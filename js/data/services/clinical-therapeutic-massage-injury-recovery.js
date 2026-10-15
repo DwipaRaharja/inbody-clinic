@@ -20,9 +20,9 @@ export default {
     },
   },
   hero: {
-    eyebrow: 'InBody Clinic · Pain & Injury Recovery',
-    lines: [{ text: 'Ease the pain' }, { text: 'move more freely', accent: true }],
-    subEyebrow: 'Clinical Therapeutic Massage & Injury Recovery',
+    eyebrow: 'Clinical Therapeutic Massage & Injury Recovery',
+    lines: [{ text: 'Ease The Pain' }, { text: 'Move More Freely', accent: true }],
+    subEyebrow: 'InBody Clinic · Pain & Injury Recovery',
     description: 'A structured clinical treatment designed to ease muscular pain, improve restricted movement, and support recovery from injuries, helping you move with greater comfort.',
     benefits: [
       { icon: 'ph-drop', label: 'Pain Relief' },
