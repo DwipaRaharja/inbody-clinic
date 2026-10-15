@@ -1,6 +1,6 @@
 import { icon } from './icons.js';
 
-export const bookingHref = 'mailto:Sailainsua@gmail.com?subject=Appointment%20enquiry';
+export const bookingHref = './contact.html';
 
 const variants = {
   hero: {

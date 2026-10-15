@@ -22,7 +22,7 @@ function ServicesDropdown(serviceId) {
                 <ul class="m-0 list-none p-0">
                   ${services.map(({ id, label, href }) => `
                     <li class="border-t border-clinic-light-grey">
-                      <a class="flex min-h-11 items-center py-2.5 text-[12px] leading-[1.25] transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage aria-[current=page]:font-semibold aria-[current=page]:text-clinic-sage motion-reduce:transition-none tablet:text-[13px]" href="${href ?? `${bookingHref}&body=${encodeURIComponent(`I'd like to learn more about ${label}.`)}`}"${id && id === serviceId ? ' aria-current="page"' : ''}>${label}</a>
+                      <a class="flex min-h-11 items-center py-2.5 text-[12px] leading-[1.25] transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage aria-[current=page]:font-semibold aria-[current=page]:text-clinic-sage motion-reduce:transition-none tablet:text-[13px]" href="${href ?? bookingHref}"${id && id === serviceId ? ' aria-current="page"' : ''}>${label}</a>
                     </li>
                   `).join('')}
                 </ul>

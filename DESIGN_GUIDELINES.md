@@ -100,8 +100,8 @@ panah menuju `#service-options`. Varian `contact` memakai pill Navy dengan teks 
 label, untuk CTA kontak di atas footer. Keduanya tetap memakai `ActionButton`
 agar hover, fokus keyboard, dan reduced motion mengikuti komponen bersama.
 
-Tujuan CTA saat ini masih email klinik. Ubah `bookingHref` di
-`js/components/button.js` ketika URL booking tersedia.
+CTA Book an Appointment menuju `./contact.html`. `BookingButton` memakai
+`bookingHref` di `js/components/button.js` sebagai tujuan bersama navbar dan CTA Home.
 
 ## 6. Layout dan spacing
 
@@ -251,7 +251,7 @@ Data tiga slide hero berada di `js/data/hero-slides.js`. Fungsi `HeroSlide` pada
 | Move Better. Feel Lighter. Live Better. | Foto kiri, teks kanan | `hero-2.jpg` |
 | Care Designed Around You. | Teks atas kiri, benefit vertikal di kanan, foto di bawah | `hero-3.jpg` |
 
-Ketiganya menggunakan `BookingButton()` dan ikon Leaf, Heart, serta Users Three
+Ketiganya menggunakan `ActionButton` menuju `./contact.html` dan ikon Leaf, Heart, serta Users Three
 yang sama. Ukuran headline memakai `Heading({ size: 'hero' })`; opsi `inline`
 menyambungkan bagian headline slide ketiga dengan accent Sage tegak.
 
@@ -342,7 +342,7 @@ dapat dihubungkan ketika endpoint form tersedia.
 
 `ActionButton` merender link ketika `href` diberikan, atau elemen button ketika
 tanpa `href`, termasuk `type: 'submit'` untuk form Contact Us. `BookingButton`
-tetap memakai link email booking yang sama seperti sebelumnya.
+menuju halaman Contact Us melalui `bookingHref`.
 
 ## 14. Dropdown Our Services
 

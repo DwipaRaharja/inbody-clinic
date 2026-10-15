@@ -231,7 +231,7 @@ browser tetap perlu dilakukan terpisah dari `npm test` dan build Tailwind.
 - Contact Us memuat kartu kontak, iframe Google Maps, serta tautan peta.
   Form membuka draf email di aplikasi pengguna; belum mengirim langsung melalui
   backend. Kolom Name hanya menerima huruf Unicode dan spasi.
-- CTA booking memakai kontak email klinik sampai tautan booking tersedia.
+- CTA Book an Appointment pada navbar, hero slider, dan section CTA Home menuju `./contact.html`.
   Seluruh 13 item dropdown membuka halaman layanan masing-masing; CTA kontak
   halaman layanan menuju `./contact.html#contact-form`.
 
