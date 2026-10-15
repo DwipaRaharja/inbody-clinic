@@ -3,6 +3,8 @@ import { readFile, readdir, access } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { PageLayout } from '../js/layouts/page-layout.js';
+import { services } from '../js/data/services/index.js';
+import { serviceNavigationGroups } from '../js/data/navigation.js';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const siteOrigin = 'https://inbody.test';
@@ -25,8 +27,10 @@ for (const filename of htmlFiles) {
   const serviceId = html.match(/\sdata-service="([^"]+)"/u)?.[1];
   const page = typeof definition === 'function' ? definition({ serviceId }) : definition;
   assert.equal(page.id, pageId, `${filename}: wrong page descriptor`);
+  if (pageId === 'service') assert.equal(page.serviceId, serviceId, `${filename}: wrong service data`);
   assert.ok(page.sections.length, `${filename}: no sections`);
   const markup = PageLayout(page);
+  assert.ok(!markup.includes('[object Object]') && !markup.includes('undefined'), `${filename}: invalid rendered content`);
   const ids = [...markup.matchAll(/\sid="([^"]+)"/gu)].map(match => match[1]);
   const idSet = new Set(ids);
   assert.equal(ids.length, idSet.size, `${filename}: duplicate IDs`);
@@ -41,7 +45,7 @@ for (const filename of htmlFiles) {
   for (const section of page.sections) assert.ok(idSet.has(section.id), `${filename}: missing section #${section.id}`);
 
   const route = filename === 'index.html' ? '/' : `/${filename}`;
-  renderedPages.set(route, { filename, html, markup, ids: idSet });
+  renderedPages.set(route, { filename, html, markup, ids: idSet, serviceId });
 }
 
 for (const [route, { filename, html, markup }] of renderedPages) {
@@ -55,6 +59,29 @@ for (const [route, { filename, html, markup }] of renderedPages) {
       await access(join(projectRoot, decodeURIComponent(url.pathname.slice(1))));
     }
   }
+}
+
+const dropdownServices = serviceNavigationGroups.flatMap(group => group.services);
+assert.equal(new Set(dropdownServices.map(service => service.id)).size, dropdownServices.length, 'Service dropdown IDs must be unique');
+assert.equal(Object.keys(services).length, dropdownServices.length, 'Every registered service must have a dropdown entry');
+const iconStyles = await readFile(join(projectRoot, 'node_modules/@phosphor-icons/web/src/light/style.css'), 'utf8');
+for (const item of dropdownServices) {
+  assert.ok(item.id && item.href, `${item.label}: missing service page link`);
+  const data = services[item.id];
+  assert.ok(data && data.id === item.id, `${item.label}: missing or mismatched service data`);
+  assert.equal(item.href, data.href, `${item.label}: dropdown and service URLs differ`);
+  const route = new URL(item.href, siteOrigin).pathname;
+  const page = renderedPages.get(route);
+  assert.equal(page?.serviceId, item.id, `${item.label}: wrong HTML service target`);
+  const activeLinks = [...page.markup.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/gu)];
+  assert.equal(activeLinks.length, 1, `${item.label}: expected one active service link`);
+  assert.equal(decodeAttribute(activeLinks[0][0].match(/\shref="([^"]+)"/u)[1]), item.href, `${item.label}: wrong active link`);
+
+  const icons = [
+    ...data.hero.benefits.map(benefit => benefit.icon),
+    ...data.expertise.columns.filter(column => column.variant === 'icon-blocks').flatMap(column => column.items.map(block => block.icon)),
+  ];
+  for (const icon of icons) assert.ok(iconStyles.includes(`.${icon}:`), `${item.label}: missing Phosphor icon ${icon}`);
 }
 
 async function checkImports(directory) {
@@ -71,4 +98,4 @@ async function checkImports(directory) {
   }
 }
 await checkImports(join(projectRoot, 'js'));
-console.log(`Passed: ${renderedPages.size} pages, shared layout, IDs, accessibility targets, links, assets and module imports.`);
+console.log(`Passed: ${renderedPages.size} pages, ${dropdownServices.length} service routes, shared layout, IDs, accessibility targets, links, icons, assets and module imports.`);

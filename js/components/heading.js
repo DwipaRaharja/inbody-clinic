@@ -22,7 +22,12 @@ export function Heading({ eyebrow = '', lines = [], level = 2, id = '', size = '
     <div>
       ${eyebrow ? `<p class="mb-[18px] text-[9px] leading-[1.6] font-medium tracking-[0.17em] uppercase tablet:mb-[22px] tablet:max-w-[330px] tablet:text-[10px] tablet:tracking-[0.2em] nav:max-w-none nav:text-[13px]">${escapeText(eyebrow)}</p>` : ''}
       <${tag}${id ? ` id="${escapeText(id)}"` : ''} class="m-0 font-display tracking-[-0.018em] text-clinic-navy ${titleClasses}">
-        ${lines.map(({ text, accent = false }) => `<span class="${inline ? 'inline' : 'block'}${accent ? ` text-clinic-sage${accentItalic ? ' italic' : ''}` : ''}">${escapeText(text)}</span>`).join(inline ? ' ' : '')}
+        ${lines.map(({ text, accent = false, segments }) => {
+          const content = Array.isArray(segments)
+            ? segments.map(({ text: segmentText, accent: segmentAccent = false }) => `<span${segmentAccent ? ` class="text-clinic-sage${accentItalic ? ' italic' : ''}"` : ''}>${escapeText(segmentText)}</span>`).join('')
+            : escapeText(text);
+          return `<span class="${inline ? 'inline' : 'block'}${accent ? ` text-clinic-sage${accentItalic ? ' italic' : ''}` : ''}">${content}</span>`;
+        }).join(inline ? ' ' : '')}
       </${tag}>
     </div>
   `;

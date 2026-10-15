@@ -293,8 +293,8 @@ klinik; tautan layanan kembali ke `./#services`.
 
 Navbar dan footer memakai data navigasi yang sama di `js/data/navigation.js`.
 Tautan Home dan logo klinik menuju `./` tanpa hash atau ID section.
-Tautan About menuju `./about.html`; tautan Our Clinic di halaman About kembali
-ke section terkait pada halaman Home. Our Services di navbar membuka dropdown;
+Tautan About menuju `./about.html`; tautan Our Clinic pada navbar dan footer
+menuju `./our-clinic.html`. Our Services di navbar membuka dropdown;
 tautan Our Service di footer kembali ke section layanan Home. Halaman aktif memakai `aria-current`.
 
 Padding mengikuti `containerClasses`: 32px di HP dan 80px mulai tablet, dengan
@@ -357,15 +357,18 @@ mengembalikan fokus ke tombol; klik di luar serta perpindahan fokus keluar
 dropdown juga menutupnya. Panel tertutup memakai `inert` dan `aria-hidden`.
 
 Item layanan disimpan sebagai object pada `serviceNavigationGroups`, dengan
-`label` serta `id` dan `href` jika halaman layanan tersedia. Pregnancy Massage &
-Circulation Support menuju `./pregnancy-massage-circulation-support.html`.
-Item lainnya tetap membuka enquiry email dengan nama layanan di body email.
+`label`, `id`, dan `href` menuju entry HTML layanan masing-masing. Seluruh
+**13 item** sudah memiliki halaman: Pregnancy & Postpartum **3**, Lymphatic
+Drainage **3**, Pain & TMJ Relief **4**, dan Body Contouring **3**. Contohnya,
+Pregnancy Massage & Circulation Support menuju
+`./pregnancy-massage-circulation-support.html`. Daftar lengkap menu dan slug
+tersedia di `README.md`.
 `serviceId` dari descriptor halaman diteruskan melalui `PageLayout` ke navbar
 untuk memberi `aria-current="page"` pada tautan layanan yang sedang dibuka.
 
 ## 15. Layout bersama dan struktur halaman
 
-Entry Home, About, Contact Us, dan setiap layanan tetap memiliki URL,
+Entry Home, About, Our Clinic, Contact Us, dan setiap layanan tetap memiliki URL,
 title, meta description, pemanggilan font, Phosphor Icons, dan `css/output.css`
 masing-masing. Entry menyediakan `#app`, atribut `data-page` pada body,
 serta satu entry module `js/app.js`. Tidak ada framework atau proses build HTML.
@@ -383,9 +386,10 @@ menjalankan `initNavbar`, lalu inisialisasi fitur halaman setelah konten terpasa
 Container berada di `js/layouts/container.js`. Batas lebar konten diterapkan di
 dalam section agar background dan foto tetap dapat mencapai tepi layar.
 Section Home dikelompokkan di `js/sections/home/`, About di
-`js/sections/about/`, dan Contact Us di `js/sections/contact/`. Komponen visual
-bersama berada di `js/components/`; controller slider dan form berada di
-`js/features/`; data navigasi, kontak, dan slide berada di `js/data/`.
+`js/sections/about/`, Our Clinic di `js/sections/clinic/`, dan Contact Us di
+`js/sections/contact/`. Komponen visual bersama berada di `js/components/`;
+controller slider, galeri, dan form berada di `js/features/`; data navigasi,
+kontak, slide, serta galeri berada di `js/data/`.
 
 Saat menambah halaman, buat entry HTML beserta descriptor di `js/pages/`,
 kelompokkan section halaman di `js/sections/`, lalu daftarkan pemuat descriptor
@@ -407,10 +411,10 @@ Renderer umum berada di `js/sections/service/index.js`. Urutan template:
 
 | Section | Komposisi |
 | --- | --- |
-| Hero | Eyebrow, H1 dua warna, deskripsi, tombol Learn More dan tiga benefit di kiri; foto di kanan |
+| Hero | Eyebrow, H1 dua warna, sub-eyebrow bila ada, deskripsi, tombol Learn More dan tiga benefit di kiri; foto di kanan |
 | Pilihan perawatan | Foto di kiri; eyebrow, H2, paragraf dan daftar bernomor di kanan |
 | Tahap pemulihan | Background Light Grey; heading terpusat dan tiga kartu White bernomor |
-| Pendekatan dan hasil | Heading terpusat, lalu dua panel dengan daftar bernomor |
+| Pendekatan dan hasil | Heading terpusat, paragraf opsional, lalu dua panel dengan daftar bernomor atau blok ikon |
 | Kutipan | Teks singkat terpusat dengan ruang vertikal lega |
 | CTA kontak | Background Light Sage; judul dan deskripsi di kiri, tombol Navy di kanan |
 
@@ -421,19 +425,101 @@ nomor, serta tombol memakai Montserrat. Gunakan ikon Phosphor Light untuk benefi
 Foto berada di dalam container dengan sudut membulat, mengikuti referensi
 halaman layanan; foto tidak memakai grid full-bleed hero Home.
 
-Seluruh isi layanan pertama berada di
-`js/data/services/pregnancy-massage-circulation-support.js`. Dua foto memakai
-aset JPEG yang disediakan pengguna dalam folder
-`assets/images/services/Pregnancy & Postpartum/POSTNATAL LYMPHATIC DRAINAGE/`.
-Hero memakai `WhatsApp Image 2026-10-02 at 10.33.06 (2).jpeg`; foto pilihan
-perawatan memakai `WhatsApp Image 2026-10-02 at 10.33.09.jpeg`.
-Screenshot Recovery & Core Restoration digunakan untuk komposisi; judul,
-deskripsi, dan daftar menyesuaikan layanan Pregnancy Massage & Circulation
-Support. Referensi isi: [halaman resmi klinik](https://inbodyclinic.com/pregnancy-massage-circulation-support/).
+Seluruh 13 layanan memakai record di `js/data/services/<service-id>.js` dan
+entry root `<service-id>.html`. Hero, pilihan perawatan, tiga kartu, panel,
+kutipan, dan CTA mengambil isi serta foto dari record yang sama. Perbedaan
+layanan ditempatkan pada data, bukan dengan menyalin markup section.
+
+Sepuluh layanan Pregnancy, Lymphatic, dan Pain mengambil teks dari PNG
+masing-masing dalam `Our Service Layout/`. Tiga Body Contouring mengutamakan
+teks `data_service_inbody_clinic.md` dan memakai PNG di folder
+`Our Service Layout/Body Countoring/` untuk komposisi visual. Ejaan folder
+referensi asli dipertahankan. Perbedaan Markdown dan PNG serta teks yang
+berulang atau tercampur dicatat pada `docs/SERVICE_COPY_REVIEW.md`; teks
+tersebut belum direvisi atau dianggap telah disetujui pemilik konten.
+
+Foto Pregnancy Massage kini memakai pasangan foto dalam folder
+`assets/images/services/Pregnancy & Postpartum/Pregnancy Massage & Circulation Support/`
+yang sesuai PNG layanannya. Recovery memakai dua foto dari folder Recovery.
+Hero Postnatal memakai `WhatsApp Image 2026-10-02 at 10.33.06 (1).jpeg` di folder
+Lipedema & Inflammatory Leg Care karena cocok dengan PNG Postnatal; foto
+treatment memakai `WhatsApp Image 2026-10-02 at 10.33.09.jpeg` di folder
+Postnatal. Pemetaan lintas folder ini disengaja dan tidak memindahkan aset asli.
+
+Variasi yang tetap ditangani renderer bersama:
+
+- `lines[].segments` mengatur accent Sage pada sebagian baris headline tanpa
+  memasukkan HTML ke data. Accent dan pemenggalan baris mengikuti PNG.
+- `hero.eyebrow` berada di atas H1 dan `hero.subEyebrow` berada di bawahnya;
+  setiap layanan menentukan urutan label sesuai desainnya.
+- `expertise.description` menampilkan paragraf opsional di antara heading dan
+  dua panel, misalnya keterangan program **6–8 sesi** pada Hormonal.
+- Panel default memakai daftar string bernomor. Panel kanan Clinical Cellulite
+  memakai `variant: 'icon-blocks'` dengan item `{ icon, title, description }`;
+  ikon Phosphor Light target, heartbeat, dan check-circle mengikuti jenis
+  simbol pada desain. Label sumber “Headline”, “Deskripsi”, dan “Hasil” tetap
+  ditampilkan sambil menunggu review isi.
+- Nomor daftar dihasilkan renderer secara berurutan. Panel kanan Endometriosis
+  menampilkan **01, 02, 03**, sementara PNG bertuliskan **01, 02, 02**. Isi item
+  mengikuti sumber; perbedaan nomor tercatat sebagai T02 pada dokumen review.
+
+Tombol Learn More menuju `#service-options`; CTA Contact the Clinic menuju
+`./contact.html#contact-form`. Semua halaman memakai komponen tombol, shell,
+container, serta status menu aktif yang sama.
 
 Untuk layanan berikutnya, tambahkan satu data lengkap ke registry, entry HTML
 dengan metadata serta `data-service` yang sesuai, tautan dropdown, dan sumber
 Tailwind. Pakai renderer yang sama agar perubahan layout berlaku konsisten.
 Jangan menyalin section atau shell untuk setiap layanan. Jalankan pemeriksaan
 struktur halaman dan build CSS, lalu periksa hasil visual di browser; pemeriksaan
-struktur saja tidak membuktikan kesesuaian visual.
+struktur saja tidak membuktikan kesesuaian visual. Dokumentasi implementasi ini
+tidak menyatakan bahwa pemeriksaan visual browser baru telah dilakukan.
+
+## 17. Halaman Our Clinic
+
+Halaman `our-clinic.html` memakai `data-page="clinic"`; descriptor
+`js/pages/clinic.js` menyusun tiga section dari `js/sections/clinic/index.js`
+melalui shell bersama. Menu Our Clinic pada navbar dan footer menuju
+`./our-clinic.html`, dengan `aria-current="page"` ketika halaman ini aktif.
+
+Pengantar terpusat memakai background Light Sage lembut, eyebrow
+`INBODY CLINIC · DOUBLE BAY`, serta H1 `A space to / feel at ease` dari komponen
+`Heading` ukuran `profile`. Accent baris kedua memakai Sage italic. Deskripsi
+berfokus pada ruang dan kunjungan klinik; tidak memakai copy Pregnancy dari
+referensi galeri.
+
+Bagian Inside InBody Clinic memakai background White dengan heading dan filter
+yang dapat membungkus ke beberapa baris. Filter aktif berbentuk pill Sage
+dengan teks White; filter lain memakai Cream dengan teks Navy. Kelompok filter
+memakai `role="group"`, tombol memiliki `aria-pressed`, dan jumlah foto memiliki
+status `aria-live="polite"`.
+
+Grid foto seragam memakai satu kolom pada HP, dua mulai 641px, dan tiga mulai
+1101px. Jarak antarkolom 24px dan antarbaris 40px, dengan gambar rasio 4:3,
+`object-cover`, dan sudut 12px. Susunan ini menjaga keseimbangan ruang tanpa
+kolom masonry atau area kosong besar dari referensi. Caption memakai eyebrow
+uppercase kecil, judul Cormorant Garamond 26–28px, serta deskripsi Montserrat
+13px. Semua konten mengikuti `containerClasses` 1440px dengan padding 32/80px.
+
+Pemetaan foto dan filter berada di `js/data/clinic-gallery.js`. Foto berasal
+dari 12 JPEG pada folder root `gallery/` milik pengguna. MP4 pada folder sumber
+tidak ditampilkan. Record menyimpan caption, alt text, dimensi asli, dan array
+kategori; satu foto dapat masuk kategori `treatment-rooms`, `equipment`, dan/atau
+`details`. Pertahankan kategori sesuai isi foto saat menambah atau mengganti
+aset.
+
+Tombol foto memiliki nama aksesibel dan ikon Phosphor Light `arrows-out`.
+Hover memperbesar foto secara halus; reduced motion menonaktifkan gerakan.
+Pembesaran memakai elemen `dialog` native, bukan halaman baru. Foto ditampilkan
+dengan `object-contain`, judul dan deskripsi tersedia di bawahnya, serta tombol
+close memakai ikon `x`. `js/features/clinic-gallery.js` menangani filter,
+pembukaan dialog, penutupan dengan tombol atau Escape, dan pengembalian fokus
+ke tombol foto yang membuka dialog.
+
+Bagian Plan Your Visit memakai Cream dengan dua kolom mulai 1101px: teks
+pengantar di kiri dan kartu White berisi alamat serta jam klinik di kanan.
+Bagian ini tidak mengulang foto galeri. Ikon Phosphor Light `map-pin` dan
+`clock` mendampingi detail dari `js/data/clinic-contact.js`. Tombol Find the
+Clinic memakai `ActionButton` dengan URL Google Maps yang sama dengan halaman
+Contact Us, dan tautan Contact Us menuju `./contact.html`. Di layar kecil
+kedua kolom bertumpuk.

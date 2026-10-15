@@ -4,6 +4,7 @@ const pages = {
   home: () => import('./pages/home.js'),
   about: () => import('./pages/about.js'),
   contact: () => import('./pages/contact.js'),
+  clinic: () => import('./pages/clinic.js'),
   service: () => import('./pages/service.js'),
 };
 

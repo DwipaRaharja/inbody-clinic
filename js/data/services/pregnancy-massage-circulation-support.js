@@ -1,4 +1,4 @@
-const imageDirectory = './assets/images/services/Pregnancy & Postpartum/POSTNATAL LYMPHATIC DRAINAGE/';
+const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Pregnancy Massage & Circulation Support/';
 
 export default {
   id: 'pregnancy-massage-circulation-support',
@@ -7,22 +7,23 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.06 (2).jpeg`,
-      alt: 'A therapist providing hands-on care during an InBody Clinic treatment session',
+      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.55 (1).jpeg`,
+      alt: 'Saila providing hands-on care to a patient lying on a treatment bed at InBody Clinic',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.09.jpeg`,
-      alt: 'An InBody Clinic therapist working with a patient in a treatment room',
+      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.55.jpeg`,
+      alt: 'Saila standing beside a patient resting on a treatment bed in the clinic',
       width: 1600,
       height: 1066,
     },
   },
   hero: {
     eyebrow: 'Pregnancy Massage & Circulation Support',
-    lines: [{ text: 'Feel supported.' }, { text: 'Move with ease.', accent: true }],
-    description: 'Personalised pregnancy massage to support comfort, ease muscular tension and care for your changing body.',
+    lines: [{ text: 'Comfort through' }, { text: 'every change', accent: true }],
+    subEyebrow: 'InBody Clinic · Pregnancy & Postpartum',
+    description: 'Pregnancy massage and circulation support, thoughtfully tailored to help ease physical tension and support your changing body.',
     benefits: [
       { icon: 'ph-heart', label: 'Care shaped around you' },
       { icon: 'ph-sparkle', label: 'Clinically guided care' },
@@ -30,22 +31,27 @@ export default {
     ],
   },
   options: {
-    eyebrow: 'Personalised treatment options',
-    lines: [{ text: 'Care chosen for' }, { text: 'your comfort', accent: true }],
+    eyebrow: 'Support for your changing body',
+    lines: [{ text: 'Care that meets you' }, { text: 'where you are', accent: true }],
     paragraphs: [
-      'Pregnancy brings changes in posture, muscles and circulation. You may notice tension in your back or pelvis, tired legs or a changing sense of comfort.',
-      'Your session is adapted to your needs and stage of pregnancy, with a focus on:',
+      'As pregnancy progresses, postural changes and the growing uterus can place additional demands on muscles, joints and circulation. A personalised session focuses on comfort, mobility and the areas that need support.',
+      'Your therapist will take time to understand how you are feeling and adapt the treatment to your needs.',
     ],
-    items: ['Pregnancy massage', 'Circulation support', 'Muscular tension care', 'Comfort and positioning'],
+    items: [
+      'Back and pelvic discomfort',
+      'Leg swelling and fluid retention',
+      'Rib restriction and breathing fatigue',
+      'Rib restriction and breathing fatigue',
+    ],
   },
   recovery: {
-    eyebrow: 'A personalised care framework',
-    lines: [{ text: 'Support at' }, { text: 'your pace', accent: true }],
-    description: 'Care evolves with you, shaped around your comfort and changing needs.',
+    eyebrow: 'Treatment focus',
+    lines: [{ text: 'More ease in' }, { text: 'your day', accent: true }],
+    description: 'Clinical pregnancy massage may help support comfort and movement through the physical changes of pregnancy.',
     steps: [
-      { title: 'Start with you', description: 'Share how you feel and what matters to you.' },
-      { title: 'Care for your comfort', description: 'A considered session centred on your needs.' },
-      { title: 'Adapt as you change', description: 'Review your comfort as your pregnancy progresses.' },
+      { title: 'Circulation & Oxygen Support', description: 'Improve circulation and oxygen delivery while clinical pregnancy massage focuses on supporting the body through physical changes' },
+      { title: 'Fluid & Swelling Relief', description: 'Reduce fluid retention and swelling, especially for leg swelling and fluid retention during pregnancy.' },
+      { title: 'Muscular & Pelvic Comfort', description: 'Relieve back and pelvic pain, release muscular tension, and support postural balance and comfort.' },
     ],
   },
   expertise: {
@@ -53,31 +59,31 @@ export default {
     columns: [
       {
         title: 'Treatment Approaches',
-        subtitle: 'Personalised care and considered techniques.',
+        subtitle: 'Treatment Focuses On:',
         items: [
-          'An individual discussion of your needs',
-          'Massage adapted to your stage of pregnancy',
-          'Comfortable, supported positioning',
-          'Attention to areas of muscular tension',
-          'Ongoing review of your care',
+          'Clinical pregnancy massage focusing on improving circulation',
+          'Reducing tissue tension and supporting the body through physical changes',
+          'Managing stress placed on muscles, joints, and circulation',
+          'Addressing postural changes and hormonal adaptations',
+          'A clinically guided approach designed for the physiological demands of pregnancy',
         ],
       },
       {
         title: 'What You Can Expect',
-        subtitle: 'Your comfort at the centre of each session.',
+        subtitle: 'Many Patient Notice:',
         items: [
-          'Time to share how your body feels',
-          'A plan shaped around your comfort',
-          'A calm, considered treatment session',
-          'Clear discussion of your next steps',
+          'Relieve back and pelvic pain and discomfort',
+          'Reduce leg swelling, fluid retention, and muscular tension',
+          'Improve circulation, oxygen delivery, and ease breathing fatigue',
+          'Support postural balance, comfort, and prepare your body safely for labour',
         ],
       },
     ],
   },
-  quote: 'Care that listens to your body, with comfort at the centre of every session.',
+  quote: 'The treatment is gentle, rhythmic, and highly specific, allowing the nervous system to regulate while circulation improves.',
   cta: {
     lines: [{ text: 'Discuss your' }, { text: 'Pregnancy & Postpartum', accent: true }],
-    description: 'Talk to our team about care during your pregnancy.',
+    description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
     href: './contact.html#contact-form',
   },

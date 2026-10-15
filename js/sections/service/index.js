@@ -14,7 +14,8 @@ function renderImage(image = {}, { hero = false } = {}) {
   const dimensions = Number.isFinite(width) && width > 0 && Number.isFinite(height) && height > 0
     ? ` width="${Math.round(width)}" height="${Math.round(height)}"`
     : '';
-  return `<img class="block w-full min-w-0 rounded-[10px] object-cover ${hero ? 'aspect-[3/2]' : 'aspect-[9/10]'}" src="${escapeText(image.src)}" alt="${escapeText(image.alt)}"${dimensions} ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />`;
+  const fitClass = image.fit === 'contain' ? 'object-contain' : 'object-cover';
+  return `<img class="block w-full min-w-0 rounded-[10px] ${fitClass} ${hero ? 'aspect-[3/2]' : 'aspect-[9/10]'}" src="${escapeText(image.src)}" alt="${escapeText(image.alt)}"${dimensions} ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />`;
 }
 
 function renderBenefit({ icon, label }) {
@@ -37,7 +38,7 @@ export function ServiceHero(service) {
       <div class="[&_p.uppercase]:mb-4 [&_p.uppercase]:text-[10px] [&_p.uppercase]:font-semibold [&_p.uppercase]:tracking-[0.12em] [&_p.uppercase]:text-clinic-sage tablet:[&_p.uppercase]:text-[11px]">
         ${Heading({ eyebrow: hero.eyebrow, lines: hero.lines, level: 1, id: 'service-title', size: 'profile' })}
       </div>
-      ${service.category ? `<p class="mt-4 text-[9px] leading-[1.6] font-semibold tracking-[0.1em] text-clinic-sage uppercase tablet:text-[10px]">InBody Clinic · ${escapeText(service.category)}</p>` : ''}
+      ${hero.subEyebrow || service.category ? `<p class="mt-4 text-[9px] leading-[1.6] font-semibold tracking-[0.1em] text-clinic-sage uppercase tablet:text-[10px]">${escapeText(hero.subEyebrow ?? `InBody Clinic · ${service.category}`)}</p>` : ''}
       <p class="mt-5 max-w-[43ch] text-[13px] leading-[1.75] text-clinic-navy/85 tablet:text-[14px]">${escapeText(hero.description)}</p>
       <div class="mt-5 [&_a]:min-w-[230px] [&_a]:tracking-[0.1em] [&_a]:font-semibold">
         ${ActionButton({ label: 'Learn more', href: '#service-options' })}
@@ -82,10 +83,35 @@ export function ServiceRecovery(service) {
       ${(recovery.steps ?? []).map((step, index) => `<li class="flex min-w-0 flex-col items-center rounded-[10px] bg-clinic-white px-6 py-6 text-center tablet:px-5 tablet:py-7">
         <span class="text-[26px] leading-none font-semibold text-clinic-sage tabular-nums" aria-hidden="true">${numberLabel(index)}</span>
         <h3 class="mt-4 max-w-[16ch] font-display text-[26px] leading-[1.05] font-semibold italic tablet:text-[28px]">${escapeText(step.title)}</h3>
-        <p class="mt-3 max-w-[31ch] text-[12px] leading-[1.45] text-clinic-navy/75 tablet:text-[13px]">${escapeText(step.description)}</p>
+        ${step.description ? `<p class="mt-3 max-w-[31ch] text-[12px] leading-[1.45] text-clinic-navy/75 tablet:text-[13px]">${escapeText(step.description)}</p>` : ''}
       </li>`).join('')}
     </ol>
   </div>`;
+}
+
+function renderExpertiseList(column) {
+  if (column.variant === 'icon-blocks') {
+    return `<ul class="mt-6 grid list-none gap-4 p-0">
+      ${(column.items ?? []).map(item => {
+        const iconClass = /^ph-[a-z0-9-]+$/.test(item.icon) ? item.icon : 'ph-circle';
+        return `<li class="flex min-w-0 items-center gap-4 py-2 tablet:gap-5">
+          <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-clinic-sage/50 bg-clinic-light-sage/60 text-clinic-sage"><i class="ph-light ${iconClass} text-[20px] leading-none" aria-hidden="true"></i></span>
+          <div class="min-w-0 text-[12px] leading-[1.5] text-clinic-navy/85 tablet:text-[13px]">
+            ${item.label
+              ? `<p><span class="font-semibold">${escapeText(item.label)}</span> ${escapeText(item.description)}</p>`
+              : `${item.title ? `<p class="font-medium">${escapeText(item.title)}</p>` : ''}${item.description ? `<p${item.title ? ' class="mt-1"' : ''}>${escapeText(item.description)}</p>` : ''}`}
+          </div>
+        </li>`;
+      }).join('')}
+    </ul>`;
+  }
+
+  return `<ol class="mt-6 grid list-none gap-4 p-0">
+    ${(column.items ?? []).map((item, index) => `<li class="flex min-w-0 items-center gap-5 rounded-[12px] bg-clinic-light-grey px-4 py-4 tablet:gap-6">
+      <span class="shrink-0 font-display text-[26px] leading-none font-semibold italic tabular-nums" aria-hidden="true">${numberLabel(index)}</span>
+      <span class="min-w-0 text-[12px] leading-[1.4] text-clinic-navy/85 tablet:text-[13px]">${escapeText(item)}</span>
+    </li>`).join('')}
+  </ol>`;
 }
 
 export function ServiceExpertise(service) {
@@ -93,17 +119,13 @@ export function ServiceExpertise(service) {
   return `<div class="${containerClasses} pt-10 pb-6 tablet:pt-12 tablet:pb-8" data-section-frame="service-expertise">
     <div class="mx-auto max-w-[730px] text-center">
       ${Heading({ lines: expertise.lines, level: 2, id: 'service-expertise-title', size: 'section' })}
+      ${expertise.description ? `<p class="mx-auto mt-4 max-w-[58ch] text-[13px] leading-[1.8] text-clinic-navy/85 tablet:text-[14px]">${escapeText(expertise.description)}</p>` : ''}
     </div>
     <div class="mt-10 grid min-w-0 items-start gap-6 wide:relative wide:grid-cols-2 wide:gap-12 wide:before:pointer-events-none wide:before:absolute wide:before:inset-y-0 wide:before:left-1/2 wide:before:w-px wide:before:bg-clinic-light-grey wide:before:content-['']">
       ${(expertise.columns ?? []).map(column => `<article class="min-w-0 rounded-[20px] border border-clinic-navy/10 bg-clinic-white px-5 py-7 shadow-[0_12px_28px_rgb(32_56_88/0.07)] tablet:px-8 tablet:py-8">
         <h3 class="text-center font-display text-[28px] leading-[1.15] font-semibold italic tablet:text-[32px]">${escapeText(column.title)}</h3>
         <p class="mt-3 text-center text-[11px] leading-[1.6] font-medium tracking-[0.08em] text-clinic-navy/75 italic tablet:text-[12px]">${escapeText(column.subtitle)}</p>
-        <ol class="mt-6 grid list-none gap-4 p-0">
-          ${(column.items ?? []).map((item, index) => `<li class="flex min-w-0 items-center gap-5 rounded-[12px] bg-clinic-light-grey px-4 py-4 tablet:gap-6">
-            <span class="shrink-0 font-display text-[26px] leading-none font-semibold italic tabular-nums" aria-hidden="true">${numberLabel(index)}</span>
-            <span class="min-w-0 text-[12px] leading-[1.4] text-clinic-navy/85 tablet:text-[13px]">${escapeText(item)}</span>
-          </li>`).join('')}
-        </ol>
+        ${renderExpertiseList(column)}
       </article>`).join('')}
     </div>
   </div>`;

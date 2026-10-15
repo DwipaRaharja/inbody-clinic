@@ -1,30 +1,40 @@
 import { Heading } from '../../components/heading.js';
-import { bookingHref } from '../../components/button.js';
+import { serviceNavigationGroups } from '../../data/navigation.js';
 import { containerClasses } from '../../layouts/container.js';
+
+const serviceRoutes = Object.fromEntries(
+  serviceNavigationGroups.flatMap(group => group.services).map(service => [service.id, service.href]),
+);
 
 const services = [
   {
     title: 'Lymphatic Health',
+    serviceId: 'clinical-lymphatic-drainage-sydney',
     description: 'Reduce swelling, support circulation and feel lighter.',
   },
   {
     title: 'Lipedema Care',
+    serviceId: 'lipedema-inflammatory-leg-care',
     description: 'Specialised, conservative treatment and long-term support.',
   },
   {
     title: 'Post-Operative Recovery',
+    serviceId: 'post-surgical-recovery',
     description: 'Recover faster with expert guidance and personalised care.',
   },
   {
     title: 'Pregnancy & Postpartum',
+    serviceId: 'pregnancy-massage-circulation-support',
     description: 'Support for your body through every stage.',
   },
   {
     title: 'Skin Health & Body Contouring',
+    serviceId: 'clinical-cellulite-remodelling',
     description: 'Improve skin health, reduce cellulite and enhance your confidence.',
   },
   {
     title: "Women's Health Physiotherapy",
+    serviceId: 'recovery-core-restoration',
     description: 'Pelvic health, core function and whole-body wellbeing.',
   },
 ];
@@ -53,7 +63,7 @@ export function Services() {
             </span>
             <p class="mt-[18px] text-[16px] leading-[1.3] font-semibold wide:text-[18px]">${service.title}</p>
             <p class="mt-2.5 mb-6 max-w-[330px] text-[14px] leading-[1.35] wide:text-[16px]">${service.description}</p>
-            <a class="mt-auto inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-clinic-navy/65 text-clinic-navy transition-colors duration-[160ms] hover:bg-clinic-navy hover:text-clinic-white motion-reduce:transition-none" href="${bookingHref}&body=${encodeURIComponent(`I'd like to learn more about ${service.title}.`)}" aria-label="Enquire about ${service.title}">
+            <a class="mt-auto inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-clinic-navy/65 text-clinic-navy transition-colors duration-[160ms] hover:bg-clinic-navy hover:text-clinic-white motion-reduce:transition-none" href="${serviceRoutes[service.serviceId]}" aria-label="Learn more about ${service.title}">
               <i class="ph-light ph-arrow-right text-[28px]" aria-hidden="true"></i>
             </a>
           </li>
