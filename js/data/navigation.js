@@ -10,34 +10,34 @@ export const serviceNavigationGroups = [
   {
     title: 'Pregnancy & Postpartum',
     services: [
-      'Pregnancy Massage & Circulation Support',
-      'Recovery & Core Restoration',
-      'Postnatal Lymphatic Drainage',
+      { id: 'pregnancy-massage-circulation-support', label: 'Pregnancy Massage & Circulation Support', href: './pregnancy-massage-circulation-support.html' },
+      { label: 'Recovery & Core Restoration' },
+      { label: 'Postnatal Lymphatic Drainage' },
     ],
   },
   {
     title: 'Lymphatic Drainage',
     services: [
-      'Post-Surgical Recovery',
-      'Clinical Lymphatic Drainage Sydney',
-      'Lipedema & Inflammatory Leg Care',
+      { label: 'Post-Surgical Recovery' },
+      { label: 'Clinical Lymphatic Drainage Sydney' },
+      { label: 'Lipedema & Inflammatory Leg Care' },
     ],
   },
   {
     title: 'Pain & TMJ Relief',
     services: [
-      'TMJ, Jaw & Headache Treatment',
-      'Chronic Pain, Stress & Inflammation',
-      'Clinical Therapeutic Massage & Injury Recovery',
-      'Endometriosis & Pelvic Pain Support',
+      { label: 'TMJ, Jaw & Headache Treatment' },
+      { label: 'Chronic Pain, Stress & Inflammation' },
+      { label: 'Clinical Therapeutic Massage & Injury Recovery' },
+      { label: 'Endometriosis & Pelvic Pain Support' },
     ],
   },
   {
     title: 'Body Contouring',
     services: [
-      'Clinical Cellulite Remodelling',
-      'Lymphatic Reset & Fluid Retention Treatment',
-      'Hormonal Skin Tightening & Firmness Treatment',
+      { label: 'Clinical Cellulite Remodelling' },
+      { label: 'Lymphatic Reset & Fluid Retention Treatment' },
+      { label: 'Hormonal Skin Tightening & Firmness Treatment' },
     ],
   },
 ];

@@ -9,6 +9,7 @@ const siteOrigin = 'https://inbody.test';
 const appSource = await readFile(join(projectRoot, 'js/app.js'), 'utf8');
 const renderedPages = new Map();
 const htmlFiles = (await readdir(projectRoot)).filter(name => name.endsWith('.html'));
+const decodeAttribute = value => value.replace(/&(amp|lt|gt|quot|#39);/gu, (_, entity) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" })[entity]);
 
 for (const filename of htmlFiles) {
   const html = await readFile(join(projectRoot, filename), 'utf8');
@@ -20,7 +21,9 @@ for (const filename of htmlFiles) {
   assert.ok(/<title>[^<]+<\/title>/u.test(html), `${filename}: missing page title`);
   assert.ok(/name="description"/u.test(html), `${filename}: missing description`);
 
-  const { default: page } = await import(pathToFileURL(join(projectRoot, `js/pages/${pageId}.js`)));
+  const { default: definition } = await import(pathToFileURL(join(projectRoot, `js/pages/${pageId}.js`)));
+  const serviceId = html.match(/\sdata-service="([^"]+)"/u)?.[1];
+  const page = typeof definition === 'function' ? definition({ serviceId }) : definition;
   assert.equal(page.id, pageId, `${filename}: wrong page descriptor`);
   assert.ok(page.sections.length, `${filename}: no sections`);
   const markup = PageLayout(page);
@@ -43,7 +46,7 @@ for (const filename of htmlFiles) {
 
 for (const [route, { filename, html, markup }] of renderedPages) {
   for (const match of `${html}\n${markup}`.matchAll(/\s(href|src)="(\.\/[^"]+|#[^"]+)"/gu)) {
-    const url = new URL(match[2], `${siteOrigin}${route}`);
+    const url = new URL(decodeAttribute(match[2]), `${siteOrigin}${route}`);
     const destination = renderedPages.get(url.pathname === '/index.html' ? '/' : url.pathname);
     if (destination) {
       if (url.hash) assert.ok(destination.ids.has(decodeURIComponent(url.hash.slice(1))), `${filename}: broken anchor ${match[2]}`);

@@ -16,6 +16,12 @@ const variants = {
     iconClasses: 'size-[22px]',
     shapeClasses: 'rounded-lg',
   },
+  contact: {
+    classes: 'gap-4 px-6 py-3 text-[12px] tablet:min-w-[220px] tablet:text-[14px]',
+    iconClasses: 'size-[22px]',
+    colorClasses: 'bg-clinic-navy',
+    textClasses: 'normal-case tracking-normal',
+  },
 };
 
 function escapeText(value) {
@@ -28,7 +34,7 @@ export function ActionButton({ label, href, variant = 'hero', type = 'button' })
   const styles = variants[variant] ?? variants.hero;
   const tag = href ? 'a' : 'button';
   const attributes = href ? `href="${escapeText(href)}"` : `type="${['button', 'submit', 'reset'].includes(type) ? type : 'button'}"`;
-  return `<${tag} class="inline-flex max-w-full cursor-pointer items-center justify-center ${styles.shapeClasses ?? 'rounded-full'} bg-clinic-sage font-sans font-medium leading-[1.25] tracking-[0.045em] text-clinic-white uppercase transition-[filter,transform] duration-[160ms] hover:-translate-y-px hover:brightness-95 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${styles.classes}" ${attributes}><span>${escapeText(label)}</span>${icon('arrow', `shrink-0 ${styles.iconClasses}`)}</${tag}>`;
+  return `<${tag} class="inline-flex max-w-full cursor-pointer items-center justify-center ${styles.shapeClasses ?? 'rounded-full'} ${styles.colorClasses ?? 'bg-clinic-sage'} font-sans font-medium leading-[1.25] ${styles.textClasses ?? 'tracking-[0.045em] uppercase'} text-clinic-white transition-[filter,transform] duration-[160ms] hover:-translate-y-px hover:brightness-95 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${styles.classes}" ${attributes}><span>${escapeText(label)}</span>${icon('arrow', `shrink-0 ${styles.iconClasses}`)}</${tag}>`;
 }
 
 export function BookingButton(variant = 'hero') {

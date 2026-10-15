@@ -4,6 +4,7 @@ const pages = {
   home: () => import('./pages/home.js'),
   about: () => import('./pages/about.js'),
   contact: () => import('./pages/contact.js'),
+  service: () => import('./pages/service.js'),
 };
 
 const root = document.getElementById('app');
@@ -11,7 +12,10 @@ const root = document.getElementById('app');
 try {
   const loadPage = pages[document.body.dataset.page];
   if (!loadPage) throw new Error(`Unknown page: ${document.body.dataset.page}`);
-  const { default: page } = await loadPage();
+  const { default: definition } = await loadPage();
+  const page = typeof definition === 'function'
+    ? definition({ serviceId: document.body.dataset.service })
+    : definition;
   mountPage(root, page);
 } catch (error) {
   root.setAttribute('role', 'alert');

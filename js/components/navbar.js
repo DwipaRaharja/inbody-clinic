@@ -7,7 +7,7 @@ const contactClasses = 'inline-flex items-center gap-2 text-[9px] font-medium ta
 const contactIconClasses = 'size-[15px] shrink-0 nav:size-[18px]';
 const navLinkClasses = "relative w-fit py-[13px] whitespace-nowrap text-[14px] font-medium transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage after:pointer-events-none after:absolute after:bottom-2 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100 motion-reduce:transition-none motion-reduce:after:transition-none nav:py-0 nav:text-[12px] nav:after:-bottom-1.5 wide:text-[14px]";
 
-function ServicesDropdown() {
+function ServicesDropdown(serviceId) {
   return `
     <div class="min-w-0 nav:flex nav:items-center nav:self-stretch" data-services-dropdown>
       <button class="${navLinkClasses} group flex cursor-pointer items-center gap-[7px] text-left aria-expanded:text-clinic-sage aria-expanded:after:scale-x-100" type="button" id="services-toggle" aria-expanded="false" aria-controls="services-dropdown" data-services-toggle>
@@ -20,9 +20,9 @@ function ServicesDropdown() {
               <section class="min-w-0" aria-label="${title}">
                 <h2 class="whitespace-nowrap pb-2.5 font-display text-[20px] leading-[1.2] font-medium tablet:text-[22px]">${title}</h2>
                 <ul class="m-0 list-none p-0">
-                  ${services.map((service) => `
+                  ${services.map(({ id, label, href }) => `
                     <li class="border-t border-clinic-light-grey">
-                      <a class="flex min-h-11 items-center py-2.5 text-[12px] leading-[1.25] transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage motion-reduce:transition-none tablet:text-[13px]" href="${bookingHref}&body=${encodeURIComponent(`I'd like to learn more about ${service}.`)}">${service}</a>
+                      <a class="flex min-h-11 items-center py-2.5 text-[12px] leading-[1.25] transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage aria-[current=page]:font-semibold aria-[current=page]:text-clinic-sage motion-reduce:transition-none tablet:text-[13px]" href="${href ?? `${bookingHref}&body=${encodeURIComponent(`I'd like to learn more about ${label}.`)}`}"${id && id === serviceId ? ' aria-current="page"' : ''}>${label}</a>
                     </li>
                   `).join('')}
                 </ul>
@@ -47,13 +47,13 @@ export function ContactBar() {
   `;
 }
 
-export function Navbar({ currentPage = 'home' } = {}) {
+export function Navbar({ currentPage = 'home', serviceId } = {}) {
   return `
     <nav class="${containerClasses} relative z-10 flex min-h-[72px] items-center justify-between gap-8 bg-clinic-white py-[7px] tablet:min-h-[76px] nav:min-h-[72px] nav:gap-5 wide:min-h-[76px] wide:gap-8" aria-label="Main navigation">
       <a class="block shrink-0" href="./" aria-label="InBody Clinic home"><img class="h-auto w-[158px] tablet:w-[170px] wide:w-[184px]" src="./assets/logo/logo.png" alt="InBody Clinic — Woman Health Clinics" width="184" height="58" /></a>
       <button class="group inline-flex size-11 cursor-pointer items-center justify-center text-clinic-navy nav:hidden" data-nav-toggle type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false">${icon('menu', 'size-[25px] group-aria-expanded:hidden')}${icon('close', 'hidden size-[25px] group-aria-expanded:block')}</button>
       <div class="${pagePaddingClasses} absolute inset-x-0 top-full hidden max-h-[calc(100dvh-108px)] flex-col items-stretch gap-0 overflow-y-auto overscroll-contain bg-clinic-white pt-3 pb-6 shadow-[0_12px_20px_rgb(32_56_88/0.1)] data-[open=true]:flex tablet:max-h-[calc(100dvh-118px)] nav:static nav:flex nav:max-h-none nav:flex-row nav:items-center nav:self-stretch nav:gap-5 nav:overflow-visible nav:p-0 nav:shadow-none wide:gap-[clamp(18px,2.6vw,40px)]" id="nav-links" data-open="false">
-        ${getNavigationLinks(currentPage).map(({ id, label, href }) => id === 'services' ? ServicesDropdown() : `<a class="${navLinkClasses}" href="${href}"${id === currentPage ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
+        ${getNavigationLinks(currentPage).map(({ id, label, href }) => id === 'services' ? ServicesDropdown(serviceId) : `<a class="${navLinkClasses}" href="${href}"${id === currentPage ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
         ${BookingButton('navbar')}
       </div>
     </nav>

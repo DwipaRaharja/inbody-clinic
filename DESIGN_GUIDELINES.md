@@ -91,7 +91,14 @@ Gunakan komponen bersama, bukan menyalin style button:
 BookingButton();         // CTA hero
 BookingButton('navbar'); // CTA navbar
 ActionButton({ label: 'View services', href: './#services', variant: 'services' });
+ActionButton({ label: 'Learn more', href: '#service-options' });
+ActionButton({ label: 'Contact the Clinic', href: './contact.html', variant: 'contact' });
 ```
+
+Learn More memakai varian default `hero`: pill Sage dengan teks uppercase dan
+panah menuju `#service-options`. Varian `contact` memakai pill Navy dengan teks sesuai kapitalisasi
+label, untuk CTA kontak di atas footer. Keduanya tetap memakai `ActionButton`
+agar hover, fokus keyboard, dan reduced motion mengikuti komponen bersama.
 
 Tujuan CTA saat ini masih email klinik. Ubah `bookingHref` di
 `js/components/button.js` ketika URL booking tersedia.
@@ -349,18 +356,25 @@ mengaktifkan tombol pada semua perangkat. Escape menutup dropdown dan
 mengembalikan fokus ke tombol; klik di luar serta perpindahan fokus keluar
 dropdown juga menutupnya. Panel tertutup memakai `inert` dan `aria-hidden`.
 
-Layanan memakai mekanisme enquiry email yang sama dengan kartu layanan Home,
-dengan nama layanan terpilih di body email. Halaman layanan terpisah belum tersedia.
+Item layanan disimpan sebagai object pada `serviceNavigationGroups`, dengan
+`label` serta `id` dan `href` jika halaman layanan tersedia. Pregnancy Massage &
+Circulation Support menuju `./pregnancy-massage-circulation-support.html`.
+Item lainnya tetap membuka enquiry email dengan nama layanan di body email.
+`serviceId` dari descriptor halaman diteruskan melalui `PageLayout` ke navbar
+untuk memberi `aria-current="page"` pada tautan layanan yang sedang dibuka.
 
 ## 15. Layout bersama dan struktur halaman
 
-`index.html`, `about.html`, dan `contact.html` tetap menjadi entry dengan URL,
+Entry Home, About, Contact Us, dan setiap layanan tetap memiliki URL,
 title, meta description, pemanggilan font, Phosphor Icons, dan `css/output.css`
-masing-masing. Ketiganya menyediakan `#app`, atribut `data-page` pada body,
+masing-masing. Entry menyediakan `#app`, atribut `data-page` pada body,
 serta satu entry module `js/app.js`. Tidak ada framework atau proses build HTML.
 
 `js/app.js` memilih dan memuat descriptor dari `js/pages/` sesuai `data-page`.
-Descriptor menentukan section dan inisialisasi interaksi khusus halaman.
+Module halaman dapat mengekspor object descriptor atau factory yang menerima
+`{ serviceId }`. Descriptor menentukan section dan inisialisasi interaksi khusus
+halaman. Entry layanan memakai `data-page="service"` dan `data-service` untuk
+memilih data melalui factory `js/pages/service.js`.
 `js/layouts/page-layout.js` menyediakan `PageLayout` dan `mountPage` untuk shell
 bersama: skip link menuju `#main-content`, bar kontak, navbar sticky, main
 selebar halaman, serta footer. `mountPage` memasang class global Tailwind,
@@ -378,3 +392,48 @@ kelompokkan section halaman di `js/sections/`, lalu daftarkan pemuat descriptor
 di `js/app.js`. Perbarui `js/data/navigation.js` dan sumber Tailwind bila perlu.
 Gunakan shell dan container yang sama; jangan menyalin navbar atau footer ke
 section. Langkah pengembangan lengkap ada di `README.md`.
+
+## 16. Template halaman layanan
+
+Halaman `pregnancy-massage-circulation-support.html` memakai
+`data-page="service"` dan
+`data-service="pregnancy-massage-circulation-support"`. `js/pages/service.js`
+mencari data pada registry `js/data/services/index.js`, lalu memanggil
+`createServicePage(service)` dari `js/layouts/service-page.js`. Descriptor yang
+dihasilkan tetap dipasang melalui `PageLayout` dan `mountPage` yang sama dengan
+halaman lain.
+
+Renderer umum berada di `js/sections/service/index.js`. Urutan template:
+
+| Section | Komposisi |
+| --- | --- |
+| Hero | Eyebrow, H1 dua warna, deskripsi, tombol Learn More dan tiga benefit di kiri; foto di kanan |
+| Pilihan perawatan | Foto di kiri; eyebrow, H2, paragraf dan daftar bernomor di kanan |
+| Tahap pemulihan | Background Light Grey; heading terpusat dan tiga kartu White bernomor |
+| Pendekatan dan hasil | Heading terpusat, lalu dua panel dengan daftar bernomor |
+| Kutipan | Teks singkat terpusat dengan ruang vertikal lega |
+| CTA kontak | Background Light Sage; judul dan deskripsi di kiri, tombol Navy di kanan |
+
+Pada layar kecil, pasangan kolom bertumpuk dan kartu menyesuaikan lebar.
+Konten mengikuti `containerClasses`; background section tetap selebar layar.
+Heading memakai Cormorant Garamond dengan accent Sage dan italic. Body, label,
+nomor, serta tombol memakai Montserrat. Gunakan ikon Phosphor Light untuk benefit.
+Foto berada di dalam container dengan sudut membulat, mengikuti referensi
+halaman layanan; foto tidak memakai grid full-bleed hero Home.
+
+Seluruh isi layanan pertama berada di
+`js/data/services/pregnancy-massage-circulation-support.js`. Dua foto memakai
+aset JPEG yang disediakan pengguna dalam folder
+`assets/images/services/Pregnancy & Postpartum/POSTNATAL LYMPHATIC DRAINAGE/`.
+Hero memakai `WhatsApp Image 2026-10-02 at 10.33.06 (2).jpeg`; foto pilihan
+perawatan memakai `WhatsApp Image 2026-10-02 at 10.33.09.jpeg`.
+Screenshot Recovery & Core Restoration digunakan untuk komposisi; judul,
+deskripsi, dan daftar menyesuaikan layanan Pregnancy Massage & Circulation
+Support. Referensi isi: [halaman resmi klinik](https://inbodyclinic.com/pregnancy-massage-circulation-support/).
+
+Untuk layanan berikutnya, tambahkan satu data lengkap ke registry, entry HTML
+dengan metadata serta `data-service` yang sesuai, tautan dropdown, dan sumber
+Tailwind. Pakai renderer yang sama agar perubahan layout berlaku konsisten.
+Jangan menyalin section atau shell untuk setiap layanan. Jalankan pemeriksaan
+struktur halaman dan build CSS, lalu periksa hasil visual di browser; pemeriksaan
+struktur saja tidak membuktikan kesesuaian visual.
