@@ -21,7 +21,7 @@ function renderImage(image = {}, { hero = false } = {}) {
 function renderBenefit({ icon, label }) {
   const iconClass = /^ph-[a-z0-9-]+$/.test(icon) ? icon : 'ph-heart';
   return `<li class="flex min-w-0 items-start gap-3">
-    <i class="ph-light ${iconClass} shrink-0 text-[22px] leading-none text-clinic-sage" aria-hidden="true"></i>
+    <i class="ph ${iconClass} shrink-0 text-[22px] leading-none text-clinic-sage" aria-hidden="true"></i>
     <span class="min-w-0 text-[10px] leading-[1.4] text-clinic-navy/80 tablet:text-[11px]">${escapeText(label)}</span>
   </li>`;
 }
@@ -95,7 +95,7 @@ function renderExpertiseList(column) {
       ${(column.items ?? []).map(item => {
         const iconClass = /^ph-[a-z0-9-]+$/.test(item.icon) ? item.icon : 'ph-circle';
         return `<li class="flex min-w-0 items-center gap-4 py-2 tablet:gap-5">
-          <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-clinic-sage/50 bg-clinic-light-sage/60 text-clinic-sage"><i class="ph-light ${iconClass} text-[20px] leading-none" aria-hidden="true"></i></span>
+          <span class="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-clinic-sage/50 bg-clinic-light-sage/60 text-clinic-sage"><i class="ph ${iconClass} text-[20px] leading-none" aria-hidden="true"></i></span>
           <div class="min-w-0 text-[12px] leading-[1.5] text-clinic-navy/85 tablet:text-[13px]">
             ${item.label
               ? `<p><span class="font-semibold">${escapeText(item.label)}</span> ${escapeText(item.description)}</p>`

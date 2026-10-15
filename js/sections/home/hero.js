@@ -9,7 +9,7 @@ function HeroBenefits(benefits, vertical = false) {
     : 'mt-7 grid w-full max-w-[490px] min-w-0 list-none grid-cols-3 gap-3.5 p-0 tablet:mt-[31px] tablet:gap-5';
   return `<ul class="${listClasses}" aria-label="Our approach">
     ${benefits.map((benefit) => `<li class="flex min-w-0 flex-col items-center gap-2.5 text-center tablet:gap-[13px] ${vertical ? 'wide:flex-row wide:gap-5 wide:text-left' : ''}">
-      <i class="ph-light ${benefit.icon} inline-flex size-8 shrink-0 items-center justify-center text-[32px] text-clinic-navy tablet:size-[38px] tablet:text-[38px]" aria-hidden="true"></i>
+      <i class="ph ${benefit.icon} inline-flex size-8 shrink-0 items-center justify-center text-[32px] text-clinic-navy tablet:size-[38px] tablet:text-[38px]" aria-hidden="true"></i>
       <span class="text-[11px] leading-[1.2] font-medium text-clinic-navy tablet:text-[12px] wide:text-[14px]">${vertical ? `<span class="wide:hidden">${benefit.label}</span><span class="hidden wide:inline">${benefit.inlineLabel}</span>` : benefit.label}</span>
     </li>`).join('')}
   </ul>`;

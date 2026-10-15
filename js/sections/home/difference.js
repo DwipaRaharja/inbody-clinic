@@ -49,7 +49,7 @@ export function Difference() {
         <ul class="mt-7 grid list-none grid-cols-1 gap-7 p-0 tablet:grid-cols-3 tablet:gap-6 nav:gap-5">
           ${strengths.map((strength) => `
             <li>
-              <i class="ph-light ${strength.icon} inline-block text-[34px]" aria-hidden="true"></i>
+              <i class="ph ${strength.icon} inline-block text-[34px]" aria-hidden="true"></i>
               <p class="mt-4 text-[14px] leading-[1.2] font-semibold">${strength.title}</p>
               <p class="mt-1 text-[14px] leading-[1.3]">${strength.description}</p>
             </li>

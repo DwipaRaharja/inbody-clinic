@@ -9,6 +9,8 @@ import { serviceNavigationGroups } from '../js/data/navigation.js';
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const siteOrigin = 'https://inbody.test';
 const appSource = await readFile(join(projectRoot, 'js/app.js'), 'utf8');
+const iconStyles = await readFile(join(projectRoot, 'node_modules/@phosphor-icons/web/src/regular/style.css'), 'utf8');
+const iconStylesheetUrl = 'https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css';
 const renderedPages = new Map();
 const htmlFiles = (await readdir(projectRoot)).filter(name => name.endsWith('.html'));
 const decodeAttribute = value => value.replace(/&(amp|lt|gt|quot|#39);/gu, (_, entity) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" })[entity]);
@@ -20,6 +22,8 @@ for (const filename of htmlFiles) {
   assert.ok(appSource.includes(`import('./pages/${pageId}.js')`), `${filename}: page is not registered in app.js`);
   assert.equal((html.match(/src="\.\/js\/app\.js"/gu) ?? []).length, 1, `${filename}: expected one shared entry script`);
   assert.equal((html.match(/href="\.\/css\/output\.css"/gu) ?? []).length, 1, `${filename}: expected one Tailwind stylesheet`);
+  assert.equal(html.split(`href="${iconStylesheetUrl}"`).length - 1, 1, `${filename}: expected one Phosphor Regular CDN stylesheet`);
+  assert.ok(!html.includes('./node_modules/@phosphor-icons/'), `${filename}: icon stylesheets must use the CDN`);
   assert.ok(/<title>[^<]+<\/title>/u.test(html), `${filename}: missing page title`);
   assert.ok(/name="description"/u.test(html), `${filename}: missing description`);
 
@@ -30,6 +34,14 @@ for (const filename of htmlFiles) {
   if (pageId === 'service') assert.equal(page.serviceId, serviceId, `${filename}: wrong service data`);
   assert.ok(page.sections.length, `${filename}: no sections`);
   const markup = PageLayout(page);
+  for (const match of markup.matchAll(/<i\b[^>]*\bclass="([^"]+)"/gu)) {
+    const classes = match[1].split(/\s+/u);
+    const glyphs = classes.filter(name => name.startsWith('ph-'));
+    if (glyphs.length) {
+      assert.ok(classes.includes('ph'), `${filename}: missing Regular icon class`);
+      for (const glyph of glyphs) assert.ok(iconStyles.includes(`.ph.${glyph}:`), `${filename}: missing Regular icon ${glyph}`);
+    }
+  }
   assert.ok(!markup.includes('[object Object]') && !markup.includes('undefined'), `${filename}: invalid rendered content`);
   const ids = [...markup.matchAll(/\sid="([^"]+)"/gu)].map(match => match[1]);
   const idSet = new Set(ids);
@@ -64,7 +76,6 @@ for (const [route, { filename, html, markup }] of renderedPages) {
 const dropdownServices = serviceNavigationGroups.flatMap(group => group.services);
 assert.equal(new Set(dropdownServices.map(service => service.id)).size, dropdownServices.length, 'Service dropdown IDs must be unique');
 assert.equal(Object.keys(services).length, dropdownServices.length, 'Every registered service must have a dropdown entry');
-const iconStyles = await readFile(join(projectRoot, 'node_modules/@phosphor-icons/web/src/light/style.css'), 'utf8');
 for (const item of dropdownServices) {
   assert.ok(item.id && item.href, `${item.label}: missing service page link`);
   const data = services[item.id];

@@ -12,7 +12,7 @@ export const footerSocialLinks = [
 
 function SocialIcon({ name, icon, href }) {
   const classes = 'inline-flex size-7 shrink-0 items-center justify-center text-[26px]';
-  const glyph = `<i class="ph-fill ${icon}" aria-hidden="true"></i>`;
+  const glyph = `<i class="ph ${icon}" aria-hidden="true"></i>`;
   if (!href) {
     return `<span class="${classes}" role="img" aria-label="${name}" title="${name}">${glyph}</span>`;
   }

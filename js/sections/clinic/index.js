@@ -28,7 +28,7 @@ function galleryCard(photo) {
   return `<li class="min-w-0" data-gallery-card data-gallery-id="${escapeText(photo.id)}" data-gallery-categories="${escapeText(photo.categories.join(' '))}">
     <button class="group relative block aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl bg-clinic-light-grey text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clinic-sage" type="button" data-gallery-open="${escapeText(photo.id)}" aria-label="View photo: ${title}">
       <img class="block size-full object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none" src="${escapeText(photo.src)}" alt="${escapeText(photo.alt)}" width="${escapeText(photo.width)}" height="${escapeText(photo.height)}" loading="lazy" decoding="async" />
-      <span class="absolute right-3 bottom-3 inline-flex size-10 items-center justify-center rounded-full bg-clinic-white/95 text-clinic-navy shadow-sm transition-colors group-hover:bg-clinic-white motion-reduce:transition-none" aria-hidden="true"><i class="ph-light ph-arrows-out text-[20px]"></i></span>
+      <span class="absolute right-3 bottom-3 inline-flex size-10 items-center justify-center rounded-full bg-clinic-white/95 text-clinic-navy shadow-sm transition-colors group-hover:bg-clinic-white motion-reduce:transition-none" aria-hidden="true"><i class="ph ph-arrows-out text-[20px]"></i></span>
     </button>
     <p class="mt-5 text-[9px] leading-[1.6] font-semibold tracking-[0.15em] text-clinic-sage uppercase tablet:text-[10px]">${escapeText(photo.eyebrow)}</p>
     <h3 class="mt-1.5 font-display text-[26px] leading-[1.15] font-semibold text-clinic-navy tablet:text-[28px]" data-gallery-title>${title}</h3>
@@ -55,7 +55,7 @@ export function ClinicGallery() {
     <dialog class="fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[1080px] overflow-auto rounded-2xl border-0 bg-clinic-white p-0 text-clinic-navy shadow-2xl backdrop:bg-clinic-navy/80" data-gallery-dialog aria-labelledby="clinic-photo-title">
       <div class="relative">
         <div class="bg-clinic-navy/5"><img class="mx-auto block max-h-[75dvh] w-full object-contain" data-gallery-full-image alt="" /></div>
-        <button class="absolute top-4 right-4 inline-flex size-11 cursor-pointer items-center justify-center rounded-full bg-clinic-white text-clinic-navy shadow-sm transition-colors hover:bg-clinic-cream focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clinic-sage motion-reduce:transition-none" type="button" data-gallery-close aria-label="Close photo" autofocus><i class="ph-light ph-x text-[24px]" aria-hidden="true"></i></button>
+        <button class="absolute top-4 right-4 inline-flex size-11 cursor-pointer items-center justify-center rounded-full bg-clinic-white text-clinic-navy shadow-sm transition-colors hover:bg-clinic-cream focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clinic-sage motion-reduce:transition-none" type="button" data-gallery-close aria-label="Close photo" autofocus><i class="ph ph-x text-[24px]" aria-hidden="true"></i></button>
         <div class="px-6 py-6 tablet:px-8">
           <h2 class="font-display text-[28px] leading-[1.2] font-semibold tablet:text-[32px]" id="clinic-photo-title" data-gallery-dialog-title></h2>
           <p class="mt-2 max-w-[70ch] text-[13px] leading-[1.7] text-clinic-navy/75" data-gallery-dialog-description></p>
@@ -74,11 +74,11 @@ export function ClinicVisit() {
     </div>
     <div class="min-w-0 rounded-2xl border border-clinic-light-grey bg-clinic-white p-6 tablet:p-8">
       <div class="flex items-start gap-4">
-        <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-clinic-light-sage/40 text-clinic-navy" aria-hidden="true"><i class="ph-light ph-map-pin text-[23px]"></i></span>
+        <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-clinic-light-sage/40 text-clinic-navy" aria-hidden="true"><i class="ph ph-map-pin text-[23px]"></i></span>
         <div class="min-w-0"><h3 class="text-[13px] leading-[1.5] font-semibold">Find us in Double Bay</h3><p class="mt-2 text-[13px] leading-[1.7] text-clinic-navy/75">${clinicContact.addressLines.map(line => `<span class="block">${escapeText(line)}</span>`).join('')}</p></div>
       </div>
       <div class="mt-6 flex items-start gap-4 border-t border-clinic-light-grey pt-6">
-        <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-clinic-light-sage/40 text-clinic-navy" aria-hidden="true"><i class="ph-light ph-clock text-[23px]"></i></span>
+        <span class="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-clinic-light-sage/40 text-clinic-navy" aria-hidden="true"><i class="ph ph-clock text-[23px]"></i></span>
         <div class="min-w-0"><h3 class="text-[13px] leading-[1.5] font-semibold">Clinic hours</h3><p class="mt-2 text-[13px] leading-[1.7] text-clinic-navy/75">${clinicContact.hours.map(line => `<span class="block">${escapeText(line)}</span>`).join('')}</p></div>
       </div>
       <div class="mt-7">${ActionButton({ label: 'Find the clinic', href: clinicMapUrl })}</div>

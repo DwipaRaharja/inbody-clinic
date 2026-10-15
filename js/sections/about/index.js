@@ -33,14 +33,14 @@ export function TherapistProfile() {
       <p class="mt-2.5 max-w-[48ch] text-[14px] leading-[1.4]">With over 20 years of clinical experience, Saila specialises in women’s health, dermatofunctional therapy and advanced lymphatic care.</p>
       <ul class="mt-4 list-none divide-y divide-clinic-light-sage border-y border-clinic-light-sage p-0">
         ${specialties.map(({ label, icon }) => `<li><a class="group flex min-h-[45px] items-center gap-4 py-2 text-[13px] leading-[1.4] transition-colors hover:text-clinic-sage motion-reduce:transition-none tablet:gap-5 tablet:text-[14px]" href="./#services">
-          <i class="ph-light ${icon} shrink-0 text-[24px] text-clinic-sage" aria-hidden="true"></i>
+          <i class="ph ${icon} shrink-0 text-[24px] text-clinic-sage" aria-hidden="true"></i>
           <span class="min-w-0">${label}</span>
-          <i class="ph-light ph-caret-right ml-auto shrink-0 text-[18px] text-clinic-sage transition-transform group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" aria-hidden="true"></i>
+          <i class="ph ph-caret-right ml-auto shrink-0 text-[18px] text-clinic-sage transition-transform group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" aria-hidden="true"></i>
         </a></li>`).join('')}
       </ul>
       <div class="mt-3 flex flex-wrap items-center justify-between gap-x-5 gap-y-4">
         ${ActionButton({ label: 'View services', href: './#services', variant: 'services' })}
-        <a class="inline-flex min-h-11 items-center gap-2 text-[14px] font-medium transition-colors hover:text-clinic-sage motion-reduce:transition-none tablet:text-[15px]" href="mailto:Sailainsua@gmail.com"><i class="ph-light ph-envelope text-[24px]" aria-hidden="true"></i><span>Contact Saila</span></a>
+        <a class="inline-flex min-h-11 items-center gap-2 text-[14px] font-medium transition-colors hover:text-clinic-sage motion-reduce:transition-none tablet:text-[15px]" href="mailto:Sailainsua@gmail.com"><i class="ph ph-envelope text-[24px]" aria-hidden="true"></i><span>Contact Saila</span></a>
       </div>
     </div>
     <img class="aspect-[4/3] w-full min-w-0 rounded-[10px] object-cover object-center wide:h-full wide:min-h-[380px]" src="./assets/images/about/saila.jpg" alt="Saila Insua López at InBody Clinic holding a treatment device in front of the clinic shelves" width="1600" height="1066" fetchpriority="high" />
@@ -64,7 +64,7 @@ export function TherapistExpertise() {
     </div>
     <ul class="grid min-w-0 list-none grid-cols-1 gap-3 p-0 tablet:grid-cols-2">
       ${expertise.map(({ title, description, icon, svg }) => `<li class="flex min-h-[125px] min-w-0 items-center gap-4 rounded-lg bg-clinic-light-grey px-4 py-5">
-        ${svg ? renderIcon(icon, 'size-8 shrink-0 stroke-[1.1] text-clinic-sage') : `<i class="ph-light ${icon} shrink-0 text-[32px] text-clinic-sage" aria-hidden="true"></i>`}
+        ${svg ? renderIcon(icon, 'size-8 shrink-0 stroke-[1.1] text-clinic-sage') : `<i class="ph ${icon} shrink-0 text-[32px] text-clinic-sage" aria-hidden="true"></i>`}
         <div class="min-w-0">
           <h3 class="font-sans! text-[13px] leading-[1.35] font-semibold tablet:text-[14px]">${title}</h3>
           <p class="mt-1 text-[12px] leading-[1.55] text-clinic-navy/75">${description}</p>

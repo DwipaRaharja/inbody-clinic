@@ -145,16 +145,18 @@ Breakpoint project:
 
 ## 7. Ikon hero
 
-Gunakan Phosphor Icons dari dependency `@phosphor-icons/web`, weight **Light**:
+Gunakan Phosphor Icons versi 2.1.2 dari CDN jsDelivr, weight **Regular**:
 
 | Benefit | Ikon | Class |
 | --- | --- | --- |
-| Evidence-Based Care | Leaf | `ph-light ph-leaf` |
-| Personalised Treatment | Heart | `ph-light ph-heart` |
-| A Holistic Approach | Users Three | `ph-light ph-users-three` |
+| Evidence-Based Care | Leaf | `ph ph-leaf` |
+| Personalised Treatment | Heart | `ph ph-heart` |
+| A Holistic Approach | Users Three | `ph ph-users-three` |
 
-Stylesheet resmi weight Light dimuat di setiap entry HTML dari dependency lokal.
-Jalankan `npm install` untuk menyediakan dependency ketika menyiapkan project.
+Stylesheet Regular dimuat di setiap entry HTML melalui
+`https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css`.
+Gunakan class dasar `ph`, bukan `ph-light` atau `ph-fill`. Paket lokal
+hanya dipakai untuk memeriksa ketersediaan nama ikon saat menjalankan tes.
 Ukuran ikon: 32px di HP dan 38px mulai tablet, dengan warna Navy.
 Ikon bersifat dekoratif dan memakai `aria-hidden="true"` karena label sudah tersedia.
 
@@ -188,7 +190,7 @@ lalu Footer.
 | Section | Modul | Aset / ikon |
 | --- | --- | --- |
 | Hero | `js/sections/home/hero.js` | Tiga foto dan komposisi dari `js/data/hero-slides.js` |
-| Our Services | `js/sections/home/services.js` | Phosphor Light leaf dan flower-lotus; SVG tubuh, kehamilan, wajah, dan pelvic health |
+| Our Services | `js/sections/home/services.js` | Phosphor Regular leaf dan flower-lotus; SVG tubuh, kehamilan, wajah, dan pelvic health |
 | The InBody Difference | `js/sections/home/difference.js` | `assets/images/home/difference.jpg`; graduation cap, users, shield check |
 | Testimonial | `js/sections/home/testimonials.js` | `assets/images/home/testimonial.jpg`; kutipan dari referensi pengguna |
 | CTA | `js/sections/home/booking.js` | `assets/images/home/cta.jpg`; memakai `BookingButton()` |
@@ -197,7 +199,7 @@ Our Services memakai tiga kolom mulai 1101px, dua kolom mulai 641px, dan satu ko
 di HP. Nama layanan memakai Montserrat sebagai label kartu. Panah layanan
 menuju halaman layanan melalui URL dari `serviceNavigationGroups`.
 Ikon memakai Navy di atas lingkaran Light Sage. Leaf dan lotus memakai Phosphor
-Light; ikon tubuh Lipedema, kehamilan, wajah, dan pelvic health memakai SVG
+Regular; ikon tubuh Lipedema, kehamilan, wajah, dan pelvic health memakai SVG
 `currentColor` dari `js/components/icons.js`, mengikuti referensi pengguna.
 SVG di kartu berukuran 42px dengan ketebalan garis 0.85 pada viewBox 24px;
 override ini hanya berlaku pada ikon kartu, termasuk SVG pregnancy yang dipakai
@@ -220,7 +222,7 @@ Desktop lebar memakai tiga kolom: logo dan copyright, navigasi dan ikon,
 lalu lokasi serta tagline dengan divider vertikal. Layout bertumpuk pada HP.
 Margin mengikuti `containerClasses` yang sama dengan navbar dan section.
 
-Urutan ikon Phosphor Fill: Facebook, TikTok, Envelope (email), WhatsApp,
+Urutan ikon Phosphor Regular: Facebook, TikTok, Envelope (email), WhatsApp,
 dan Instagram. Email memakai kontak klinik dan WhatsApp memakai nomor telepon
 klinik yang ada. Sesuai arahan pengguna, Facebook, TikTok, dan Instagram
 sementara mengarah ke situs utama aplikasi masing-masing. Ganti URL pada
@@ -289,7 +291,7 @@ dan `Footer({ currentPage: 'about' })`. `Heading({ size: 'profile' })` mengatur 
 profil. Tombol View Services memakai `ActionButton` varian `services` dengan
 sudut rounded-lg, sedangkan CTA booking tetap memakai `BookingButton()` berbentuk pill.
 
-Ikon memakai Phosphor Light: flower tulip, waves, drop, envelope,
+Ikon memakai Phosphor Regular: flower tulip, waves, drop, envelope,
 caret right, stethoscope, dan plant. Kartu Women's life stages memakai SVG ibu hamil
 yang digambar mengikuti referensi pengguna melalui `icon('pregnancy')` di
 `js/components/icons.js`. SVG memakai `currentColor` dengan `text-clinic-sage`,
@@ -320,7 +322,7 @@ menuju `./contact.html`; Home tetap menuju `./` tanpa hash.
 
 Bagian pembuka memakai Light Sage dan teks terpusat. Bagian utama memakai White:
 detail kontak dan peta di kiri, form di kanan mulai 1101px. Di layar kecil kedua
-kolom bertumpuk. Kartu kontak memakai Cream dan ikon Phosphor Light phone,
+kolom bertumpuk. Kartu kontak memakai Cream dan ikon Phosphor Regular phone,
 envelope, map-pin, serta clock. Padding tetap 32px di HP dan 80px mulai tablet.
 
 Data kontak dan URL peta berada di `js/data/clinic-contact.js`. Alamat tujuan:
@@ -427,7 +429,7 @@ Renderer umum berada di `js/sections/service/index.js`. Urutan template:
 Pada layar kecil, pasangan kolom bertumpuk dan kartu menyesuaikan lebar.
 Konten mengikuti `containerClasses`; background section tetap selebar layar.
 Heading memakai Cormorant Garamond dengan accent Sage dan italic. Body, label,
-nomor, serta tombol memakai Montserrat. Gunakan ikon Phosphor Light untuk benefit.
+nomor, serta tombol memakai Montserrat. Gunakan ikon Phosphor Regular untuk benefit.
 Foto berada di dalam container dengan sudut membulat, mengikuti referensi
 halaman layanan; foto tidak memakai grid full-bleed hero Home.
 
@@ -462,7 +464,7 @@ Variasi yang tetap ditangani renderer bersama:
   dua panel, misalnya keterangan program **6–8 sesi** pada Hormonal.
 - Panel default memakai daftar string bernomor. Panel kanan Clinical Cellulite
   memakai `variant: 'icon-blocks'` dengan item `{ icon, title, description }`;
-  ikon Phosphor Light target, heartbeat, dan check-circle mengikuti jenis
+  ikon Phosphor Regular target, heartbeat, dan check-circle mengikuti jenis
   simbol pada desain. Label sumber “Headline”, “Deskripsi”, dan “Hasil” tetap
   ditampilkan sambil menunggu review isi.
 - Nomor daftar dihasilkan renderer secara berurutan. Panel kanan Endometriosis
@@ -514,7 +516,7 @@ kategori; satu foto dapat masuk kategori `treatment-rooms`, `equipment`, dan/ata
 `details`. Pertahankan kategori sesuai isi foto saat menambah atau mengganti
 aset.
 
-Tombol foto memiliki nama aksesibel dan ikon Phosphor Light `arrows-out`.
+Tombol foto memiliki nama aksesibel dan ikon Phosphor Regular `arrows-out`.
 Hover memperbesar foto secara halus; reduced motion menonaktifkan gerakan.
 Pembesaran memakai elemen `dialog` native, bukan halaman baru. Foto ditampilkan
 dengan `object-contain`, judul dan deskripsi tersedia di bawahnya, serta tombol
@@ -524,7 +526,7 @@ ke tombol foto yang membuka dialog.
 
 Bagian Plan Your Visit memakai Cream dengan dua kolom mulai 1101px: teks
 pengantar di kiri dan kartu White berisi alamat serta jam klinik di kanan.
-Bagian ini tidak mengulang foto galeri. Ikon Phosphor Light `map-pin` dan
+Bagian ini tidak mengulang foto galeri. Ikon Phosphor Regular `map-pin` dan
 `clock` mendampingi detail dari `js/data/clinic-contact.js`. Tombol Find the
 Clinic memakai `ActionButton` dengan URL Google Maps yang sama dengan halaman
 Contact Us, dan tautan Contact Us menuju `./contact.html`. Di layar kecil

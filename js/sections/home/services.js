@@ -72,12 +72,12 @@ export function Services() {
             <span class="inline-flex size-20 items-center justify-center rounded-full bg-clinic-light-sage wide:size-[88px]">
               ${service.svg
                 ? icon(service.icon, 'size-[42px] text-clinic-navy [stroke-width:0.85]')
-                : `<i class="ph-light ${service.icon} text-[42px] text-clinic-navy" aria-hidden="true"></i>`}
+                : `<i class="ph ${service.icon} text-[42px] text-clinic-navy" aria-hidden="true"></i>`}
             </span>
             <p class="mt-[18px] text-[16px] leading-[1.3] font-semibold wide:text-[18px]">${service.title}</p>
             <p class="mt-2.5 mb-6 max-w-[330px] text-[14px] leading-[1.35] wide:text-[16px]">${service.description}</p>
             <a class="mt-auto inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-clinic-navy/65 text-clinic-navy transition-colors duration-[160ms] hover:bg-clinic-navy hover:text-clinic-white motion-reduce:transition-none" href="${serviceRoutes[service.serviceId]}" aria-label="Learn more about ${service.title}">
-              <i class="ph-light ph-arrow-right text-[28px]" aria-hidden="true"></i>
+              <i class="ph ph-arrow-right text-[28px]" aria-hidden="true"></i>
             </a>
           </li>
         `).join('')}

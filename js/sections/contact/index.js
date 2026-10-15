@@ -31,7 +31,7 @@ export function ContactDetailsAndForm() {
         ${contactCards.map(({ title, icon, lines, href, external }) => {
           const tag = href ? 'a' : 'div';
           return `<${tag} class="min-h-[196px] min-w-0 rounded-lg bg-clinic-cream px-6 py-5 ${href ? 'transition-colors hover:bg-clinic-light-sage/40 motion-reduce:transition-none' : ''}"${href ? ` href="${href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}` : ''}>
-            <span class="inline-flex size-12 items-center justify-center rounded-full bg-clinic-white"><i class="ph-light ${icon} text-[24px]" aria-hidden="true"></i></span>
+            <span class="inline-flex size-12 items-center justify-center rounded-full bg-clinic-white"><i class="ph ${icon} text-[24px]" aria-hidden="true"></i></span>
             <h3 class="mt-2 font-display text-[26px] leading-[1.2] font-semibold tablet:text-[28px]">${title}</h3>
             <p class="mt-2 text-[13px] leading-[1.5] break-words text-clinic-navy/80">${lines.map(line => `<span class="block">${line}</span>`).join('')}</p>
           </${tag}>`;
@@ -40,7 +40,7 @@ export function ContactDetailsAndForm() {
       <div class="mt-8 overflow-hidden rounded-lg border border-clinic-light-grey bg-clinic-light-sage">
         <iframe class="block h-[240px] w-full border-0 tablet:h-[220px]" src="${clinicMapEmbedUrl}" title="Google Maps location of InBody Clinic, Level 1, 336 New South Head Road, Double Bay NSW 2028" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
-      <a class="mt-3 inline-flex items-center gap-2 text-[12px] font-medium underline-offset-4 hover:text-clinic-sage hover:underline" href="${clinicMapUrl}" target="_blank" rel="noopener noreferrer">Open in Google Maps<i class="ph-light ph-arrow-square-out text-[16px]" aria-hidden="true"></i></a>
+      <a class="mt-3 inline-flex items-center gap-2 text-[12px] font-medium underline-offset-4 hover:text-clinic-sage hover:underline" href="${clinicMapUrl}" target="_blank" rel="noopener noreferrer">Open in Google Maps<i class="ph ph-arrow-square-out text-[16px]" aria-hidden="true"></i></a>
     </div>
     <div class="min-w-0">
       <div class="[&_p.uppercase]:mb-8 [&_p.uppercase]:max-w-none [&_p.uppercase]:text-[12px] tablet:[&_p.uppercase]:text-[14px]">

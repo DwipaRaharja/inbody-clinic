@@ -2,6 +2,7 @@
 
 Website multi-halaman berbasis HTML, JavaScript ES modules, dan Tailwind CSS v4.
 Halaman Home, About, Our Clinic, Contact Us, dan layanan memakai satu layout bersama.
+Phosphor Icons memakai stylesheet Regular versi 2.1.2 dari CDN jsDelivr di semua entry HTML.
 Section halaman umum disusun per halaman; halaman layanan memakai satu template
 dengan data layanan yang terpisah.
 
