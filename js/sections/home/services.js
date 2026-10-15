@@ -1,4 +1,5 @@
 import { Heading } from '../../components/heading.js';
+import { icon } from '../../components/icons.js';
 import { serviceNavigationGroups } from '../../data/navigation.js';
 import { containerClasses } from '../../layouts/container.js';
 
@@ -9,31 +10,41 @@ const serviceRoutes = Object.fromEntries(
 const services = [
   {
     title: 'Lymphatic Health',
+    icon: 'ph-leaf',
     serviceId: 'clinical-lymphatic-drainage-sydney',
     description: 'Reduce swelling, support circulation and feel lighter.',
   },
   {
     title: 'Lipedema Care',
+    icon: 'body-contour',
+    svg: true,
     serviceId: 'lipedema-inflammatory-leg-care',
     description: 'Specialised, conservative treatment and long-term support.',
   },
   {
     title: 'Post-Operative Recovery',
+    icon: 'ph-flower-lotus',
     serviceId: 'post-surgical-recovery',
     description: 'Recover faster with expert guidance and personalised care.',
   },
   {
     title: 'Pregnancy & Postpartum',
+    icon: 'pregnancy',
+    svg: true,
     serviceId: 'pregnancy-massage-circulation-support',
     description: 'Support for your body through every stage.',
   },
   {
     title: 'Skin Health & Body Contouring',
+    icon: 'skin-health',
+    svg: true,
     serviceId: 'clinical-cellulite-remodelling',
     description: 'Improve skin health, reduce cellulite and enhance your confidence.',
   },
   {
     title: "Women's Health Physiotherapy",
+    icon: 'pelvic-health',
+    svg: true,
     serviceId: 'recovery-core-restoration',
     description: 'Pelvic health, core function and whole-body wellbeing.',
   },
@@ -59,7 +70,9 @@ export function Services() {
         ${services.map((service) => `
           <li class="mx-auto flex w-full min-w-0 max-w-[330px] flex-col items-center text-center">
             <span class="inline-flex size-20 items-center justify-center rounded-full bg-clinic-light-sage wide:size-[88px]">
-              <i class="ph-light ph-leaf text-[42px] text-clinic-navy" aria-hidden="true"></i>
+              ${service.svg
+                ? icon(service.icon, 'size-[42px] text-clinic-navy [stroke-width:0.85]')
+                : `<i class="ph-light ${service.icon} text-[42px] text-clinic-navy" aria-hidden="true"></i>`}
             </span>
             <p class="mt-[18px] text-[16px] leading-[1.3] font-semibold wide:text-[18px]">${service.title}</p>
             <p class="mt-2.5 mb-6 max-w-[330px] text-[14px] leading-[1.35] wide:text-[16px]">${service.description}</p>

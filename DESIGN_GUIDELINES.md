@@ -188,14 +188,20 @@ lalu Footer.
 | Section | Modul | Aset / ikon |
 | --- | --- | --- |
 | Hero | `js/sections/home/hero.js` | Tiga foto dan komposisi dari `js/data/hero-slides.js` |
-| Our Services | `js/sections/home/services.js` | Enam layanan; semua memakai `ph-light ph-leaf` sementara |
+| Our Services | `js/sections/home/services.js` | Phosphor Light leaf dan flower-lotus; SVG tubuh, kehamilan, wajah, dan pelvic health |
 | The InBody Difference | `js/sections/home/difference.js` | `assets/images/home/difference.jpg`; graduation cap, users, shield check |
 | Testimonial | `js/sections/home/testimonials.js` | `assets/images/home/testimonial.jpg`; kutipan dari referensi pengguna |
 | CTA | `js/sections/home/booking.js` | `assets/images/home/cta.jpg`; memakai `BookingButton()` |
 
 Our Services memakai tiga kolom mulai 1101px, dua kolom mulai 641px, dan satu kolom
 di HP. Nama layanan memakai Montserrat sebagai label kartu. Panah layanan
-sementara membuka draft email berisi pertanyaan tentang layanan yang dipilih.
+menuju halaman layanan melalui URL dari `serviceNavigationGroups`.
+Ikon memakai Navy di atas lingkaran Light Sage. Leaf dan lotus memakai Phosphor
+Light; ikon tubuh Lipedema, kehamilan, wajah, dan pelvic health memakai SVG
+`currentColor` dari `js/components/icons.js`, mengikuti referensi pengguna.
+SVG di kartu berukuran 42px dengan ketebalan garis 0.85 pada viewBox 24px;
+override ini hanya berlaku pada ikon kartu, termasuk SVG pregnancy yang dipakai
+kembali dari halaman About. Ikon dekoratif memakai `aria-hidden="true"`.
 
 Difference memakai layout foto dan teks dua kolom di desktop, lalu bertumpuk
 di bawah 1101px. Quote pada foto memakai Cormorant Garamond italic.
