@@ -1,6 +1,6 @@
-import { Heading } from '../components/heading.js';
-import { BookingButton } from '../components/button.js';
-import { fullBleedGridClasses, pagePaddingClasses } from '../components/layout.js';
+import { Heading } from '../../components/heading.js';
+import { BookingButton } from '../../components/button.js';
+import { fullBleedGridClasses, pagePaddingClasses } from '../../layouts/container.js';
 
 export function Booking() {
   return `

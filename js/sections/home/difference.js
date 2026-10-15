@@ -1,5 +1,5 @@
-import { Heading } from '../components/heading.js';
-import { fullBleedGridClasses, pagePaddingClasses } from '../components/layout.js';
+import { Heading } from '../../components/heading.js';
+import { fullBleedGridClasses, pagePaddingClasses } from '../../layouts/container.js';
 
 const strengths = [
   {

@@ -7,7 +7,9 @@ function escapeText(value) {
 /** Shared section heading, with an optional italic accent for each line. */
 export function Heading({ eyebrow = '', lines = [], level = 2, id = '', size = 'default', accentItalic = true, inline = false }) {
   const tag = [1, 2, 3, 4, 5, 6].includes(level) ? `h${level}` : 'h2';
-  const titleClasses = tag === 'h1' || size === 'hero'
+  const titleClasses = size === 'profile'
+    ? 'text-[2.5rem] leading-[1.08] font-semibold tablet:text-[3rem] wide:text-[3.25rem] min-[90rem]:text-[3.5rem]'
+    : tag === 'h1' || size === 'hero'
     ? 'text-[2.5rem] leading-[1.08] font-bold min-[30rem]:text-[3.25rem] tablet:text-[2.75rem] tablet:leading-[1.15] nav:text-[3.25rem] wide:text-[3.75rem] min-[90rem]:text-[4.5rem]'
     : tag === 'h2'
       ? ({

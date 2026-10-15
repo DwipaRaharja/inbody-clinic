@@ -1,7 +1,7 @@
-import { Heading } from '../components/heading.js';
-import { BookingButton } from '../components/button.js';
-import { containerClasses, fullBleedGridClasses, pagePaddingClasses } from '../components/layout.js';
-import { heroSlides } from '../data/hero-slides.js';
+import { Heading } from '../../components/heading.js';
+import { BookingButton } from '../../components/button.js';
+import { containerClasses, fullBleedGridClasses, pagePaddingClasses } from '../../layouts/container.js';
+import { heroSlides } from '../../data/hero-slides.js';
 
 function HeroBenefits(benefits, vertical = false) {
   const listClasses = vertical

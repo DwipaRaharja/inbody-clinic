@@ -1,6 +1,6 @@
-import { Heading } from '../components/heading.js';
-import { bookingHref } from '../components/button.js';
-import { containerClasses } from '../components/layout.js';
+import { Heading } from '../../components/heading.js';
+import { bookingHref } from '../../components/button.js';
+import { containerClasses } from '../../layouts/container.js';
 
 const services = [
   {

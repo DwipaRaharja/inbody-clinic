@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-pt-[72px] scroll-smooth tablet:scroll-pt-[76px] nav:scroll-pt-[72px] wide:scroll-pt-[76px] motion-reduce:scroll-auto">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,7 @@
   />
 
   <link rel="stylesheet" href="./node_modules/@phosphor-icons/web/src/light/style.css" />
+  <link rel="stylesheet" href="./node_modules/@phosphor-icons/web/src/fill/style.css" />
   <link rel="stylesheet" href="./css/output.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,26 +22,9 @@
   />
 </head>
 
-<body class="bg-clinic-cream font-sans text-clinic-navy antialiased [&_h1]:font-display [&_h2]:font-display [&_h3]:font-display **:[-webkit-tap-highlight-color:transparent] **:focus-visible:outline-2 **:focus-visible:outline-offset-5 **:focus-visible:outline-clinic-navy">
-
-  <a class="fixed -top-[100px] left-4 z-100 bg-clinic-white px-[18px] py-3 text-clinic-navy focus:top-3" href="#hero">Skip to main content</a>
-  <div id="contact-bar"></div>
-  <header id="navbar" class="sticky top-0 z-50 bg-clinic-white"></header>
-
-  <main class="w-full min-w-0">
-    <section id="hero" class="relative w-full min-w-0 overflow-hidden bg-clinic-white"></section>
-
-    <section id="services" class="bg-clinic-white"></section>
-
-    <section id="difference" class="overflow-hidden bg-clinic-light-sage"></section>
-
-    <section id="testimonials" class="relative overflow-hidden border-y border-clinic-light-grey bg-clinic-white"></section>
-
-    <section id="booking" class="relative overflow-hidden bg-clinic-white"></section>
-  </main>
-
-  <footer id="footer" class="bg-clinic-navy text-clinic-white [&_a]:focus-visible:outline-clinic-white"></footer>
-
-  <script type="module" src="./js/main.js"></script>
+<body data-page="home">
+  <div id="app"></div>
+  <noscript>Please enable JavaScript to view the InBody Clinic website.</noscript>
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>

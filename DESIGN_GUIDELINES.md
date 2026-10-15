@@ -16,7 +16,7 @@ Cream dan White menjadi warna dominan, Sage sebagai accent, dan Navy untuk teks.
 | H1, H2, H3, dan headline utama | Cormorant Garamond | `font-display` |
 | Paragraph, navigation, button, form, dan informasi lainnya | Montserrat | `font-sans` |
 
-Font dimuat dari Google Fonts melalui `index.html`, dengan weight 400, 500, 600, dan 700.
+Font dimuat dari Google Fonts melalui setiap entry HTML, dengan weight 400, 500, 600, dan 700.
 Fallback heading adalah `serif`; fallback body adalah `sans-serif`.
 
 ## 3. Color palette
@@ -90,6 +90,7 @@ Gunakan komponen bersama, bukan menyalin style button:
 ```js
 BookingButton();         // CTA hero
 BookingButton('navbar'); // CTA navbar
+ActionButton({ label: 'View services', href: './#services', variant: 'services' });
 ```
 
 Tujuan CTA saat ini masih email klinik. Ubah `bookingHref` di
@@ -104,12 +105,12 @@ Tujuan CTA saat ini masih email klinik. Ubah `bookingHref` di
 - Pada HP: **32px**, menggunakan `px-8`.
 - Gunakan `pagePaddingClasses` untuk padding bersama pada kolom teks section;
   jarak internal antara teks dan foto tetap mengikuti komposisi masing-masing.
-- Gunakan `containerClasses` dari `js/components/layout.js` agar navbar,
+- Gunakan `containerClasses` dari `js/layouts/container.js` agar navbar,
   bar kontak, dan konten section sejajar.
 - Background dan foto section mencapai tepi layar. Batas 1440px hanya berlaku
   pada jalur konten teks, bukan wrapper yang membatasi seluruh foto.
 - Hero, Difference, testimonial, dan CTA memakai `fullBleedGridClasses` dari
-  `js/components/layout.js`: dua jalur tengah membatasi konten hingga 1440px,
+  `js/layouts/container.js`: dua jalur tengah membatasi konten hingga 1440px,
   sedangkan dua jalur luar membagi ruang tambahan secara simetris.
   Foto membentang ke jalur luar agar tidak muncul celah di tepi halaman.
 - Heading memakai ukuran `rem` per breakpoint, bukan ukuran font berbasis `vw`.
@@ -145,7 +146,7 @@ Gunakan Phosphor Icons dari dependency `@phosphor-icons/web`, weight **Light**:
 | Personalised Treatment | Heart | `ph-light ph-heart` |
 | A Holistic Approach | Users Three | `ph-light ph-users-three` |
 
-Stylesheet resmi weight Light dimuat di `index.html` dari dependency lokal.
+Stylesheet resmi weight Light dimuat di setiap entry HTML dari dependency lokal.
 Jalankan `npm install` untuk menyediakan dependency ketika menyiapkan project.
 Ukuran ikon: 32px di HP dan 38px mulai tablet, dengan warna Navy.
 Ikon bersifat dekoratif dan memakai `aria-hidden="true"` karena label sudah tersedia.
@@ -158,7 +159,7 @@ Ikon bersifat dekoratif dan memakai `aria-hidden="true"` karena label sudah ters
 - Muat `output.css` sekali melalui `<link>` di setiap halaman HTML utama.
   Komponen JS di halaman tersebut otomatis memakai stylesheet yang sama.
 - Gunakan nama class lengkap dalam kode agar terbaca oleh compiler Tailwind.
-- Pakai ulang `Navbar`, `Heading`, `BookingButton`, dan `containerClasses`.
+- Pakai ulang `Navbar`, `Heading`, `BookingButton`, `ActionButton`, dan `containerClasses`.
 
 Build CSS setelah mengubah utility atau token:
 
@@ -179,10 +180,11 @@ lalu Footer.
 
 | Section | Modul | Aset / ikon |
 | --- | --- | --- |
-| Our Services | `js/sections/services.js` | Enam layanan; semua memakai `ph-light ph-leaf` sementara |
-| The InBody Difference | `js/sections/difference.js` | `assets/images/home/difference.jpg`; graduation cap, users, shield check |
-| Testimonial | `js/sections/testimonials.js` | `assets/images/home/testimonial.jpg`; kutipan dari referensi pengguna |
-| CTA | `js/sections/booking.js` | `assets/images/home/cta.jpg`; memakai `BookingButton()` |
+| Hero | `js/sections/home/hero.js` | Tiga foto dan komposisi dari `js/data/hero-slides.js` |
+| Our Services | `js/sections/home/services.js` | Enam layanan; semua memakai `ph-light ph-leaf` sementara |
+| The InBody Difference | `js/sections/home/difference.js` | `assets/images/home/difference.jpg`; graduation cap, users, shield check |
+| Testimonial | `js/sections/home/testimonials.js` | `assets/images/home/testimonial.jpg`; kutipan dari referensi pengguna |
+| CTA | `js/sections/home/booking.js` | `assets/images/home/cta.jpg`; memakai `BookingButton()` |
 
 Our Services memakai tiga kolom mulai 1101px, dua kolom mulai 641px, dan satu kolom
 di HP. Nama layanan memakai Montserrat sebagai label kartu. Panah layanan
@@ -205,7 +207,7 @@ Desktop lebar memakai tiga kolom: logo dan copyright, navigasi dan ikon,
 lalu lokasi serta tagline dengan divider vertikal. Layout bertumpuk pada HP.
 Margin mengikuti `containerClasses` yang sama dengan navbar dan section.
 
-Urutan ikon Phosphor Light: Facebook, TikTok, Envelope (email), WhatsApp,
+Urutan ikon Phosphor Fill: Facebook, TikTok, Envelope (email), WhatsApp,
 dan Instagram. Email memakai kontak klinik dan WhatsApp memakai nomor telepon
 klinik yang ada. Sesuai arahan pengguna, Facebook, TikTok, dan Instagram
 sementara mengarah ke situs utama aplikasi masing-masing. Ganti URL pada
@@ -228,7 +230,7 @@ desktop, lalu teks di atas dan foto di bawah pada lebar di bawah 1101px.
 Teks CTA memiliki lebar maksimal 390px dan memakai `BookingButton()` yang sama.
 
 Data tiga slide hero berada di `js/data/hero-slides.js`. Fungsi `HeroSlide` pada
-`js/sections/hero.js` merender teks, CTA, benefit, dan foto untuk tiap komposisi:
+`js/sections/home/hero.js` merender teks, CTA, benefit, dan foto untuk tiap komposisi:
 
 | Slide | Komposisi desktop | Foto |
 | --- | --- | --- |
@@ -241,7 +243,7 @@ yang sama. Ukuran headline memakai `Heading({ size: 'hero' })`; opsi `inline`
 menyambungkan bagian headline slide ketiga dengan accent Sage tegak.
 
 Wrapper memiliki `data-hero-slider`; tiap slide memiliki `data-hero-slide`.
-Controller `initHeroSlider` di `js/components/hero-slider.js` dipanggil setelah
+Controller `initHeroSlider` di `js/features/hero-slider.js` dipanggil setelah
 render. Slide ditumpuk pada satu sel grid agar tinggi hero tetap stabil ketika
 berganti. Foto tetap mencapai tepi layar dan teks mengikuti jalur konten tengah.
 
@@ -256,6 +258,123 @@ terlihat. Preferensi `prefers-reduced-motion`
 menonaktifkan autoplay awal dan animasi pergeseran. Slide nonaktif memakai
 `inert` dan `aria-hidden` agar link serta isinya tidak menerima fokus.
 
-Verifikasi dilakukan pada lebar efektif yang mewakili viewport setelah zoom,
+Verifikasi layout sebelumnya dilakukan pada lebar efektif yang mewakili viewport setelah zoom,
 termasuk 3840, 2560, 1920, 1536, 1440, 1200, 1101, 674, dan 320px. Ini merupakan
-pengujian reflow viewport, bukan bukti pengujian kontrol zoom browser langsung.
+pengujian reflow viewport, bukan bukti pengujian kontrol zoom browser langsung
+atau verifikasi visual baru setelah perubahan struktur folder.
+
+## 12. Halaman About
+
+Halaman `about.html` memakai `data-page="about"`; `js/app.js` memuat descriptor
+`js/pages/about.js` dan section dari `js/sections/about/index.js`. Kontennya mengikuti referensi
+About: profil Saila Insua López, empat ringkasan latar belakang, lalu bagian
+Experience & expertise dengan empat kartu keahlian. Foto profil memakai
+`assets/images/about/saila.jpg`.
+
+Gunakan kembali `ContactBar()`, `Navbar({ currentPage: 'about' })`, `Heading()`,
+dan `Footer({ currentPage: 'about' })`. `Heading({ size: 'profile' })` mengatur H1
+profil. Tombol View Services memakai `ActionButton` varian `services` dengan
+sudut rounded-lg, sedangkan CTA booking tetap memakai `BookingButton()` berbentuk pill.
+
+Ikon memakai Phosphor Light: flower tulip, waves, drop, envelope,
+caret right, stethoscope, dan plant. Kartu Women's life stages memakai SVG ibu hamil
+yang digambar mengikuti referensi pengguna melalui `icon('pregnancy')` di
+`js/components/icons.js`. SVG memakai `currentColor` dengan `text-clinic-sage`,
+ukuran 32px, serta `aria-hidden` karena judul kartu sudah menjadi label.
+Kontak Saila membuka email
+klinik; tautan layanan kembali ke `./#services`.
+
+Navbar dan footer memakai data navigasi yang sama di `js/data/navigation.js`.
+Tautan Home dan logo klinik menuju `./` tanpa hash atau ID section.
+Tautan About menuju `./about.html`; tautan Our Clinic di halaman About kembali
+ke section terkait pada halaman Home. Our Services di navbar membuka dropdown;
+tautan Our Service di footer kembali ke section layanan Home. Halaman aktif memakai `aria-current`.
+
+Padding mengikuti `containerClasses`: 32px di HP dan 80px mulai tablet, dengan
+lebar maksimum 1440px. Profil dan bagian keahlian memakai dua kolom mulai 1101px;
+di layar kecil keduanya bertumpuk. Statistik memakai dua kolom di layar kecil dan
+empat kolom mulai 1101px. Kartu keahlian memakai satu kolom di HP dan dua kolom
+mulai tablet. Warna section: Cream untuk profil, Sage untuk statistik, White untuk
+keahlian, serta footer Navy yang sama dengan Home.
+
+## 13. Halaman Contact Us
+
+Halaman `contact.html` memakai `data-page="contact"`; `js/app.js` memuat descriptor
+`js/pages/contact.js` dan section dari `js/sections/contact/index.js`. Layout memakai kembali
+`ContactBar`, `Navbar({ currentPage: 'contact' })`, `Heading`, `ActionButton`,
+serta `Footer({ currentPage: 'contact' })`. Menu Contact Us di semua halaman
+menuju `./contact.html`; Home tetap menuju `./` tanpa hash.
+
+Bagian pembuka memakai Light Sage dan teks terpusat. Bagian utama memakai White:
+detail kontak dan peta di kiri, form di kanan mulai 1101px. Di layar kecil kedua
+kolom bertumpuk. Kartu kontak memakai Cream dan ikon Phosphor Light phone,
+envelope, map-pin, serta clock. Padding tetap 32px di HP dan 80px mulai tablet.
+
+Data kontak dan URL peta berada di `js/data/clinic-contact.js`. Alamat tujuan:
+Level 1, 336 New South Head Road, Double Bay NSW 2028. Peta Google Maps ditanam
+melalui iframe responsif dengan tautan Open in Google Maps sebagai akses langsung.
+Tautan peta memakai Maps URLs dengan `api=1` dan query nama klinik beserta alamat.
+Alamat dan jam klinik cocok dengan [halaman kontak resmi](https://inbodyclinic.com/contact/);
+format tautan mengikuti [dokumentasi Google Maps URLs](https://developers.google.com/maps/documentation/urls/get-started).
+
+Form berisi Name, Email, Subject, dan Message, semuanya wajib diisi. Name hanya
+menerima huruf Unicode dan spasi, termasuk huruf beraksen seperti López; angka
+dan simbol dibersihkan saat mengetik maupun paste. Email memakai validasi bawaan
+browser. `buildContactMailto` dan `initContactForm` berada di
+`js/features/contact-form.js`; tombol Send Message membuka draf email pengguna
+ke email klinik, dengan subject dan body yang di-encode. Form mempertahankan isi
+pesan dan tidak menampilkan klaim pesan sudah terkirim. Teks bantuan pada halaman
+menjelaskan bahwa aplikasi email akan terbuka. Pengiriman langsung melalui server
+dapat dihubungkan ketika endpoint form tersedia.
+
+`ActionButton` merender link ketika `href` diberikan, atau elemen button ketika
+tanpa `href`, termasuk `type: 'submit'` untuk form Contact Us. `BookingButton`
+tetap memakai link email booking yang sama seperti sebelumnya.
+
+## 14. Dropdown Our Services
+
+Navbar memakai tombol disclosure Our Services dengan empat kategori di
+`serviceNavigationGroups` pada `js/data/navigation.js`. Panel mengikuti referensi
+pengguna: background White, teks Navy, sudut 20px, border tipis, heading
+Cormorant Garamond, serta divider Light Grey di antara layanan.
+Judul Pregnancy & Postpartum tetap satu baris, dengan kolom pertama lebih lebar.
+Panel memakai empat kolom mulai 1101px, dua kolom mulai 641px, dan satu kolom di HP.
+Pada desktop panel dibatasi 1120px dan terpusat di bawah navbar; pada HP/tablet
+panel berada di dalam navigasi hamburger yang bisa digulir.
+
+Panel terbuka melalui reveal dari atas ke bawah selama 360ms. Saat ditutup,
+panel hanya memudar selama 140ms, lalu ruangnya dirapatkan. Reduced motion
+menonaktifkan transisi. Hover mouse membuka panel pada desktop, klik/ketuk
+mengaktifkan tombol pada semua perangkat. Escape menutup dropdown dan
+mengembalikan fokus ke tombol; klik di luar serta perpindahan fokus keluar
+dropdown juga menutupnya. Panel tertutup memakai `inert` dan `aria-hidden`.
+
+Layanan memakai mekanisme enquiry email yang sama dengan kartu layanan Home,
+dengan nama layanan terpilih di body email. Halaman layanan terpisah belum tersedia.
+
+## 15. Layout bersama dan struktur halaman
+
+`index.html`, `about.html`, dan `contact.html` tetap menjadi entry dengan URL,
+title, meta description, pemanggilan font, Phosphor Icons, dan `css/output.css`
+masing-masing. Ketiganya menyediakan `#app`, atribut `data-page` pada body,
+serta satu entry module `js/app.js`. Tidak ada framework atau proses build HTML.
+
+`js/app.js` memilih dan memuat descriptor dari `js/pages/` sesuai `data-page`.
+Descriptor menentukan section dan inisialisasi interaksi khusus halaman.
+`js/layouts/page-layout.js` menyediakan `PageLayout` dan `mountPage` untuk shell
+bersama: skip link menuju `#main-content`, bar kontak, navbar sticky, main
+selebar halaman, serta footer. `mountPage` memasang class global Tailwind,
+menjalankan `initNavbar`, lalu inisialisasi fitur halaman setelah konten terpasang.
+
+Container berada di `js/layouts/container.js`. Batas lebar konten diterapkan di
+dalam section agar background dan foto tetap dapat mencapai tepi layar.
+Section Home dikelompokkan di `js/sections/home/`, About di
+`js/sections/about/`, dan Contact Us di `js/sections/contact/`. Komponen visual
+bersama berada di `js/components/`; controller slider dan form berada di
+`js/features/`; data navigasi, kontak, dan slide berada di `js/data/`.
+
+Saat menambah halaman, buat entry HTML beserta descriptor di `js/pages/`,
+kelompokkan section halaman di `js/sections/`, lalu daftarkan pemuat descriptor
+di `js/app.js`. Perbarui `js/data/navigation.js` dan sumber Tailwind bila perlu.
+Gunakan shell dan container yang sama; jangan menyalin navbar atau footer ke
+section. Langkah pengembangan lengkap ada di `README.md`.

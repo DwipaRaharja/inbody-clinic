@@ -1,4 +1,4 @@
-import { fullBleedGridClasses, pagePaddingClasses } from '../components/layout.js';
+import { fullBleedGridClasses, pagePaddingClasses } from '../../layouts/container.js';
 
 export function Testimonials() {
   return `
