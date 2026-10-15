@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@source "../index.html";
+@source "../js";
+
+@theme {
+  --color-clinic-navy: #203858;
+  --color-clinic-sage: #879f9b;
+  --color-clinic-light-sage: #d0dcd8;
+  --color-clinic-cream: #f8f6f2;
+  --color-clinic-white: #ffffff;
+  --color-clinic-light-grey: #e8e9e7;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Montserrat", sans-serif;
+
+  --breakpoint-tablet: 40.0625rem;
+  --breakpoint-nav: 56.3125rem;
+  --breakpoint-wide: 68.8125rem;
+}
