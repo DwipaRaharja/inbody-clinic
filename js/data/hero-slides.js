@@ -1,20 +1,20 @@
 const benefits = [
-  { icon: 'ph-leaf', label: 'Evidence-Based<br />Care', inlineLabel: 'Evidence-Based Care' },
-  { icon: 'ph-heart', label: 'Personalised<br />Treatment', inlineLabel: 'Personalised Treatment' },
-  { icon: 'ph-users-three', label: 'A Holistic<br />Approach', inlineLabel: 'A Holistic Approach' },
+  { icon: 'ph-leaf', label: 'Individual<br />Assessment', inlineLabel: 'Individual Assessment' },
+  { icon: 'ph-heart', label: 'Specialised<br />Hands-On Care', inlineLabel: 'Specialised Hands-On Care' },
+  { icon: 'ph-users-three', label: 'Personalised<br />Treatment', inlineLabel: 'Personalised Treatment' },
 ];
 
 export const heroSlides = [
   {
     id: 'expert-care',
     layout: 'image-right',
-    eyebrow: 'Science. Experience. A healthier you.',
+    eyebrow: 'Specialised clinical care · Double Bay',
     lines: [
       { text: "Women's Health." },
       { text: 'Advanced Lymphatic Therapy.' },
       { text: 'Specialised Care.', accent: true },
     ],
-    description: 'Personalised, evidence-based care to help you feel stronger, lighter, and more like you at every stage of life.',
+    description: 'Personalised clinical care combining specialised hands-on therapy, extensive clinical experience and advanced technology when appropriate.',
     image: {
       src: './assets/images/home/hero.jpg',
       alt: 'InBody Clinic practitioner beside a treatment device in the clinic',
@@ -26,13 +26,12 @@ export const heroSlides = [
   {
     id: 'lymphatic-care',
     layout: 'image-left',
-    eyebrow: 'Specialised lymphatic care',
+    eyebrow: 'Lymphatic therapy & recovery',
     lines: [
-      { text: 'Move Better.' },
-      { text: 'Feel Lighter.' },
-      { text: 'Live Better.', accent: true },
+      { text: 'Understand Your Needs.' },
+      { text: 'Personalise Your Care.', accent: true },
     ],
-    description: 'Specialised lymphatic care designed to support circulation, reduce swelling, and help your body feel its best.',
+    description: 'Specialised hands-on care for swelling, lymphatic symptoms and post-surgical recovery, guided by individual assessment and ongoing review.',
     image: {
       src: './assets/images/home/hero-2.jpg',
       alt: 'Two InBody Clinic practitioners reviewing a personalised care plan together on a tablet',
@@ -44,12 +43,12 @@ export const heroSlides = [
   {
     id: 'personalised-care',
     layout: 'image-bottom',
-    eyebrow: "Women's health & wellbeing",
+    eyebrow: 'The InBody Method™',
     lines: [
-      { text: 'Care Designed' },
-      { text: 'Around You.', accent: true },
+      { text: 'Clinical Knowledge.' },
+      { text: 'Individual Care.', accent: true },
     ],
-    description: 'Personalised treatment and expert guidance to support your health, confidence, and wellbeing through every stage of life.',
+    description: 'Women’s health, post-surgical recovery and tissue health: a personalised approach combining clinical experience, specialised manual therapy and technology when appropriate.',
     image: {
       src: './assets/images/home/hero-3.jpg',
       alt: 'An InBody Clinic practitioner welcoming patients in the clinic',

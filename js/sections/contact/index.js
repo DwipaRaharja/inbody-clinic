@@ -16,7 +16,7 @@ const labelClasses = 'mb-3 block text-[14px] leading-[1.4] font-semibold tablet:
 export function ContactIntro() {
   return `<div class="${containerClasses} py-12 text-center tablet:py-14 [&_p.uppercase]:mx-auto" data-section-frame="contact-intro">
     ${Heading({ eyebrow: 'We’re here for you', level: 1, id: 'contact-title', lines: [{ text: 'Contact Us' }] })}
-    <p class="mx-auto mt-6 max-w-[760px] text-[14px] leading-[1.75] tablet:text-[15px]">Welcome to InBody Clinic. Our mission is to support women at every stage of life with expert, compassionate care. We’d be honoured to walk this journey with you.</p>
+    <p class="mx-auto mt-6 max-w-[760px] text-[14px] leading-[1.75] tablet:text-[15px]">Speak with our team about women’s health, lymphatic therapy, post-surgical recovery or tissue care. Tell us what you need support with and we can help you identify an appropriate starting point.</p>
   </div>`;
 }
 

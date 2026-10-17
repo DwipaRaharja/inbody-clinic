@@ -1,6 +1,7 @@
 import { Heading } from '../../components/heading.js';
 import { ActionButton } from '../../components/button.js';
 import { containerClasses } from '../../layouts/container.js';
+import { getSpecialityForService } from '../../data/specialities/catalog.js';
 
 function escapeText(value) {
   return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -33,8 +34,10 @@ function numberLabel(index) {
 // Each renderer receives the same service record, so new services only need data.
 export function ServiceHero(service) {
   const { hero } = service;
+  const speciality = getSpecialityForService(service.id);
   return `<div class="${containerClasses} grid min-w-0 items-center gap-9 py-10 tablet:gap-12 tablet:py-12 wide:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] wide:gap-16 wide:py-12" data-section-frame="service-hero">
     <div class="min-w-0">
+      <a class="mb-5 inline-flex max-w-full items-start gap-2 text-[11px] leading-[1.6] text-clinic-navy/75 hover:text-clinic-sage" href="${speciality ? speciality.href : './#services'}"><i class="ph ph-arrow-left mt-0.5 shrink-0" aria-hidden="true"></i><span>${escapeText(speciality ? speciality.name : 'Explore our specialities')}</span></a>
       <div class="[&_p.uppercase]:mb-4 [&_p.uppercase]:text-[10px] [&_p.uppercase]:font-semibold [&_p.uppercase]:tracking-[0.12em] [&_p.uppercase]:text-clinic-sage tablet:[&_p.uppercase]:text-[11px]">
         ${Heading({ eyebrow: hero.eyebrow, lines: hero.lines, level: 1, id: 'service-title', size: 'profile' })}
       </div>

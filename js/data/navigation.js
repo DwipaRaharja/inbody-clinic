@@ -1,3 +1,7 @@
+import { specialityCatalog } from './specialities/catalog.js';
+
+export const specialityNavigationLinks = specialityCatalog;
+
 const navigationLinks = [
   { id: 'home', label: 'Home', href: './' },
   { id: 'about', label: 'About', href: './pages/about.html' },

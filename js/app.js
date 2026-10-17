@@ -6,6 +6,8 @@ const pages = {
   contact: () => import('./pages/contact.js'),
   clinic: () => import('./pages/clinic.js'),
   service: () => import('./pages/service.js'),
+  speciality: () => import('./pages/speciality.js'),
+  method: () => import('./pages/method.js'),
 };
 
 const root = document.getElementById('app');
@@ -15,7 +17,7 @@ try {
   if (!loadPage) throw new Error(`Unknown page: ${document.body.dataset.page}`);
   const { default: definition } = await loadPage();
   const page = typeof definition === 'function'
-    ? definition({ serviceId: document.body.dataset.service })
+    ? definition({ serviceId: document.body.dataset.service, specialityId: document.body.dataset.speciality })
     : definition;
   mountPage(root, page);
 } catch (error) {

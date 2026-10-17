@@ -1,8 +1,7 @@
 import { Hero } from '../sections/home/hero.js';
 import { Services } from '../sections/home/services.js';
-import { Difference } from '../sections/home/difference.js';
-import { Testimonials } from '../sections/home/testimonials.js';
-import { Booking } from '../sections/home/booking.js';
+import { MethodPreview, TeamPreview, WhatToExpect, AssessmentCTA } from '../components/care.js';
+import { HomeContact } from '../sections/home/contact.js';
 import { initHeroSlider } from '../features/hero-slider.js';
 
 export default {
@@ -11,9 +10,11 @@ export default {
   sections: [
     { id: 'hero', className: 'relative w-full min-w-0 overflow-hidden bg-clinic-white', labelledBy: 'hero-title', render: Hero },
     { id: 'services', className: 'bg-clinic-white', labelledBy: 'services-title', render: Services },
-    { id: 'difference', className: 'overflow-hidden bg-clinic-light-sage', labelledBy: 'difference-title', render: Difference },
-    { id: 'testimonials', className: 'relative overflow-hidden border-y border-clinic-light-grey bg-clinic-white', labelledBy: 'testimonials-title', render: Testimonials },
-    { id: 'booking', className: 'relative overflow-hidden bg-clinic-white', labelledBy: 'booking-title', render: Booking },
+    { id: 'method', className: 'bg-clinic-light-sage/45', labelledBy: 'method-title', render: MethodPreview },
+    { id: 'team', className: 'bg-clinic-white', labelledBy: 'team-title', render: TeamPreview },
+    { id: 'expect', className: 'bg-clinic-cream', labelledBy: 'expect-title', render: WhatToExpect },
+    { id: 'assessment', className: 'bg-clinic-light-sage', labelledBy: 'assessment-title', render: AssessmentCTA },
+    { id: 'home-contact', className: 'bg-clinic-white', labelledBy: 'home-contact-title', render: HomeContact },
   ],
   init(root) {
     initHeroSlider(root.querySelector('[data-hero-slider]'));

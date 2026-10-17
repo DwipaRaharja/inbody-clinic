@@ -4,9 +4,9 @@ import { containerClasses } from '../../layouts/container.js';
 import { icon as renderIcon } from '../../components/icons.js';
 
 const specialties = [
-  { label: "Women’s Health", icon: 'ph-flower-tulip' },
-  { label: 'Dermatofunctional Therapy', icon: 'ph-waves' },
-  { label: 'Advanced Lymphatic Care', icon: 'ph-drop' },
+  { label: "Women’s Health", icon: 'ph-flower-tulip', href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html' },
+  { label: 'Dermatofunctional Therapy', icon: 'ph-waves', href: './pages/specialities/skin-tissue-health.html' },
+  { label: 'Advanced Lymphatic Care', icon: 'ph-drop', href: './pages/specialities/clinical-lymphatic-care.html' },
 ];
 
 const credentials = [
@@ -32,7 +32,7 @@ export function TherapistProfile() {
       <p class="mt-3 text-[17px] leading-[1.4] font-medium text-clinic-sage tablet:text-[18px]">Spain-trained physiotherapist</p>
       <p class="mt-2.5 max-w-[48ch] text-[14px] leading-[1.4]">With over 20 years of clinical experience, Saila specialises in women’s health, dermatofunctional therapy and advanced lymphatic care.</p>
       <ul class="mt-4 list-none divide-y divide-clinic-light-sage border-y border-clinic-light-sage p-0">
-        ${specialties.map(({ label, icon }) => `<li><a class="group flex min-h-[45px] items-center gap-4 py-2 text-[13px] leading-[1.4] transition-colors hover:text-clinic-sage motion-reduce:transition-none tablet:gap-5 tablet:text-[14px]" href="./#services">
+        ${specialties.map(({ label, icon, href }) => `<li><a class="group flex min-h-[45px] items-center gap-4 py-2 text-[13px] leading-[1.4] transition-colors hover:text-clinic-sage motion-reduce:transition-none tablet:gap-5 tablet:text-[14px]" href="${href}">
           <i class="ph ${icon} shrink-0 text-[24px] text-clinic-sage" aria-hidden="true"></i>
           <span class="min-w-0">${label}</span>
           <i class="ph ph-caret-right ml-auto shrink-0 text-[18px] text-clinic-sage transition-transform group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" aria-hidden="true"></i>
@@ -60,7 +60,7 @@ export function TherapistExpertise() {
   return `<div class="${containerClasses} grid min-w-0 items-center gap-10 py-14 tablet:py-16 wide:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] wide:gap-20 wide:py-[60px]" data-section-frame="expertise">
     <div class="min-w-0">
       ${Heading({ level: 2, size: 'section', id: 'expertise-title', accentItalic: false, lines: [{ text: 'Experience' }, { text: '& expertise', accent: true }] })}
-      <p class="mt-5 max-w-[42ch] text-[14px] leading-[1.4] tablet:text-[16px]">Advanced manual therapy, Vodder and Leduc lymphatic drainage, and INDIBA® radiofrequency technology.</p>
+      <p class="mt-5 max-w-[42ch] text-[14px] leading-[1.7] tablet:text-[16px]">Individual assessment and specialised hands-on therapy inform Saila’s care, including Vodder and Leduc lymphatic drainage techniques. Therapeutic technology may support treatment when appropriate.</p>
     </div>
     <ul class="grid min-w-0 list-none grid-cols-1 gap-3 p-0 tablet:grid-cols-2">
       ${expertise.map(({ title, description, icon, svg }) => `<li class="flex min-h-[125px] min-w-0 items-center gap-4 rounded-lg bg-clinic-light-grey px-4 py-5">

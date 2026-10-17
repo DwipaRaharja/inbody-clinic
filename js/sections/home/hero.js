@@ -30,8 +30,6 @@ export function HeroSlide(slide, { index = 0 } = {}) {
     size: 'hero',
     id: headingId,
     lines: slide.lines,
-    inline: editorial,
-    accentItalic: !editorial,
   });
   const slideClasses = 'col-start-1 row-start-1 w-full min-w-0 bg-clinic-white translate-x-full data-[position=active]:translate-x-0 data-[position=exit]:-translate-x-full motion-safe:[[data-animate=true]_&]:transition-transform motion-safe:[[data-animate=true]_&]:duration-700 motion-safe:[[data-animate=true]_&]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none wide:min-h-[clamp(620px,57.4vw,826px)]';
 

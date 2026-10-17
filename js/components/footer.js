@@ -41,7 +41,8 @@ export function Footer({ currentPage = 'home' } = {}) {
       </div>
       <div class="self-start border-t border-clinic-white/60 pt-6 tablet:col-span-2 wide:col-span-1 wide:min-h-[84px] wide:border-t-0 wide:border-l wide:pt-2 wide:pl-[30px]">
         <p class="flex items-center gap-2 text-[10px] leading-[1.6] tracking-[0.2em] uppercase">Double Bay <span class="h-4 w-px bg-clinic-white" aria-hidden="true"></span> Sydney</p>
-        <p class="mt-5 text-[10px] leading-[1.6] tracking-[0.18em] uppercase">A healthier you, for what's next</p>
+        <p class="mt-5 text-[10px] leading-[1.6] tracking-[0.18em] uppercase">Clinical expertise. Personalised care.</p>
+        <a class="mt-3 inline-flex items-center gap-2 text-[11px] leading-[1.6] hover:text-clinic-light-sage" href="./pages/the-inbody-method.html"${currentPage === 'method' ? ' aria-current="page"' : ''}>The InBody Method™<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
   `;

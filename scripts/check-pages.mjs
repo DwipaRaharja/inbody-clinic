@@ -5,6 +5,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { PageLayout } from '../js/layouts/page-layout.js';
 import { services } from '../js/data/services/index.js';
 import { serviceNavigationGroups } from '../js/data/navigation.js';
+import { specialityCatalog, getSpecialityForService } from '../js/data/specialities/catalog.js';
+import { specialities } from '../js/data/specialities/index.js';
+import homePage from '../js/pages/home.js';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const siteOrigin = 'https://inbody.test';
@@ -42,9 +45,11 @@ for (const filename of htmlFiles) {
 
   const { default: definition } = await import(pathToFileURL(join(projectRoot, `js/pages/${pageId}.js`)));
   const serviceId = html.match(/\sdata-service="([^"]+)"/u)?.[1];
-  const page = typeof definition === 'function' ? definition({ serviceId }) : definition;
+  const specialityId = html.match(/\sdata-speciality="([^"]+)"/u)?.[1];
+  const page = typeof definition === 'function' ? definition({ serviceId, specialityId }) : definition;
   assert.equal(page.id, pageId, `${filename}: wrong page descriptor`);
   if (pageId === 'service') assert.equal(page.serviceId, serviceId, `${filename}: wrong service data`);
+  if (pageId === 'speciality') assert.equal(page.specialityId, specialityId, `${filename}: wrong speciality data`);
   assert.ok(page.sections.length, `${filename}: no sections`);
   const markup = PageLayout(page, { rootPrefix });
   for (const match of markup.matchAll(/<i\b[^>]*\bclass="([^"]+)"/gu)) {
@@ -70,7 +75,7 @@ for (const filename of htmlFiles) {
   for (const section of page.sections) assert.ok(idSet.has(section.id), `${filename}: missing section #${section.id}`);
 
   const route = filename === 'index.html' ? '/' : `/${filename}`;
-  renderedPages.set(route, { filename, html, markup, ids: idSet, serviceId });
+  renderedPages.set(route, { filename, html, markup, ids: idSet, serviceId, specialityId });
 }
 
 for (const mountPath of ['', '/preview/inbody']) {
@@ -102,14 +107,39 @@ for (const item of dropdownServices) {
   const page = renderedPages.get(route);
   assert.equal(page?.serviceId, item.id, `${item.label}: wrong HTML service target`);
   const activeLinks = [...page.markup.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/gu)];
-  assert.equal(activeLinks.length, 1, `${item.label}: expected one active service link`);
-  assert.equal(new URL(decodeAttribute(activeLinks[0][0].match(/\shref="([^"]+)"/u)[1]), siteOrigin + route).pathname, route, item.label + ': wrong active link');
+  assert.equal(activeLinks.length, 0, `${item.label}: detail page must not label its parent as the current page`);
+  const parent = getSpecialityForService(item.id);
+  const parentLinks = [...page.markup.matchAll(/<a\b[^>]*aria-current="location"[^>]*>/gu)];
+  assert.equal(parentLinks.length, parent ? 1 : 0, `${item.label}: wrong active parent speciality`);
+  if (parent) assert.equal(new URL(decodeAttribute(parentLinks[0][0].match(/\shref="([^"]+)"/u)[1]), siteOrigin + route).pathname, new URL(parent.href, siteOrigin).pathname);
 
   const icons = [
     ...data.hero.benefits.map(benefit => benefit.icon),
     ...data.expertise.columns.filter(column => column.variant === 'icon-blocks').flatMap(column => column.items.map(block => block.icon)),
   ];
   for (const icon of icons) assert.ok(iconStyles.includes(`.${icon}:`), `${item.label}: missing Phosphor icon ${icon}`);
+}
+
+assert.equal(specialityCatalog.length, 6, 'Expected the six client specialities');
+assert.equal(Object.keys(specialities).length, 6, 'Every speciality needs detailed content');
+assert.equal(new Set(specialityCatalog.map(speciality => speciality.id)).size, 6, 'Speciality IDs must be unique');
+for (const speciality of specialityCatalog) {
+  const route = new URL(speciality.href, siteOrigin).pathname;
+  const page = renderedPages.get(route);
+  assert.equal(page?.specialityId, speciality.id, `${speciality.name}: missing entry`);
+  const activeLinks = [...page.markup.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/gu)];
+  assert.equal(activeLinks.length, 1, `${speciality.name}: expected one active speciality link`);
+  assert.equal(new URL(decodeAttribute(activeLinks[0][0].match(/\shref="([^"]+)"/u)[1]), siteOrigin + route).pathname, route);
+  assert.ok(renderedPages.get('/').markup.includes(`href="${speciality.href}"`), `${speciality.name}: missing Home card`);
+  for (const id of speciality.serviceIds) assert.ok(services[id], `${speciality.name}: unknown related treatment`);
+}
+assert.deepEqual(homePage.sections.map(section => section.id), ['hero', 'services', 'method', 'team', 'expect', 'assessment', 'home-contact']);
+assert.ok(!/Live Better|A healthier you|Real results/iu.test(renderedPages.get('/').markup), 'Home still contains generic legacy marketing copy');
+assert.ok(renderedPages.has('/pages/the-inbody-method.html'), 'Missing Method page');
+for (const [id, treatment] of Object.entries(services)) {
+  const destination = new URL(treatment.href, siteOrigin).pathname;
+  const linked = [...renderedPages].some(([route, page]) => route !== destination && [...page.markup.matchAll(/\shref="([^"]+)"/gu)].some(match => new URL(decodeAttribute(match[1]), siteOrigin + route).pathname === destination));
+  assert.ok(linked, `${id}: legacy treatment has no incoming page link`);
 }
 
 async function checkImports(directory) {
@@ -126,4 +156,4 @@ async function checkImports(directory) {
   }
 }
 await checkImports(join(projectRoot, 'js'));
-console.log(`Passed: ${renderedPages.size} pages, ${dropdownServices.length} service routes, shared layout, IDs, accessibility targets, root/subfolder links, icons, assets and module imports.`);
+console.log(`Passed: ${renderedPages.size} pages, ${specialityCatalog.length} specialities, ${dropdownServices.length} treatment routes, Home order, navigation, accessibility targets, root/subfolder links, icons, assets and module imports.`);

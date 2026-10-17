@@ -1,5 +1,10 @@
 # Catatan review teks layanan
 
+> Update 17 Oktober 2026: enam halaman speciality dan The InBody Method™ ditambahkan dari brief
+> revisi client. Catatan di bawah tetap berlaku untuk 13 detail treatment lama dan belum otomatis
+> ditutup. Status draft baru serta penundaan profil kedua/booking tercatat pada
+> [REVISION_IMPLEMENTATION.md](REVISION_IMPLEMENTATION.md).
+
 Dokumen ini mencatat teks yang berulang, berbeda antar-sumber, atau perlu
 dipastikan oleh pemilik konten. Catatan ini bukan keputusan penggantian teks.
 Isi sumber tetap dipertahankan sampai pengguna menentukan revisinya.
