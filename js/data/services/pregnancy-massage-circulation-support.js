@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Pregnanc
 export default {
   id: 'pregnancy-massage-circulation-support',
   name: 'Pregnancy Massage & Circulation Support',
-  href: './pregnancy-massage-circulation-support.html',
+  href: './pages/services/pregnancy-postpartum/pregnancy-massage-circulation-support.html',
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
@@ -85,6 +85,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'Pregnancy & Postpartum', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

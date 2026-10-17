@@ -16,8 +16,8 @@ npm run build:css
 ```
 
 Buka folder project melalui static server, misalnya **Live Server** di VS Code,
-lalu kunjungi entry HTML melalui URL server, misalnya `index.html`, `about.html`,
-`our-clinic.html`, `contact.html`, atau salah satu dari 13 entry layanan pada tabel di bawah.
+lalu kunjungi entry HTML melalui URL server, misalnya `index.html`, `pages/about.html`,
+`pages/our-clinic.html`, `pages/contact.html`, atau salah satu dari 13 entry layanan pada tabel di bawah.
 ES modules perlu dijalankan melalui HTTP, sehingga jangan membuka HTML dengan
 protokol `file://`.
 
@@ -46,10 +46,15 @@ pemeriksaan tampilan dan interaksi di browser.
 ```text
 inbody-clinic-v2/
 ├── index.html                 # Entry Home dan metadata halaman
-├── about.html                 # Entry About dan metadata halaman
-├── our-clinic.html            # Entry galeri Our Clinic dan metadata halaman
-├── contact.html               # Entry Contact Us dan metadata halaman
-├── <service-id>.html          # 13 entry layanan dengan metadata masing-masing
+├── pages/                     # Entry HTML selain Home
+│   ├── about.html
+│   ├── our-clinic.html
+│   ├── contact.html
+│   └── services/              # 13 entry layanan sesuai kelompok dropdown
+│       ├── pregnancy-postpartum/ # 3 halaman
+│       ├── lymphatic-drainage/   # 3 halaman
+│       ├── pain-tmj-relief/      # 4 halaman
+│       └── body-contouring/     # 3 halaman
 ├── assets/
 │   ├── images/                # Gambar, dikelompokkan per halaman/layanan
 │   └── logo/
@@ -101,7 +106,18 @@ Setiap entry HTML menyimpan title, meta description, tautan Google Fonts,
 Phosphor Icons, dan `css/output.css` sendiri. Body menentukan halaman melalui
 `data-page="home"`, `data-page="about"`, `data-page="clinic"`, `data-page="contact"`, atau
 `data-page="service"`, menyediakan `#app`, dan memanggil satu module
-`./js/app.js`. Entry layanan juga menentukan `data-service`.
+`js/app.js` dengan path relatif sesuai kedalaman folder. Entry layanan juga menentukan `data-service`.
+
+Home tetap berada di root sebagai `index.html`. Halaman umum berada di `pages/`;
+halaman layanan berada di `pages/services/<category>/<service-id>.html`.
+Setiap entry di `pages/` memiliki `data-root="../"`, sedangkan entry layanan
+memiliki `data-root="../../../"`. Path script dan CSS pada HTML memakai prefix
+yang sama. `PageLayout` memakai `data-root` untuk menyesuaikan URL `href`/`src`
+yang diawali `./` di komponen, section, dan data. URL tersebut ditulis relatif
+terhadap root project agar renderer tetap bisa dipakai dari semua kedalaman.
+Anchor lokal seperti `#service-options` tetap menunjuk ke dokumen yang sedang
+dibuka. Tidak ada elemen `base`, sehingga skip link dan anchor section tetap benar.
+Struktur ini juga mendukung static hosting di subfolder.
 
 `app.js` memuat descriptor halaman dari `js/pages/`. Module halaman dapat
 mengekspor object descriptor atau factory yang menerima `{ serviceId }`.
@@ -123,16 +139,16 @@ Grid full-bleed memungkinkan foto dan background tetap mencapai tepi layar.
 
 ## Menambah halaman
 
-1. Buat entry HTML root dengan metadata dan `data-page` yang sesuai; pertahankan
-   pemanggilan font, ikon, output CSS, `#app`, dan `./js/app.js`.
+1. Buat entry HTML di `pages/` dengan metadata, `data-page`, dan `data-root="../"`;
+   pertahankan font, ikon, `../css/output.css`, `#app`, dan `../js/app.js`.
 2. Buat folder `js/sections/nama-halaman/` untuk markup section. Pakai komponen
    bersama di `js/components/` dan utility container di `js/layouts/container.js`.
 3. Buat descriptor `js/pages/nama-halaman.js`, mengikuti pola halaman yang ada.
    Susun section dan tetapkan inisialisasi fitur setelah mount bila diperlukan.
 4. Daftarkan pemuat descriptor di `js/app.js`, lalu perbarui tautan atau status
    navigasi di `js/data/navigation.js` bila halaman perlu masuk menu.
-5. Tambahkan entry HTML ke `@source` di `css/input.css`. Class lengkap di bawah
-   `js/` sudah termasuk dalam sumber Tailwind. Jalankan `npm run build:css`.
+5. Folder `pages/` dan `js/` sudah termasuk dalam sumber Tailwind di
+   `css/input.css`. Jalankan `npm run build:css` setelah mengubah utility.
 6. Periksa halaman melalui static server, termasuk navigasi, interaksi,
    perubahan lebar layar, dan reflow teks.
 
@@ -148,8 +164,10 @@ Postpartum **3**, Lymphatic Drainage **3**, Pain & TMJ Relief **4**, dan Body
 Contouring **3**. Semua item memiliki tautan halaman sendiri dan status aktif.
 
 Kolom slug di bawah sekaligus menjadi nama file data
-`js/data/services/<slug>.js`, nama entry root `<slug>.html`, dan nilai
-`data-service` pada body. Tautan dropdown menuju `./<slug>.html`.
+`js/data/services/<slug>.js`, nama file entry `<slug>.html`, dan nilai
+`data-service` pada body. Entry dan tautan dropdown memakai
+`pages/services/<category>/<slug>.html`. Folder kategori adalah
+`pregnancy-postpartum`, `lymphatic-drainage`, `pain-tmj-relief`, dan `body-contouring`.
 
 | Kelompok | Menu dropdown | Slug |
 | --- | --- | --- |
@@ -182,14 +200,15 @@ File sumber `data_service_inbody_clinic.md`, PNG, dan foto asli tidak diedit.
    layanan yang ada. Isi judul, deskripsi, gambar, pilihan perawatan, tahap
    pemulihan, dua panel informasi, kutipan, dan CTA sesuai layanan tersebut.
 2. Daftarkan data di `js/data/services/index.js` dengan ID layanan yang unik.
-3. Buat entry HTML root dengan title dan meta description khusus, pemanggilan
-   font/ikon/CSS yang sama, `#app`, dan script `./js/app.js`. Tetapkan
-   `data-page="service"` serta `data-service="nama-layanan"` pada body.
+3. Buat entry HTML di `pages/services/<category>/nama-layanan.html` dengan metadata,
+   font/ikon, `../../../css/output.css`, `#app`, dan script `../../../js/app.js`.
+   Tetapkan `data-page="service"`, `data-service="nama-layanan"`, dan
+   `data-root="../../../"` pada body.
 4. Perbarui item yang sesuai di `serviceNavigationGroups` pada
    `js/data/navigation.js` menjadi object dengan `id`, `label`, dan `href` ke
    entry HTML baru.
-5. Tambahkan entry HTML ke sumber Tailwind di `css/input.css`, lalu jalankan
-   `npm test` dan `npm run build:css`.
+5. Folder `pages/` otomatis dibaca Tailwind. Jalankan `npm test` dan
+   `npm run build:css`; tes memeriksa tautan pada hosting root maupun subfolder.
 6. Periksa isi layanan, navigasi dropdown, gambar, anchor, tombol, dan tampilan
    pada layar kecil maupun besar melalui static server.
 
@@ -227,18 +246,18 @@ browser tetap perlu dilakukan terpisah dari `npm test` dan build Tailwind.
   700ms. Autoplay memperhatikan fokus, visibilitas, dan reduced motion.
 - Bar kontak bergulir bersama halaman; navbar tetap sticky di bagian atas.
   Navbar dan footer memakai satu sumber navigasi bersama.
-- Our Clinic pada navbar dan footer menuju `./our-clinic.html`, dengan status
+- Our Clinic pada navbar dan footer menuju `./pages/our-clinic.html`, dengan status
   halaman aktif yang sama seperti Home, About, dan Contact Us.
 - Contact Us memuat kartu kontak, iframe Google Maps, serta tautan peta.
   Form membuka draf email di aplikasi pengguna; belum mengirim langsung melalui
   backend. Kolom Name hanya menerima huruf Unicode dan spasi.
-- CTA Book an Appointment pada navbar, hero slider, dan section CTA Home menuju `./contact.html`.
+- CTA Book an Appointment pada navbar, hero slider, dan section CTA Home menuju `./pages/contact.html`.
   Seluruh 13 item dropdown membuka halaman layanan masing-masing; CTA kontak
-  halaman layanan menuju `./contact.html#contact-form`.
+  halaman layanan menuju `./pages/contact.html#contact-form`.
 
 ## Galeri Our Clinic
 
-Entry `our-clinic.html` memakai `data-page="clinic"`. `js/app.js` memuat
+Entry `pages/our-clinic.html` memakai `data-page="clinic"`. `js/app.js` memuat
 descriptor `js/pages/clinic.js`, lalu memasang pengantar, galeri, dan bagian
 Plan Your Visit dari `js/sections/clinic/index.js` melalui layout bersama.
 
@@ -265,7 +284,7 @@ fokus ke foto pembuka.
 Bagian Plan Your Visit memakai background Cream dan kartu alamat/jam klinik
 tanpa mengulang foto galeri. Detailnya berasal dari `js/data/clinic-contact.js`;
 tombol Find the Clinic memakai `ActionButton` bersama menuju Google Maps,
-sedangkan tautan Contact Us menuju `./contact.html`.
+sedangkan tautan Contact Us menuju `./pages/contact.html`.
 
 Token warna, font, breakpoint, komponen, dan detail tampilan tercatat di
 [DESIGN_GUIDELINES.md](DESIGN_GUIDELINES.md). Styling menggunakan utility Tailwind;

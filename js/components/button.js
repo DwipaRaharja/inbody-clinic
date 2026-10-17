@@ -1,6 +1,6 @@
 import { icon } from './icons.js';
 
-export const bookingHref = './contact.html';
+export const bookingHref = './pages/contact.html';
 
 const variants = {
   hero: {

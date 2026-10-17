@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Body Contouring/Hormonal Skin T
 export default {
   id: 'hormonal-skin-tightening-firmness-treatment',
   name: 'Hormonal Skin Tightening & Firmness Treatment',
-  href: './hormonal-skin-tightening-firmness-treatment.html',
+  href: './pages/services/body-contouring/hormonal-skin-tightening-firmness-treatment.html',
   category: 'Body Contouring',
   images: {
     hero: {
@@ -83,6 +83,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'Body Contouring', accent: true }],
     description: 'Ask how our clinical therapies can support circulation, skin elasticity, and natural body renewal.',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

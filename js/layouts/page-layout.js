@@ -18,20 +18,22 @@ function Section({ id, className = '', labelledBy, label, render }) {
   return `<section id="${escapeAttribute(id)}" class="${escapeAttribute(className)}"${accessibleName}>${render()}</section>`;
 }
 
-export function PageLayout({ id, serviceId, sections }) {
-  return `
+export function PageLayout({ id, serviceId, sections }, { rootPrefix = './' } = {}) {
+  const markup = `
     <a class="fixed -top-[100px] left-4 z-100 bg-clinic-white px-[18px] py-3 text-clinic-navy focus:top-3" href="#main-content">Skip to main content</a>
     <div id="contact-bar">${ContactBar()}</div>
     <header id="navbar" class="sticky top-0 z-50 bg-clinic-white">${Navbar({ currentPage: id, serviceId })}</header>
     <main id="main-content" class="w-full min-w-0" tabindex="-1">${sections.map(Section).join('\n')}</main>
     <footer id="footer" class="bg-clinic-navy text-clinic-white [&_a]:focus-visible:outline-clinic-white">${Footer({ currentPage: id })}</footer>
   `;
+  // Sections use project-relative URLs; local #anchors stay on the current page.
+  return markup.replace(/\b(href|src)="\.\/([^"\n]*)"/gu, (_, attribute, path) => `${attribute}="${rootPrefix}${path}"`);
 }
 
 export function mountPage(root, page) {
   document.documentElement.classList.add(...documentClasses.split(' '));
   document.body.classList.add(...bodyClasses.split(' '), backgroundClasses[page.background] ?? backgroundClasses.cream);
-  root.innerHTML = PageLayout(page);
+  root.innerHTML = PageLayout(page, { rootPrefix: document.body.dataset.root ?? './' });
 
   initNavbar(root.querySelector('#navbar'));
   page.init?.(root);

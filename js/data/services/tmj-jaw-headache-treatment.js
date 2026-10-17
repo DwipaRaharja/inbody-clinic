@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Ease the tens
 export default {
   id: 'tmj-jaw-headache-treatment',
   name: 'TMJ, Jaw & Headache Treatment',
-  href: './tmj-jaw-headache-treatment.html',
+  href: './pages/services/pain-tmj-relief/tmj-jaw-headache-treatment.html',
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
@@ -94,6 +94,6 @@ export default {
     lines: [{ text: 'Start Your' }, { text: 'Jaw Care Journey', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

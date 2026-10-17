@@ -11,8 +11,8 @@ export const heroSlides = [
     eyebrow: 'Science. Experience. A healthier you.',
     lines: [
       { text: "Women's Health." },
-      { text: 'Lymphatic Health.' },
-      { text: 'Expert Care.', accent: true },
+      { text: 'Advanced Lymphatic Therapy.' },
+      { text: 'Specialised Care.', accent: true },
     ],
     description: 'Personalised, evidence-based care to help you feel stronger, lighter, and more like you at every stage of life.',
     image: {

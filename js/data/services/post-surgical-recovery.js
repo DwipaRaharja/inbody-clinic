@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Lymphatic Drainage/Post-Surgica
 export default {
   id: 'post-surgical-recovery',
   name: 'Post-Surgical Recovery',
-  href: './post-surgical-recovery.html',
+  href: './pages/services/lymphatic-drainage/post-surgical-recovery.html',
   category: 'Lymphatic Drainage',
   images: {
     hero: {
@@ -85,6 +85,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'lymphatic drainage care', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

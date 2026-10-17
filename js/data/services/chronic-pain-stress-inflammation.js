@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Chronic Pain,
 export default {
   id: 'chronic-pain-stress-inflammation',
   name: 'Chronic Pain, Stress & Inflammation',
-  href: './chronic-pain-stress-inflammation.html',
+  href: './pages/services/pain-tmj-relief/chronic-pain-stress-inflammation.html',
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
@@ -93,6 +93,6 @@ export default {
     lines: [{ text: 'Start Your' }, { text: 'Recovery Journey', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

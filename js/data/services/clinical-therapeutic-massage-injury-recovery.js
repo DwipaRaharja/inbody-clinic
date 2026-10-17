@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Clinical Ther
 export default {
   id: 'clinical-therapeutic-massage-injury-recovery',
   name: 'Clinical Therapeutic Massage & Injury Recovery',
-  href: './clinical-therapeutic-massage-injury-recovery.html',
+  href: './pages/services/pain-tmj-relief/clinical-therapeutic-massage-injury-recovery.html',
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
@@ -92,6 +92,6 @@ export default {
     lines: [{ text: 'Start Your' }, { text: 'Recovery Journey', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

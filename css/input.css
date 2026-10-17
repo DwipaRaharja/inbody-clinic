@@ -1,22 +1,8 @@
 @import "tailwindcss";
 
 @source "../index.html";
-@source "../about.html";
-@source "../contact.html";
-@source "../our-clinic.html";
-@source "../pregnancy-massage-circulation-support.html";
-@source "../recovery-core-restoration.html";
-@source "../postnatal-lymphatic-drainage.html";
-@source "../post-surgical-recovery.html";
-@source "../clinical-lymphatic-drainage-sydney.html";
-@source "../lipedema-inflammatory-leg-care.html";
-@source "../tmj-jaw-headache-treatment.html";
-@source "../chronic-pain-stress-inflammation.html";
-@source "../clinical-therapeutic-massage-injury-recovery.html";
-@source "../endometriosis-pelvic-pain-support.html";
-@source "../clinical-cellulite-remodelling.html";
-@source "../lymphatic-reset-fluid-retention-treatment.html";
-@source "../hormonal-skin-tightening-firmness-treatment.html";
+@source "../pages";
+
 @source "../js";
 
 @theme {

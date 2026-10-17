@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Lymphatic Drainage/Lipedema & I
 export default {
   id: 'lipedema-inflammatory-leg-care',
   name: 'Lipedema & Inflammatory Leg Care',
-  href: './lipedema-inflammatory-leg-care.html',
+  href: './pages/services/lymphatic-drainage/lipedema-inflammatory-leg-care.html',
   category: 'Lymphatic Drainage',
   images: {
     hero: {
@@ -92,6 +92,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'lymphatic drainage care', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

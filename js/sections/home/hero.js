@@ -40,7 +40,7 @@ export function HeroSlide(slide, { index = 0 } = {}) {
       <div class="min-w-0">
         ${heading}
         <p class="mt-5 mb-6 max-w-[70ch] text-[13px] leading-[1.65] tablet:text-[14px] tablet:leading-[1.4] wide:text-[16px]">${slide.description}</p>
-        ${ActionButton({ label: 'Book an appointment', href: './contact.html' })}
+        ${ActionButton({ label: 'Book an appointment', href: './pages/contact.html' })}
       </div>
       <div class="min-w-0 wide:pt-4">${HeroBenefits(slide.benefits, true)}</div>
     </div>
@@ -51,7 +51,7 @@ export function HeroSlide(slide, { index = 0 } = {}) {
       <div class="mx-auto w-full min-w-0 max-w-[600px] wide:mx-0">
         ${heading}
         <p class="mt-5 mb-6 max-w-[475px] text-left text-[13px] leading-[1.65] font-normal tablet:mt-[22px] tablet:mb-[30px] tablet:text-[14px] tablet:leading-[1.4] wide:text-[16px]">${slide.description}</p>
-        ${ActionButton({ label: 'Book an appointment', href: './contact.html' })}
+        ${ActionButton({ label: 'Book an appointment', href: './pages/contact.html' })}
         ${HeroBenefits(slide.benefits)}
       </div>
     </div>

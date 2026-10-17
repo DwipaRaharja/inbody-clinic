@@ -7,7 +7,8 @@
   "scripts": {
     "test": "node scripts/check-pages.mjs",
     "dev:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch",
-    "build:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --minify"
+    "build:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --minify",
+    "serve": "npx serve ."
   },
   "keywords": [],
   "author": "",

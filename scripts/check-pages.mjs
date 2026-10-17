@@ -12,7 +12,17 @@ const appSource = await readFile(join(projectRoot, 'js/app.js'), 'utf8');
 const iconStyles = await readFile(join(projectRoot, 'node_modules/@phosphor-icons/web/src/regular/style.css'), 'utf8');
 const iconStylesheetUrl = 'https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css';
 const renderedPages = new Map();
-const htmlFiles = (await readdir(projectRoot)).filter(name => name.endsWith('.html'));
+assert.deepEqual((await readdir(projectRoot)).filter(name => name.endsWith('.html')), ['index.html'], 'Only the Home entry belongs in the project root');
+async function findHtmlFiles(directory, prefix = '') {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const filename = prefix ? `${prefix}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) files.push(...await findHtmlFiles(join(directory, entry.name), filename));
+    else if (entry.name.endsWith('.html')) files.push(filename);
+  }
+  return files;
+}
+const htmlFiles = ['index.html', ...await findHtmlFiles(join(projectRoot, 'pages'), 'pages')];
 const decodeAttribute = value => value.replace(/&(amp|lt|gt|quot|#39);/gu, (_, entity) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" })[entity]);
 
 for (const filename of htmlFiles) {
@@ -20,8 +30,11 @@ for (const filename of htmlFiles) {
   const pageId = html.match(/<body\s+data-page="([^"]+)"/u)?.[1];
   assert.ok(pageId, `${filename}: missing data-page`);
   assert.ok(appSource.includes(`import('./pages/${pageId}.js')`), `${filename}: page is not registered in app.js`);
-  assert.equal((html.match(/src="\.\/js\/app\.js"/gu) ?? []).length, 1, `${filename}: expected one shared entry script`);
-  assert.equal((html.match(/href="\.\/css\/output\.css"/gu) ?? []).length, 1, `${filename}: expected one Tailwind stylesheet`);
+  const rootPrefix = '../'.repeat(filename.split('/').length - 1) || './';
+  if (filename !== 'index.html') assert.ok(html.includes(`data-root="${rootPrefix}"`), `${filename}: wrong project root prefix`);
+  assert.equal(html.split(`src="${rootPrefix}js/app.js"`).length - 1, 1, `${filename}: expected one shared entry script`);
+  assert.equal(html.split(`href="${rootPrefix}css/output.css"`).length - 1, 1, `${filename}: expected one Tailwind stylesheet`);
+  assert.ok(!/<base\b/u.test(html), `${filename}: a base element would redirect local section anchors`);
   assert.equal(html.split(`href="${iconStylesheetUrl}"`).length - 1, 1, `${filename}: expected one Phosphor Regular CDN stylesheet`);
   assert.ok(!html.includes('./node_modules/@phosphor-icons/'), `${filename}: icon stylesheets must use the CDN`);
   assert.ok(/<title>[^<]+<\/title>/u.test(html), `${filename}: missing page title`);
@@ -33,7 +46,7 @@ for (const filename of htmlFiles) {
   assert.equal(page.id, pageId, `${filename}: wrong page descriptor`);
   if (pageId === 'service') assert.equal(page.serviceId, serviceId, `${filename}: wrong service data`);
   assert.ok(page.sections.length, `${filename}: no sections`);
-  const markup = PageLayout(page);
+  const markup = PageLayout(page, { rootPrefix });
   for (const match of markup.matchAll(/<i\b[^>]*\bclass="([^"]+)"/gu)) {
     const classes = match[1].split(/\s+/u);
     const glyphs = classes.filter(name => name.startsWith('ph-'));
@@ -60,15 +73,19 @@ for (const filename of htmlFiles) {
   renderedPages.set(route, { filename, html, markup, ids: idSet, serviceId });
 }
 
-for (const [route, { filename, html, markup }] of renderedPages) {
-  for (const match of `${html}\n${markup}`.matchAll(/\s(href|src)="(\.\/[^"]+|#[^"]+)"/gu)) {
-    const url = new URL(decodeAttribute(match[2]), `${siteOrigin}${route}`);
-    const destination = renderedPages.get(url.pathname === '/index.html' ? '/' : url.pathname);
-    if (destination) {
-      if (url.hash) assert.ok(destination.ids.has(decodeURIComponent(url.hash.slice(1))), `${filename}: broken anchor ${match[2]}`);
-    } else {
-      assert.ok(!url.hash, `${filename}: anchor destination is not a page: ${match[2]}`);
-      await access(join(projectRoot, decodeURIComponent(url.pathname.slice(1))));
+for (const mountPath of ['', '/preview/inbody']) {
+  for (const [route, { filename, html, markup }] of renderedPages) {
+    for (const match of (html + '\n' + markup).matchAll(/\s(href|src)="((?:\.{1,2}\/|#)[^"]*)"/gu)) {
+      const url = new URL(decodeAttribute(match[2]), siteOrigin + mountPath + route);
+      assert.ok(url.pathname.startsWith(mountPath + '/'), filename + ': URL escapes the project when hosted in a subfolder');
+      const projectPath = url.pathname.slice(mountPath.length);
+      const destination = renderedPages.get(projectPath === '/index.html' ? '/' : projectPath);
+      if (destination) {
+        if (url.hash) assert.ok(destination.ids.has(decodeURIComponent(url.hash.slice(1))), filename + ': broken anchor ' + match[2]);
+      } else {
+        assert.ok(!url.hash, filename + ': anchor destination is not a page: ' + match[2]);
+        await access(join(projectRoot, decodeURIComponent(projectPath.slice(1))));
+      }
     }
   }
 }
@@ -86,7 +103,7 @@ for (const item of dropdownServices) {
   assert.equal(page?.serviceId, item.id, `${item.label}: wrong HTML service target`);
   const activeLinks = [...page.markup.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/gu)];
   assert.equal(activeLinks.length, 1, `${item.label}: expected one active service link`);
-  assert.equal(decodeAttribute(activeLinks[0][0].match(/\shref="([^"]+)"/u)[1]), item.href, `${item.label}: wrong active link`);
+  assert.equal(new URL(decodeAttribute(activeLinks[0][0].match(/\shref="([^"]+)"/u)[1]), siteOrigin + route).pathname, route, item.label + ': wrong active link');
 
   const icons = [
     ...data.hero.benefits.map(benefit => benefit.icon),
@@ -109,4 +126,4 @@ async function checkImports(directory) {
   }
 }
 await checkImports(join(projectRoot, 'js'));
-console.log(`Passed: ${renderedPages.size} pages, ${dropdownServices.length} service routes, shared layout, IDs, accessibility targets, links, icons, assets and module imports.`);
+console.log(`Passed: ${renderedPages.size} pages, ${dropdownServices.length} service routes, shared layout, IDs, accessibility targets, root/subfolder links, icons, assets and module imports.`);

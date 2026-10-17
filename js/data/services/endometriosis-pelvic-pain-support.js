@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Endometriosis
 export default {
   id: 'endometriosis-pelvic-pain-support',
   name: 'Endometriosis & Pelvic Pain Support',
-  href: './endometriosis-pelvic-pain-support.html',
+  href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html',
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
@@ -92,6 +92,6 @@ export default {
     lines: [{ text: 'Start Your' }, { text: 'Pelvic Care Journey', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

@@ -70,7 +70,7 @@ export function ClinicVisit() {
     <div class="min-w-0">
       ${Heading({ eyebrow: 'InBody Clinic · Double Bay', level: 2, id: 'clinic-visit-title', size: 'section', lines: [{ text: 'Plan your visit' }] })}
       <p class="mt-5 max-w-[48ch] text-[14px] leading-[1.8] text-clinic-navy/80 tablet:text-[15px]">We look forward to welcoming you to our Double Bay clinic. Find our location below, or get in touch if you have a question before your appointment.</p>
-      <div class="mt-5">${ActionButton({ label: 'Contact us', href: './contact.html' })}</div>
+      <div class="mt-5">${ActionButton({ label: 'Contact us', href: './pages/contact.html' })}</div>
     </div>
     <div class="min-w-0 rounded-2xl border border-clinic-light-grey bg-clinic-white p-6 tablet:p-8">
       <div class="flex items-start gap-4">

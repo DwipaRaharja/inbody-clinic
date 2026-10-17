@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Recovery
 export default {
   id: 'recovery-core-restoration',
   name: 'Recovery & Core Restoration',
-  href: './recovery-core-restoration.html',
+  href: './pages/services/pregnancy-postpartum/recovery-core-restoration.html',
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
@@ -89,6 +89,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'Pregnancy & Postpartum', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Lymphatic Drainage/Clinical Lym
 export default {
   id: 'clinical-lymphatic-drainage-sydney',
   name: 'Clinical Lymphatic Drainage Sydney',
-  href: './clinical-lymphatic-drainage-sydney.html',
+  href: './pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html',
   category: 'Lymphatic Drainage',
   images: {
     hero: {
@@ -96,6 +96,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'lymphatic drainage care', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

@@ -3,7 +3,7 @@ const imageDirectory = './assets/images/services/Body Contouring/Lymphatic Reset
 export default {
   id: 'lymphatic-reset-fluid-retention-treatment',
   name: 'Lymphatic Reset & Fluid Retention Treatment',
-  href: './lymphatic-reset-fluid-retention-treatment.html',
+  href: './pages/services/body-contouring/lymphatic-reset-fluid-retention-treatment.html',
   category: 'Body Contouring',
   images: {
     hero: {
@@ -77,6 +77,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'Body Contouring', accent: true }],
     description: 'Ask how our clinical therapies can support circulation, skin elasticity, and natural body renewal.',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };

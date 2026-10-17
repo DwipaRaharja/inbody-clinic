@@ -92,7 +92,7 @@ BookingButton();         // CTA hero
 BookingButton('navbar'); // CTA navbar
 ActionButton({ label: 'View services', href: './#services', variant: 'services' });
 ActionButton({ label: 'Learn more', href: '#service-options' });
-ActionButton({ label: 'Contact the Clinic', href: './contact.html', variant: 'contact' });
+ActionButton({ label: 'Contact the Clinic', href: './pages/contact.html', variant: 'contact' });
 ```
 
 Learn More memakai varian default `hero`: pill Sage dengan teks uppercase dan
@@ -100,7 +100,7 @@ panah menuju `#service-options`. Varian `contact` memakai pill Navy dengan teks 
 label, untuk CTA kontak di atas footer. Keduanya tetap memakai `ActionButton`
 agar hover, fokus keyboard, dan reduced motion mengikuti komponen bersama.
 
-CTA Book an Appointment menuju `./contact.html`. `BookingButton` memakai
+CTA Book an Appointment menuju `./pages/contact.html`. `BookingButton` memakai
 `bookingHref` di `js/components/button.js` sebagai tujuan bersama navbar dan CTA Home.
 
 ## 6. Layout dan spacing
@@ -253,7 +253,7 @@ Data tiga slide hero berada di `js/data/hero-slides.js`. Fungsi `HeroSlide` pada
 | Move Better. Feel Lighter. Live Better. | Foto kiri, teks kanan | `hero-2.jpg` |
 | Care Designed Around You. | Teks atas kiri, benefit vertikal di kanan, foto di bawah | `hero-3.jpg` |
 
-Ketiganya menggunakan `ActionButton` menuju `./contact.html` dan ikon Leaf, Heart, serta Users Three
+Ketiganya menggunakan `ActionButton` menuju `./pages/contact.html` dan ikon Leaf, Heart, serta Users Three
 yang sama. Ukuran headline memakai `Heading({ size: 'hero' })`; opsi `inline`
 menyambungkan bagian headline slide ketiga dengan accent Sage tegak.
 
@@ -280,7 +280,7 @@ atau verifikasi visual baru setelah perubahan struktur folder.
 
 ## 12. Halaman About
 
-Halaman `about.html` memakai `data-page="about"`; `js/app.js` memuat descriptor
+Halaman `pages/about.html` memakai `data-page="about"`; `js/app.js` memuat descriptor
 `js/pages/about.js` dan section dari `js/sections/about/index.js`. Kontennya mengikuti referensi
 About: profil Saila Insua López, empat ringkasan latar belakang, lalu bagian
 Experience & expertise dengan empat kartu keahlian. Foto profil memakai
@@ -301,8 +301,8 @@ klinik; tautan layanan kembali ke `./#services`.
 
 Navbar dan footer memakai data navigasi yang sama di `js/data/navigation.js`.
 Tautan Home dan logo klinik menuju `./` tanpa hash atau ID section.
-Tautan About menuju `./about.html`; tautan Our Clinic pada navbar dan footer
-menuju `./our-clinic.html`. Our Services di navbar membuka dropdown;
+Tautan About menuju `./pages/about.html`; tautan Our Clinic pada navbar dan footer
+menuju `./pages/our-clinic.html`. Our Services di navbar membuka dropdown;
 tautan Our Service di footer kembali ke section layanan Home. Halaman aktif memakai `aria-current`.
 
 Padding mengikuti `containerClasses`: 32px di HP dan 80px mulai tablet, dengan
@@ -314,11 +314,11 @@ keahlian, serta footer Navy yang sama dengan Home.
 
 ## 13. Halaman Contact Us
 
-Halaman `contact.html` memakai `data-page="contact"`; `js/app.js` memuat descriptor
+Halaman `pages/contact.html` memakai `data-page="contact"`; `js/app.js` memuat descriptor
 `js/pages/contact.js` dan section dari `js/sections/contact/index.js`. Layout memakai kembali
 `ContactBar`, `Navbar({ currentPage: 'contact' })`, `Heading`, `ActionButton`,
 serta `Footer({ currentPage: 'contact' })`. Menu Contact Us di semua halaman
-menuju `./contact.html`; Home tetap menuju `./` tanpa hash.
+menuju `./pages/contact.html`; Home tetap menuju `./` tanpa hash.
 
 Bagian pembuka memakai Light Sage dan teks terpusat. Bagian utama memakai White:
 detail kontak dan peta di kiri, form di kanan mulai 1101px. Di layar kecil kedua
@@ -369,7 +369,7 @@ Item layanan disimpan sebagai object pada `serviceNavigationGroups`, dengan
 **13 item** sudah memiliki halaman: Pregnancy & Postpartum **3**, Lymphatic
 Drainage **3**, Pain & TMJ Relief **4**, dan Body Contouring **3**. Contohnya,
 Pregnancy Massage & Circulation Support menuju
-`./pregnancy-massage-circulation-support.html`. Daftar lengkap menu dan slug
+`./pages/services/pregnancy-postpartum/pregnancy-massage-circulation-support.html`. Daftar lengkap menu dan slug
 tersedia di `README.md`.
 `serviceId` dari descriptor halaman diteruskan melalui `PageLayout` ke navbar
 untuk memberi `aria-current="page"` pada tautan layanan yang sedang dibuka.
@@ -399,7 +399,7 @@ Section Home dikelompokkan di `js/sections/home/`, About di
 controller slider, galeri, dan form berada di `js/features/`; data navigasi,
 kontak, slide, serta galeri berada di `js/data/`.
 
-Saat menambah halaman, buat entry HTML beserta descriptor di `js/pages/`,
+Saat menambah halaman, buat entry HTML di `pages/` beserta descriptor di `js/pages/`,
 kelompokkan section halaman di `js/sections/`, lalu daftarkan pemuat descriptor
 di `js/app.js`. Perbarui `js/data/navigation.js` dan sumber Tailwind bila perlu.
 Gunakan shell dan container yang sama; jangan menyalin navbar atau footer ke
@@ -407,7 +407,7 @@ section. Langkah pengembangan lengkap ada di `README.md`.
 
 ## 16. Template halaman layanan
 
-Halaman `pregnancy-massage-circulation-support.html` memakai
+Halaman `pages/services/pregnancy-postpartum/pregnancy-massage-circulation-support.html` memakai
 `data-page="service"` dan
 `data-service="pregnancy-massage-circulation-support"`. `js/pages/service.js`
 mencari data pada registry `js/data/services/index.js`, lalu memanggil
@@ -434,7 +434,7 @@ Foto berada di dalam container dengan sudut membulat, mengikuti referensi
 halaman layanan; foto tidak memakai grid full-bleed hero Home.
 
 Seluruh 13 layanan memakai record di `js/data/services/<service-id>.js` dan
-entry root `<service-id>.html`. Hero, pilihan perawatan, tiga kartu, panel,
+entry `pages/services/<category>/<service-id>.html`. Hero, pilihan perawatan, tiga kartu, panel,
 kutipan, dan CTA mengambil isi serta foto dari record yang sama. Perbedaan
 layanan ditempatkan pada data, bukan dengan menyalin markup section.
 
@@ -472,7 +472,7 @@ Variasi yang tetap ditangani renderer bersama:
   mengikuti sumber; perbedaan nomor tercatat sebagai T02 pada dokumen review.
 
 Tombol Learn More menuju `#service-options`; CTA Contact the Clinic menuju
-`./contact.html#contact-form`. Semua halaman memakai komponen tombol, shell,
+`./pages/contact.html#contact-form`. Semua halaman memakai komponen tombol, shell,
 container, serta status menu aktif yang sama.
 
 Untuk layanan berikutnya, tambahkan satu data lengkap ke registry, entry HTML
@@ -485,10 +485,10 @@ tidak menyatakan bahwa pemeriksaan visual browser baru telah dilakukan.
 
 ## 17. Halaman Our Clinic
 
-Halaman `our-clinic.html` memakai `data-page="clinic"`; descriptor
+Halaman `pages/our-clinic.html` memakai `data-page="clinic"`; descriptor
 `js/pages/clinic.js` menyusun tiga section dari `js/sections/clinic/index.js`
 melalui shell bersama. Menu Our Clinic pada navbar dan footer menuju
-`./our-clinic.html`, dengan `aria-current="page"` ketika halaman ini aktif.
+`./pages/our-clinic.html`, dengan `aria-current="page"` ketika halaman ini aktif.
 
 Pengantar terpusat memakai background Light Sage lembut, eyebrow
 `INBODY CLINIC · DOUBLE BAY`, serta H1 `A space to / feel at ease` dari komponen
@@ -529,5 +529,25 @@ pengantar di kiri dan kartu White berisi alamat serta jam klinik di kanan.
 Bagian ini tidak mengulang foto galeri. Ikon Phosphor Regular `map-pin` dan
 `clock` mendampingi detail dari `js/data/clinic-contact.js`. Tombol Find the
 Clinic memakai `ActionButton` dengan URL Google Maps yang sama dengan halaman
-Contact Us, dan tautan Contact Us menuju `./contact.html`. Di layar kecil
+Contact Us, dan tautan Contact Us menuju `./pages/contact.html`. Di layar kecil
 kedua kolom bertumpuk.
+
+## 18. Struktur entry HTML
+
+Hanya Home (`index.html`) berada di root. About, Contact Us, dan Our Clinic
+berada di `pages/`. Entry layanan dikelompokkan di
+`pages/services/pregnancy-postpartum/`, `lymphatic-drainage/`,
+`pain-tmj-relief/`, dan `body-contouring/` sesuai kategori dropdown.
+Descriptor JavaScript tetap di `js/pages/` dan data layanan tetap di `js/data/services/`.
+
+Body HTML umum memakai `data-root="../"`, dan body HTML layanan memakai
+`data-root="../../../"`. Script `js/app.js` dan stylesheet `css/output.css`
+dipanggil dengan prefix tersebut. `mountPage` meneruskan prefix ke `PageLayout`,
+yang menyesuaikan atribut `href` dan `src` berawalan `./` pada hasil render.
+Tulis URL dalam komponen dan data relatif terhadap root project, misalnya
+`./pages/contact.html` atau `./assets/logo/logo.png`.
+Anchor `#...` tetap lokal pada dokumen; jangan menambahkan elemen `base`.
+
+Tailwind membaca `index.html`, folder `pages/`, dan `js/` melalui `css/input.css`.
+Pemeriksaan halaman menemukan HTML secara rekursif dan memvalidasi URL ketika
+project dilayani dari root domain maupun subfolder hosting.

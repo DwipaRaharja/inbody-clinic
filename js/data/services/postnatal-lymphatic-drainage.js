@@ -3,7 +3,7 @@ const postnatalImageDirectory = './assets/images/services/Pregnancy & Postpartum
 export default {
   id: 'postnatal-lymphatic-drainage',
   name: 'Postnatal Lymphatic Drainage',
-  href: './postnatal-lymphatic-drainage.html',
+  href: './pages/services/pregnancy-postpartum/postnatal-lymphatic-drainage.html',
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
@@ -104,6 +104,6 @@ export default {
     lines: [{ text: 'Discuss your' }, { text: 'Pregnancy & Postpartum', accent: true }],
     description: 'Ask about support for swelling, fluid retention and heavy legs',
     label: 'Contact the Clinic',
-    href: './contact.html#contact-form',
+    href: './pages/contact.html#contact-form',
   },
 };
