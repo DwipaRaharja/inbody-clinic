@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Pregnanc
 export default {
   id: 'pregnancy-massage-circulation-support',
   name: 'Pregnancy Massage & Circulation Support',
+  summary: 'Gentle hands-on care during pregnancy for back or pelvic discomfort, muscular tension, swelling and a feeling of heavy legs.',
   href: './pages/services/pregnancy-postpartum/pregnancy-massage-circulation-support.html',
   category: 'Pregnancy & Postpartum',
   images: {

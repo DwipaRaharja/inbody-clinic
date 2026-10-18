@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Lymphatic Drainage/Lipedema & I
 export default {
   id: 'lipedema-inflammatory-leg-care',
   name: 'Lipedema & Inflammatory Leg Care',
+  summary: 'Conservative care for heavy or painful legs associated with lipedema, with an individual approach to swelling and tissue sensitivity.',
   href: './pages/services/lymphatic-drainage/lipedema-inflammatory-leg-care.html',
   category: 'Lymphatic Drainage',
   images: {

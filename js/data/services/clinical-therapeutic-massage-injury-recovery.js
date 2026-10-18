@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Clinical Ther
 export default {
   id: 'clinical-therapeutic-massage-injury-recovery',
   name: 'Clinical Therapeutic Massage & Injury Recovery',
+  summary: 'Targeted manual therapy for muscular pain, restricted movement and injury recovery, adapted to the areas affected by physical strain.',
   href: './pages/services/pain-tmj-relief/clinical-therapeutic-massage-injury-recovery.html',
   category: 'Pain & TMJ Relief',
   images: {

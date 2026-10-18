@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Chronic Pain,
 export default {
   id: 'chronic-pain-stress-inflammation',
   name: 'Chronic Pain, Stress & Inflammation',
+  summary: 'Personalised care for persistent pain, muscular stiffness and stress-related physical tension, guided by your comfort and individual needs.',
   href: './pages/services/pain-tmj-relief/chronic-pain-stress-inflammation.html',
   category: 'Pain & TMJ Relief',
   images: {

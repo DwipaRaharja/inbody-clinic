@@ -4,7 +4,7 @@
 
 - Home memakai urutan tujuh section dari brief client.
 - Enam speciality memiliki halaman sendiri dengan renderer dan data bersama.
-- The InBody Method™ memiliki ringkasan Home/About dan halaman detail.
+- The InBody Method™ memiliki ringkasan Home, pengantar pada About, dan halaman detail.
 - Dropdown menampilkan speciality; 13 treatment lama tetap tersedia sebagai detail.
 - Pengantar tim menggunakan informasi kolektif dari brief. Tidak ada profil individu kedua yang dibuat.
 - Copy hero, footer, dan CTA Home menekankan asesmen, hands-on treatment, pengalaman, dan personalisasi.
@@ -13,14 +13,24 @@
 ## Arahan pengguna yang membatasi pekerjaan
 
 Profil anggota tim kedua masih ditunda. About tetap memakai profil Saila yang sudah ada.
+Layout About sebelumnya dipertahankan sesuai koreksi pengguna: profil di kiri dan
+foto Saila di kanan, empat kartu credential pada section Sage, expertise dalam grid
+2×2, serta pengantar Method. Label pembuka menjadi “Meet our team”. Pengguna kemudian
+mengizinkan satu section detail tim setelah expertise dan sebelum Method, tanpa
+mengubah layout section lama. Isinya memakai pengantar, filosofi, dan pendekatan
+bersama dari brief, foto bersama lampiran yang disalin ke `assets/images/about/team.jpg`
+melalui `team.detailImage`, serta CTA Contact Us. Foto dan informasi kolektif tambahan
+ini bukan profil individu kedua lengkap. Identitas, bio, dan credential pribadinya
+masih menunggu data klinik; tidak ada profil contoh atau nama sementara pada halaman publik.
 Pengguna mengonfirmasi alur booking sudah selesai: semua tombol appointment dan assessment
 menuju Contact Us. Integrasi platform booking eksternal tidak diperlukan.
 CTA assessment bersifat enquiry melalui Contact Us, tanpa prefill, slot, atau konfirmasi booking.
 
 Catatan pengguna pada `task.md` juga menyatakan pemilihan foto hero perlu didiskusikan.
 Ketiga sumber gambar hero dipertahankan; tidak ada aset asli yang diganti, dipindah, atau diedit.
-Foto team overview memakai foto asli beresolusi 1600×1066 dari folder Clinical Cellulite
-Remodelling, yang menampilkan kedua praktisi meninjau tablet. Foto yang sama digunakan
+Foto Meet Our Team di Home dan detail tim About memakai foto bersama terbaru
+`assets/images/about/team.jpg` (1535×1024). Crop Home dipusatkan agar kedua wajah terlihat.
+Foto dua praktisi meninjau tablet dari folder Clinical Cellulite Remodelling tetap digunakan
 pada speciality Skin & Tissue Health sebagai visual asesmen; ilustrasi abdomen pada detail
 Cellulite lama tidak dipakai sebagai foto utama speciality baru. Speciality TMJ memakai foto
 hands-on treatment dari aset lama. Halaman Method memakai foto reception di `gallery/`.
@@ -36,10 +46,12 @@ berdasarkan cakupan brief dan informasi yang sudah ada, bukan kutipan langsung d
 | Slide 2 | “Understand Your Needs. Personalise Your Care.”; ringkasan lymphatic symptoms dan post-surgical recovery |
 | Slide 3 | “Clinical Knowledge. Individual Care.”; ringkasan women’s health, recovery, tissue health, dan teknologi when appropriate |
 | Enam speciality | Intro, keluhan, pendekatan, teknik, timing, dan related treatment disusun dari cakupan client; tidak menetapkan durasi, biaya, jumlah sesi, atau hasil |
+| Related treatment information | Dua belas kartu di enam speciality kini memuat nama, ringkasan fokus perawatan, dan View treatment details. Ringkasan disimpan pada seluruh 13 data treatment, disusun dari konten layanan yang tersedia; CTA Contact Us tetap memakai alur yang sudah ada |
 | Lymphoedema/oncology | Konten dibatasi pada conservative care, lymphatic complications associated with cancer treatment, symptom management, education, dan tissue care dari brief; tidak menambahkan credential/protokol khusus |
 | Pertanyaan kartu ketiga | “Living with lipedema?” tetap mengikuti contoh client; judul dan ringkasan tetap mencakup lymphoedema/oncology |
 | Method | Pengalaman lebih dari 20 tahun, training Europe/Chile, lima unsur, empat tahap, dan sisi women/mothers berasal dari brief; detail kalimat disusun untuk web |
 | Tim | Pernyataan kolektif memakai brief. Tidak mengatribusikan seluruh credential Saila kepada orang lain atau mengklaim registrasi profesional Australia |
+| About | Layout profil, credential, expertise 2×2, dan pengantar Method sebelumnya dipertahankan; satu section detail tim dengan foto bersama ditambahkan setelah expertise sesuai izin pengguna, sementara profil individu kedua lengkap masih menunggu |
 | What to Expect | Menguraikan proses kunjungan berdasarkan assessment/personalisation/reassessment dari brief; tidak menjanjikan jadwal atau prosedur spesifik yang belum diberikan |
 | Assessment CTA | “Ask about an assessment” membuka Contact Us, sesuai alur enquiry yang sudah tersedia |
 | Testimonial | Tidak dirender pada Home baru; module, foto, dan kutipan asli tetap dipertahankan |
@@ -52,6 +64,15 @@ induk baru yang belum disebut client. Tidak ada treatment atau URL detail lama y
 
 Catatan `SERVICE_COPY_REVIEW.md` masih terbuka. Penerapan brief baru tidak otomatis menyetujui,
 menormalisasi, atau memperbaiki seluruh teks pada 13 detail treatment lama.
+
+## Status layout About
+
+Pengguna mengoreksi perubahan tata letak: rancangan tiga section terpisah untuk
+pengantar tim, profil, dan filosofi tidak digunakan. Susunan About sebelumnya
+dipertahankan dengan satu section detail tim tambahan yang diizinkan pengguna,
+setelah expertise dan sebelum Method. Pemeriksaan visual rancangan yang dibatalkan
+tidak menjadi bukti verifikasi layout saat ini. Profil anggota kedua lengkap tetap
+menunggu data, dan kualifikasi individual yang tampil hanya milik Saila.
 
 ## Pemeriksaan
 

@@ -3,6 +3,7 @@ const postnatalImageDirectory = './assets/images/services/Pregnancy & Postpartum
 export default {
   id: 'postnatal-lymphatic-drainage',
   name: 'Postnatal Lymphatic Drainage',
+  summary: 'Gentle lymphatic care after childbirth, focused on swelling, fluid retention and a feeling of heaviness during postnatal recovery.',
   href: './pages/services/pregnancy-postpartum/postnatal-lymphatic-drainage.html',
   category: 'Pregnancy & Postpartum',
   images: {

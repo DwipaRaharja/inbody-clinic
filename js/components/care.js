@@ -34,7 +34,7 @@ export function MethodPreview({ id = 'method-title' } = {}) {
 export function TeamPreview({ id = 'team-title', level = 2 } = {}) {
   return `<div class="${containerClasses} grid min-w-0 gap-9 py-14 tablet:py-20 wide:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] wide:items-center wide:gap-20" data-section-frame="team">
     <div class="relative min-w-0 overflow-hidden rounded-xl bg-clinic-light-sage/30">
-      <img class="block aspect-[5/4] w-full object-cover object-[75%_35%] wide:aspect-[4/5]" src="${e(team.image.src)}" alt="${e(team.image.alt)}" width="${team.image.width}" height="${team.image.height}" loading="lazy" />
+      <img class="block aspect-[5/4] w-full object-cover object-center wide:aspect-[4/5] wide:object-[40%_center]" src="${e(team.image.src)}" alt="${e(team.image.alt)}" width="${team.image.width}" height="${team.image.height}" loading="lazy" />
     </div>
     <div class="min-w-0">
       ${Heading({ eyebrow: 'Experience, education & expertise', level, id, size: level === 1 ? 'profile' : 'section', lines: [{ text: 'Meet Our Team' }] })}

@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Ease the tens
 export default {
   id: 'tmj-jaw-headache-treatment',
   name: 'TMJ, Jaw & Headache Treatment',
+  summary: 'Targeted hands-on care for jaw discomfort, clenching and tension-related headaches, with attention to the jaw, neck and surrounding muscles.',
   href: './pages/services/pain-tmj-relief/tmj-jaw-headache-treatment.html',
   category: 'Pain & TMJ Relief',
   images: {

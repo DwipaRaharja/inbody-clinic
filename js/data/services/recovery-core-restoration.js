@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Recovery
 export default {
   id: 'recovery-core-restoration',
   name: 'Recovery & Core Restoration',
+  summary: 'Postpartum rehabilitation focused on deep core activation, abdominal wall support and a steadier return to everyday movement.',
   href: './pages/services/pregnancy-postpartum/recovery-core-restoration.html',
   category: 'Pregnancy & Postpartum',
   images: {

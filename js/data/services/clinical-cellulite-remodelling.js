@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Body Contouring/Clinical Cellul
 export default {
   id: 'clinical-cellulite-remodelling',
   name: 'Clinical Cellulite Remodelling',
+  summary: 'Clinical care for visible cellulite and uneven skin texture, with treatment selected for your connective tissue condition and individual needs.',
   href: './pages/services/body-contouring/clinical-cellulite-remodelling.html',
   category: 'Body Contouring',
   images: {

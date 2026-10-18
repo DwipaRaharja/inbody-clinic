@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Lymphatic Drainage/Post-Surgica
 export default {
   id: 'post-surgical-recovery',
   name: 'Post-Surgical Recovery',
+  summary: 'Individual care after plastic or reconstructive surgery, focused on swelling, scar tightness and tissue recovery at each stage of healing.',
   href: './pages/services/lymphatic-drainage/post-surgical-recovery.html',
   category: 'Lymphatic Drainage',
   images: {

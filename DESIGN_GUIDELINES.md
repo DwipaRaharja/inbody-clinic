@@ -56,7 +56,8 @@ BookingButton('navbar');
 
 CTA default berbentuk pill, Sage, White, dengan panah. Varian `contact` memakai Navy
 serta teks normal case. Hover dan reduced motion mengikuti komponen yang sama.
-`BookingButton` menuju Contact Us. Integrasi booking dan profil kedua ditunda oleh pengguna;
+`BookingButton` menuju Contact Us; alur booking sudah selesai sesuai konfirmasi pengguna
+dan integrasi eksternal tidak diperlukan. Profil kedua tetap menunggu data;
 jangan menampilkan slot, credential, atau konfirmasi appointment rekaan.
 
 `js/components/care.js` menyediakan `MethodPreview`, `MethodSteps`, `TeamPreview`,
@@ -146,8 +147,17 @@ serta tautan Method. Tagline memakai “Clinical expertise. Personalised care.�
 
 ## 8. About, Contact Us, dan Our Clinic
 
-About tetap memakai profil Saila yang sudah ada; profil kedua belum dibuat sesuai penundaan pengguna.
-Section Method ditambahkan dan wording expertise mengutamakan assessment serta manual therapy.
+Layout About sebelumnya dipertahankan sesuai koreksi pengguna. `TherapistProfile`
+menampilkan profil di kiri dan foto Saila di kanan; `TherapistCredentials` memakai empat
+kartu pada section Sage; `TherapistExpertise` mempertahankan grid expertise 2×2;
+`MethodPreview` tetap menjadi pengantar Method. Label pembuka memakai “Meet our team”.
+Sesuai izin pengguna, `TeamDetails` ditambahkan setelah expertise dan sebelum Method,
+tanpa mengubah tata letak section lama. Section ini memakai informasi kolektif pada
+`team.introduction`, `team.philosophy`, dan `team.sharedCare`, foto bersama lokal
+`assets/images/about/team.jpg` melalui `team.detailImage`, serta CTA Contact Us.
+Profil Saila memakai data yang sudah tersedia; profil kedua masih menunggu identitas,
+bio, dan credential pribadi dari klinik. Foto bersama tambahan bukan pengganti profil
+individu kedua lengkap. Jangan menambahkan identitas atau kualifikasi rekaan.
 Team overview Home menggunakan informasi kolektif client dan foto bersama yang sudah tersedia.
 
 Contact Us memakai data di `js/data/clinic-contact.js`, kartu kontak, Google Maps, dan form email.

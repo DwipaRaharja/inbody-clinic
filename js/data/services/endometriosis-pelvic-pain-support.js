@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Pain & TMJ Relief/Endometriosis
 export default {
   id: 'endometriosis-pelvic-pain-support',
   name: 'Endometriosis & Pelvic Pain Support',
+  summary: 'Supportive clinical care for pelvic discomfort associated with endometriosis, focused on tissue mobility, tension and everyday comfort.',
   href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html',
   category: 'Pain & TMJ Relief',
   images: {

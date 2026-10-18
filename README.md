@@ -61,7 +61,7 @@ js/
 │   ├── specialities/catalog.js     # Enam nama, pertanyaan, ringkasan, route, relasi
 │   ├── specialities/index.js       # Konten lengkap dan foto tiap speciality
 │   ├── method.js                   # Lima unsur, empat tahap, pengalaman kunjungan
-│   ├── team.js                     # Pengantar tim dari brief, tanpa profil kedua
+│   ├── team.js                     # Pengantar pengalaman dan filosofi bersama
 │   ├── services/                   # 13 record treatment yang dipertahankan
 │   ├── hero-slides.js
 │   ├── navigation.js
@@ -111,6 +111,11 @@ Assess → Personalise → Treat → Reassess, serta filosofi personal care.
 Total saat ini **24 halaman**: empat halaman umum lama, 13 detail treatment,
 enam speciality, dan satu halaman Method.
 
+Setiap data treatment di `js/data/services/` menyimpan `summary` singkat yang menjelaskan
+fokus perawatan. Kartu Related treatment information menampilkan nama, ringkasan, dan
+tautan View treatment details menuju halaman layanan yang sama. Semua 13 data treatment
+memiliki ringkasan; 12 treatment saat ini ditampilkan melalui enam speciality.
+
 ## Routing dan layout bersama
 
 Setiap entry HTML menyimpan metadata, font, CDN ikon, stylesheet, `#app`, serta satu script `js/app.js`.
@@ -138,6 +143,14 @@ Tautan Method tersedia pada dropdown, section Home/About, speciality, dan footer
 Profil anggota tim kedua masih ditunda sesuai arahan pengguna.
 Pengantar tim hanya memakai informasi kolektif yang diberikan client. About tetap menampilkan
 profil Saila yang sudah tersedia; tidak ada nama, credential, atau foto profil kedua rekaan.
+Layout About sebelumnya dipertahankan sesuai koreksi pengguna: profil di kiri dan foto
+Saila di kanan, empat kartu credential pada section Sage, expertise dalam grid 2×2,
+serta pengantar Method. Label pembuka menjadi “Meet our team”. Sesuai izin pengguna,
+satu section detail tim ditambahkan setelah expertise dan sebelum Method, tanpa
+mengubah layout section lama. Section ini memakai informasi kolektif dari brief,
+foto bersama `assets/images/about/team.jpg`, dan CTA Contact Us. Foto tambahan ini
+bukan profil individu kedua lengkap; nama, bio, dan credential pribadinya masih
+menunggu data klinik.
 
 Pengguna mengonfirmasi alur booking selesai: semua tombol appointment dan assessment
 membuka Contact Us. Integrasi platform booking eksternal tidak diperlukan. Tidak ada slot, pembayaran,

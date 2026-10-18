@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Body Contouring/Hormonal Skin T
 export default {
   id: 'hormonal-skin-tightening-firmness-treatment',
   name: 'Hormonal Skin Tightening & Firmness Treatment',
+  summary: 'Care for changes in skin firmness and elasticity during hormonal transitions, including pregnancy, postpartum recovery and menopause.',
   href: './pages/services/body-contouring/hormonal-skin-tightening-firmness-treatment.html',
   category: 'Body Contouring',
   images: {

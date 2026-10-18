@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Lymphatic Drainage/Clinical Lym
 export default {
   id: 'clinical-lymphatic-drainage-sydney',
   name: 'Clinical Lymphatic Drainage Sydney',
+  summary: 'Gentle manual lymphatic drainage using Vodder and Leduc techniques, focused on swelling, puffiness and a feeling of heaviness.',
   href: './pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html',
   category: 'Lymphatic Drainage',
   images: {

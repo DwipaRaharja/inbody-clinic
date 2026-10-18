@@ -3,6 +3,7 @@ const imageDirectory = './assets/images/services/Body Contouring/Lymphatic Reset
 export default {
   id: 'lymphatic-reset-fluid-retention-treatment',
   name: 'Lymphatic Reset & Fluid Retention Treatment',
+  summary: 'Care for persistent fluid retention and heavy legs, combining lymphatic drainage with additional clinical therapies when appropriate.',
   href: './pages/services/body-contouring/lymphatic-reset-fluid-retention-treatment.html',
   category: 'Body Contouring',
   images: {

@@ -2,6 +2,8 @@ import { Heading } from '../../components/heading.js';
 import { ActionButton } from '../../components/button.js';
 import { containerClasses } from '../../layouts/container.js';
 import { icon as renderIcon } from '../../components/icons.js';
+import { team } from '../../data/team.js';
+import { escapeHtml as e } from '../../utils/html.js';
 
 const specialties = [
   { label: "Women’s Health", icon: 'ph-flower-tulip', href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html' },
@@ -27,7 +29,7 @@ export function TherapistProfile() {
   return `<div class="${containerClasses} grid min-w-0 items-center gap-10 py-10 tablet:gap-12 tablet:py-12 wide:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] wide:gap-20 wide:py-10" data-section-frame="about">
     <div class="min-w-0">
       <div class="[&_p.uppercase]:flex [&_p.uppercase]:items-center [&_p.uppercase]:gap-2 [&_p.uppercase]:after:w-16 [&_p.uppercase]:after:border-t [&_p.uppercase]:after:border-dashed [&_p.uppercase]:after:content-['']">
-        ${Heading({ eyebrow: 'Meet your therapist', level: 1, size: 'profile', id: 'about-title', lines: [{ text: 'Saila Insua López' }] })}
+        ${Heading({ eyebrow: 'Meet our team', level: 1, size: 'profile', id: 'about-title', lines: [{ text: 'Saila Insua López' }] })}
       </div>
       <p class="mt-3 text-[17px] leading-[1.4] font-medium text-clinic-sage tablet:text-[18px]">Spain-trained physiotherapist</p>
       <p class="mt-2.5 max-w-[48ch] text-[14px] leading-[1.4]">With over 20 years of clinical experience, Saila specialises in women’s health, dermatofunctional therapy and advanced lymphatic care.</p>
@@ -71,5 +73,21 @@ export function TherapistExpertise() {
         </div>
       </li>`).join('')}
     </ul>
+  </div>`;
+}
+
+export function TeamDetails() {
+  return `<div class="${containerClasses} grid min-w-0 items-center gap-9 py-14 tablet:gap-12 tablet:py-16 wide:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] wide:gap-20 wide:py-20" data-section-frame="team-details">
+    <figure class="min-w-0">
+      <img class="block h-auto w-full rounded-[10px]" src="${e(team.detailImage.src)}" alt="${e(team.detailImage.alt)}" width="${team.detailImage.width}" height="${team.detailImage.height}" loading="lazy" />
+      <figcaption class="mt-4 text-[10px] leading-[1.6] font-medium tracking-[0.12em] text-clinic-navy/70 uppercase">InBody Clinic · Double Bay</figcaption>
+    </figure>
+    <div class="min-w-0">
+      ${Heading({ eyebrow: 'Experience, education & shared values', level: 2, size: 'section', id: 'team-details-title', lines: [{ text: 'The team behind' }, { text: 'InBody Clinic' }] })}
+      <p class="mt-6 text-[14px] leading-[1.85] text-clinic-navy/90 tablet:text-[15px]">${e(team.introduction)}</p>
+      <p class="mt-4 text-[13px] leading-[1.85] text-clinic-navy/85 tablet:text-[14px]">${e(team.philosophy)}</p>
+      <p class="mt-4 text-[13px] leading-[1.85] text-clinic-navy/85 tablet:text-[14px]">${e(team.sharedCare)}</p>
+      <div class="mt-7">${ActionButton({ label: 'Contact our team', href: './pages/contact.html' })}</div>
+    </div>
   </div>`;
 }

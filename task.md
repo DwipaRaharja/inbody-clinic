@@ -186,6 +186,12 @@ sesuai, tanpa menggandakan halaman.
 
 ### R05 — Meet Our Team dan About
 
+- [x] Pertahankan layout About sebelumnya sesuai koreksi pengguna: profil kiri/foto
+  kanan, empat kartu credential pada section Sage, expertise 2×2, dan pengantar Method.
+  Label pembuka menjadi “Meet our team”.
+- [x] Tambahkan satu section detail tim setelah expertise dan sebelum Method sesuai
+  izin pengguna, tanpa mengubah layout section lama. Gunakan informasi kolektif dari
+  brief, foto bersama `assets/images/about/team.jpg`, serta CTA Contact Us.
 - [ ] Tambahkan section Meet Our Team pada Home, memperkenalkan dua anggota tim
   secara seimbang, bukan hanya satu figur utama.
 - [ ] Perbarui halaman About yang sudah ada untuk menampilkan dua profil lengkap:
@@ -206,6 +212,10 @@ foto bersama, tetapi bukan pengganti verifikasi identitas dan data kedua profil.
 
 Pengantar kolektif Meet Our Team sudah tersedia pada Home berdasarkan brief.
 Pembuatan profil individu kedua dan penambahan datanya ditunda sesuai arahan pengguna.
+Susunan section lama About tetap dipertahankan, dengan satu section detail tim
+tambahan yang diizinkan pengguna. Foto bersama lampiran dan informasi kolektif ini
+bukan profil individu kedua lengkap; nama, bio, dan credential pribadinya masih
+diperlukan sebelum melengkapi profilnya.
 
 ### R06 — What to Expect
 

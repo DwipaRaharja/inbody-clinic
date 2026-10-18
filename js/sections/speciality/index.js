@@ -46,7 +46,11 @@ export function SpecialityTreatments(speciality) {
     ${Heading({ eyebrow: 'Explore in more detail', level: 2, id: 'speciality-treatments-title', size: 'section', lines: [{ text: 'Related treatment information' }] })}
     <p class="mt-5 max-w-[66ch] text-[14px] leading-[1.8] text-clinic-navy/80">Learn about some of the treatments within this speciality. You can also contact us without choosing a treatment first.</p>
     <ul class="mt-8 grid list-none grid-cols-1 gap-4 p-0 tablet:grid-cols-2 wide:grid-cols-3">
-      ${speciality.treatments.map(treatment => `<li class="min-w-0"><a class="group flex h-full min-h-[116px] items-center justify-between gap-5 rounded-xl border border-clinic-light-grey p-6 transition-colors hover:border-clinic-sage hover:bg-clinic-cream motion-reduce:transition-none" href="${e(treatment.href)}"><span class="font-display text-[25px] leading-[1.15] font-semibold">${e(treatment.name)}</span><i class="ph ph-arrow-right shrink-0 text-[22px] text-clinic-sage transition-transform group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true"></i></a></li>`).join('')}
+      ${speciality.treatments.map(treatment => `<li class="min-w-0"><a class="group flex h-full flex-col rounded-xl border border-clinic-light-grey p-6 transition-colors hover:border-clinic-sage hover:bg-clinic-cream motion-reduce:transition-none" href="${e(treatment.href)}" aria-labelledby="related-${e(treatment.id)}-title" aria-describedby="related-${e(treatment.id)}-summary" data-treatment-card="${e(treatment.id)}">
+        <h3 class="font-display text-[25px] leading-[1.2] font-semibold" id="related-${e(treatment.id)}-title">${e(treatment.name)}</h3>
+        <p class="mt-4 text-[13px] leading-[1.8] text-clinic-navy/80" id="related-${e(treatment.id)}-summary">${e(treatment.summary)}</p>
+        <span class="mt-auto inline-flex items-center gap-3 pt-6 text-[12px] leading-[1.5] font-medium">View treatment details<i class="ph ph-arrow-right shrink-0 text-[20px] text-clinic-sage transition-transform group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true"></i></span>
+      </a></li>`).join('')}
     </ul>
   </div>`;
 }
