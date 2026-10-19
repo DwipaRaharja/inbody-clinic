@@ -20,8 +20,8 @@ clinical knowledge, specialised hands-on care, dan personalisation.
 | White | `#FFFFFF` | `clinic-white` | Background utama dan content surface |
 | Light Grey | `#E8E9E7` | `clinic-light-grey` | Border dan divider |
 
-Token berada di `css/input.css`. Styling memakai utility Tailwind; build ke `css/output.css`,
-jangan menambahkan CSS layout khusus ke input atau mengedit output secara manual.
+Token berada di `css/input.css`. Styling memakai utility Tailwind dan diproses melalui Vite;
+jangan mengedit CSS hasil build pada `dist/` secara manual.
 Teks pertanyaan pada kartu speciality memakai Navy agar terbaca jelas; Sage digunakan sebagai accent.
 
 ## 2. Container dan reflow
@@ -41,21 +41,22 @@ Periksa reflow, heading panjang, dan jarak kiri/kanan setelah perubahan copy.
 
 ## 3. Komponen bersama
 
-`PageLayout` menyediakan skip link, bar kontak, navbar sticky, main selebar halaman,
-dan footer. Bar kontak bergulir bersama dokumen. Section tidak menyalin shell.
-Shell dipasang sekali; navigasi internal hanya mengganti isi main. Pertahankan elemen
-navbar/footer dan perbarui link/menu aktif melalui atribut `data-nav-page` atau
-`data-nav-speciality`. Fitur halaman yang memakai listener/timer harus mengembalikan cleanup
-dari `page.init(root)` agar layout dapat menghentikannya sebelum mengganti konten.
+Layout React pada `src/App.jsx` menyediakan skip link, bar kontak, navbar sticky,
+main selebar halaman, dan footer. Bar kontak bergulir bersama dokumen. Section tidak menyalin shell.
+Shell dipasang sekali; React Router mengganti konten main saat navigasi internal.
+Pertahankan elemen navbar/footer/main dan penanda `data-nav-page` atau `data-nav-speciality`.
+Controller yang memasang listener/timer diaktifkan melalui effect React dan harus
+mengembalikan cleanup untuk dijalankan saat halaman dilepas. Jangan memasang listener
+saat render atau mengganti DOM yang dimiliki React menggunakan `innerHTML`.
 
 Gunakan `Heading` untuk heading utama; data `lines`/`segments` menentukan accent.
 Heading default memakai Navy, accent Sage, dan pilihan italic. Untuk label kartu speciality
 atau langkah klinis yang memakai Montserrat, gunakan override `font-sans!`.
 
-```js
-ActionButton({ label: 'Explore our method', href: './pages/the-inbody-method.html' });
-ActionButton({ label: 'Ask about an assessment', href: './pages/contact.html#contact-form', variant: 'contact' });
-BookingButton('navbar');
+```jsx
+<ActionButton label="Explore our method" href="./pages/the-inbody-method.html" />
+<ActionButton label="Ask about an assessment" href="./pages/contact.html#contact-form" variant="contact" />
+<BookingButton variant="navbar" />
 ```
 
 CTA default berbentuk pill, Sage, White, dengan panah. Varian `contact` memakai Navy
@@ -64,21 +65,19 @@ serta teks normal case. Hover dan reduced motion mengikuti komponen yang sama.
 dan integrasi eksternal tidak diperlukan. Profil kedua tetap menunggu data;
 jangan menampilkan slot, credential, atau konfirmasi appointment rekaan.
 
-`js/components/care.js` menyediakan `MethodPreview`, `MethodSteps`, `TeamPreview`,
+`js/components/care.jsx` menyediakan `MethodPreview`, `MethodSteps`, `TeamPreview`,
 `WhatToExpect`, dan `AssessmentCTA`. ID heading bisa disesuaikan agar tetap unik.
-Copy dinamis pada section baru di-escape melalui `js/utils/html.js`.
+Render copy dinamis sebagai JSX agar React melakukan escaping. Untuk markup inline
+yang memang didukung data, gunakan helper bersama dengan daftar tag terbatas.
+Jangan merender HTML mentah dari sumber yang tidak dipercaya.
 
 ## 4. Phosphor Icons dan SVG
 
-Semua entry HTML memuat satu stylesheet berikut:
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
-```
-
-Gunakan class `ph ph-nama-ikon`, bukan weight Light/Fill dari dependency lokal.
-Paket lokal hanya dipakai untuk validasi glyph dalam tes. Ikon dekoratif memakai `aria-hidden="true"`.
-SVG khusus tetap berada di `js/components/icons.js` dan memakai `currentColor`.
+Stylesheet `@phosphor-icons/web/regular` diimpor melalui entry Vite,
+lalu CSS dan font ikon dibundel sebagai aset lokal. Jangan menambahkan kembali stylesheet
+ikon CDN pada setiap halaman. Gunakan class `ph ph-nama-ikon`, bukan weight Light/Fill.
+Tes memeriksa glyph terhadap dependency lokal. Ikon dekoratif memakai `aria-hidden="true"`.
+SVG khusus berada di `js/components/icons.jsx` dan memakai `currentColor`.
 
 Kartu speciality menggunakan lingkaran Light Sage ukuran 80/88px dan ikon sekitar 40/42px.
 Surgery memakai first-aid-kit; lymphatic memakai leaf; Lipedema memakai SVG body-contour;
@@ -88,7 +87,7 @@ About yang dipakai bersama hanya untuk menyesuaikan kartu Home.
 
 ## 5. Struktur Home
 
-Urutan Home di `js/pages/home.js`:
+Urutan section Home pada renderer React:
 
 1. `hero`: tiga slide, headline klinis dan foto asli yang sudah ada.
 2. `services`: How Can We Help? dengan enam speciality.
@@ -114,7 +113,7 @@ konteks kebutuhan pasien. Panjang copy berbeda diakomodasi dengan flex dan panah
 
 Katalog ringan `js/data/specialities/catalog.js` menjadi sumber bersama Home dan dropdown.
 Konten lengkap berada di `js/data/specialities/index.js`; template terdapat di
-`js/sections/speciality/index.js` dan factory `js/pages/speciality.js`.
+`js/sections/speciality/index.jsx`; route dan metadata berada di `src/routes.js`.
 
 Setiap speciality memuat hero, kebutuhan/gejala, clinical approach, teknik yang mungkin
 sesuai, kapan care relevan, detail treatment terkait, dan assessment enquiry CTA.
@@ -142,7 +141,7 @@ Speciality aktif memakai `aria-current="page"`. Pada detail treatment, parent sp
 memakai `aria-current="location"`; jangan menandai parent sebagai halaman detail yang sedang dibuka.
 `serviceNavigationGroups` tetap menyimpan 13 route lama, tetapi tidak merender dropdown utama.
 
-Tiga belas treatment tetap memakai template `js/sections/service/index.js`. Breadcrumb menuju
+Tiga belas treatment tetap memakai template `js/sections/service/index.jsx`. Breadcrumb menuju
 speciality induk ditambahkan. Endometriosis tetap ditautkan dari Women's Health pada About,
 tanpa menetapkan parent speciality baru. Catatan copy lama tetap terbuka pada `docs/SERVICE_COPY_REVIEW.md`.
 
@@ -172,27 +171,26 @@ Our Clinic tetap memakai 12 JPEG asli pada `gallery/`, filter kategori, grid 1/2
 thumbnail 4:3, dan dialog `object-contain`. Dialog mendukung close/Escape, scroll lock,
 serta pengembalian fokus. MP4 belum dipakai.
 
-## 9. Entry HTML dan pemeriksaan
+## 9. Build, HTML statis, dan pemeriksaan
 
-Hanya `index.html` berada di root. Entry umum berada di `pages/`, speciality di
-`pages/specialities/`, dan treatment di `pages/services/<category>/`.
+Source memakai React dan Vite. `src/routes.js` menyimpan 24 path, ID, judul, dan deskripsi.
+`npm run build` menghasilkan HTML berisi konten pada `dist/index.html`, `dist/pages/`,
+`dist/pages/specialities/`, serta `dist/pages/services/<category>/`. File entry halaman
+dibuat oleh prerender saat build; jangan menambah atau mengedit file HTML keluaran secara manual.
+React melakukan hydration pada markup yang sama dan mempertahankan shell saat navigasi.
 
-| Kedalaman | `data-root` dan prefix script/CSS |
-| --- | --- |
-| Root | `./` |
-| `pages/` | `../` |
-| `pages/specialities/` | `../../` |
-| `pages/services/<category>/` | `../../../` |
+Komponen/data tetap menulis URL `./...` relatif terhadap root project. Helper URL React
+menambahkan base Vite untuk aset dan link agar lokasi tidak bergeser ketika URL berubah.
+Anchor lokal tetap lokal; jangan memakai elemen `base`. Build root domain menggunakan `/`;
+GitHub Pages project menggunakan base repository seperti `/inbody-clinic/`.
+Semua alamat `.html` tetap dipertahankan untuk link langsung dan refresh tanpa rewrite server.
 
-Komponen/data menulis URL `./...` relatif terhadap root project. `PageLayout` menyesuaikan
-`href`/`src` berdasarkan prefix entry untuk render statis. Pada browser, `navigation.js`
-memakai prefix root dari URL modul aplikasi agar aset/link tidak bergeser saat `pushState`.
-Anchor lokal tetap lokal; jangan memakai elemen `base`.
-Font/CDN, title, dan meta description tetap berada pada entry HTML masing-masing.
-Navigasi membaca metadata dari entry tujuan. Semua file `.html` tetap tersedia untuk
-link langsung/refresh di GitHub Pages; jangan menggantinya dengan route tanpa file HTML.
+Tailwind membaca source React dan data project. Jalankan `npm run build`, `npm test`,
+dan `npm run test:navigation`. Ulangi dengan `npm run build:pages` untuk base subfolder.
+Tes struktur memeriksa 24 HTML prerender beserta metadata, route/anchor, ARIA, glyph,
+aset, urutan Home, enam speciality, dan 13 treatment. Tes browser memeriksa hydration,
+navigasi tanpa reload, shell, cleanup, history, mobile, dan konten tanpa JavaScript.
+Periksa visual serta interaksi setelah perubahan layout; hasil tes teknis bukan persetujuan copy client.
 
-Tailwind membaca `index.html`, `pages/`, dan `js/`. Jalankan `npm test` dan `npm run build:css`.
-Tes mencakup 24 halaman, enam speciality, 13 treatment, metadata, route/anchor, ARIA, glyph,
-aset, import, urutan Home, dan hosting root/subfolder. Periksa visual serta interaksi di browser
-setelah perubahan yang memengaruhi layout; hasil tes teknis bukan persetujuan copy client.
+Migrasi React tidak menambahkan animasi masuk GSAP. Perubahan animasi navbar/heading
+akan dinilai satu per satu sesuai arahan pengguna; jangan mengaktifkan animasi seluruh teks.

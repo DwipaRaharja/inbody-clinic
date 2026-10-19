@@ -2,23 +2,33 @@
   "name": "inbody-clinic-v2",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "InBody Clinic website built with React, Vite and prerendered static pages.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
+    "dev": "vite",
+    "build": "node scripts/build.mjs",
+    "build:pages": "node scripts/build.mjs --base /inbody-clinic/",
+    "preview": "vite preview",
     "test": "node scripts/check-pages.mjs",
     "test:navigation": "node scripts/check-navigation.mjs",
-    "dev:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch",
-    "build:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --minify",
-    "serve": "npx serve ."
+    "serve": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.0",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/vite": "4.3.3",
+    "@vitejs/plugin-react": "6.1.2",
+    "tailwindcss": "^4.3.3",
+    "vite": "8.3.4"
   },
   "dependencies": {
-    "@phosphor-icons/web": "^2.1.2"
+    "@phosphor-icons/web": "^2.1.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.4"
   }
 }

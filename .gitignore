@@ -1,3 +1,6 @@
 # Installed dependencies
 node_modules/
 node_module/
+dist/
+.build/
+/css/output.css
