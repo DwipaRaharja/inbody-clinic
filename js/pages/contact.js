@@ -9,6 +9,6 @@ export default {
     { id: 'contact-content', className: 'bg-clinic-white', labelledBy: 'contact-details-title contact-form-title', render: ContactDetailsAndForm },
   ],
   init(root) {
-    initContactForm(root.querySelector('#contact-form'));
+    return initContactForm(root.querySelector('#contact-form'));
   },
 };

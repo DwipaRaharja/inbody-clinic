@@ -1,4 +1,4 @@
-import { mountPage } from './layouts/page-layout.js';
+import { startNavigation } from './navigation.js';
 
 const pages = {
   home: () => import('./pages/home.js'),
@@ -12,14 +12,16 @@ const pages = {
 
 const root = document.getElementById('app');
 
-try {
-  const loadPage = pages[document.body.dataset.page];
-  if (!loadPage) throw new Error(`Unknown page: ${document.body.dataset.page}`);
-  const { default: definition } = await loadPage();
-  const page = typeof definition === 'function'
-    ? definition({ serviceId: document.body.dataset.service, specialityId: document.body.dataset.speciality })
+async function loadPage(data) {
+  if (!Object.hasOwn(pages, data.page)) throw new Error(`Unknown page: ${data.page}`);
+  const { default: definition } = await pages[data.page]();
+  return typeof definition === 'function'
+    ? definition({ serviceId: data.service, specialityId: data.speciality })
     : definition;
-  mountPage(root, page);
+}
+
+try {
+  await startNavigation({ root, loadPage, siteRoot: new URL('../', import.meta.url) });
 } catch (error) {
   root.setAttribute('role', 'alert');
   root.textContent = 'The page could not be loaded. Please refresh to try again.';

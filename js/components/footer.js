@@ -32,7 +32,7 @@ export function Footer({ currentPage = 'home' } = {}) {
       <div class="pt-1">
         <nav aria-label="Footer navigation">
           <ul class="flex list-none flex-wrap items-center gap-x-6 gap-y-4 p-0 text-[13px] leading-[1.6] wide:justify-between wide:gap-x-3">
-            ${getNavigationLinks(currentPage).map(({ id, label, footerLabel, href }) => `<li><a class="whitespace-nowrap transition-colors duration-[160ms] hover:text-clinic-light-sage motion-reduce:transition-none" href="${href}"${id === currentPage ? ' aria-current="page"' : ''}>${footerLabel ?? label}</a></li>`).join('')}
+            ${getNavigationLinks(currentPage).map(({ id, label, footerLabel, href }) => `<li><a class="whitespace-nowrap transition-colors duration-[160ms] hover:text-clinic-light-sage motion-reduce:transition-none" data-nav-page="${id}" href="${href}"${id === currentPage ? ' aria-current="page"' : ''}>${footerLabel ?? label}</a></li>`).join('')}
           </ul>
         </nav>
         <div class="mt-6 flex items-center gap-2" role="group" aria-label="Social media and contact">
@@ -42,7 +42,7 @@ export function Footer({ currentPage = 'home' } = {}) {
       <div class="self-start border-t border-clinic-white/60 pt-6 tablet:col-span-2 wide:col-span-1 wide:min-h-[84px] wide:border-t-0 wide:border-l wide:pt-2 wide:pl-[30px]">
         <p class="flex items-center gap-2 text-[10px] leading-[1.6] tracking-[0.2em] uppercase">Double Bay <span class="h-4 w-px bg-clinic-white" aria-hidden="true"></span> Sydney</p>
         <p class="mt-5 text-[10px] leading-[1.6] tracking-[0.18em] uppercase">Clinical expertise. Personalised care.</p>
-        <a class="mt-3 inline-flex items-center gap-2 text-[11px] leading-[1.6] hover:text-clinic-light-sage" href="./pages/the-inbody-method.html"${currentPage === 'method' ? ' aria-current="page"' : ''}>The InBody Method™<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        <a class="mt-3 inline-flex items-center gap-2 text-[11px] leading-[1.6] hover:text-clinic-light-sage" data-nav-page="method" href="./pages/the-inbody-method.html"${currentPage === 'method' ? ' aria-current="page"' : ''}>The InBody Method™<i class="ph ph-arrow-right" aria-hidden="true"></i></a>
       </div>
     </div>
   `;

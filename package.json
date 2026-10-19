@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node scripts/check-pages.mjs",
+    "test:navigation": "node scripts/check-navigation.mjs",
     "dev:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch",
     "build:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --minify",
     "serve": "npx serve ."

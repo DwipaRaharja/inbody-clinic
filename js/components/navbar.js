@@ -20,13 +20,13 @@ function ServicesDropdown(serviceId, specialityId, currentPage) {
             <ul class="m-0 grid list-none grid-cols-1 gap-x-6 gap-y-0 p-0 tablet:grid-cols-2 wide:grid-cols-3">
               ${specialityNavigationLinks.map(speciality => {
                 const current = speciality.id === specialityId ? 'page' : speciality.serviceIds.includes(serviceId) ? 'location' : null;
-                return `<li class="min-w-0 border-b border-clinic-light-grey"><a class="group flex min-h-[100px] items-center justify-between gap-4 py-4 transition-colors hover:text-clinic-sage aria-[current=page]:text-clinic-sage aria-[current=location]:text-clinic-sage motion-reduce:transition-none" href="${e(speciality.href)}"${current ? ` aria-current="${current}"` : ''}>
+                return `<li class="min-w-0 border-b border-clinic-light-grey"><a class="group flex min-h-[100px] items-center justify-between gap-4 py-4 transition-colors hover:text-clinic-sage aria-[current=page]:text-clinic-sage aria-[current=location]:text-clinic-sage motion-reduce:transition-none" data-nav-speciality="${e(speciality.id)}" href="${e(speciality.href)}"${current ? ` aria-current="${current}"` : ''}>
                   <span class="min-w-0"><span class="block font-display text-[22px] leading-[1.15] font-semibold">${e(speciality.name)}</span><span class="mt-2 block text-[11px] leading-[1.5] text-clinic-navy/70">${e(speciality.question)}</span></span>
                   <i class="ph ph-arrow-up-right shrink-0 text-[20px] text-clinic-sage transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true"></i>
                 </a></li>`;
               }).join('')}
             </ul>
-            <a class="mt-5 inline-flex min-h-10 items-center gap-3 text-[12px] font-medium text-clinic-navy hover:text-clinic-sage" href="./pages/the-inbody-method.html"${currentPage === 'method' ? ' aria-current="page"' : ''}>Our approach: The InBody Method™<i class="ph ph-arrow-right text-[17px]" aria-hidden="true"></i></a>
+            <a class="mt-5 inline-flex min-h-10 items-center gap-3 text-[12px] font-medium text-clinic-navy hover:text-clinic-sage" data-nav-page="method" href="./pages/the-inbody-method.html"${currentPage === 'method' ? ' aria-current="page"' : ''}>Our approach: The InBody Method™<i class="ph ph-arrow-right text-[17px]" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@ export function Navbar({ currentPage = 'home', serviceId, specialityId } = {}) {
       <a class="block shrink-0" href="./" aria-label="InBody Clinic home"><img class="h-auto w-[158px] tablet:w-[170px] wide:w-[184px]" src="./assets/logo/logo.png" alt="InBody Clinic — Woman Health Clinics" width="184" height="58" /></a>
       <button class="group inline-flex size-11 cursor-pointer items-center justify-center text-clinic-navy nav:hidden" data-nav-toggle type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false">${icon('menu', 'size-[25px] group-aria-expanded:hidden')}${icon('close', 'hidden size-[25px] group-aria-expanded:block')}</button>
       <div class="${pagePaddingClasses} absolute inset-x-0 top-full hidden max-h-[calc(100dvh-108px)] flex-col items-stretch gap-0 overflow-y-auto overscroll-contain bg-clinic-white pt-3 pb-6 shadow-[0_12px_20px_rgb(32_56_88/0.1)] data-[open=true]:flex tablet:max-h-[calc(100dvh-118px)] nav:static nav:flex nav:max-h-none nav:flex-row nav:items-center nav:self-stretch nav:gap-5 nav:overflow-visible nav:p-0 nav:shadow-none wide:gap-[clamp(18px,2.6vw,40px)]" id="nav-links" data-open="false">
-        ${getNavigationLinks(currentPage).map(({ id, label, href }) => id === 'services' ? ServicesDropdown(serviceId, specialityId, currentPage) : `<a class="${navLinkClasses}" href="${href}"${id === currentPage ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
+        ${getNavigationLinks(currentPage).map(({ id, label, href }) => id === 'services' ? ServicesDropdown(serviceId, specialityId, currentPage) : `<a class="${navLinkClasses}" data-nav-page="${id}" href="${href}"${id === currentPage ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
         ${BookingButton('navbar')}
       </div>
     </nav>
@@ -127,4 +127,5 @@ export function initNavbar(element) {
     if (!element.contains(event.target)) setOpen(false);
   });
   desktop.addEventListener('change', () => setOpen(false));
+  return { close: () => setOpen(false) };
 }

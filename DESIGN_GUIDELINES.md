@@ -43,6 +43,10 @@ Periksa reflow, heading panjang, dan jarak kiri/kanan setelah perubahan copy.
 
 `PageLayout` menyediakan skip link, bar kontak, navbar sticky, main selebar halaman,
 dan footer. Bar kontak bergulir bersama dokumen. Section tidak menyalin shell.
+Shell dipasang sekali; navigasi internal hanya mengganti isi main. Pertahankan elemen
+navbar/footer dan perbarui link/menu aktif melalui atribut `data-nav-page` atau
+`data-nav-speciality`. Fitur halaman yang memakai listener/timer harus mengembalikan cleanup
+dari `page.init(root)` agar layout dapat menghentikannya sebelum mengganti konten.
 
 Gunakan `Heading` untuk heading utama; data `lines`/`segments` menentukan accent.
 Heading default memakai Navy, accent Sage, dan pilihan italic. Untuk label kartu speciality
@@ -181,8 +185,12 @@ Hanya `index.html` berada di root. Entry umum berada di `pages/`, speciality di
 | `pages/services/<category>/` | `../../../` |
 
 Komponen/data menulis URL `./...` relatif terhadap root project. `PageLayout` menyesuaikan
-`href`/`src` berdasarkan prefix entry. Anchor lokal tetap lokal; jangan memakai elemen `base`.
+`href`/`src` berdasarkan prefix entry untuk render statis. Pada browser, `navigation.js`
+memakai prefix root dari URL modul aplikasi agar aset/link tidak bergeser saat `pushState`.
+Anchor lokal tetap lokal; jangan memakai elemen `base`.
 Font/CDN, title, dan meta description tetap berada pada entry HTML masing-masing.
+Navigasi membaca metadata dari entry tujuan. Semua file `.html` tetap tersedia untuk
+link langsung/refresh di GitHub Pages; jangan menggantinya dengan route tanpa file HTML.
 
 Tailwind membaca `index.html`, `pages/`, dan `js/`. Jalankan `npm test` dan `npm run build:css`.
 Tes mencakup 24 halaman, enam speciality, 13 treatment, metadata, route/anchor, ARIA, glyph,

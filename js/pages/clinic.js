@@ -10,6 +10,6 @@ export default {
     { id: 'clinic-visit', className: 'bg-clinic-cream', labelledBy: 'clinic-visit-title', render: ClinicVisit },
   ],
   init(root) {
-    initClinicGallery(root.querySelector('[data-clinic-gallery]'));
+    return initClinicGallery(root.querySelector('[data-clinic-gallery]'));
   },
 };

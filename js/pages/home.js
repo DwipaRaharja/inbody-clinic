@@ -17,6 +17,6 @@ export default {
     { id: 'home-contact', className: 'bg-clinic-white', labelledBy: 'home-contact-title', render: HomeContact },
   ],
   init(root) {
-    initHeroSlider(root.querySelector('[data-hero-slider]'));
+    return initHeroSlider(root.querySelector('[data-hero-slider]'));
   },
 };

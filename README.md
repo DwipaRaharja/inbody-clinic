@@ -1,6 +1,6 @@
 # InBody Clinic
 
-Website multi-halaman dengan HTML, ES modules, Tailwind CSS v4, dan komponen layout bersama.
+Website dengan entry HTML per halaman, ES modules, Tailwind CSS v4, dan layout yang menetap selama navigasi internal.
 Revisi 17 Oktober 2026 memperkenalkan enam speciality berdasarkan kebutuhan pasien serta The InBody Method™.
 
 ## Menjalankan project
@@ -39,7 +39,8 @@ pages/
     ├── pain-tmj-relief/
     └── body-contouring/
 js/
-├── app.js
+├── app.js                          # Registry dan pemuat modul halaman
+├── navigation.js                   # Navigasi internal, metadata, history, dan scroll
 ├── pages/                          # Descriptor / factory halaman
 ├── layouts/                        # PageLayout, template lama, container
 ├── components/
@@ -120,7 +121,11 @@ memiliki ringkasan; 12 treatment saat ini ditampilkan melalui enam speciality.
 
 Setiap entry HTML menyimpan metadata, font, CDN ikon, stylesheet, `#app`, serta satu script `js/app.js`.
 Body memakai `data-page`; detail treatment juga memakai `data-service`, sedangkan speciality memakai `data-speciality`.
-`app.js` meneruskan ID ke factory halaman, lalu memasang descriptor melalui `PageLayout`.
+`app.js` meneruskan ID ke factory halaman. Saat pertama dibuka, `PageLayout` memasang contact bar,
+navbar, `<main>`, dan footer sekali. Klik link internal selanjutnya ditangani `navigation.js`:
+metadata dan ID dibaca dari entry HTML tujuan, modul halaman dimuat, lalu hanya isi `<main>` diganti.
+Konten lama tetap tampil selama pemuatan; respons navigasi yang sudah digantikan oleh klik baru diabaikan.
+Navbar/footer beserta listener-nya tetap dipertahankan, sementara link dan `aria-current` diperbarui.
 
 - Home di root memakai prefix `./`.
 - Halaman umum di `pages/` memakai `data-root="../"`.
@@ -129,8 +134,24 @@ Body memakai `data-page`; detail treatment juga memakai `data-service`, sedangka
 
 Script/CSS HTML memakai prefix yang sama. Tulis `href` dan `src` pada komponen/data
 relatif terhadap root project, misalnya `./pages/contact.html` atau `./assets/logo/logo.png`.
-`PageLayout` menyesuaikannya saat mount. Anchor `#...` tetap menunjuk ke dokumen yang sedang dibuka;
-jangan memakai elemen `base`. Routing juga bekerja jika project dipasang di subfolder hosting.
+`PageLayout` menyesuaikannya saat mount. Pada browser, prefix root ditentukan dari lokasi `js/app.js`
+dan URL proyek dibuat relatif terhadap origin, misalnya `/inbody-clinic/assets/...`.
+Dengan begitu, aset dan link tetap benar meski URL halaman berubah melalui `pushState`.
+Anchor `#...` tetap menunjuk ke halaman yang sedang dibuka; jangan memakai elemen `base`.
+Routing juga bekerja jika project dipasang di subfolder hosting.
+
+URL `.html` tetap dipakai. Link langsung dan refresh dilayani oleh file HTML yang sama,
+sehingga GitHub Pages tidak memerlukan fallback SPA atau rewrite ke `index.html`.
+Back/Forward memuat konten sesuai URL dan memulihkan posisi scroll. Navigasi baru memindahkan
+fokus ke `<main>` dan scroll ke atas atau ke anchor tujuan. Judul, deskripsi, serta dataset halaman
+ikut diperbarui. Link eksternal, email/telepon, download, dan klik dengan modifier tetap memakai
+perilaku browser. Jika navigasi internal gagal, browser membuka entry HTML tujuan seperti biasa.
+Tambahkan `data-full-reload` pada link bila perpindahan dokumen penuh memang diperlukan.
+
+`page.init(root)` dapat mengembalikan fungsi cleanup. Layout memanggilnya sebelum mengganti konten;
+Home, Clinic, dan Contact meneruskan cleanup slider, galeri, dan form agar listener/timer lama berhenti.
+Pemuatan pertama tetap memerlukan JavaScript dan aset; perubahan ini menghilangkan reload dokumen
+pada perpindahan internal, bukan menghilangkan seluruh biaya pemuatan awal.
 
 Navbar menampilkan enam speciality melalui `specialityNavigationLinks`.
 `serviceNavigationGroups` masih menjadi daftar route 13 treatment lama, tetapi tidak lagi
@@ -179,6 +200,22 @@ Controller mengembalikan fokus dan scroll state setelah dialog ditutup. Foto asl
 `npm test` memeriksa 24 entry, metadata, import, ID, target aksesibilitas, enam speciality,
 13 route treatment, hubungan treatment/induk, urutan Home, glyph Regular, aset, serta URL root/subfolder.
 Tes struktur tidak menggantikan pemeriksaan visual atau persetujuan copy oleh client.
+
+`npm run test:navigation` menjalankan tes browser pada root dan subfolder `/preview/inbody/`.
+Tes memeriksa 24 route tanpa reload dokumen, identitas layout, konten saat loading, klik cepat,
+metadata, cleanup fitur, Back/Forward/scroll, anchor, link langsung/refresh, menu mobile, dan fallback.
+Playwright hanya diperlukan untuk tes browser opsional ini:
+
+```sh
+npm install --no-save --package-lock=false playwright
+npx playwright install chromium
+npm run test:navigation
+```
+
+Untuk memakai browser Edge yang sudah terpasang di Windows, set `$env:PLAYWRIGHT_CHANNEL = 'msedge'`
+sebelum menjalankan tes (instalasi Chromium tidak diperlukan). Runtime desktop juga dapat memasok
+`PLAYWRIGHT_MODULE_PATH` yang menunjuk ke `playwright/index.mjs` tanpa memasang dependency proyek.
+Tes berjalan lokal, menggantikan request pihak ketiga, dan tidak mengubah situs GitHub Pages.
 
 - [task.md](task.md): status pekerjaan dan bagian yang ditunda.
 - [docs/REVISION_IMPLEMENTATION.md](docs/REVISION_IMPLEMENTATION.md): penerapan, draft copy, dan batas verifikasi.

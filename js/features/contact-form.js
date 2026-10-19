@@ -16,6 +16,8 @@ export function buildContactMailto({ name, email, subject, message }) {
 }
 
 export function initContactForm(form) {
+  const controller = new AbortController();
+  const options = { signal: controller.signal };
   const status = form.querySelector('[data-contact-status]');
   const nameInput = form.querySelector('[name="name"]');
   const sanitizeName = () => {
@@ -36,8 +38,8 @@ export function initContactForm(form) {
 
   nameInput.addEventListener('input', (event) => {
     if (!event.isComposing) sanitizeName();
-  });
-  nameInput.addEventListener('compositionend', sanitizeName);
+  }, options);
+  nameInput.addEventListener('compositionend', sanitizeName, options);
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -48,5 +50,6 @@ export function initContactForm(form) {
       status.textContent = 'Your email draft is ready. Send it from your email app, or contact us using the email link on this page.';
     }
     window.location.href = buildContactMailto(values);
-  });
+  }, options);
+  return () => controller.abort();
 }
