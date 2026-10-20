@@ -6,6 +6,7 @@ import { siteUrl, stripBase } from '../js/utils/urls.js';
 import { getRoute, normalizePath } from './routes.js';
 import { getPage } from './pages.jsx';
 import { documentClasses, bodyClasses, backgroundClasses } from './theme.js';
+import { initHeaderEntrance } from '../js/features/header-entrance.js';
 
 const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 const scrollPositions = new Map();
@@ -71,6 +72,7 @@ export function App() {
   }, [navigate]);
 
   useBrowserLayoutEffect(() => page?.init?.(mainRef.current), [page]);
+  useBrowserLayoutEffect(() => initHeaderEntrance(document.getElementById('app')), []);
 
   useBrowserLayoutEffect(() => {
     document.title = title;

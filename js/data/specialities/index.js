@@ -32,11 +32,17 @@ const details = {
   'pregnancy-postpartum-care': {
     headline: ['Care during pregnancy.', 'Support after childbirth.'],
     introduction: 'Specialised, individual care throughout pregnancy and after childbirth, with support for discomfort, swelling, tissue recovery and postpartum rehabilitation.',
-    needs: ['Pelvic and back discomfort during pregnancy', 'Swelling and a sensation of heavy legs', 'Birth preparation', 'C-section scar care', 'Abdominal tissue recovery', 'Postpartum rehabilitation support'],
+    needs: ['Pelvic and back discomfort during pregnancy', 'Swelling and a sensation of heavy legs', 'Birth preparation', 'C-section scar care', 'Abdominal tissue recovery', 'Postpartum rehabilitation support', 'Diastasis recti (abdominal separation)'],
     approach: 'As women and mothers ourselves, we understand the importance of feeling heard and supported. We assess your symptoms, tissue quality and stage of pregnancy or postpartum recovery to personalise treatment.',
     techniques: ['Pregnancy massage and specialised manual therapy', 'Lymphatic care when appropriate', 'Birth preparation support', 'C-section scar and abdominal tissue care', 'Personalised postpartum rehabilitation support'],
     timing: 'Your needs can change during pregnancy and after childbirth. An assessment provides a starting point for care that reflects your current symptoms and stage of recovery.',
     imageService: 'pregnancy-massage-circulation-support',
+    image: {
+      src: './assets/images/specialities/pregnancy-postpartum-care/hero.jpeg',
+      alt: 'Hands applying pink kinesiology tape to the abdomen during a care session',
+      width: 1600,
+      height: 1066,
+    },
   },
   'tmj-pain-stress-care': {
     headline: ['Understanding tension.', 'Care shaped around you.'],
@@ -64,7 +70,7 @@ export const specialities = Object.fromEntries(specialityCatalog.map(speciality 
   const detail = details[speciality.id];
   return [speciality.id, {
     ...speciality, ...detail,
-    image: services[detail.imageService].images[detail.imageVariant ?? 'hero'],
+    image: detail.image ?? services[detail.imageService].images[detail.imageVariant ?? 'hero'],
     treatments: speciality.serviceIds.map(id => services[id]),
   }];
 }));

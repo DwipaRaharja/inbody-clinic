@@ -14,6 +14,7 @@
     "preview": "vite preview",
     "test": "node scripts/check-pages.mjs",
     "test:navigation": "node scripts/check-navigation.mjs",
+    "test:header": "node scripts/check-header-animation.mjs",
     "serve": "vite"
   },
   "keywords": [],

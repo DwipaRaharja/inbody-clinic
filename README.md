@@ -6,7 +6,12 @@ interaksi di browser melalui hydration. Navbar dan footer tetap terpasang selama
 internal; konten utama, URL, metadata, dan menu aktif mengikuti halaman tujuan.
 
 Desain, copy, foto asli, enam speciality, 13 treatment, dan URL `.html` dipertahankan.
-Migrasi ini tidak menambahkan animasi GSAP baru. Animasi navbar/heading akan dikerjakan terpisah.
+Animasi masuk header memakai GSAP core dari CDN: latar bar kontak terbuka dari atas
+ke bawah, lalu lokasi/email/telepon dan menu navbar memudar masuk. Logo tetap statis.
+Animasi hanya berjalan sekali setiap dokumen dibuka, menghormati reduced motion,
+dan dihentikan saat pengguna mulai berinteraksi. Navigasi React tidak mengulanginya.
+CDN tidak ditambahkan sebagai dependency npm. Konten tetap terlihat jika CDN gagal
+atau belum siap dalam satu detik; judul dan isi halaman tidak ikut dianimasikan.
 
 ## Menjalankan project
 
@@ -160,6 +165,11 @@ npm run build
 npm test
 npm run test:navigation
 ```
+
+`npm run test:header` memeriksa urutan latar dan fade teks menggunakan GSAP CDN asli,
+logo/judul yang tetap statis, satu animasi per dokumen, menu mobile, reduced motion,
+serta fallback CDN gagal/lambat. Tes ini memerlukan koneksi CDN dan Playwright;
+respons GSAP hanya disimpan di memori selama tes.
 
 `npm test` memvalidasi **hasil build yang sudah ada di `dist/`**: 24 HTML prerender,
 metadata, satu H1/main, shell, ARIA, ID unik, seluruh route/anchor, parent speciality,

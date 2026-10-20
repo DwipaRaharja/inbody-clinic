@@ -192,5 +192,9 @@ aset, urutan Home, enam speciality, dan 13 treatment. Tes browser memeriksa hydr
 navigasi tanpa reload, shell, cleanup, history, mobile, dan konten tanpa JavaScript.
 Periksa visual serta interaksi setelah perubahan layout; hasil tes teknis bukan persetujuan copy client.
 
-Migrasi React tidak menambahkan animasi masuk GSAP. Perubahan animasi navbar/heading
-akan dinilai satu per satu sesuai arahan pengguna; jangan mengaktifkan animasi seluruh teks.
+Animasi masuk header memakai GSAP core dari CDN melalui `js/features/header-entrance.js`.
+Latar bar kontak terbuka dari atas ke bawah terlebih dahulu, lalu lokasi, email, telepon,
+dan menu navbar memudar masuk. Logo, container navbar, dan judul halaman tetap statis.
+Effect dipasang sekali pada layout App; perpindahan route tidak mengulang animasi.
+Reduced motion dan interaksi pengguna menghentikan animasi serta memulihkan style.
+Konten tetap terlihat jika CDN gagal atau terlambat. Jangan mengaktifkan animasi seluruh teks.

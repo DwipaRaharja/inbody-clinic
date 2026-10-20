@@ -2,19 +2,29 @@ import { assetUrl } from "../../utils/urls.js";
 import { Heading } from "../../components/heading.jsx";
 import { MethodSteps, AssessmentCTA } from "../../components/care.jsx";
 import { containerClasses } from "../../layouts/container.js";
-import { methodIntro, methodElements } from "../../data/method.js";
+import { methodElements } from "../../data/method.js";
 import { team } from "../../data/team.js";
 export function MethodIntro() {
-  return <div className={`${containerClasses} grid min-w-0 gap-9 py-12 tablet:py-16 wide:grid-cols-2 wide:items-center wide:gap-16`}>
-    <div className="min-w-0"><Heading eyebrow="Our clinical approach" level={1} id="method-page-title" size="profile" lines={[{ text: "The InBody" }, {
-    text: "Method™",
-    accent: true
-  }]} />
-      <p className="mt-6 text-[15px] leading-[1.85]">{methodIntro}</p>
-      <p className="mt-4 text-[14px] leading-[1.85] text-clinic-navy/80">Advanced training in lymphatic drainage methods, women’s health, dermatofunctional therapy, manual therapy and post-surgical rehabilitation informs our care.</p>
-      <p className="mt-4 text-[14px] leading-[1.85] text-clinic-navy/80">We bring this knowledge together to create personalised treatment rather than following the same protocol for every patient.</p>
+  return <div className={`${containerClasses} grid min-w-0 gap-8 py-10 tablet:gap-10 tablet:py-14 wide:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] wide:gap-x-16 wide:gap-y-8 wide:py-16`}>
+      <div className="min-w-0 wide:col-start-1 wide:row-start-1">
+        <Heading level={1} id="method-page-title" size="profile" lines={[{ text: "The InBody" }, { text: "Method™", accent: true }]} />
+        <p className="mt-5 max-w-[34ch] font-display text-[26px] leading-[1.35] font-medium text-clinic-sage tablet:text-[30px]">Born from experience. Driven by passion. Created for women.</p>
+        <p className="mt-5 text-[14px] leading-[1.85] text-clinic-navy/85 tablet:text-[15px]">The InBody Method™ is the result of over 20 years of clinical experience, continuous learning and a genuine passion for women’s health and wellbeing.</p>
+      </div>
+      <img className="block aspect-[4/3] w-full min-w-0 rounded-xl object-cover wide:sticky wide:top-[108px] wide:col-start-2 wide:row-span-2 wide:row-start-1 wide:self-start" src={assetUrl("./gallery/WhatsApp Image 2026-10-02 at 10.33.11.jpeg")} alt="The clinic reception with seating and illuminated product shelves" width="1536" height="1024" fetchPriority="high" />
+    <div className="min-w-0 text-[14px] leading-[1.85] text-clinic-navy/85 tablet:text-[15px] wide:col-start-1 wide:row-start-2">
+      <p>Our journey began in physiotherapy, including the founding of a specialised women’s health clinic in Madrid. Through years of advanced training and clinical practice across Europe and Chile, we have developed expertise in pelvic health, pregnancy and postpartum care, clinical lymphatic drainage, lipedema, dermatofunctional therapy and recovery following plastic and reconstructive surgery.</p>
+      <p className="mt-5">We are women. We are mothers. And we understand that every stage of a woman’s life brings different needs.</p>
+      <p className="mt-5">Our professional knowledge and personal experiences inspired us to create more than a treatment clinic a space where women feel heard, understood and genuinely cared for.</p>
+      <div className="mt-10 tablet:mt-12">
+        <Heading level={2} size="compact" lines={[{ text: "Your Body Is Unique." }, { text: "Your Treatment Should Be Too.", accent: true }]} />
+      </div>
+      <p className="mt-6">At InBody Clinic, we don’t follow one-size-fits-all protocols.</p>
+      <p className="mt-5">We listen, assess and adapt every treatment to your individual needs, combining specialised hands-on techniques, clinical reasoning and advanced therapeutic technologies when appropriate.</p>
+      <p className="mt-5">What makes our method different isn’t one particular technique, but the experience, knowledge and care behind every treatment.</p>
+      <p className="mt-5">Because exceptional care is not just about what we do. It’s about knowing why, when and how to do it for you.</p>
+      <p className="mt-8 border-t border-clinic-sage/30 pt-6 font-display text-[24px] leading-[1.45] text-clinic-navy tablet:text-[28px]">The InBody Method™ Experience, knowledge and care. Uniquely tailored to you.</p>
     </div>
-    <img className="block aspect-[4/3] w-full rounded-xl object-cover" src={assetUrl("./gallery/WhatsApp Image 2026-10-02 at 10.33.11.jpeg")} alt="The clinic reception with seating and illuminated product shelves" width="1536" height="1024" fetchPriority="high" />
   </div>;
 }
 export function MethodPrinciples() {
