@@ -1,7 +1,9 @@
 import { MethodIntro, MethodPrinciples, MethodPathway, MethodHumanCare, AssessmentCTA } from '../sections/method/index.jsx';
+import { initMethodReveal } from '../features/care-reveal.js';
 
 export default {
   id: 'method', background: 'white',
+  init: initMethodReveal,
   sections: [
     { id: 'method', className: 'bg-clinic-cream', labelledBy: 'method-page-title', render: MethodIntro },
     { id: 'method-principles', className: 'bg-clinic-white', labelledBy: 'method-principles-title', render: MethodPrinciples },

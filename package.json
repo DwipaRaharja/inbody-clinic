@@ -15,6 +15,7 @@
     "test": "node scripts/check-pages.mjs",
     "test:navigation": "node scripts/check-navigation.mjs",
     "test:header": "node scripts/check-header-animation.mjs",
+    "test:home-reveal": "node scripts/check-home-reveal.mjs",
     "serve": "vite"
   },
   "keywords": [],

@@ -3,6 +3,7 @@ import { Heading } from "../../components/heading.jsx";
 import { ActionButton } from "../../components/button.jsx";
 import { AssessmentCTA } from "../../components/care.jsx";
 import { containerClasses } from "../../layouts/container.js";
+import { initSpecialityReveal } from "../../features/care-reveal.js";
 function paragraphs(value) {
   return Array.isArray(value) ? value : [value];
 }
@@ -61,6 +62,7 @@ export function createSpecialityPage(speciality) {
     id: "speciality",
     specialityId: speciality.id,
     background: "white",
+    init: initSpecialityReveal,
     sections: [
       {
         id: "speciality",

@@ -35,8 +35,8 @@ export const heroSlides = [
     image: {
       src: './assets/images/home/hero-2.jpg',
       alt: 'Two InBody Clinic practitioners reviewing a personalised care plan together on a tablet',
-      width: 530,
-      height: 588,
+      width: 1600,
+      height: 1066,
     },
     benefits,
   },

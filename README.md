@@ -11,7 +11,24 @@ ke bawah, lalu lokasi/email/telepon dan menu navbar memudar masuk. Logo tetap st
 Animasi hanya berjalan sekali setiap dokumen dibuka, menghormati reduced motion,
 dan dihentikan saat pengguna mulai berinteraksi. Navigasi React tidak mengulanginya.
 CDN tidak ditambahkan sebagai dependency npm. Konten tetap terlihat jika CDN gagal
-atau belum siap dalam satu detik; judul dan isi halaman tidak ikut dianimasikan.
+atau belum siap dalam satu detik.
+
+Home, Our Clinic, Contact Us, seluruh service/speciality, dan The InBody Method™ memakai
+`js/features/content-reveal.js` untuk animasi sekali saat tiap
+kelompok konten masuk layar: teks naik 16px sambil fade-in, foto hanya fade-in,
+dan kartu/daftar memakai jeda 120ms. Durasi 850ms dengan easing `power2.out`.
+Hero memudar masuk sebagai satu kelompok; pergantian slide tetap memakai controller
+slider. Fitur memakai GSAP CDN yang sama dan IntersectionObserver, tanpa ScrollTrigger.
+Reduced motion menonaktifkannya; konten tetap terbaca jika CDN gagal atau terlambat.
+Home memilih kelompok melalui `js/features/home-reveal.js`; Clinic dan Contact memakai
+atribut `data-content-reveal` (`rise`/`fade`) dan `data-content-reveal-group` untuk stagger.
+`js/features/care-reveal.js` memilih elemen yang sudah ada pada layout service,
+template speciality, dan halaman Method. Inisialisasi dipasang pada factory layout
+agar semua 13 service dan enam speciality mengikuti perilaku yang sama tanpa mengubah
+struktur HTML atau class layout. Foto Method hanya fade-in agar posisi sticky tetap utuh.
+Foto galeri memudar bersama keterangannya; dialog galeri tetap langsung terbuka.
+Kolom form Contact muncul bersama labelnya dan langsung terlihat saat mendapat fokus.
+Latar pembuka Contact memakai Cream yang sama dengan pembuka halaman speciality Our Services.
 
 ## Menjalankan project
 
@@ -154,7 +171,10 @@ Semua tombol appointment/assessment menuju Contact Us. Form memvalidasi nama ber
 huruf Unicode/spasi dan membuka draf email di aplikasi pengguna. Tidak ada pengiriman
 email melalui server, booking otomatis, slot, pembayaran, atau integrasi booking eksternal.
 
-About menampilkan profil Saila, credential, expertise, profil Beatriz, dan detail tim kolektif.
+About dimulai dengan “Meet your clinicians”: profil Saila dan Beatriz memakai susunan
+yang sama, sejajar mulai 901px dan bertumpuk pada layar kecil. Setelahnya adalah
+Experience & expertise, The team behind InBody Clinic, lalu The InBody Method™.
+Banner pembuka “Two clinicians, one shared approach” belum digunakan.
 Beatriz memakai copy serta foto yang diberikan pengguna (`assets/images/about/beatriz.jpg`),
 dengan latar Chilean-trained physiotherapist dan peran Australian Remedial Massage Therapist.
 Data profil berada di `js/data/team.js`; jangan menyalin credential antaranggota tim.
@@ -165,6 +185,7 @@ Foto bersama tetap menggunakan `assets/images/about/team.jpg`.
 ```sh
 npm run build
 npm test
+npm run test:home-reveal
 npm run test:navigation
 ```
 
@@ -172,6 +193,9 @@ npm run test:navigation
 logo/judul yang tetap statis, satu animasi per dokumen, menu mobile, reduced motion,
 serta fallback CDN gagal/lambat. Tes ini memerlukan koneksi CDN dan Playwright;
 respons GSAP hanya disimpan di memori selama tes.
+
+`npm run test:home-reveal` memeriksa kelompok Home/Clinic/Contact, stagger, animasi sekali,
+fokus keyboard, cleanup, reduced motion, serta fallback CDN gagal/lambat tanpa jaringan.
 
 `npm test` memvalidasi **hasil build yang sudah ada di `dist/`**: 24 HTML prerender,
 metadata, satu H1/main, shell, ARIA, ID unik, seluruh route/anchor, parent speciality,

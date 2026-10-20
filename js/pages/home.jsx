@@ -3,6 +3,7 @@ import { Services } from '../sections/home/services.jsx';
 import { MethodPreview, TeamPreview, WhatToExpect, AssessmentCTA } from '../components/care.jsx';
 import { HomeContact } from '../sections/home/contact.jsx';
 import { initHeroSlider } from '../features/hero-slider.js';
+import { initHomeReveal } from '../features/home-reveal.js';
 
 export default {
   id: 'home',
@@ -17,6 +18,11 @@ export default {
     { id: 'home-contact', className: 'bg-clinic-white', labelledBy: 'home-contact-title', render: HomeContact },
   ],
   init(root) {
-    return initHeroSlider(root.querySelector('[data-hero-slider]'));
+    const destroySlider = initHeroSlider(root.querySelector('[data-hero-slider]'));
+    const destroyReveal = initHomeReveal(root);
+    return () => {
+      destroyReveal();
+      destroySlider();
+    };
   },
 };

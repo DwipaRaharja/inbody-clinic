@@ -47,7 +47,7 @@ export function HeroSlide({ slide, index = 0 }) {
       </div>
     </div>
     <div className={`relative -mt-2 h-[clamp(320px,65vw,520px)] min-w-0 overflow-hidden after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(180deg,white_0%,rgb(255_255_255/0)_25%)] after:content-[''] wide:row-start-1 wide:mt-0 wide:h-auto ${reversed ? "wide:col-start-1 wide:col-end-3 wide:after:bg-[linear-gradient(270deg,white_0%,rgb(255_255_255/0)_20%)]" : "wide:col-start-3 wide:col-end-5 wide:after:bg-[linear-gradient(90deg,white_0%,rgb(255_255_255/0.5)_8%,rgb(255_255_255/0)_24%)]"}`} data-section-media="hero">
-      <HeroImage slide={slide} primary={primary} className={reversed ? "object-[45%_center] wide:object-[45%_top]" : "object-[48%_center] wide:object-[40%_center] min-[90rem]:object-[40%_top]"} />
+      <HeroImage slide={slide} primary={primary} className={reversed ? "object-[75%_center] wide:object-[75%_top]" : "object-[48%_center] wide:object-[40%_center] min-[90rem]:object-[40%_top]"} />
     </div></Fragment>;
   return <article id={`home-hero-slide-${index + 1}`} className={`${slideClasses} ${editorial ? "grid grid-rows-[auto_1fr]" : fullBleedGridClasses.hero}`} data-hero-slide={slide.id} data-position={primary ? "active" : "next"} data-section-frame="hero" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${heroSlides.length}: ${slide.lines.map((line) => line.text).join(" ")}`} aria-hidden={primary ? undefined : true} inert={!primary}>
     {content}

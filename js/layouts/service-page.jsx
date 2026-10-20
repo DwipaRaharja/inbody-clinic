@@ -1,4 +1,5 @@
 import { ServiceHero, ServiceOptions, ServiceRecovery, ServiceExpertise, ServiceQuote, ServiceCTA } from '../sections/service/index.jsx';
+import { initServiceReveal } from '../features/care-reveal.js';
 
 /** Compose any service's content using the shared site layout and section renderers. */
 export function createServicePage(service) {
@@ -6,6 +7,7 @@ export function createServicePage(service) {
     id: 'service',
     serviceId: service.id,
     background: 'white',
+    init: initServiceReveal,
     sections: [
       { id: 'service-hero', className: 'bg-clinic-white', labelledBy: 'service-title', render: () => <ServiceHero {...service} /> },
       { id: 'service-options', className: 'bg-clinic-white', labelledBy: 'service-options-title', render: () => <ServiceOptions {...service} /> },

@@ -130,6 +130,19 @@ for (const speciality of specialityCatalog) {
 }
 
 const home = renderedPages.get('/');
+const about = renderedPages.get('/pages/about.html');
+assert.deepEqual(
+  [...about.html.matchAll(/<section\b[^>]*\sid="([^"]+)"/gu)].map(match => match[1]),
+  ['about', 'expertise', 'team-details', 'method'],
+  'About must show the clinicians before expertise, the team and the Method',
+);
+assert.deepEqual(
+  [...about.html.matchAll(/data-clinician="([^"]+)"/gu)].map(match => match[1]),
+  ['saila', 'beatriz'],
+  'About must include both clinician profiles',
+);
+assert.ok(about.html.includes('Meet your clinicians'), 'About must start with Meet your clinicians');
+assert.ok(!about.html.includes('Two clinicians.'), 'The shared-approach hero is not part of this revision');
 const homeSections = [...home.html.matchAll(/<section\b[^>]*\sid="([^"]+)"/gu)].map(match => match[1]);
 assert.deepEqual(homeSections, ['hero', 'services', 'method', 'team', 'expect', 'assessment', 'home-contact'], 'Home section order changed');
 assert.ok(!/Live Better|A healthier you|Real results/iu.test(home.html), 'Home still contains generic legacy marketing copy');

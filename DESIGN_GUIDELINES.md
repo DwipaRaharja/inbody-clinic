@@ -100,12 +100,36 @@ Urutan section Home pada renderer React:
 Module Difference, testimonial, dan CTA harbour lama tetap ada tetapi tidak dipasang pada Home baru.
 Kutipan pasien tidak diubah. Jangan memasukkan kembali section lama tanpa meninjau urutan brief.
 
+Animasi konten diterapkan pada Home, Our Clinic, Contact Us, seluruh service/speciality,
+dan The InBody Method™ melalui
+`js/features/content-reveal.js`; Home memilih kelompok melalui `js/features/home-reveal.js`.
+Teks naik 16px sambil fade-in selama 850ms (`power2.out`); foto dan hero hanya fade-in.
+Kartu serta daftar yang masuk layar bersama memakai stagger 120ms. Tiap target muncul
+sekali per kunjungan halaman, tanpa mengulang saat scroll kembali. Pergantian slide dan
+animasi header memakai controller masing-masing. Gunakan GSAP CDN yang sudah ada
+dan IntersectionObserver; jangan menambahkan ScrollTrigger atau dependency animasi baru.
+Reduced motion, fokus pengguna, cleanup route, dan CDN gagal/lambat harus menjaga
+konten tetap terlihat. Jangan menyembunyikan konten pada HTML prerender atau CSS awal.
+Clinic dan Contact menandai kelompok dengan `data-content-reveal="rise|fade"` dan
+`data-content-reveal-group` untuk stagger. Foto galeri beserta caption hanya fade-in;
+dialog tetap terpisah dari target animasi. Form Contact menganimasikan seluruh kolom
+bersama label, bukan placeholder atau teks ketikan. Latar section pembuka Contact
+menggunakan Cream, sama dengan section pembuka speciality di menu Our Services.
+`js/features/care-reveal.js` memilih kelompok dari elemen layout yang sudah ada.
+Controller service dipasang sekali pada `createServicePage`, speciality pada
+`createSpecialityPage`, dan Method pada konfigurasi halamannya. Jangan menyalin layout
+per service atau menambahkan wrapper untuk animasi. Foto hanya fade-in; kartu expertise
+bergerak sebagai satu kelompok bersama judul dan daftarnya. Posisi sticky foto Method,
+grid, urutan section, dan dekorasi konektor MethodSteps harus tetap bekerja.
+
 Hero mempertahankan autoplay 5000ms, transisi 700ms, arah masuk dari kanan/keluar ke kiri,
 inert/aria-hidden pada slide nonaktif, serta reduced motion. Fokus di dalam hero, visibilitas tab,
 dan posisi hero diperhatikan oleh controller. Tiga tombol titik di tengah bawah hero memilih slide
 dan menandai slide aktif; navigasi slider tidak memakai panah atau ikon caret.
 Slide ketiga hero memakai foto tim terbaru yang diberikan pengguna pada `assets/images/home/hero-3.jpg`.
-Foto slide pertama dan kedua tetap mengikuti aset yang sudah dipilih.
+Foto slide pertama tetap memakai aset yang sudah dipilih (1024×670).
+Slide kedua memakai foto asli 1600×1066 pada `assets/images/home/hero-2.jpg`, menggantikan
+crop 530×588 yang diperbesar. Posisi crop 75% menjaga kedua wajah tetap terlihat.
 
 Kartu speciality memakai grid 1/2/3 kolom. Seluruh kartu adalah tautan ke speciality;
 panah adalah dekorasi dalam link yang sama. Judul, pertanyaan, dan ringkasan memberi
@@ -171,16 +195,21 @@ serta tautan Method. Tagline memakai “Clinical expertise. Personalised care.�
 
 ## 8. About, Contact Us, dan Our Clinic
 
-Layout About sebelumnya dipertahankan sesuai koreksi pengguna. `TherapistProfile`
-menampilkan profil di kiri dan foto Saila di kanan; `TherapistCredentials` memakai empat
-kartu pada section Sage; `TherapistExpertise` mempertahankan grid expertise 2×2;
-`MethodPreview` tetap menjadi pengantar Method. Label pembuka memakai “Meet our team”.
-`BeatrizProfile` ditambahkan setelah expertise Saila, sebelum `TeamDetails` dan Method.
-Section memakai nama, foto asli, pengalaman 22+ tahun, lima area expertise, serta
-filosofi perawatan yang diberikan pengguna melalui data `beatriz` di `js/data/team.js`.
-Judul profesi membedakan latar pendidikan Chile dan peran Remedial Massage Therapist di Australia.
-Foto `assets/images/about/beatriz.jpg` dipertahankan utuh, dengan layout satu kolom di HP
-dan foto di kiri/teks di kanan pada desktop. Gunakan H2 agar halaman tetap memiliki satu H1.
+About dimulai dengan H1 “Meet your clinicians” melalui `MeetClinicians`.
+Profil Saila dan Beatriz memakai satu komponen `ClinicianProfile`: foto, nama/profesi,
+pengalaman, ringkasan, Clinical focus, Her approach, serta tombol layanan dan kontak.
+Data berada pada `saila` dan `beatriz` di `js/data/team.js`, menggunakan foto asli.
+Grid menjadi dua kolom mulai 901px; di bawahnya profil bertumpuk. CSS subgrid
+menyejajarkan baris konten serta tombol kedua profil meski jumlah keahliannya berbeda.
+Foto memakai rasio 4:3 di layar kecil dan 9:5 di dua kolom, dengan crop yang konsisten.
+Nama tiap anggota memakai H2 di bawah H1 bersama. Pengalaman Saila 20+ tahun dan
+Beatriz 22+ tahun; profesi Beatriz membedakan pendidikan Chile dan peran Australia.
+Banner “Two clinicians, one shared approach” belum digunakan sesuai arahan pengguna.
+Urutan section adalah Meet your clinicians, Experience & expertise, The team behind
+InBody Clinic, dan The InBody Method™. Strip credential terpisah dan profil Beatriz
+lama digantikan oleh profil sejajar; informasi clinical tutor Saila tetap berada
+di section expertise. `TherapistExpertise` mempertahankan grid expertise 2×2 dan
+`MethodPreview` tetap menjadi pengantar Method.
 `TeamDetails` memakai informasi kolektif pada
 `team.introduction`, `team.philosophy`, dan `team.sharedCare`, foto bersama lokal
 `assets/images/about/team.jpg` melalui `team.detailImage`, serta CTA Contact Us.
@@ -219,7 +248,7 @@ Periksa visual serta interaksi setelah perubahan layout; hasil tes teknis bukan 
 
 Animasi masuk header memakai GSAP core dari CDN melalui `js/features/header-entrance.js`.
 Latar bar kontak terbuka dari atas ke bawah terlebih dahulu, lalu lokasi, email, telepon,
-dan menu navbar memudar masuk. Logo, container navbar, dan judul halaman tetap statis.
+dan menu navbar memudar masuk. Logo dan container navbar tetap statis.
 Effect dipasang sekali pada layout App; perpindahan route tidak mengulang animasi.
 Reduced motion dan interaksi pengguna menghentikan animasi serta memulihkan style.
 Konten tetap terlihat jika CDN gagal atau terlambat. Jangan mengaktifkan animasi seluruh teks.
