@@ -154,9 +154,11 @@ Semua tombol appointment/assessment menuju Contact Us. Form memvalidasi nama ber
 huruf Unicode/spasi dan membuka draf email di aplikasi pengguna. Tidak ada pengiriman
 email melalui server, booking otomatis, slot, pembayaran, atau integrasi booking eksternal.
 
-About mempertahankan profil Saila, credential, expertise, dan detail tim kolektif dengan
-foto `assets/images/about/team.jpg`. Profil individu kedua masih menunggu data klinik;
-jangan menambahkan nama, bio, atau credential rekaan. Copy tetap memerlukan review klinik.
+About menampilkan profil Saila, credential, expertise, profil Beatriz, dan detail tim kolektif.
+Beatriz memakai copy serta foto yang diberikan pengguna (`assets/images/about/beatriz.jpg`),
+dengan latar Chilean-trained physiotherapist dan peran Australian Remedial Massage Therapist.
+Data profil berada di `js/data/team.js`; jangan menyalin credential antaranggota tim.
+Foto bersama tetap menggunakan `assets/images/about/team.jpg`.
 
 ## Verifikasi
 

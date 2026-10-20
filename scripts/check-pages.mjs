@@ -134,13 +134,15 @@ const homeSections = [...home.html.matchAll(/<section\b[^>]*\sid="([^"]+)"/gu)].
 assert.deepEqual(homeSections, ['hero', 'services', 'method', 'team', 'expect', 'assessment', 'home-contact'], 'Home section order changed');
 assert.ok(!/Live Better|A healthier you|Real results/iu.test(home.html), 'Home still contains generic legacy marketing copy');
 assert.ok(renderedPages.has('/pages/the-inbody-method.html'), 'Missing Method page');
+// This listing was replaced by Advanced Lymphatic Therapy; preserve its existing detail URL.
+const unlistedLegacyServices = new Set(['lymphatic-reset-fluid-retention-treatment']);
 for (const [id, treatment] of Object.entries(services)) {
   const destination = new URL(treatment.href, siteOrigin).pathname;
   const linked = [...renderedPages.values()].some(page => page.path !== destination && [...page.html.matchAll(/\shref="([^"]+)"/gu)].some(match => {
     const url = new URL(decodeAttribute(match[1]), siteOrigin + base + page.path.slice(1));
     return '/' + url.pathname.slice(base.length) === destination;
   }));
-  assert.ok(linked, `${id}: treatment has no incoming page link`);
+  assert.ok(linked || unlistedLegacyServices.has(id), `${id}: treatment has no incoming page link`);
 }
 
 console.log(`Passed: ${renderedPages.size} prerendered React pages at ${base}, metadata, content, route catalog, links, anchors, accessibility targets, icons and built assets.`);

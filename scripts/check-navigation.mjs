@@ -243,8 +243,13 @@ try {
   assert.equal(await page.locator('[data-nav-toggle]').getAttribute('aria-expanded'), 'false');
   await page.locator('[data-nav-toggle]').click();
   await page.locator('[data-services-toggle]').click();
-  await page.locator('[data-nav-speciality]').first().click();
-  await waitForPage(page, { page: 'speciality' });
+  const bookingLink = page.locator('[data-nav-speciality]').first();
+  const bookingUrl = await bookingLink.getAttribute('href');
+  assert.equal(new URL(bookingUrl).hostname, 'www.fresha.com', 'Dropdown must open external booking');
+  await bookingLink.click();
+  await page.waitForURL(bookingUrl);
+  await page.goBack();
+  await waitForPage(page, { page: 'contact' });
   assert.equal(await page.locator('[data-services-toggle]').getAttribute('aria-expanded'), 'false');
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
   if (process.env.NAVIGATION_SCREENSHOT_DIR) {

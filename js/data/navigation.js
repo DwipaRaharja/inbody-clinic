@@ -1,6 +1,19 @@
 import { specialityCatalog } from './specialities/catalog.js';
 
-export const specialityNavigationLinks = specialityCatalog;
+const specialityBookingLinks = {
+  'clinical-lymphatic-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A29617377&share=true&pId=2642624',
+  'pre-post-surgical-recovery': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A29617756&share=true&pId=2642624',
+  'lipedema-lymphoedema-oncology-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A26068782&share=true&pId=2642624',
+  'pregnancy-postpartum-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A24481861&share=true&pId=2642624',
+  'tmj-pain-stress-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&share=true&pId=2642624',
+  'skin-tissue-health': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&share=true&pId=2642624',
+};
+
+export const specialityNavigationLinks = specialityCatalog.map(speciality => ({
+  ...speciality,
+  name: speciality.id === 'skin-tissue-health' ? 'Cellulite & Tissue Remodelling' : speciality.name,
+  href: specialityBookingLinks[speciality.id],
+}));
 
 const navigationLinks = [
   { id: 'home', label: 'Home', href: './' },
@@ -23,7 +36,7 @@ export const serviceNavigationGroups = [
     title: 'Lymphatic Drainage',
     services: [
       { id: 'post-surgical-recovery', label: 'Post-Surgical Recovery', href: './pages/services/lymphatic-drainage/post-surgical-recovery.html' },
-      { id: 'clinical-lymphatic-drainage-sydney', label: 'Clinical Lymphatic Drainage Sydney', href: './pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html' },
+      { id: 'clinical-lymphatic-drainage-sydney', label: 'Advanced Lymphatic Therapy', href: './pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html' },
       { id: 'lipedema-inflammatory-leg-care', label: 'Lipedema & Inflammatory Leg Care', href: './pages/services/lymphatic-drainage/lipedema-inflammatory-leg-care.html' },
     ],
   },

@@ -8,15 +8,14 @@ export default {
   category: 'Body Contouring',
   images: {
     hero: {
-      src: `${imageDirectory}23fc0f3102d3c6f596bd16a19ecab8d1e2dbfa05-750x605-1.avif`,
-      alt: 'Illustration of a woman holding her abdomen, with a red area highlighting discomfort',
-      width: 750,
-      height: 605,
-      fit: 'contain',
+      src: `${imageDirectory}hero-treatment.jpg`,
+      alt: 'Close-up of a therapist applying a treatment device to a patient’s abdomen',
+      width: 1600,
+      height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.57.jpeg`,
-      alt: 'Two InBody Clinic therapists reviewing a tablet together in the treatment room',
+      src: `${imageDirectory}tissue-treatment.jpg`,
+      alt: 'A therapist providing hands-on tissue care with a treatment device to a patient’s thigh',
       width: 1600,
       height: 1066,
     },
@@ -69,11 +68,10 @@ export default {
       {
         title: 'Treatment Approaches',
         subtitle: 'Treatment Outcome & Process:',
-        variant: 'icon-blocks',
         items: [
-          { icon: 'ph-target', label: 'Headline:', description: 'Restoring Tissue Health' },
-          { icon: 'ph-heartbeat', label: 'Deskripsi:', description: 'This treatment works on the entire tissue environment, improving circulation and reducing congestion to progressively remodel the skin.' },
-          { icon: 'ph-check-circle', label: 'Hasil:', description: 'Over time, tissues feel lighter, smoother, and less congested.' },
+          'Restoring Tissue Health',
+          'This treatment works on the entire tissue environment, improving circulation and reducing congestion to progressively remodel the skin.',
+          'Over time, tissues feel lighter, smoother, and less congested.',
         ],
       },
     ],

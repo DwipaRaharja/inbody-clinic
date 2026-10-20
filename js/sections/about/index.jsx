@@ -3,7 +3,7 @@ import { Heading } from "../../components/heading.jsx";
 import { ActionButton } from "../../components/button.jsx";
 import { containerClasses } from "../../layouts/container.js";
 import { Icon } from "../../components/icons.jsx";
-import { team } from "../../data/team.js";
+import { team, beatriz } from "../../data/team.js";
 const specialties = [
   {
     label: "Women’s Health",
@@ -111,6 +111,33 @@ export function TherapistExpertise() {
         </div>
       </li>)}
     </ul>
+  </div>;
+}
+export function BeatrizProfile() {
+  return <div className={`${containerClasses} grid min-w-0 gap-9 py-14 tablet:gap-12 tablet:py-16 wide:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] wide:items-start wide:gap-16 wide:py-20`} data-section-frame="beatriz">
+    <figure className="min-w-0 wide:sticky wide:top-[108px]">
+      <img className="block h-auto w-full rounded-[10px]" src={assetUrl(beatriz.image.src)} alt={beatriz.image.alt} width={beatriz.image.width} height={beatriz.image.height} loading="lazy" />
+    </figure>
+    <div className="min-w-0">
+      <Heading eyebrow="Meet our team" level={2} size="profile" id="beatriz-title" lines={[{ text: beatriz.name }]} />
+      <p className="mt-4 text-[15px] leading-[1.65] font-medium text-clinic-navy/80 tablet:text-[16px]">{beatriz.role}</p>
+      <p className="mt-4 inline-block rounded-full bg-clinic-light-sage px-4 py-2 text-[12px] leading-[1.5] font-semibold text-clinic-navy">{beatriz.experience}</p>
+      <div className="mt-6 space-y-4 text-[14px] leading-[1.85] text-clinic-navy/85 tablet:text-[15px]">
+        {beatriz.biography.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+      </div>
+      <h3 className="mt-8 font-display text-[28px] leading-[1.2] font-semibold tablet:text-[30px]">Areas of Expertise</h3>
+      <ul className="mt-5 list-none divide-y divide-clinic-sage/25 border-y border-clinic-sage/25 p-0">
+        {beatriz.expertise.map(({ title, description }) => <li key={title} className="flex min-w-0 items-start gap-3 py-4 text-[13px] leading-[1.75] tablet:text-[14px]">
+          <i className="ph ph-check-circle mt-1 shrink-0 text-[19px] text-clinic-sage" aria-hidden="true" />
+          <p className="min-w-0"><strong className="font-semibold">{title}</strong><span> – {description}</span></p>
+        </li>)}
+      </ul>
+      <h3 className="mt-8 font-display text-[28px] leading-[1.2] font-semibold tablet:text-[30px]">Her Approach</h3>
+      <div className="mt-5 space-y-4 text-[14px] leading-[1.85] text-clinic-navy/85 tablet:text-[15px]">
+        {beatriz.approach.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+      </div>
+      <p className="mt-7 border-t border-clinic-sage/25 pt-6 font-display text-[24px] leading-[1.4] font-medium text-clinic-navy tablet:text-[26px]">{beatriz.closing}</p>
+    </div>
   </div>;
 }
 export function TeamDetails() {

@@ -49,8 +49,8 @@ export const routes = [
     "path": "/pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html",
     "pageId": "service",
     "serviceId": "clinical-lymphatic-drainage-sydney",
-    "title": "Clinical Lymphatic Drainage Sydney | InBody Clinic",
-    "description": "Clinical lymphatic drainage at InBody Clinic in Sydney for people who often feel swollen, heavy, or puffy, even when they eat well and exercise."
+    "title": "Advanced Lymphatic Therapy | InBody Clinic",
+    "description": "Specialised Lymphatic Drainage & Personalised Fluid Management in Double Bay, Sydney"
   },
   {
     "path": "/pages/services/lymphatic-drainage/lipedema-inflammatory-leg-care.html",
@@ -147,8 +147,8 @@ export const routes = [
     "path": "/pages/specialities/skin-tissue-health.html",
     "pageId": "speciality",
     "specialityId": "skin-tissue-health",
-    "title": "Skin & Tissue Health | InBody Clinic",
-    "description": "Dermatofunctional care considers the health and quality of your skin and connective tissues. We support people experiencing cellulite, fibrosis, tissue restrictions and changes in skin texture."
+    "title": "Cellulite & Tissue Remodelling | InBody Clinic",
+    "description": "Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility."
   },
   {
     "path": "/pages/specialities/tmj-pain-stress-care.html",

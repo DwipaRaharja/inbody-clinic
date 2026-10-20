@@ -1,7 +1,7 @@
 # Task revisi website InBody Clinic
 
 **Tanggal:** 17 Oktober 2026  
-**Status:** Implementasi utama diterapkan di project lokal; alur booking selesai melalui Contact Us. Profil kedua dan pilihan foto hero ditunda.  
+**Status:** Implementasi utama diterapkan di project lokal; alur booking melalui Contact Us. Profil Beatriz sudah ditambahkan memakai copy dan foto dari pengguna. Pilihan foto hero masih ditunda.
 **Sumber:** Brief revisi client pada lampiran `Pasted text.txt`.
 
 Dokumen ini merangkum permintaan client, hasil pencocokan dengan project, usulan
@@ -194,7 +194,7 @@ sesuai, tanpa menggandakan halaman.
   brief, foto bersama `assets/images/about/team.jpg`, serta CTA Contact Us.
 - [ ] Tambahkan section Meet Our Team pada Home, memperkenalkan dua anggota tim
   secara seimbang, bukan hanya satu figur utama.
-- [ ] Perbarui halaman About yang sudah ada untuk menampilkan dua profil lengkap:
+- [x] Perbarui halaman About yang sudah ada untuk menampilkan dua profil lengkap:
   nama, foto asli, latar pendidikan, qualifications, training, pengalaman,
   keahlian, dan filosofi perawatan bersama.
 - [x] Jelaskan latar internationally trained physiotherapists dan bahwa keduanya
@@ -206,16 +206,12 @@ sesuai, tanpa menggandakan halaman.
 - [x] Gunakan nada empatik dan profesional; hindari gelar, status registrasi,
   afiliasi, atau keahlian tambahan yang belum diberikan.
 
-Nama lengkap, bio, credential, serta foto profil anggota kedua belum teridentifikasi
-dalam data profil project yang ada. Foto `hero-2.jpg` dapat ditinjau sebagai kandidat
-foto bersama, tetapi bukan pengganti verifikasi identitas dan data kedua profil.
-
-Pengantar kolektif Meet Our Team sudah tersedia pada Home berdasarkan brief.
-Pembuatan profil individu kedua dan penambahan datanya ditunda sesuai arahan pengguna.
-Susunan section lama About tetap dipertahankan, dengan satu section detail tim
-tambahan yang diizinkan pengguna. Foto bersama lampiran dan informasi kolektif ini
-bukan profil individu kedua lengkap; nama, bio, dan credential pribadinya masih
-diperlukan sebelum melengkapi profilnya.
+Pengguna kini memberikan nama Beatriz, foto asli, latar pendidikan Chile, peran
+Australian Remedial Massage Therapist, pengalaman 22+ tahun, lima area expertise,
+dan pendekatan perawatannya. Profil individu ditambahkan setelah expertise Saila
+dan sebelum detail tim kolektif, dengan data di `js/data/team.js` dan foto
+`assets/images/about/beatriz.jpg`. Nama belakang atau credential tambahan tidak dibuat.
+Pengantar kolektif Meet Our Team pada Home tetap memakai data tim bersama.
 
 ### R06 — What to Expect
 
@@ -309,7 +305,7 @@ Struktur berikut sudah diterapkan:
 
 ```text
 pages/
-├── about.html                        # Profil Saila; profil anggota kedua ditunda
+├── about.html                        # Profil Saila dan Beatriz; pengantar tim bersama
 ├── the-inbody-method.html            # Halaman Method baru
 └── specialities/
     ├── pre-post-surgical-recovery.html
@@ -351,15 +347,15 @@ boleh diganti dengan credential, URL booking, jadwal, atau klaim layanan rekaan.
 | D01 | Hero tetap tiga slide atau satu hero statis? | Pertahankan tiga slide/5 detik; revisi semua copy agar klinis. Brief tidak meminta slider dihapus | Diterapkan: tetap tiga slide/5 detik; foto tidak diganti |
 | D02 | Enam speciality di dropdown dan 13 detail lama tetap tersedia? | Enam speciality sebagai navigasi utama; detail lama ditautkan dari halaman yang relevan | Diterapkan: enam speciality di dropdown; 13 detail treatment tetap tersedia |
 | D03 | Tujuan initial-assessment CTA dan booking options | Semua tombol appointment dan assessment menuju Contact Us | Selesai sesuai konfirmasi pengguna; tidak memerlukan integrasi booking eksternal, slot, atau prefill baru |
-| D04 | Data anggota tim kedua dan verifikasi profil keduanya | Perlu nama, foto, pendidikan/training, qualifications, pengalaman, scope peran, serta pemetaan credential per orang | Ditunda oleh pengguna; tidak membuat profil kedua atau credential rekaan |
+| D04 | Data anggota tim kedua dan profil keduanya | Pengguna telah memberikan copy dan foto Beatriz beserta latar pendidikan, peran Australia, pengalaman, expertise dan pendekatan | Diterapkan pada section profil Beatriz di About; credential tiap anggota tetap terpisah |
 | D05 | Cakupan konten baru lymphoedema/oncology dan pre-surgical care | Pakai cakupan brief; minta konfirmasi rincian layanan dan training sebelum memperluas klaim | Konten baru dibatasi cakupan brief; detail protokol/training tambahan tidak dibuat |
 | D06 | Pemetaan Endometriosis & Pelvic Pain Support | Pertahankan URL/detail; speciality induk belum jelas dari brief | URL tetap tersedia melalui Women’s Health pada About; belum menetapkan speciality induk |
 | D07 | Testimonial lama | Tidak menjadi section tersendiri dalam urutan Home baru; opsi dipertahankan di lokasi lain jika diminta | Tidak dirender pada Home baru; module dan kutipan lama dipertahankan |
 | D08 | Foto asli pilihan dan foto tambahan tim | Gunakan aset project; perlu pemetaan foto masing-masing anggota dan konfirmasi foto utama | Foto hero dipertahankan sesuai catatan pengguna; foto project yang ada dipakai pada section lain |
-| D09 | Copy pengganti yang belum diberikan kata per kata | Buat draft English, terutama slide 2/3, detail speciality, Method, What to Expect, dan bio tim | Draft baru sudah diterapkan untuk review; bio anggota kedua tetap ditunda |
+| D09 | Copy pengganti yang belum diberikan kata per kata | Buat draft English, terutama slide 2/3, detail speciality, Method, What to Expect, dan bio tim | Draft baru sudah diterapkan; Method dan profil Beatriz kini memakai copy pengganti dari pengguna |
 
-**Batas tahap saat ini:** profil anggota tim kedua masih ditunda. Booking sudah
-dinyatakan selesai oleh pengguna dengan tujuan Contact Us; integrasi eksternal
+**Batas tahap saat ini:** profil Beatriz tersedia sesuai materi pengguna. Booking
+menggunakan tujuan Contact Us; integrasi eksternal
 tidak termasuk lingkup. Pilihan foto hero tetap menunggu diskusi sesuai catatan pengguna.
 
 
@@ -369,13 +365,13 @@ tidak termasuk lingkup. Pilihan foto hero tetap menunggu diskusi sesuai catatan 
 - [x] Enam halaman speciality dan halaman The InBody Method™ dibuat; total 24 halaman.
 - [x] Dropdown, kartu, parent treatment, CTA, About, dan footer terhubung.
 - [x] Semua 13 treatment lama dipertahankan dan memiliki tautan masuk.
-- [x] Pengantar tim memakai informasi kolektif dari client; tidak membuat profil kedua.
+- [x] Pengantar tim memakai informasi kolektif dari client; profil individu Beatriz memakai copy dan foto tersendiri dari pengguna.
 - [x] What to Expect, assessment enquiry CTA, kontak, lokasi, dan peta tersedia.
 - [x] Pemeriksaan route/aset/ARIA/import/ikon dan build Tailwind berhasil.
 - [x] Home diuji pada viewport 320–2560px tanpa overflow horizontal; speciality dan Method diuji pada mobile/desktop.
 - [x] Dropdown mobile/desktop, Escape/fokus, serta CTA Contact Us diuji di browser.
 - [ ] Pengujian kontrol zoom browser secara langsung; yang dilakukan adalah uji reflow viewport.
-- [ ] Profil lengkap anggota tim kedua dan data/foto identitasnya — ditunda pengguna.
+- [x] Profil Beatriz, foto asli, latar Chile/Australia, pengalaman 22+ tahun, expertise, dan pendekatan tersedia pada About.
 - [x] Booking dan assessment menuju Contact Us — selesai sesuai konfirmasi pengguna.
 - [ ] Pemilihan foto hero baru — menunggu diskusi sesuai catatan pengguna.
 

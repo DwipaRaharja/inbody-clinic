@@ -1,9 +1,11 @@
-import { Fragment } from "react";
 import { assetUrl, siteUrl } from "../../utils/urls.js";
 import { Heading } from "../../components/heading.jsx";
 import { ActionButton } from "../../components/button.jsx";
 import { containerClasses } from "../../layouts/container.js";
 import { getSpecialityForService } from "../../data/specialities/catalog.js";
+function paragraphs(value) {
+  return Array.isArray(value) ? value : [value];
+}
 function ServiceImage({ image = {}, hero = false }) {
   const width = Number(image.width ?? image.w);
   const height = Number(image.height ?? image.h);
@@ -32,7 +34,7 @@ export function ServiceHero(service) {
         <Heading eyebrow={hero.eyebrow} lines={hero.lines} level={1} id="service-title" size="profile" />
       </div>
       {hero.subEyebrow || service.category ? <p className="mt-4 text-[9px] leading-[1.6] font-semibold tracking-[0.1em] text-clinic-sage uppercase tablet:text-[10px]">{hero.subEyebrow ?? `InBody Clinic · ${service.category}`}</p> : ""}
-      <p className="mt-5 max-w-[43ch] text-[13px] leading-[1.75] text-clinic-navy/85 tablet:text-[14px]">{hero.description}</p>
+      {paragraphs(hero.description).map((paragraph) => <p key={paragraph} className="mt-5 max-w-[43ch] text-[13px] leading-[1.75] text-clinic-navy/85 tablet:text-[14px]">{paragraph}</p>)}
       <div className="mt-5 [&_a]:min-w-[230px] [&_a]:tracking-[0.1em] [&_a]:font-semibold">
         <ActionButton label="Learn more" href="#service-options" />
       </div>
@@ -80,19 +82,6 @@ export function ServiceRecovery(service) {
   </div>;
 }
 function ServiceExpertiseList({ column }) {
-  if (column.variant === "icon-blocks") {
-    return <ul className="mt-6 grid list-none gap-4 p-0">
-      {(column.items ?? []).map((item, index) => {
-      const iconClass = /^ph-[a-z0-9-]+$/.test(item.icon) ? item.icon : "ph-circle";
-      return <li key={index} className="flex min-w-0 items-center gap-4 py-2 tablet:gap-5">
-          <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-clinic-sage/50 bg-clinic-light-sage/60 text-clinic-sage"><i className={`ph ${iconClass} text-[20px] leading-none`} aria-hidden="true"></i></span>
-          <div className="min-w-0 text-[12px] leading-[1.5] text-clinic-navy/85 tablet:text-[13px]">
-            {item.label ? <p><span className="font-semibold">{item.label}</span> {item.description}</p> : <Fragment>{item.title && <p className="font-medium">{item.title}</p>}{item.description && <p className={item.title ? "mt-1" : undefined}>{item.description}</p>}</Fragment>}
-          </div>
-        </li>;
-    })}
-    </ul>;
-  }
   return <ol className="mt-6 grid list-none gap-4 p-0">
     {(column.items ?? []).map((item, index) => <li key={index} className="flex min-w-0 items-center gap-5 rounded-[12px] bg-clinic-light-grey px-4 py-4 tablet:gap-6">
       <span className="shrink-0 font-display text-[26px] leading-none font-semibold italic tabular-nums" aria-hidden="true">{numberLabel(index)}</span>
@@ -105,7 +94,7 @@ export function ServiceExpertise(service) {
   return <div className={`${containerClasses} pt-10 pb-6 tablet:pt-12 tablet:pb-8`} data-section-frame="service-expertise">
     <div className="mx-auto max-w-[730px] text-center">
       <Heading lines={expertise.lines} level={2} id="service-expertise-title" size="section" />
-      {expertise.description ? <p className="mx-auto mt-4 max-w-[58ch] text-[13px] leading-[1.8] text-clinic-navy/85 tablet:text-[14px]">{expertise.description}</p> : ""}
+      {expertise.description ? paragraphs(expertise.description).map((paragraph) => <p key={paragraph} className="mx-auto mt-4 max-w-[58ch] text-[13px] leading-[1.8] text-clinic-navy/85 tablet:text-[14px]">{paragraph}</p>) : ""}
     </div>
     <div className="mt-10 grid min-w-0 items-start gap-6 wide:relative wide:grid-cols-2 wide:gap-12 wide:before:pointer-events-none wide:before:absolute wide:before:inset-y-0 wide:before:left-1/2 wide:before:w-px wide:before:bg-clinic-light-grey wide:before:content-['']">
       {(expertise.columns ?? []).map((column) => <article key={column.title} className="min-w-0 rounded-[20px] border border-clinic-navy/10 bg-clinic-white px-5 py-7 shadow-[0_12px_28px_rgb(32_56_88/0.07)] tablet:px-8 tablet:py-8">
@@ -114,6 +103,7 @@ export function ServiceExpertise(service) {
         <ServiceExpertiseList column={column} />
       </article>)}
     </div>
+    {expertise.note ? <p className="mx-auto mt-8 max-w-[85ch] text-center text-[13px] leading-[1.8] text-clinic-navy/85 tablet:text-[14px]">{expertise.note}</p> : ""}
   </div>;
 }
 export function ServiceQuote(service) {

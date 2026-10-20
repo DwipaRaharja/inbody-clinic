@@ -14,11 +14,22 @@ const details = {
   'clinical-lymphatic-care': {
     headline: ['Understanding swelling.', 'Personalising your care.'],
     introduction: 'Specialised clinical lymphatic care for people experiencing swelling, fluid retention, heavy legs and lymphatic-related symptoms. Treatment begins with understanding your individual concerns.',
-    needs: ['Swelling and fluid retention', 'A sensation of heavy legs', 'Lymphatic-related symptoms', 'Changes in tissue comfort or quality', 'Understanding the right approach for your needs'],
+    needs: [
+      'General Swelling & Fluid Retention',
+      'Puffy Face, Eyes & Hands',
+      'Heavy & Swollen Legs',
+      'Chronic Inflammation & Swelling',
+      'Hormonal & Menopause-Related Swelling',
+      'Pregnancy & Postpartum Swelling',
+      'Abdominal Swelling',
+      'Venous Insufficiency',
+      'Travel-Related Swelling',
+    ],
     approach: 'We look beyond a treatment name. Your symptoms, tissue quality and individual needs inform a personalised programme, with ongoing review of your response to care.',
     techniques: ['Specialised Manual Lymphatic Drainage', 'Individual clinical assessment', 'Personalised hands-on treatment', 'Therapeutic technology when appropriate', 'Recovery and self-care advice'],
     timing: 'If swelling, fluid retention or heavy legs are affecting your comfort, an assessment can help identify the clinical care that fits your needs. You do not need to choose a particular technique before contacting us.',
     imageService: 'lymphatic-reset-fluid-retention-treatment',
+    treatments: [services['clinical-lymphatic-drainage-sydney']],
   },
   'lipedema-lymphoedema-oncology-care': {
     headline: ['Care for your symptoms.', 'Support for your needs.'],
@@ -55,14 +66,55 @@ const details = {
     imageVariant: 'treatment',
   },
   'skin-tissue-health': {
-    headline: ['Clinical care for skin.', 'Attention to your tissues.'],
-    introduction: 'Dermatofunctional care considers the health and quality of your skin and connective tissues. We support people experiencing cellulite, fibrosis, tissue restrictions and changes in skin texture.',
-    needs: ['Cellulite and changes in skin texture', 'Fibrosis and tissue restrictions', 'Changes in connective tissue quality', 'Tissue changes following pregnancy', 'Skin and tissue changes after weight loss', 'Changes associated with menopause'],
-    approach: 'We assess tissue quality, symptoms and your individual concerns to understand the support that is appropriate. Dermatofunctional expertise brings a clinical perspective to skin and tissue care.',
-    techniques: ['Individual skin and tissue assessment', 'Specialised hands-on therapy', 'Personalised tissue care', 'Therapeutic technology when appropriate', 'Self-care advice and ongoing reassessment'],
-    timing: 'An assessment can help you understand changes in your skin and connective tissues, and discuss which care may suit your needs following pregnancy, weight loss, menopause or other tissue changes.',
-    imageService: 'clinical-cellulite-remodelling',
-    imageVariant: 'treatment',
+    headline: ['Cellulite &', 'Tissue Remodelling'],
+    introduction: [
+      'Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility.',
+      'At InBody Clinic, we understand that changes in skin and connective tissue can be influenced by hormonal fluctuations, ageing, pregnancy, weight changes, surgery and medical treatments.',
+      'Our approach goes beyond traditional body-contouring treatments. We combine clinical assessment, specialised hands-on techniques and advanced therapeutic technologies to address your individual tissue concerns.',
+    ],
+    needsHeading: 'How Can We Help?',
+    needsIntroduction: 'Our personalised treatments are designed for:',
+    needs: [
+      'Cellulite & uneven skin texture – changes in skin appearance and connective tissue structure.',
+      'Fluid retention & tissue congestion – swelling, heaviness and localised fluid accumulation.',
+      'Fibrosis & tissue restrictions – areas of thickened tissue, adhesions or reduced tissue mobility.',
+      'Loss of firmness & elasticity – changes in skin and connective tissue quality.',
+      'Post-pregnancy & weight-loss changes – altered skin texture, elasticity and tissue mobility.',
+      'Perimenopause & menopause – hormonal-related changes in skin firmness and connective tissue.',
+      'Post-oncological tissue changes – scar tissue, fibrosis, tightness and reduced tissue mobility following cancer surgery, radiotherapy or other oncological treatments.',
+    ],
+    approachHeading: 'Our Approach',
+    approach: [
+      'Every treatment begins with a comprehensive, personalised clinical assessment.',
+      'We evaluate your skin and connective tissue, tissue mobility, relevant medical history and individual concerns to determine the most appropriate treatment approach.',
+    ],
+    techniquesIntroduction: 'Depending on your assessment, treatment may combine:',
+    techniques: [
+      'Specialised manual therapy – to address tissue restrictions and improve mobility.',
+      'Clinical lymphatic drainage – to support fluid management and reduce swelling when appropriate.',
+      'INDIBA® Radiofrequency – incorporated when clinically appropriate as part of tissue-focused care.',
+      'Low-Level Laser Therapy (LLLT) – selected for specific tissue rehabilitation goals.',
+      'Electrotherapy – tailored to individual therapeutic needs.',
+      'Intermittent Pneumatic Compression – to support fluid management when indicated.',
+    ],
+    timing: [
+      'Our treatments are adapted to your tissue condition, medical history and personal goals rather than following a standard body-contouring protocol.',
+      'For clients recovering from cancer treatment, care is adapted to their oncological history, current health status and any medical precautions, with medical clearance or multidisciplinary coordination when required.',
+    ],
+    image: {
+      src: './assets/images/specialities/skin-tissue-health/hero.jpg',
+      alt: 'An InBody Clinic therapist providing hands-on tissue care with a treatment device to a patient’s thigh',
+      width: 1600,
+      height: 1066,
+    },
+    treatments: [{
+      ...services['clinical-cellulite-remodelling'],
+      name: 'Cellulite & Tissue Remodelling',
+      summary: 'Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility.',
+    }, {
+      ...services['hormonal-skin-tightening-firmness-treatment'],
+      name: 'Support for Skin Firmness & Hormonal Body Changes',
+    }],
   },
 };
 
@@ -71,7 +123,7 @@ export const specialities = Object.fromEntries(specialityCatalog.map(speciality 
   return [speciality.id, {
     ...speciality, ...detail,
     image: detail.image ?? services[detail.imageService].images[detail.imageVariant ?? 'hero'],
-    treatments: speciality.serviceIds.map(id => services[id]),
+    treatments: detail.treatments ?? speciality.serviceIds.map(id => services[id]),
   }];
 }));
 

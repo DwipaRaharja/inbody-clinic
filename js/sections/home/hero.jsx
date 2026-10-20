@@ -35,8 +35,8 @@ export function HeroSlide({ slide, index = 0 }) {
       </div>
       <div className="min-w-0 wide:pt-4"><HeroBenefits benefits={slide.benefits} vertical /></div>
     </div>
-    <div className="relative min-h-[320px] min-w-0 overflow-hidden tablet:min-h-[360px] wide:min-h-[300px]" data-section-media="hero">
-      <HeroImage slide={slide} primary={primary} className="object-[50%_30%] wide:object-[50%_25%]" />
+    <div className="relative min-h-[320px] min-w-0 overflow-hidden after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(180deg,white_0%,rgb(255_255_255/0)_25%)] after:content-[''] tablet:min-h-[360px] wide:min-h-[300px]" data-section-media="hero">
+      <HeroImage slide={slide} primary={primary} className="object-[50%_10%]" />
     </div></Fragment> : <Fragment>
     <div className={`${pagePaddingClasses} min-w-0 pt-[43px] pb-[25px] tablet:py-14 wide:row-start-1 wide:pt-[clamp(72px,7.4vw,106px)] wide:pb-[72px] ${reversed ? "wide:col-start-3 wide:pl-10" : "wide:col-start-2 wide:pr-0"}`} data-section-copy="hero">
       <div className="mx-auto w-full min-w-0 max-w-[600px] wide:mx-0">
@@ -49,13 +49,18 @@ export function HeroSlide({ slide, index = 0 }) {
     <div className={`relative -mt-2 h-[clamp(320px,65vw,520px)] min-w-0 overflow-hidden after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(180deg,white_0%,rgb(255_255_255/0)_25%)] after:content-[''] wide:row-start-1 wide:mt-0 wide:h-auto ${reversed ? "wide:col-start-1 wide:col-end-3 wide:after:bg-[linear-gradient(270deg,white_0%,rgb(255_255_255/0)_20%)]" : "wide:col-start-3 wide:col-end-5 wide:after:bg-[linear-gradient(90deg,white_0%,rgb(255_255_255/0.5)_8%,rgb(255_255_255/0)_24%)]"}`} data-section-media="hero">
       <HeroImage slide={slide} primary={primary} className={reversed ? "object-[45%_center] wide:object-[45%_top]" : "object-[48%_center] wide:object-[40%_center] min-[90rem]:object-[40%_top]"} />
     </div></Fragment>;
-  return <article className={`${slideClasses} ${editorial ? "grid grid-rows-[auto_1fr]" : fullBleedGridClasses.hero}`} data-hero-slide={slide.id} data-position={primary ? "active" : "next"} data-section-frame="hero" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${heroSlides.length}: ${slide.lines.map((line) => line.text).join(" ")}`} aria-hidden={primary ? undefined : true} inert={!primary}>
+  return <article id={`home-hero-slide-${index + 1}`} className={`${slideClasses} ${editorial ? "grid grid-rows-[auto_1fr]" : fullBleedGridClasses.hero}`} data-hero-slide={slide.id} data-position={primary ? "active" : "next"} data-section-frame="hero" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${heroSlides.length}: ${slide.lines.map((line) => line.text).join(" ")}`} aria-hidden={primary ? undefined : true} inert={!primary}>
     {content}
   </article>;
 }
 export function Hero() {
   return <div className="relative w-full min-w-0 overflow-hidden" data-hero-slider data-animate="false" data-active-index="0" role="region" aria-roledescription="carousel" aria-label="InBody Clinic highlights">
     <div className="isolate grid w-full min-w-0">{heroSlides.map((slide, index) => <HeroSlide key={slide.id} slide={slide} index={index} />)}</div>
+    <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 rounded-full bg-clinic-white/90 px-1 shadow-[0_2px_12px_rgb(0_0_0/0.08)] backdrop-blur-sm tablet:bottom-6" role="group" aria-label="Choose a slide">
+      {heroSlides.map((slide, index) => <button key={slide.id} type="button" className="group flex size-11 cursor-pointer items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-clinic-navy focus-visible:ring-offset-2" data-hero-go-to={index} aria-label={`Show slide ${index + 1}: ${slide.lines.map((line) => line.text).join(" ")}`} aria-controls={`home-hero-slide-${index + 1}`} aria-current={index === 0 ? "true" : "false"}>
+        <span className="size-2.5 rounded-full bg-clinic-sage/55 transition-[background-color,transform] group-hover:bg-clinic-navy/70 group-aria-[current=true]:scale-125 group-aria-[current=true]:bg-clinic-navy motion-reduce:transition-none" aria-hidden="true"></span>
+      </button>)}
+    </div>
     <p className="sr-only" data-hero-status aria-live="polite" aria-atomic="true"></p>
   </div>;
 }

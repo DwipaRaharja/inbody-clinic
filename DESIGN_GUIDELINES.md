@@ -62,8 +62,8 @@ atau langkah klinis yang memakai Montserrat, gunakan override `font-sans!`.
 CTA default berbentuk pill, Sage, White, dengan panah. Varian `contact` memakai Navy
 serta teks normal case. Hover dan reduced motion mengikuti komponen yang sama.
 `BookingButton` menuju Contact Us; alur booking sudah selesai sesuai konfirmasi pengguna
-dan integrasi eksternal tidak diperlukan. Profil kedua tetap menunggu data;
-jangan menampilkan slot, credential, atau konfirmasi appointment rekaan.
+dan integrasi eksternal tidak diperlukan. Gunakan credential tiap anggota tim yang
+diberikan pengguna; jangan menampilkan slot atau konfirmasi appointment rekaan.
 
 `js/components/care.jsx` menyediakan `MethodPreview`, `MethodSteps`, `TeamPreview`,
 `WhatToExpect`, dan `AssessmentCTA`. ID heading bisa disesuaikan agar tetap unik.
@@ -102,8 +102,10 @@ Kutipan pasien tidak diubah. Jangan memasukkan kembali section lama tanpa meninj
 
 Hero mempertahankan autoplay 5000ms, transisi 700ms, arah masuk dari kanan/keluar ke kiri,
 inert/aria-hidden pada slide nonaktif, serta reduced motion. Fokus di dalam hero, visibilitas tab,
-dan posisi hero diperhatikan oleh controller. Tidak ada tombol navigasi slider yang ditambahkan.
-Ketiga foto hero dipertahankan karena pemilihan foto masih ingin didiskusikan pengguna.
+dan posisi hero diperhatikan oleh controller. Tiga tombol titik di tengah bawah hero memilih slide
+dan menandai slide aktif; navigasi slider tidak memakai panah atau ikon caret.
+Slide ketiga hero memakai foto tim terbaru yang diberikan pengguna pada `assets/images/home/hero-3.jpg`.
+Foto slide pertama dan kedua tetap mengikuti aset yang sudah dipilih.
 
 Kartu speciality memakai grid 1/2/3 kolom. Seluruh kartu adalah tautan ke speciality;
 panah adalah dekorasi dalam link yang sama. Judul, pertanyaan, dan ringkasan memberi
@@ -118,6 +120,20 @@ Konten lengkap berada di `js/data/specialities/index.js`; template terdapat di
 Setiap speciality memuat hero, kebutuhan/gejala, clinical approach, teknik yang mungkin
 sesuai, kapan care relevan, detail treatment terkait, dan assessment enquiry CTA.
 Foto di dalam container memakai sudut membulat dan `object-cover`.
+
+Halaman Skin & Tissue Health memakai copy Cellulite & Tissue Remodelling dan foto
+yang diberikan client pada `assets/images/specialities/skin-tissue-health/hero.jpg`.
+Template speciality tetap sama, dengan tujuh kebutuhan, enam teknik, dan dua kartu:
+Cellulite & Tissue Remodelling serta Support for Skin Firmness & Hormonal Body Changes.
+Revisi ini hanya berlaku pada halaman speciality;
+konten dan URL halaman detail treatment lama tetap tersedia.
+
+Clinical Lymphatic Care menampilkan sembilan kebutuhan dari brief client dan satu kartu
+Advanced Lymphatic Therapy, menggantikan dua kartu sebelumnya. Kartu tersebut menuju URL
+detail `pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html`.
+Detail memakai template service bersama, dengan hero, sembilan indikasi, dan lima teknik
+dari brief terbaru. Tiga kartu manfaat, kutipan, CTA kontak, dan foto lama dipertahankan
+sesuai pilihan pengguna. URL Lymphatic Reset lama tetap tersedia tanpa kartu pada speciality ini.
 
 The InBody Method™ memakai halaman `pages/the-inbody-method.html` dan data `js/data/method.js`:
 
@@ -145,6 +161,11 @@ Tiga belas treatment tetap memakai template `js/sections/service/index.jsx`. Bre
 speciality induk ditambahkan. Endometriosis tetap ditautkan dari Women's Health pada About,
 tanpa menetapkan parent speciality baru. Catatan copy lama tetap terbuka pada `docs/SERVICE_COPY_REVIEW.md`.
 
+Clinical Cellulite Remodelling memakai `hero-treatment.jpg` untuk hero dan `tissue-treatment.jpg`
+untuk Ideal If You Notice, keduanya dari foto client di folder aset treatment tersebut.
+Kedua kartu The Treatment & What to Expect memakai `ServiceExpertiseList` yang sama:
+daftar bernomor dengan latar abu-abu, tanpa varian khusus ikon pada kartu kanan.
+
 Footer memakai Navy, logo, lima navigasi utama, Facebook/TikTok/Envelope/WhatsApp/Instagram,
 serta tautan Method. Tagline memakai “Clinical expertise. Personalised care.”.
 
@@ -154,13 +175,17 @@ Layout About sebelumnya dipertahankan sesuai koreksi pengguna. `TherapistProfile
 menampilkan profil di kiri dan foto Saila di kanan; `TherapistCredentials` memakai empat
 kartu pada section Sage; `TherapistExpertise` mempertahankan grid expertise 2×2;
 `MethodPreview` tetap menjadi pengantar Method. Label pembuka memakai “Meet our team”.
-Sesuai izin pengguna, `TeamDetails` ditambahkan setelah expertise dan sebelum Method,
-tanpa mengubah tata letak section lama. Section ini memakai informasi kolektif pada
+`BeatrizProfile` ditambahkan setelah expertise Saila, sebelum `TeamDetails` dan Method.
+Section memakai nama, foto asli, pengalaman 22+ tahun, lima area expertise, serta
+filosofi perawatan yang diberikan pengguna melalui data `beatriz` di `js/data/team.js`.
+Judul profesi membedakan latar pendidikan Chile dan peran Remedial Massage Therapist di Australia.
+Foto `assets/images/about/beatriz.jpg` dipertahankan utuh, dengan layout satu kolom di HP
+dan foto di kiri/teks di kanan pada desktop. Gunakan H2 agar halaman tetap memiliki satu H1.
+`TeamDetails` memakai informasi kolektif pada
 `team.introduction`, `team.philosophy`, dan `team.sharedCare`, foto bersama lokal
 `assets/images/about/team.jpg` melalui `team.detailImage`, serta CTA Contact Us.
-Profil Saila memakai data yang sudah tersedia; profil kedua masih menunggu identitas,
-bio, dan credential pribadi dari klinik. Foto bersama tambahan bukan pengganti profil
-individu kedua lengkap. Jangan menambahkan identitas atau kualifikasi rekaan.
+Profil Saila dan Beatriz memakai data masing-masing; jangan menambahkan nama belakang,
+identitas, atau kualifikasi yang belum diberikan. Foto bersama mendukung pengantar kolektif.
 Team overview Home menggunakan informasi kolektif client dan foto bersama yang sudah tersedia.
 
 Contact Us memakai data di `js/data/clinic-contact.js`, kartu kontak, Google Maps, dan form email.

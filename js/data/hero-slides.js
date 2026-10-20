@@ -51,9 +51,9 @@ export const heroSlides = [
     description: 'Women’s health, post-surgical recovery and tissue health: a personalised approach combining clinical experience, specialised manual therapy and technology when appropriate.',
     image: {
       src: './assets/images/home/hero-3.jpg',
-      alt: 'An InBody Clinic practitioner welcoming patients in the clinic',
-      width: 1024,
-      height: 318,
+      alt: 'The InBody Clinic team standing together beside an INDIBA treatment device',
+      width: 1536,
+      height: 1024,
     },
     benefits,
   },
