@@ -54,7 +54,6 @@ export const serviceNavigationGroups = [
     services: [
       { id: 'clinical-cellulite-remodelling', label: 'Clinical Cellulite Remodelling', href: './pages/services/body-contouring/clinical-cellulite-remodelling.html' },
       { id: 'lymphatic-reset-fluid-retention-treatment', label: 'Lymphatic Reset & Fluid Retention Treatment', href: './pages/services/body-contouring/lymphatic-reset-fluid-retention-treatment.html' },
-      { id: 'hormonal-skin-tightening-firmness-treatment', label: 'Hormonal Skin Tightening & Firmness Treatment', href: './pages/services/body-contouring/hormonal-skin-tightening-firmness-treatment.html' },
     ],
   },
 ];

@@ -10,7 +10,6 @@ import therapeuticMassage from './clinical-therapeutic-massage-injury-recovery.j
 import endometriosis from './endometriosis-pelvic-pain-support.js';
 import cellulite from './clinical-cellulite-remodelling.js';
 import lymphaticReset from './lymphatic-reset-fluid-retention-treatment.js';
-import hormonalSkin from './hormonal-skin-tightening-firmness-treatment.js';
 
 export const services = {
   [pregnancyMassage.id]: pregnancyMassage,
@@ -25,7 +24,6 @@ export const services = {
   [endometriosis.id]: endometriosis,
   [cellulite.id]: cellulite,
   [lymphaticReset.id]: lymphaticReset,
-  [hormonalSkin.id]: hormonalSkin,
 };
 
 export function getService(serviceId) {

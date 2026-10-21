@@ -111,9 +111,6 @@ const details = {
       ...services['clinical-cellulite-remodelling'],
       name: 'Cellulite & Tissue Remodelling',
       summary: 'Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility.',
-    }, {
-      ...services['hormonal-skin-tightening-firmness-treatment'],
-      name: 'Support for Skin Firmness & Hormonal Body Changes',
     }],
   },
 };

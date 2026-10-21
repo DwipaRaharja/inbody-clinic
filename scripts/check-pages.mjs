@@ -31,7 +31,7 @@ async function findHtmlFiles(directory, prefix = '') {
   return files;
 }
 
-assert.equal(routes.length, 24, 'Expected 24 existing public routes');
+assert.equal(routes.length, 23, 'Expected 23 public routes after removing the hormonal skin treatment');
 assert.equal(new Set(routes.map(route => route.path)).size, routes.length, 'Route paths must be unique');
 const expectedFiles = routes.map(route => route.path === '/' ? 'index.html' : route.path.slice(1)).sort();
 const htmlFiles = (await findHtmlFiles(outputRoot)).filter(filename => filename !== '404.html').sort();
@@ -167,6 +167,9 @@ for (const page of renderedPages.values()) {
   const assessmentHref = decodeAttribute(assessmentLink.match(/href="([^"]+)"/u)?.[1] ?? '');
   assert.equal(assessmentHref, assessmentBooking.href, `${page.filename}: inconsistent first-appointment link`);
   assert.ok(page.html.indexOf('data-nav-assessment') < page.html.indexOf('data-nav-speciality'), `${page.filename}: first-appointment entry must precede categories`);
+  if (page.pageId === 'service') {
+    assert.equal((page.html.match(/data-section-frame="assessment"/gu) ?? []).length, 0, `${page.filename}: service pages use the booking CTA instead of the Start Here section`);
+  }
   if (['home', 'speciality', 'method'].includes(page.pageId)) {
     const panelButton = page.html.match(/<a\b[^>]*href="([^"]+)"[^>]*><span>BOOK YOUR FIRST APPOINTMENT<\/span>/u);
     assert.equal(decodeAttribute(panelButton?.[1] ?? ''), assessmentBooking.href, `${page.filename}: assessment button must use the shared booking link`);

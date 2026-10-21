@@ -1,7 +1,7 @@
 import { Icon } from './icons.jsx';
 import { siteUrl } from '../utils/urls.js';
 
-export const bookingHref = './pages/contact.html';
+export const bookingHref = 'https://www.fresha.com/id/a/inbody-clinic-womens-health-clinical-lymphatic-care-double-bay-sydney-double-bay-level-1-336-new-south-head-rd-new-south-head-road-spgbnjt8/booking?menu=true&share=true&offerItems=sv%3A29617337&pId=2642624&dppub=true&cartId=499f95dd-448b-4abd-95ab-c7a3ff8814f2';
 
 const variants = {
   hero: {

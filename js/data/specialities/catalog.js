@@ -42,10 +42,11 @@ const catalog = [
   {
     id: 'skin-tissue-health',
     name: 'Skin & Tissue Health',
+    homeName: 'Cellulite & Tissue Remodelling',
     question: 'Concerned about cellulite or tissue changes?',
     summary: 'Clinical care for cellulite, skin texture and changes in connective tissue quality.',
     icon: 'skin-health', svg: true,
-    serviceIds: ['clinical-cellulite-remodelling', 'hormonal-skin-tightening-firmness-treatment'],
+    serviceIds: ['clinical-cellulite-remodelling'],
   },
 ];
 

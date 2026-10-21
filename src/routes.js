@@ -32,13 +32,6 @@ export const routes = [
     "description": "Explore clinical cellulite remodelling at InBody Clinic in Double Bay, with personalised treatment for fluid retention, tissue congestion and skin texture."
   },
   {
-    "path": "/pages/services/body-contouring/hormonal-skin-tightening-firmness-treatment.html",
-    "pageId": "service",
-    "serviceId": "hormonal-skin-tightening-firmness-treatment",
-    "title": "Hormonal Skin Tightening & Firmness Treatment | InBody Clinic",
-    "description": "Discover personalised skin firmness and body contouring care at InBody Clinic in Double Bay, tailored to tissue changes across hormonal life stages."
-  },
-  {
     "path": "/pages/services/body-contouring/lymphatic-reset-fluid-retention-treatment.html",
     "pageId": "service",
     "serviceId": "lymphatic-reset-fluid-retention-treatment",

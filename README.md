@@ -1,11 +1,12 @@
 # InBody Clinic
 
 Website klinik menggunakan **React, Vite, React Router, dan Tailwind CSS v4**.
-Build menghasilkan 24 halaman HTML berisi konten (prerender), lalu React mengaktifkan
+Build menghasilkan 23 halaman HTML berisi konten (prerender), lalu React mengaktifkan
 interaksi di browser melalui hydration. Navbar dan footer tetap terpasang selama navigasi
 internal; konten utama, URL, metadata, dan menu aktif mengikuti halaman tujuan.
 
-Desain, copy, foto asli, enam speciality, 13 treatment, dan URL `.html` dipertahankan.
+Website memuat enam speciality dan 12 treatment aktif, menggunakan desain, copy,
+dan foto asli yang telah disetujui.
 Animasi masuk header memakai GSAP core dari CDN: latar bar kontak terbuka dari atas
 ke bawah, lalu lokasi/email/telepon dan menu navbar memudar masuk. Logo tetap statis.
 Animasi hanya berjalan sekali setiap dokumen dibuka, menghormati reduced motion,
@@ -24,7 +25,7 @@ Home memilih kelompok melalui `js/features/home-reveal.js`; Clinic dan Contact m
 atribut `data-content-reveal` (`rise`/`fade`) dan `data-content-reveal-group` untuk stagger.
 `js/features/care-reveal.js` memilih elemen yang sudah ada pada layout service,
 template speciality, dan halaman Method. Inisialisasi dipasang pada factory layout
-agar semua 13 service dan enam speciality mengikuti perilaku yang sama tanpa mengubah
+agar semua 12 service dan enam speciality mengikuti perilaku yang sama tanpa mengubah
 struktur HTML atau class layout. Foto Method hanya fade-in agar posisi sticky tetap utuh.
 Foto galeri memudar bersama keterangannya; dialog galeri tetap langsung terbuka.
 Kolom form Contact muncul bersama labelnya dan langsung terlihat saat mendapat fokus.
@@ -57,7 +58,7 @@ secara manual. Jalankan build lagi setelah mengubah source.
 ```text
 src/
 ├── App.jsx                         # Layout React, routing, metadata, fokus, scroll
-└── routes.js                       # 24 alamat publik dan metadata setiap halaman
+└── routes.js                       # 23 alamat publik dan metadata setiap halaman
 js/
 ├── components/*.jsx                # Navbar, footer, Heading, tombol, ikon, shared care
 ├── sections/                       # Section React untuk Home, About, Clinic, Contact,
@@ -77,7 +78,7 @@ dist/                               # Output untuk GitHub Pages atau Hostinger
 
 `src/routes.js` adalah sumber alamat, ID halaman, judul, serta deskripsi. Build membuat
 `dist/index.html`, empat halaman umum di `dist/pages/`, enam speciality di
-`dist/pages/specialities/`, dan 13 treatment di `dist/pages/services/<category>/`.
+`dist/pages/specialities/`, dan 12 treatment di `dist/pages/services/<category>/`.
 File HTML halaman bukan lagi source yang perlu disalin atau dipelihara satu per satu.
 
 ## GitHub Pages
@@ -109,7 +110,7 @@ Repository `username.github.io` atau Pages yang memakai custom domain pada root 
 Base memengaruhi URL bundle, font ikon, foto, dan navigasi, sehingga hasil build untuk satu base
 harus digunakan pada lokasi hosting yang sesuai. Jangan mengubahnya hanya pada HTML output.
 
-Semua 24 alamat `.html` memiliki file HTML sendiri. Link langsung dan refresh bekerja pada
+Semua 23 alamat `.html` memiliki file HTML sendiri. Link langsung dan refresh bekerja pada
 GitHub Pages tanpa `HashRouter`, trik `404.html`, atau rewrite server ke halaman Home.
 
 ## Hostinger hPanel
@@ -173,7 +174,11 @@ Panel assessment Home/speciality/Method dan pilihan Start Here di navbar memakai
 bersama `js/data/assessment-booking.js`: Initial Assessment & Treatment selama 90 menit,
 dengan tombol BOOK YOUR FIRST APPOINTMENT. Link yang diberikan client menargetkan
 layanan Fresha `sv:29617337` pada lokasi `2731243`.
-Tombol appointment umum tetap menuju Contact Us. Form memvalidasi nama berupa
+Halaman service diakhiri dengan `ServiceCTA` melalui `js/layouts/service-page.jsx`.
+Tombol pada section tersebut memakai `BookingButton` berlabel Book an Appointment,
+dengan link Fresha bersama. Section Start Here terpisah tidak dipasang pada halaman service.
+Tombol Book an Appointment di navbar dan hero Home memakai `BookingButton`, dengan
+link Fresha bersama pada `bookingHref` di `js/components/button.jsx`. Form memvalidasi nama berupa
 huruf Unicode/spasi dan membuka draf email di aplikasi pengguna. Pemilihan layanan,
 slot, dan penyelesaian booking dilakukan di Fresha; website tidak menyimpan booking.
 
@@ -215,12 +220,12 @@ respons GSAP hanya disimpan di memori selama tes.
 `npm run test:home-reveal` memeriksa kelompok Home/Clinic/Contact, stagger, animasi sekali,
 fokus keyboard, cleanup, reduced motion, serta fallback CDN gagal/lambat tanpa jaringan.
 
-`npm test` memvalidasi **hasil build yang sudah ada di `dist/`**: 24 HTML prerender,
+`npm test` memvalidasi **hasil build yang sudah ada di `dist/`**: 23 HTML prerender,
 metadata, satu H1/main, shell, ARIA, ID unik, seluruh route/anchor, parent speciality,
 urutan Home, glyph Regular, serta aset yang ikut diterbitkan. Build harus dijalankan
 lagi sebelum tes setelah perubahan source.
 
-`test:navigation` menggunakan Playwright untuk memeriksa hydration, 24 route dalam satu
+`test:navigation` menggunakan Playwright untuk memeriksa hydration, 23 route dalam satu
 dokumen, shell yang menetap, metadata, cleanup fitur, klik cepat, Back/Forward/scroll,
 anchor, link langsung/refresh, perilaku link native, menu mobile, dan konten tanpa JavaScript.
 Tes membaca base dari `dist/index.html`; jalankan kembali setelah `build:pages` untuk

@@ -1,6 +1,6 @@
 import { assetUrl, siteUrl } from "../../utils/urls.js";
 import { Heading } from "../../components/heading.jsx";
-import { ActionButton } from "../../components/button.jsx";
+import { ActionButton, BookingButton } from "../../components/button.jsx";
 import { containerClasses } from "../../layouts/container.js";
 import { getSpecialityForService } from "../../data/specialities/catalog.js";
 function paragraphs(value) {
@@ -120,6 +120,6 @@ export function ServiceCTA(service) {
       <Heading lines={cta.lines} level={2} id="service-cta-title" size="cta" inline={true} />
       <p className="mt-4 text-[13px] leading-[1.65] text-clinic-navy/85 tablet:text-[14px]">{cta.description}</p>
     </div>
-    <div className="max-w-full shrink-0"><ActionButton label={cta.label} href={cta.href} variant="contact" /></div>
+    <div className="max-w-full shrink-0"><BookingButton variant="contact" /></div>
   </div>;
 }

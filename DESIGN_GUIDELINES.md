@@ -61,8 +61,8 @@ atau langkah klinis yang memakai Montserrat, gunakan override `font-sans!`.
 
 CTA default berbentuk pill, Sage, White, dengan panah. Varian `contact` memakai Navy
 serta teks normal case. Hover dan reduced motion mengikuti komponen yang sama.
-`BookingButton` menuju Contact Us; alur booking sudah selesai sesuai konfirmasi pengguna
-dan integrasi eksternal tidak diperlukan. Gunakan credential tiap anggota tim yang
+`BookingButton` di navbar dan hero Home menuju link Fresha yang diberikan pengguna,
+melalui `bookingHref` pada `js/components/button.jsx`. Gunakan credential tiap anggota tim yang
 diberikan pengguna; jangan menampilkan slot atau konfirmasi appointment rekaan.
 
 `js/components/care.jsx` menyediakan `MethodPreview`, `MethodSteps`, `TeamPreview`,
@@ -104,6 +104,11 @@ Data copy, durasi 90 menit, label tombol, dan URL booking berasal dari
 `js/data/assessment-booking.js`, juga dipakai CTA speciality/Method dan navbar.
 Gunakan link Fresha yang diberikan client untuk assessment `sv:29617337`, lokasi
 `2731243`. Jangan menggantinya dengan ID layanan lain.
+Halaman detail service memakai factory bersama `js/layouts/service-page.jsx` dan
+diakhiri oleh `ServiceCTA` dengan latar Light Sage. Tombol memakai `BookingButton`
+varian contact (Navy), berlabel Book an Appointment dan menuju link Fresha bersama.
+Section Start Here terpisah tidak dipasang di halaman service. Jangan menyalin
+markup tombol atau URL booking ke masing-masing file data layanan.
 
 Module Difference, testimonial, dan CTA harbour lama tetap ada tetapi tidak dipasang pada Home baru.
 Kutipan pasien tidak diubah. Jangan memasukkan kembali section lama tanpa meninjau urutan brief.
@@ -160,10 +165,9 @@ Foto di dalam container memakai sudut membulat dan `object-cover`.
 
 Halaman Skin & Tissue Health memakai copy Cellulite & Tissue Remodelling dan foto
 yang diberikan client pada `assets/images/specialities/skin-tissue-health/hero.jpg`.
-Template speciality tetap sama, dengan tujuh kebutuhan, enam teknik, dan dua kartu:
-Cellulite & Tissue Remodelling serta Support for Skin Firmness & Hormonal Body Changes.
-Revisi ini hanya berlaku pada halaman speciality;
-konten dan URL halaman detail treatment lama tetap tersedia.
+Template speciality tetap sama, dengan tujuh kebutuhan, enam teknik, dan satu kartu:
+Cellulite & Tissue Remodelling. Treatment skin firmness/hormonal body changes telah
+dihapus dari kartu terkait, data layanan, katalog, navigasi, dan route halaman detail.
 
 Clinical Lymphatic Care menampilkan sembilan kebutuhan dari brief client dan satu kartu
 Advanced Lymphatic Therapy, menggantikan dua kartu sebelumnya. Kartu tersebut menuju URL
@@ -193,7 +197,7 @@ fokus, serta perilaku mobile/hover dari controller sebelumnya.
 
 Speciality aktif memakai `aria-current="page"`. Pada detail treatment, parent speciality
 memakai `aria-current="location"`; jangan menandai parent sebagai halaman detail yang sedang dibuka.
-`serviceNavigationGroups` tetap menyimpan 13 route lama, tetapi tidak merender dropdown utama.
+`serviceNavigationGroups` tetap menyimpan 12 route treatment, tetapi tidak merender dropdown utama.
 
 Tiga belas treatment tetap memakai template `js/sections/service/index.jsx`. Breadcrumb menuju
 speciality induk ditambahkan. Endometriosis tetap ditautkan dari Women's Health pada About,
@@ -240,8 +244,8 @@ Team overview Home menggunakan informasi kolektif client dan foto bersama yang s
 
 Contact Us memakai data di `js/data/clinic-contact.js`, kartu kontak, Google Maps, dan form email.
 Name hanya menerima huruf Unicode/spasi. Form membuka draf email; tidak mengirim melalui server.
-CTA assessment menuju Fresha melalui data booking bersama; CTA appointment umum
-tetap menuju Contact Us. Form email tidak berubah menjadi form booking.
+CTA assessment menuju Fresha melalui data booking bersama; tombol Book an Appointment
+memakai link Fresha pada `bookingHref`. Form email tidak berubah menjadi form booking.
 
 Our Clinic tetap memakai 12 JPEG asli pada `gallery/`, filter kategori, grid 1/2/3 kolom,
 thumbnail 4:3, dan dialog `object-contain`. Dialog mendukung close/Escape, scroll lock,
@@ -249,7 +253,7 @@ serta pengembalian fokus. MP4 belum dipakai.
 
 ## 9. Build, HTML statis, dan pemeriksaan
 
-Source memakai React dan Vite. `src/routes.js` menyimpan 24 path, ID, judul, dan deskripsi.
+Source memakai React dan Vite. `src/routes.js` menyimpan 23 path, ID, judul, dan deskripsi.
 `npm run build` menghasilkan HTML berisi konten pada `dist/index.html`, `dist/pages/`,
 `dist/pages/specialities/`, serta `dist/pages/services/<category>/`. File entry halaman
 dibuat oleh prerender saat build; jangan menambah atau mengedit file HTML keluaran secara manual.
@@ -263,8 +267,8 @@ Semua alamat `.html` tetap dipertahankan untuk link langsung dan refresh tanpa r
 
 Tailwind membaca source React dan data project. Jalankan `npm run build`, `npm test`,
 dan `npm run test:navigation`. Ulangi dengan `npm run build:pages` untuk base subfolder.
-Tes struktur memeriksa 24 HTML prerender beserta metadata, route/anchor, ARIA, glyph,
-aset, urutan Home, enam speciality, dan 13 treatment. Tes browser memeriksa hydration,
+Tes struktur memeriksa 23 HTML prerender beserta metadata, route/anchor, ARIA, glyph,
+aset, urutan Home, enam speciality, dan 12 treatment. Tes browser memeriksa hydration,
 navigasi tanpa reload, shell, cleanup, history, mobile, dan konten tanpa JavaScript.
 Periksa visual serta interaksi setelah perubahan layout; hasil tes teknis bukan persetujuan copy client.
 

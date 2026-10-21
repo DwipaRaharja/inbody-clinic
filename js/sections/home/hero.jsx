@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { assetUrl } from "../../utils/urls.js";
 import { Heading } from "../../components/heading.jsx";
-import { ActionButton } from "../../components/button.jsx";
+import { BookingButton } from "../../components/button.jsx";
 import { containerClasses, fullBleedGridClasses, pagePaddingClasses } from "../../layouts/container.js";
 import { heroSlides } from "../../data/hero-slides.js";
 function BenefitText({ text }) {
@@ -31,7 +31,7 @@ export function HeroSlide({ slide, index = 0 }) {
       <div className="min-w-0">
         {heading}
         <p className="mt-5 mb-6 max-w-[70ch] text-[13px] leading-[1.65] tablet:text-[14px] tablet:leading-[1.4] wide:text-[16px]">{slide.description}</p>
-        <ActionButton label="Book an appointment" href="./pages/contact.html" />
+        <BookingButton />
       </div>
       <div className="min-w-0 wide:pt-4"><HeroBenefits benefits={slide.benefits} vertical /></div>
     </div>
@@ -42,7 +42,7 @@ export function HeroSlide({ slide, index = 0 }) {
       <div className="mx-auto w-full min-w-0 max-w-[600px] wide:mx-0">
         {heading}
         <p className="mt-5 mb-6 max-w-[475px] text-left text-[13px] leading-[1.65] font-normal tablet:mt-[22px] tablet:mb-[30px] tablet:text-[14px] tablet:leading-[1.4] wide:text-[16px]">{slide.description}</p>
-        <ActionButton label="Book an appointment" href="./pages/contact.html" />
+        <BookingButton />
         <HeroBenefits benefits={slide.benefits} />
       </div>
     </div>

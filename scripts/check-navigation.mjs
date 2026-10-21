@@ -183,7 +183,7 @@ try {
   await page.evaluate(() => history.back());
   await page.waitForFunction(() => location.hash === '#services');
 
-  // Exercise all 24 routes in the same document, including service/speciality changes.
+  // Exercise all public routes in the same document, including service/speciality changes.
   for (const route of routes) {
     await clickRoute(page, destinationUrl(route.path), pageData(route));
     assert.equal(new URL(page.url()).pathname, new URL(destinationUrl(route.path)).pathname);
