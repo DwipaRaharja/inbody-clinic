@@ -120,6 +120,6 @@ export function ServiceCTA(service) {
       <Heading lines={cta.lines} level={2} id="service-cta-title" size="cta" inline={true} />
       <p className="mt-4 text-[13px] leading-[1.65] text-clinic-navy/85 tablet:text-[14px]">{cta.description}</p>
     </div>
-    <div className="max-w-full shrink-0"><BookingButton variant="contact" /></div>
+    <div className="max-w-full shrink-0"><BookingButton variant="contact" href={service.booking.href} /></div>
   </div>;
 }

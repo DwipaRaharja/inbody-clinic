@@ -1,18 +1,9 @@
 import { specialityCatalog } from './specialities/catalog.js';
 
-const specialityBookingLinks = {
-  'clinical-lymphatic-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A29617377&share=true&pId=2642624',
-  'pre-post-surgical-recovery': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A29617756&share=true&pId=2642624',
-  'lipedema-lymphoedema-oncology-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A26068782&share=true&pId=2642624',
-  'pregnancy-postpartum-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&oiid=sv%3A24481861&share=true&pId=2642624',
-  'tmj-pain-stress-care': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&share=true&pId=2642624',
-  'skin-tissue-health': 'https://www.fresha.com/book-now/inbodybondi-b6ilbzwd/services?lid=2731243&share=true&pId=2642624',
-};
-
 export const specialityNavigationLinks = specialityCatalog.map(speciality => ({
   ...speciality,
   name: speciality.id === 'skin-tissue-health' ? 'Cellulite & Tissue Remodelling' : speciality.name,
-  href: specialityBookingLinks[speciality.id],
+  href: speciality.bookingHref,
 }));
 
 const navigationLinks = [

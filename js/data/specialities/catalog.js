@@ -1,3 +1,5 @@
+import { specialityBookingLinks } from './booking.js';
+
 const catalog = [
   {
     id: 'pre-post-surgical-recovery',
@@ -53,6 +55,7 @@ const catalog = [
 export const specialityCatalog = catalog.map(speciality => ({
   ...speciality,
   href: `./pages/specialities/${speciality.id}.html`,
+  bookingHref: specialityBookingLinks[speciality.id],
 }));
 
 export function getSpecialityForService(serviceId) {

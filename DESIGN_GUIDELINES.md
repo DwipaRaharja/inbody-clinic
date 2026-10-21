@@ -101,12 +101,15 @@ Urutan section Home pada renderer React:
 Assessment Home berada di dalam Services sebelum kategori, memakai varian embedded
 dari `AssessmentCTA`. Jangan menduplikasinya sebagai section setelah What to Expect.
 Data copy, durasi 90 menit, label tombol, dan URL booking berasal dari
-`js/data/assessment-booking.js`, juga dipakai CTA speciality/Method dan navbar.
+`js/data/assessment-booking.js`, juga dipakai CTA Method dan navbar.
 Gunakan link Fresha yang diberikan client untuk assessment `sv:29617337`, lokasi
 `2731243`. Jangan menggantinya dengan ID layanan lain.
 Halaman detail service memakai factory bersama `js/layouts/service-page.jsx` dan
 diakhiri oleh `ServiceCTA` dengan latar Light Sage. Tombol memakai `BookingButton`
-varian contact (Navy), berlabel Book an Appointment dan menuju link Fresha bersama.
+varian contact (Navy), berlabel Book an Appointment dan menuju link Fresha spesifik
+melalui `service.booking.href`. Data bersama `js/data/services/booking.js` memetakan
+12 halaman ke layanan Fresha dengan `offerItems=sv:<ID>` agar langsung terpilih.
+Jangan memakai `cartId` dari sesi browser atau fallback assessment untuk detail treatment.
 Section Start Here terpisah tidak dipasang di halaman service. Jangan menyalin
 markup tombol atau URL booking ke masing-masing file data layanan.
 
@@ -160,8 +163,17 @@ Konten lengkap berada di `js/data/specialities/index.js`; template terdapat di
 `js/sections/speciality/index.jsx`; route dan metadata berada di `src/routes.js`.
 
 Setiap speciality memuat hero, kebutuhan/gejala, clinical approach, teknik yang mungkin
-sesuai, kapan care relevan, detail treatment terkait, dan assessment enquiry CTA.
+sesuai, kapan care relevan, informasi treatment terkait, dan CTA booking kategori.
 Foto di dalam container memakai sudut membulat dan `object-cover`.
+
+Kartu Related treatment information membuka halaman detail treatment internal,
+dengan label View treatment details. Tombol Book an Appointment di halaman detail
+menuju URL Fresha treatment spesifik yang langsung terpilih. Section penutup speciality memakai `SpecialityBookingCTA`:
+judul Discuss your … dengan accent Sage italic, deskripsi khusus kategori, dan tombol
+Book an Appointment berwarna Navy di kanan desktop; elemen bertumpuk pada mobile/tablet.
+Panel Start Here/90 min tidak dipasang pada halaman speciality. URL kategori disimpan
+sekali di `js/data/specialities/booking.js` dan tersedia sebagai `bookingHref` pada katalog.
+Pertahankan `href` katalog untuk tautan internal kartu Our Specialities di Home.
 
 Halaman Skin & Tissue Health memakai copy Cellulite & Tissue Remodelling dan foto
 yang diberikan client pada `assets/images/specialities/skin-tissue-health/hero.jpg`.
@@ -170,8 +182,9 @@ Cellulite & Tissue Remodelling. Treatment skin firmness/hormonal body changes te
 dihapus dari kartu terkait, data layanan, katalog, navigasi, dan route halaman detail.
 
 Clinical Lymphatic Care menampilkan sembilan kebutuhan dari brief client dan satu kartu
-Advanced Lymphatic Therapy, menggantikan dua kartu sebelumnya. Kartu tersebut menuju URL
+Advanced Lymphatic Therapy, menggantikan dua kartu sebelumnya. Kartu tersebut menuju
 detail `pages/services/lymphatic-drainage/clinical-lymphatic-drainage-sydney.html`.
+Tombol booking di detail langsung memilih Advanced Lymphatic Therapy · 60 min di Fresha.
 Detail memakai template service bersama, dengan hero, sembilan indikasi, dan lima teknik
 dari brief terbaru. Tiga kartu manfaat, kutipan, CTA kontak, dan foto lama dipertahankan
 sesuai pilihan pengguna. URL Lymphatic Reset lama tetap tersedia tanpa kartu pada speciality ini.

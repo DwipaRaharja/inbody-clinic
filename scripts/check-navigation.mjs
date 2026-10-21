@@ -4,6 +4,7 @@ import { readFile, mkdir } from 'node:fs/promises';
 import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { routes } from '../src/routes.js';
+import { serviceBookings } from '../js/data/services/booking.js';
 
 // Use a local Playwright installation, or the desktop app's bundled package.
 const playwrightModule = process.env.PLAYWRIGHT_MODULE_PATH;
@@ -191,8 +192,35 @@ try {
     assert.equal(await page.title(), route.title);
     assert.equal(await page.locator('meta[name="description"]').getAttribute('content'), route.description);
     await assertShell(page);
+    if (route.serviceId) assert.equal(await page.locator('#service-contact a').getAttribute('href'), serviceBookings[route.serviceId].href, `${route.serviceId}: detail booking must preselect its Fresha treatment`);
     assert.equal(await page.locator('#navbar').evaluate((navbar, prefix) => [...navbar.querySelectorAll('a[href^="/"]')].every(link => new URL(link.href).pathname.startsWith(prefix)), base), true);
-    if (route.specialityId) assert.equal(await page.locator(`[data-nav-speciality="${route.specialityId}"]`).getAttribute('aria-current'), 'page');
+    if (route.specialityId) {
+      const categoryLink = page.locator(`[data-nav-speciality="${route.specialityId}"]`);
+      assert.equal(await categoryLink.getAttribute('aria-current'), 'page');
+      const bookingHref = await categoryLink.getAttribute('href');
+      assert.equal(await page.locator('#speciality-booking a').getAttribute('href'), bookingHref, `${route.specialityId}: speciality booking must match the dropdown`);
+      const treatmentLinks = await page.locator('[data-treatment-card]').evaluateAll(links => links.map(link => ({ id: link.dataset.treatmentCard, href: link.href })));
+      assert.ok(treatmentLinks.length > 0, `${route.specialityId}: related treatment cards must be rendered`);
+      for (const treatment of treatmentLinks) {
+        const targetRoute = routes.find(target => target.serviceId === treatment.id);
+        assert.ok(targetRoute, `${treatment.id}: missing treatment route`);
+        assert.equal(treatment.href, destinationUrl(targetRoute.path), `${treatment.id}: card must open the internal detail page`);
+        await page.locator(`[data-treatment-card="${treatment.id}"]`).click();
+        await waitForPage(page, pageData(targetRoute));
+        assert.equal(page.url(), treatment.href, `${treatment.id}: incorrect detail page`);
+        assert.equal(await page.locator('#service-contact a').getAttribute('href'), serviceBookings[treatment.id].href, `${treatment.id}: detail booking must preselect its Fresha treatment`);
+        await page.locator('[data-section-frame="service-hero"] a').first().click();
+        await waitForPage(page, pageData(route));
+      }
+      for (const width of [360, 768, 1024, 1440]) {
+        await page.setViewportSize({ width, height: 1000 });
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, `${route.specialityId}: overflow at ${width}px`);
+        assert.equal(await page.locator('#speciality-booking a').evaluate(link => {
+          const bounds = link.getBoundingClientRect();
+          return bounds.width > 0 && bounds.left >= 0 && bounds.right <= innerWidth;
+        }), true, `${route.specialityId}: booking button must fit at ${width}px`);
+      }
+    }
   }
   assert.equal(documentRequests, 1, 'Internal navigation must not reload the document');
 

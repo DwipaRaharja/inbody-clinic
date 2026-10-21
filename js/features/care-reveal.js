@@ -55,7 +55,7 @@ export function initSpecialityReveal(root) {
   const treatments = section('speciality-treatments');
   add([...(treatments?.children ?? [])].slice(0, 2));
   add(treatments?.querySelector('ul')?.children ?? []);
-  add(frame('assessment')?.children ?? []);
+  add(frame('speciality-booking')?.children ?? []);
   return initContentReveal(root, groups);
 }
 

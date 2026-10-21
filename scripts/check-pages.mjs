@@ -4,7 +4,7 @@ import { join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { routes } from '../src/routes.js';
 import { services } from '../js/data/services/index.js';
-import { serviceNavigationGroups } from '../js/data/navigation.js';
+import { serviceNavigationGroups, specialityNavigationLinks } from '../js/data/navigation.js';
 import { specialityCatalog, getSpecialityForService } from '../js/data/specialities/catalog.js';
 import { specialities } from '../js/data/specialities/index.js';
 import { assessmentBooking } from '../js/data/assessment-booking.js';
@@ -101,6 +101,21 @@ for (const { path, filename, html } of renderedPages.values()) {
 }
 
 const dropdownServices = serviceNavigationGroups.flatMap(group => group.services);
+const expectedBookingItems = {
+  'pregnancy-massage-circulation-support': '26998157',
+  'recovery-core-restoration': '24481861',
+  'postnatal-lymphatic-drainage': '24481861',
+  'post-surgical-recovery': '29617756',
+  'clinical-lymphatic-drainage-sydney': '29617377',
+  'lipedema-inflammatory-leg-care': '26068782',
+  'tmj-jaw-headache-treatment': '24480917',
+  'chronic-pain-stress-inflammation': '25827155',
+  'clinical-therapeutic-massage-injury-recovery': '29742779',
+  'endometriosis-pelvic-pain-support': '26131923',
+  'clinical-cellulite-remodelling': '29617957',
+  'lymphatic-reset-fluid-retention-treatment': '29617377',
+};
+assert.deepEqual(Object.keys(expectedBookingItems).sort(), Object.keys(services).sort(), 'Every treatment must have an explicitly verified Fresha selection');
 assert.equal(new Set(dropdownServices.map(service => service.id)).size, dropdownServices.length, 'Treatment navigation IDs must be unique');
 assert.equal(Object.keys(services).length, dropdownServices.length, 'Every treatment must have navigation data');
 for (const item of dropdownServices) {
@@ -115,6 +130,16 @@ for (const item of dropdownServices) {
   assert.equal(parentLinks.length, parent ? 1 : 0, `${item.label}: wrong active parent speciality`);
   if (parent) assert.ok(parentLinks[0][0].includes(`data-nav-speciality="${parent.id}"`), `${item.label}: incorrect parent speciality`);
   assert.equal((page.html.match(/<a\b[^>]*aria-current="page"[^>]*>/gu) ?? []).length, 0, `${item.label}: parent must not be marked as the detail page`);
+  const bookingSection = page.html.match(/<section\b[^>]*\sid="service-contact"[\s\S]*?<\/section>/u)?.[0] ?? '';
+  const bookingButton = bookingSection.match(/<a\b[^>]*href="([^"]+)"[^>]*><span>Book an appointment<\/span>/u);
+  assert.ok(bookingButton, `${item.label}: missing treatment booking button`);
+  assert.equal(decodeAttribute(bookingButton[1]), data.booking?.href, `${item.label}: button must use the treatment-specific Fresha link`);
+  const bookingUrl = new URL(data.booking.href);
+  assert.equal(bookingUrl.origin, 'https://www.fresha.com', `${item.label}: booking must open Fresha`);
+  assert.ok(bookingUrl.pathname.endsWith('/booking'), `${item.label}: must open the booking flow`);
+  assert.equal(bookingUrl.searchParams.get('offerItems'), `sv:${expectedBookingItems[item.id]}`, `${item.label}: incorrect selected Fresha treatment`);
+  assert.equal(bookingUrl.searchParams.get('pId'), '2642624', `${item.label}: incorrect Fresha partner`);
+  assert.ok(!bookingUrl.searchParams.has('cartId'), `${item.label}: do not share a previous visitor's cart`);
 }
 
 assert.equal(specialityCatalog.length, 6, 'Expected the six client specialities');
@@ -129,6 +154,25 @@ for (const speciality of specialityCatalog) {
   assert.ok(activeLinks[0][0].includes(`data-nav-speciality="${speciality.id}"`), `${speciality.name}: incorrect active link`);
   assert.ok(renderedPages.get('/').html.includes(`href="${base}${route.slice(1)}"`), `${speciality.name}: missing Home card`);
   for (const id of speciality.serviceIds) assert.ok(services[id], `${speciality.name}: unknown related treatment`);
+
+  const navigation = specialityNavigationLinks.find(link => link.id === speciality.id);
+  assert.equal(new URL(navigation.href).hostname, 'www.fresha.com', `${speciality.name}: booking must go to Fresha`);
+  const activeHref = decodeAttribute(activeLinks[0][0].match(/href="([^"]+)"/u)?.[1] ?? '');
+  assert.equal(activeHref, navigation.href, `${speciality.name}: navbar must use the shared category booking link`);
+  const treatmentLinks = [...page.html.matchAll(/<a\b[^>]*data-treatment-card="([^"]+)"[^>]*>/gu)];
+  assert.deepEqual(treatmentLinks.map(match => match[1]), specialities[speciality.id].treatments.map(treatment => treatment.id), `${speciality.name}: related treatments must be preserved`);
+  for (const [link, id] of treatmentLinks) {
+    const treatmentPath = new URL(services[id].href, siteOrigin).pathname;
+    assert.equal(decodeAttribute(link.match(/href="([^"]+)"/u)?.[1] ?? ''), base + treatmentPath.slice(1), `${id}: related treatment must open its internal detail page`);
+  }
+  const bookingSection = page.html.match(/<section\b[^>]*\sid="speciality-booking"[\s\S]*?<\/section>/u)?.[0] ?? '';
+  assert.equal((page.html.match(/data-section-frame="speciality-booking"/gu) ?? []).length, 1, `${speciality.name}: expected one category booking CTA`);
+  assert.ok(bookingSection.includes('Discuss your'), `${speciality.name}: restore the Discuss your heading`);
+  assert.ok(decodeAttribute(bookingSection).includes(specialities[speciality.id].booking.care), `${speciality.name}: missing category heading`);
+  assert.ok(decodeAttribute(bookingSection).includes(specialities[speciality.id].booking.description), `${speciality.name}: missing category description`);
+  const bookingButton = bookingSection.match(/<a\b[^>]*href="([^"]+)"[^>]*><span>Book an Appointment<\/span>/u);
+  assert.equal(decodeAttribute(bookingButton?.[1] ?? ''), navigation.href, `${speciality.name}: CTA must book the same category as the dropdown`);
+  assert.ok(!bookingSection.includes('90 min'), `${speciality.name}: remove the assessment duration from the category CTA`);
 }
 
 const home = renderedPages.get('/');
@@ -167,10 +211,10 @@ for (const page of renderedPages.values()) {
   const assessmentHref = decodeAttribute(assessmentLink.match(/href="([^"]+)"/u)?.[1] ?? '');
   assert.equal(assessmentHref, assessmentBooking.href, `${page.filename}: inconsistent first-appointment link`);
   assert.ok(page.html.indexOf('data-nav-assessment') < page.html.indexOf('data-nav-speciality'), `${page.filename}: first-appointment entry must precede categories`);
-  if (page.pageId === 'service') {
-    assert.equal((page.html.match(/data-section-frame="assessment"/gu) ?? []).length, 0, `${page.filename}: service pages use the booking CTA instead of the Start Here section`);
+  if (['service', 'speciality'].includes(page.pageId)) {
+    assert.equal((page.html.match(/data-section-frame="assessment"/gu) ?? []).length, 0, `${page.filename}: treatment and speciality pages use the booking CTA instead of the Start Here section`);
   }
-  if (['home', 'speciality', 'method'].includes(page.pageId)) {
+  if (['home', 'method'].includes(page.pageId)) {
     const panelButton = page.html.match(/<a\b[^>]*href="([^"]+)"[^>]*><span>BOOK YOUR FIRST APPOINTMENT<\/span>/u);
     assert.equal(decodeAttribute(panelButton?.[1] ?? ''), assessmentBooking.href, `${page.filename}: assessment button must use the shared booking link`);
     assert.equal((page.html.match(/data-section-frame="assessment"/gu) ?? []).length, 1, `${page.filename}: missing or duplicated assessment panel`);

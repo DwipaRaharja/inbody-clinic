@@ -3,6 +3,10 @@ import { services } from '../services/index.js';
 
 const details = {
   'pre-post-surgical-recovery': {
+    booking: {
+      care: 'surgical recovery care',
+      description: 'Ask about support with preparation for surgery, swelling, scars and tissue recovery.',
+    },
     headline: ['Care before surgery.', 'Support through recovery.'],
     introduction: 'Personalised clinical care for people preparing for or recovering from plastic and reconstructive surgery. We consider your procedure, tissue condition and stage of recovery when planning treatment.',
     needs: ['Preparation for plastic or reconstructive surgery', 'Recovery following liposuction or abdominoplasty', 'Recovery following breast surgery or a facelift', 'Swelling and bruising', 'Scars, fibrosis and tissue restrictions', 'Functional recovery after a procedure'],
@@ -12,6 +16,10 @@ const details = {
     imageService: 'post-surgical-recovery',
   },
   'clinical-lymphatic-care': {
+    booking: {
+      care: 'lymphatic drainage care',
+      description: 'Ask about support for swelling, fluid retention and heavy legs.',
+    },
     headline: ['Understanding swelling.', 'Personalising your care.'],
     introduction: 'Specialised clinical lymphatic care for people experiencing swelling, fluid retention, heavy legs and lymphatic-related symptoms. Treatment begins with understanding your individual concerns.',
     needs: [
@@ -32,6 +40,10 @@ const details = {
     treatments: [services['clinical-lymphatic-drainage-sydney']],
   },
   'lipedema-lymphoedema-oncology-care': {
+    booking: {
+      care: 'lymphatic condition care',
+      description: 'Ask about personalised support for lipedema, lymphoedema and cancer-related lymphatic concerns.',
+    },
     headline: ['Care for your symptoms.', 'Support for your needs.'],
     introduction: 'Specialised conservative care for people with lipedema, lymphoedema and lymphatic complications associated with cancer treatment. Our approach focuses on symptom management, education and tissue care.',
     needs: ['Living with lipedema', 'Living with lymphoedema', 'Lymphatic complications associated with cancer treatment', 'Support with symptom management', 'Tissue care and understanding individual needs'],
@@ -41,6 +53,10 @@ const details = {
     imageService: 'lipedema-inflammatory-leg-care',
   },
   'pregnancy-postpartum-care': {
+    booking: {
+      care: 'pregnancy & postpartum care',
+      description: 'Ask about support for pregnancy discomfort, swelling and recovery after childbirth.',
+    },
     headline: ['Care during pregnancy.', 'Support after childbirth.'],
     introduction: 'Specialised, individual care throughout pregnancy and after childbirth, with support for discomfort, swelling, tissue recovery and postpartum rehabilitation.',
     needs: ['Pelvic and back discomfort during pregnancy', 'Swelling and a sensation of heavy legs', 'Birth preparation', 'C-section scar care', 'Abdominal tissue recovery', 'Postpartum rehabilitation support', 'Diastasis recti (abdominal separation)'],
@@ -56,6 +72,10 @@ const details = {
     },
   },
   'tmj-pain-stress-care': {
+    booking: {
+      care: 'jaw pain & tension care',
+      description: 'Ask about support for jaw discomfort, headaches and stress-related muscular tension.',
+    },
     headline: ['Understanding tension.', 'Care shaped around you.'],
     introduction: 'Specialised hands-on care for jaw pain, bruxism, muscular-tension headaches, neck discomfort and persistent muscular tension, including stress-related physical symptoms.',
     needs: ['Jaw pain and TMJ discomfort', 'Bruxism', 'Headaches associated with muscular tension', 'Neck discomfort', 'Persistent muscular tension', 'Stress-related physical symptoms'],
@@ -66,6 +86,10 @@ const details = {
     imageVariant: 'treatment',
   },
   'skin-tissue-health': {
+    booking: {
+      care: 'skin & tissue care',
+      description: 'Ask about personalised care for cellulite, skin texture, firmness and tissue mobility.',
+    },
     headline: ['Cellulite &', 'Tissue Remodelling'],
     introduction: [
       'Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility.',

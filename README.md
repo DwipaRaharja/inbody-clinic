@@ -170,13 +170,26 @@ Navbar menampilkan Start Here terlebih dahulu, lalu enam speciality. Speciality 
 pada detail treatment, parent memakai `aria-current="location"`. Endometriosis tetap
 ditautkan dari Women's Health pada About tanpa menetapkan parent speciality baru.
 
-Panel assessment Home/speciality/Method dan pilihan Start Here di navbar memakai data
+Panel assessment Home/Method dan pilihan Start Here di navbar memakai data
 bersama `js/data/assessment-booking.js`: Initial Assessment & Treatment selama 90 menit,
 dengan tombol BOOK YOUR FIRST APPOINTMENT. Link yang diberikan client menargetkan
 layanan Fresha `sv:29617337` pada lokasi `2731243`.
+Enam halaman speciality memakai `SpecialityBookingCTA` dengan judul Discuss your …,
+penjelasan sesuai kategori, dan tombol Book an Appointment menuju URL Fresha kategori
+yang sama dengan dropdown. Kartu Related treatment information membuka halaman detail
+treatment internal; tombol Book an Appointment di halaman detail memakai URL Fresha
+spesifik yang langsung memilih treatment yang sesuai.
+Sumber URL bersama berada di `js/data/specialities/booking.js`, diteruskan melalui
+`bookingHref` pada katalog; `href` katalog tetap menuju halaman penjelasan internal
+untuk kartu Our Specialities di Home. Halaman detail treatment lama tetap tersedia.
 Halaman service diakhiri dengan `ServiceCTA` melalui `js/layouts/service-page.jsx`.
 Tombol pada section tersebut memakai `BookingButton` berlabel Book an Appointment,
-dengan link Fresha bersama. Section Start Here terpisah tidak dipasang pada halaman service.
+dengan `href` dari `service.booking`. Pemetaan 12 halaman ke layanan Fresha disimpan
+di `js/data/services/booking.js`; setiap URL memakai `offerItems=sv:<ID>` dan tidak
+menyimpan `cartId` pengunjung. Core Restoration/Postnatal Drainage berbagi Postpartum
+Recovery, dan dua halaman lymphatic berbagi Advanced Lymphatic Therapy. Catatan
+verifikasi dan nama layanan tersedia di `docs/FRESHA_BOOKING.md`.
+Section Start Here terpisah tidak dipasang pada halaman service.
 Tombol Book an Appointment di navbar dan hero Home memakai `BookingButton`, dengan
 link Fresha bersama pada `bookingHref` di `js/components/button.jsx`. Form memvalidasi nama berupa
 huruf Unicode/spasi dan membuka draf email di aplikasi pengguna. Pemilihan layanan,

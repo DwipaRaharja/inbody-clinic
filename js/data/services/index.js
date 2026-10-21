@@ -10,21 +10,13 @@ import therapeuticMassage from './clinical-therapeutic-massage-injury-recovery.j
 import endometriosis from './endometriosis-pelvic-pain-support.js';
 import cellulite from './clinical-cellulite-remodelling.js';
 import lymphaticReset from './lymphatic-reset-fluid-retention-treatment.js';
+import { serviceBookings } from './booking.js';
 
-export const services = {
-  [pregnancyMassage.id]: pregnancyMassage,
-  [recoveryCore.id]: recoveryCore,
-  [postnatalDrainage.id]: postnatalDrainage,
-  [postSurgical.id]: postSurgical,
-  [clinicalLymphatic.id]: clinicalLymphatic,
-  [lipedema.id]: lipedema,
-  [tmj.id]: tmj,
-  [chronicPain.id]: chronicPain,
-  [therapeuticMassage.id]: therapeuticMassage,
-  [endometriosis.id]: endometriosis,
-  [cellulite.id]: cellulite,
-  [lymphaticReset.id]: lymphaticReset,
-};
+export const services = Object.fromEntries([
+  pregnancyMassage, recoveryCore, postnatalDrainage, postSurgical,
+  clinicalLymphatic, lipedema, tmj, chronicPain,
+  therapeuticMassage, endometriosis, cellulite, lymphaticReset,
+].map(service => [service.id, { ...service, booking: serviceBookings[service.id] }]));
 
 export function getService(serviceId) {
   return Object.hasOwn(services, serviceId) ? services[serviceId] : null;

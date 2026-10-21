@@ -1,7 +1,6 @@
 import { assetUrl, siteUrl } from "../../utils/urls.js";
 import { Heading } from "../../components/heading.jsx";
 import { ActionButton } from "../../components/button.jsx";
-import { AssessmentCTA } from "../../components/care.jsx";
 import { containerClasses } from "../../layouts/container.js";
 import { initSpecialityReveal } from "../../features/care-reveal.js";
 function paragraphs(value) {
@@ -57,6 +56,15 @@ export function SpecialityTreatments(speciality) {
     </ul>
   </div>;
 }
+export function SpecialityBookingCTA(speciality) {
+  return <div className={`${containerClasses} flex min-w-0 flex-col items-start gap-6 py-10 tablet:py-12 wide:flex-row wide:items-center wide:justify-between wide:gap-10`} data-section-frame="speciality-booking">
+    <div className="min-w-0">
+      <Heading lines={[{ text: "Discuss your" }, { text: speciality.booking.care, accent: true }]} level={2} id="speciality-booking-title" size="cta" inline={true} />
+      <p className="mt-4 text-[13px] leading-[1.65] text-clinic-navy/85 tablet:text-[14px]">{speciality.booking.description}</p>
+    </div>
+    <div className="max-w-full shrink-0"><ActionButton label="Book an Appointment" href={speciality.bookingHref} variant="contact" /></div>
+  </div>;
+}
 export function createSpecialityPage(speciality) {
   return {
     id: "speciality",
@@ -89,10 +97,10 @@ export function createSpecialityPage(speciality) {
         render: () => <SpecialityTreatments {...speciality} />
       },
       {
-        id: "assessment",
+        id: "speciality-booking",
         className: "bg-clinic-light-sage",
-        labelledBy: "assessment-title",
-        render: AssessmentCTA
+        labelledBy: "speciality-booking-title",
+        render: () => <SpecialityBookingCTA {...speciality} />
       }
     ]
   };

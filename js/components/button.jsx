@@ -33,6 +33,6 @@ export function ActionButton({ label, href, variant = 'hero', type = 'button' })
   return <Tag className={`inline-flex max-w-full cursor-pointer items-center justify-center ${styles.shapeClasses ?? 'rounded-full'} ${styles.colorClasses ?? 'bg-clinic-sage'} font-sans font-medium leading-[1.25] ${styles.textClasses ?? 'tracking-[0.045em] uppercase'} text-clinic-white transition-[filter,transform] duration-[160ms] hover:-translate-y-px hover:brightness-95 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${styles.classes}`} {...attributes}><span>{label}</span><Icon name="arrow" className={`shrink-0 ${styles.iconClasses}`} /></Tag>;
 }
 
-export function BookingButton({ variant = 'hero' } = {}) {
-  return <ActionButton label="Book an appointment" href={bookingHref} variant={variant} />;
+export function BookingButton({ variant = 'hero', href = bookingHref } = {}) {
+  return <ActionButton label="Book an appointment" href={href} variant={variant} />;
 }
