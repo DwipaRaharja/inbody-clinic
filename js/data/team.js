@@ -6,6 +6,7 @@ const teamPortrait = {
 };
 
 export const team = {
+  summary: 'International training from Spain and Chile. Personalised care in Double Bay.',
   introduction: 'We are internationally trained physiotherapists with specialised education and extensive clinical experience, working within our respective professional scopes in Australia.',
   philosophy: 'As women and mothers ourselves, we understand how important it is to feel listened to, cared for and supported throughout different stages of life.',
   sharedCare: 'Our team shares the same clinical approach through The InBody Method™. Individual assessment, specialised hands-on treatment and ongoing reassessment guide your care with either member of our team.',
@@ -17,7 +18,6 @@ export const saila = {
   id: 'saila',
   name: 'Saila Insua López',
   role: 'Spain-trained physiotherapist',
-  profileFocus: 'Women’s health & advanced lymphatic care',
   experience: '20+ years of clinical experience',
   image: {
     src: './assets/images/about/saila.jpg',
@@ -25,14 +25,15 @@ export const saila = {
     width: 1600,
     height: 1066,
   },
-  summary: 'Saila specialises in women’s health, dermatofunctional therapy and advanced lymphatic care, combining clinical knowledge with personalised hands-on treatment.',
+  summary: 'With over 20 years of clinical experience, Saila specialises in women’s health, dermatofunctional therapy and advanced lymphatic care.',
   expertise: [
-    { title: 'Post-surgical recovery', href: './pages/services/lymphatic-drainage/post-surgical-recovery.html' },
-    { title: 'Advanced lymphatic therapy', href: './pages/specialities/clinical-lymphatic-care.html' },
-    { title: 'Women’s health & life stages', href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html' },
-    { title: 'Tissue rehabilitation', href: './pages/specialities/skin-tissue-health.html' },
+    { title: 'Women’s Health', href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html' },
+    { title: 'Dermatofunctional Therapy', href: './pages/specialities/skin-tissue-health.html' },
+    { title: 'Advanced Lymphatic Care', href: './pages/specialities/clinical-lymphatic-care.html' },
   ],
-  approachSummary: 'Individual assessment and specialised hands-on therapy guide Saila’s care. Therapeutic technology may support treatment when appropriate.',
+  approach: [
+    'Individual assessment and specialised hands-on therapy inform Saila’s care, including Vodder and Leduc lymphatic drainage techniques. Therapeutic technology may support treatment when appropriate.',
+  ],
   contactLabel: 'Contact Saila',
   contactHref: 'mailto:Sailainsua@gmail.com',
 };
@@ -42,8 +43,6 @@ export const beatriz = {
   name: 'Beatriz',
   role: 'Chilean-Trained Physiotherapist | Australian Remedial Massage Therapist',
   experience: '22+ Years of Clinical Experience',
-  summary: 'Beatriz brings extensive experience in musculoskeletal rehabilitation, clinical lymphatic drainage and specialised manual therapy, with a personalised, evidence-informed approach.',
-  approachSummary: 'Every treatment reflects the individual’s needs, combining clinical experience and specialised hands-on care through The InBody Method™.',
   contactLabel: 'Contact our team',
   contactHref: './pages/contact.html',
   image: {

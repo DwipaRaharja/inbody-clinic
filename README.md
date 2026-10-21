@@ -151,7 +151,9 @@ Phosphor Icons Regular dibundel bersama CSS/font lokal. Google Fonts tetap dimua
 untuk Cormorant Garamond dan Montserrat. Konten utama sudah tersedia sebelum
 JavaScript aktif; slider, dropdown, dialog galeri, dan validasi form memerlukan JavaScript.
 
-Home mempertahankan urutan hero, services, method, team, expect, assessment, dan home-contact.
+Home memakai urutan hero, services, method, team, expect, dan home-contact.
+Services menampilkan panel Start Here sebelum enam kategori speciality; CTA assessment
+lama di bagian bawah Home dipindahkan ke panel ini.
 Hero menggunakan tiga foto asli dan autoplay lima detik. Our Clinic memakai 12 JPEG,
 filter, jumlah foto, serta dialog foto besar yang mengembalikan fokus dan scroll state.
 
@@ -163,22 +165,35 @@ Untuk menambahkan halaman, lengkapi data dan komponen yang sesuai, lalu daftarka
 ID, judul, dan deskripsinya pada `src/routes.js`. Build akan membuat HTML tujuan.
 Perbarui pemeriksaan jumlah route jika penambahan halaman sudah disetujui.
 
-Navbar menampilkan enam speciality. Speciality aktif memakai `aria-current="page"`;
+Navbar menampilkan Start Here terlebih dahulu, lalu enam speciality. Speciality aktif memakai `aria-current="page"`;
 pada detail treatment, parent memakai `aria-current="location"`. Endometriosis tetap
 ditautkan dari Women's Health pada About tanpa menetapkan parent speciality baru.
 
-Semua tombol appointment/assessment menuju Contact Us. Form memvalidasi nama berupa
-huruf Unicode/spasi dan membuka draf email di aplikasi pengguna. Tidak ada pengiriman
-email melalui server, booking otomatis, slot, pembayaran, atau integrasi booking eksternal.
+Panel assessment Home/speciality/Method dan pilihan Start Here di navbar memakai data
+bersama `js/data/assessment-booking.js`: Initial Assessment & Treatment selama 90 menit,
+dengan tombol BOOK YOUR FIRST APPOINTMENT. Link yang diberikan client menargetkan
+layanan Fresha `sv:29617337` pada lokasi `2731243`.
+Tombol appointment umum tetap menuju Contact Us. Form memvalidasi nama berupa
+huruf Unicode/spasi dan membuka draf email di aplikasi pengguna. Pemilihan layanan,
+slot, dan penyelesaian booking dilakukan di Fresha; website tidak menyimpan booking.
 
-About dimulai dengan “Meet your clinicians”: profil Saila dan Beatriz memakai susunan
-yang sama, sejajar mulai 901px dan bertumpuk pada layar kecil. Setelahnya adalah
-Experience & expertise, The team behind InBody Clinic, lalu The InBody Method™.
-Banner pembuka “Two clinicians, one shared approach” belum digunakan.
+About mengikuti referensi dua terapis: hero “One shared philosophy” dengan panel
+pengalaman gabungan 42+ tahun, kemudian profil Saila dan Beatriz secara bergantian.
+Foto berada di kiri untuk Saila dan kanan untuk Beatriz mulai 901px;
+pada layar kecil foto dan kartu konten bertumpuk.
 Beatriz memakai copy serta foto yang diberikan pengguna (`assets/images/about/beatriz.jpg`),
 dengan latar Chilean-trained physiotherapist dan peran Australian Remedial Massage Therapist.
 Data profil berada di `js/data/team.js`; jangan menyalin credential antaranggota tim.
-Foto bersama tetap menggunakan `assets/images/about/team.jpg`.
+Copy lama Saila serta biografi, lima rincian keahlian, dan tiga paragraf pendekatan
+Beatriz ditampilkan lengkap. Setiap profil memakai kartu biografi,
+keahlian bernomor, foto dengan caption navy, dan empat kartu fakta.
+Pendekatan Beatriz memakai panel navy. The team behind InBody Clinic muncul setelah
+profil Beatriz: foto bersama dan kartu putih berisi tiga paragraf nilai bersama.
+Kartu 42+ di hero memakai ringkasan singkat agar pengantar tidak berulang.
+Section Our clinical approach — The InBody Method™ memakai `MethodPreview` setelah
+section tim, termasuk empat
+langkah dan tautan Method. Footer langsung mengikuti section Method.
+Navbar, footer, dan komponen tombol tetap menggunakan komponen bersama.
 
 ## Verifikasi
 

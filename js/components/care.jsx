@@ -5,6 +5,7 @@ import { ActionButton } from "./button.jsx";
 import { containerClasses } from "../layouts/container.js";
 import { methodIntro, methodSteps, visitSteps } from "../data/method.js";
 import { team } from "../data/team.js";
+import { assessmentBooking } from "../data/assessment-booking.js";
 export function MethodSteps() {
   return <ol className="grid auto-rows-fr list-none grid-cols-1 gap-y-10 p-0 wide:grid-cols-4 wide:gap-x-10" aria-label="Assess, personalise, treat, reassess">
       {methodSteps.map((step, index) => <li key={step.title} className="relative min-w-0 rounded-xl border border-clinic-sage/20 bg-clinic-white p-6">
@@ -61,16 +62,20 @@ export function WhatToExpect({ id = "expect-title" } = {}) {
     </ol>
   </div>;
 }
-export function AssessmentCTA({ id = "assessment-title" } = {}) {
-  return <div className={`${containerClasses} grid min-w-0 gap-7 py-14 tablet:py-16 wide:grid-cols-[minmax(0,1fr)_auto] wide:items-center wide:gap-16`} data-section-frame="assessment">
-    <div className="min-w-0"><Heading eyebrow="An individual starting point" level={2} id={id} size="section" lines={[{ text: "Not sure what to book?" }, {
-    text: "Start here.",
-    accent: true
-  }]} />
-      <p className="mt-5 max-w-[65ch] text-[14px] leading-[1.8]">An initial assessment and personalised treatment session helps us understand your needs and recommend an appropriate approach. You do not need to choose a technique first.</p>
+export function AssessmentCTA({ id = "assessment-title", embedded = false } = {}) {
+  const frameClasses = embedded
+    ? "mt-10 rounded-2xl border border-clinic-sage/25 bg-clinic-cream p-6 tablet:mt-12 tablet:p-9"
+    : `${containerClasses} py-14 tablet:py-16`;
+  return <div className={`${frameClasses} grid min-w-0 gap-7 wide:grid-cols-[minmax(0,1fr)_minmax(280px,0.5fr)] wide:items-center wide:gap-12`} id={embedded ? "assessment" : undefined} role={embedded ? "region" : undefined} aria-labelledby={embedded ? id : undefined} data-section-frame="assessment">
+    <div className="min-w-0">
+      <Heading eyebrow={assessmentBooking.eyebrow} level={embedded ? 3 : 2} id={id} size="compact" lines={assessmentBooking.titleLines} />
+      <p className="mt-5 text-[14px] leading-[1.75] font-semibold tablet:text-[15px]">{assessmentBooking.question}</p>
+      {assessmentBooking.paragraphs.map(paragraph => <p key={paragraph} className="mt-3 max-w-[65ch] text-[13px] leading-[1.8] text-clinic-navy/85 tablet:text-[14px]">{paragraph}</p>)}
     </div>
-    <div className="min-w-0 wide:max-w-[300px]"><ActionButton label="Ask about an assessment" href="./pages/contact.html#contact-form" variant="contact" />
-      <p className="mt-3 max-w-[40ch] text-[12px] leading-[1.65] text-clinic-navy/75">Contact our team to discuss appointments and the care you are looking for.</p>
+    <div className="min-w-0 rounded-xl bg-clinic-white p-5 tablet:p-6">
+      <p className="text-[13px] leading-[1.6] font-medium tablet:text-[14px]">{assessmentBooking.appointment}</p>
+      <p className="mt-2 font-display text-[40px] leading-[1.1] font-semibold text-clinic-navy tablet:text-[46px]">{assessmentBooking.duration}</p>
+      <div className="mt-5 [&_a]:w-full [&_a]:font-light"><ActionButton label={assessmentBooking.buttonLabel} href={assessmentBooking.href} variant="contact" /></div>
     </div>
   </div>;
 }

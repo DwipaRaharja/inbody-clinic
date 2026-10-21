@@ -1,13 +1,14 @@
-import { MeetClinicians, TherapistExpertise, TeamDetails } from '../sections/about/index.jsx';
+import { AboutHero, SailaProfile, BeatrizProfile, TeamDetails } from '../sections/about/index.jsx';
 import { MethodPreview } from '../components/care.jsx';
 
 export default {
   id: 'about',
   background: 'cream',
   sections: [
-    { id: 'about', className: 'bg-clinic-cream', labelledBy: 'about-title', render: MeetClinicians },
-    { id: 'expertise', className: 'bg-clinic-white', labelledBy: 'expertise-title', render: TherapistExpertise },
+    { id: 'about', className: 'bg-clinic-cream', labelledBy: 'about-title', render: AboutHero },
+    { id: 'saila-profile', className: 'bg-clinic-cream', labelledBy: 'saila-title', render: SailaProfile },
+    { id: 'beatriz-profile', className: 'bg-clinic-cream', labelledBy: 'beatriz-title', render: BeatrizProfile },
     { id: 'team-details', className: 'bg-clinic-cream', labelledBy: 'team-details-title', render: TeamDetails },
-    { id: 'method', className: 'bg-clinic-light-sage/45', labelledBy: 'method-title', render: MethodPreview },
+    { id: 'method', className: 'mt-14 bg-clinic-light-sage/45 tablet:mt-20', labelledBy: 'method-title', render: MethodPreview },
   ],
 };

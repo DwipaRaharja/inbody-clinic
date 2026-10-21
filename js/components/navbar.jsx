@@ -4,6 +4,7 @@ import { Icon } from './icons.jsx';
 import { containerClasses, pagePaddingClasses } from '../layouts/container.js';
 import { getNavigationLinks, specialityNavigationLinks } from '../data/navigation.js';
 import { assetUrl, siteUrl } from '../utils/urls.js';
+import { assessmentBooking } from '../data/assessment-booking.js';
 
 const contactClasses = 'inline-flex items-center gap-2 text-[9px] font-medium tablet:text-[10px] nav:text-[12px]';
 const contactIconClasses = 'size-[15px] shrink-0 nav:size-[18px]';
@@ -17,6 +18,14 @@ function ServicesDropdown({ serviceId, specialityId, currentPage, open, services
     <div className="invisible grid grid-rows-[0fr] opacity-0 [clip-path:inset(0_0_100%_0)] transition-[grid-template-rows,clip-path,opacity,visibility] duration-[0ms,0ms,140ms,0ms] delay-[140ms,140ms,0ms,140ms] data-[open=true]:visible data-[open=true]:grid-rows-[1fr] data-[open=true]:opacity-100 data-[open=true]:[clip-path:inset(0_0_0_0)] data-[open=true]:duration-[360ms,360ms,100ms,0ms] data-[open=true]:delay-0 motion-reduce:transition-none nav:absolute nav:inset-x-8 nav:top-full nav:mx-auto nav:max-w-[1120px] nav:grid-rows-[1fr] wide:inset-x-20" id="services-dropdown" data-open={String(open)} aria-labelledby="services-toggle" aria-hidden={!open} inert={!open}>
       <div className="min-h-0 overflow-hidden">
         <div className="min-w-0 rounded-[20px] border border-clinic-navy/25 bg-clinic-white px-4 py-5 text-clinic-navy tablet:px-6 tablet:py-6 nav:max-h-[calc(100dvh-136px)] nav:overflow-y-auto nav:overscroll-contain nav:px-8">
+          <a className="group mb-3 flex min-w-0 flex-col gap-4 rounded-xl bg-clinic-cream px-4 py-4 transition-colors hover:bg-clinic-light-sage/40 motion-reduce:transition-none tablet:flex-row tablet:items-center tablet:justify-between tablet:gap-6 tablet:px-5" data-nav-assessment href={siteUrl(assessmentBooking.href)}>
+            <span className="min-w-0">
+              <span className="block text-[9px] leading-[1.6] font-medium tracking-[0.13em] uppercase tablet:text-[10px]">{assessmentBooking.eyebrow}</span>
+              <span className="mt-2 block font-display text-[24px] leading-[1.2] font-semibold tablet:text-[26px]">{assessmentBooking.title}</span>
+              <span className="mt-2 block text-[11px] leading-[1.6] text-clinic-navy/75 tablet:text-[12px]">{assessmentBooking.appointment} | {assessmentBooking.duration}</span>
+            </span>
+            <span className="inline-flex items-center gap-3 text-[10px] leading-[1.6] font-light tablet:max-w-[190px] tablet:text-[11px]">{assessmentBooking.buttonLabel}<i className="ph ph-arrow-up-right shrink-0 text-[20px] text-clinic-sage" aria-hidden="true" /></span>
+          </a>
           <ul className="m-0 grid list-none grid-cols-1 gap-x-6 gap-y-0 p-0 tablet:grid-cols-2 wide:grid-cols-3">
             {specialityNavigationLinks.map(speciality => {
               const current = speciality.id === specialityId ? 'page' : speciality.serviceIds.includes(serviceId) ? 'location' : undefined;

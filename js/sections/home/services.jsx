@@ -3,12 +3,14 @@ import { Heading } from "../../components/heading.jsx";
 import { Icon } from "../../components/icons.jsx";
 import { specialityCatalog } from "../../data/specialities/catalog.js";
 import { containerClasses } from "../../layouts/container.js";
+import { AssessmentCTA } from "../../components/care.jsx";
 export function Services() {
   return <div className={`${containerClasses} py-14 tablet:py-20`} data-section-frame="services">
     <div className="mx-auto max-w-[900px] text-center [&_p.uppercase]:mx-auto">
       <Heading eyebrow="Our specialities" level={2} size="section" id="services-title" lines={[{ text: "How Can We Help?" }]} />
       <p className="mt-4 font-display text-[26px] leading-[1.25] text-clinic-sage tablet:text-[30px]">Specialised care tailored to your needs.</p>
     </div>
+    <AssessmentCTA embedded />
     <ul className="mt-12 grid min-w-0 list-none grid-cols-1 gap-x-8 gap-y-12 p-0 tablet:grid-cols-2 tablet:gap-y-14 wide:grid-cols-3 wide:gap-x-12">
       {specialityCatalog.map((speciality) => <li key={speciality.id} className="min-w-0">
         <a className="group mx-auto flex h-full w-full max-w-[350px] flex-col items-center text-center" href={siteUrl(speciality.href)} aria-label={`${speciality.question} Explore ${speciality.name}`}>

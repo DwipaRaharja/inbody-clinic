@@ -7,6 +7,8 @@ import { services } from '../js/data/services/index.js';
 import { serviceNavigationGroups } from '../js/data/navigation.js';
 import { specialityCatalog, getSpecialityForService } from '../js/data/specialities/catalog.js';
 import { specialities } from '../js/data/specialities/index.js';
+import { assessmentBooking } from '../js/data/assessment-booking.js';
+import { saila, beatriz } from '../js/data/team.js';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const outputRoot = resolve(projectRoot, 'dist');
@@ -133,18 +135,48 @@ const home = renderedPages.get('/');
 const about = renderedPages.get('/pages/about.html');
 assert.deepEqual(
   [...about.html.matchAll(/<section\b[^>]*\sid="([^"]+)"/gu)].map(match => match[1]),
-  ['about', 'expertise', 'team-details', 'method'],
-  'About must show the clinicians before expertise, the team and the Method',
+  ['about', 'saila-profile', 'beatriz-profile', 'team-details', 'method'],
+  'About must show the shared philosophy hero, both therapist profiles, shared team values and the Method',
 );
 assert.deepEqual(
   [...about.html.matchAll(/data-clinician="([^"]+)"/gu)].map(match => match[1]),
   ['saila', 'beatriz'],
   'About must include both clinician profiles',
 );
-assert.ok(about.html.includes('Meet your clinicians'), 'About must start with Meet your clinicians');
-assert.ok(!about.html.includes('Two clinicians.'), 'The shared-approach hero is not part of this revision');
+const aboutTitle = about.html.match(/<h1\b[^>]*id="about-title"[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? '';
+assert.ok(aboutTitle.includes('One shared philosophy.'), 'About must use the reference hero title');
+assert.ok(!about.html.includes('Different experience. A shared approach to your care.'), 'About must use the previous team copy');
+for (const clinician of [saila, beatriz]) {
+  const profile = about.html.match(new RegExp(`<article\\b[^>]*data-clinician="${clinician.id}"[\\s\\S]*?<\\/article>`, 'u'))?.[0] ?? '';
+  const content = decodeAttribute(profile);
+  const expectedCopy = [clinician.name, clinician.experience, ...clinician.role.split(' | '), ...(clinician.biography ?? [clinician.summary]), ...clinician.approach];
+  for (const item of clinician.expertise) expectedCopy.push(item.title, ...(item.description ? [item.description] : []));
+  for (const copy of expectedCopy) assert.ok(content.includes(copy), `${clinician.name}: missing approved profile copy: ${copy}`);
+  assert.ok(profile.includes('Meet your therapist'), `${clinician.name}: missing therapist eyebrow`);
+}
 const homeSections = [...home.html.matchAll(/<section\b[^>]*\sid="([^"]+)"/gu)].map(match => match[1]);
-assert.deepEqual(homeSections, ['hero', 'services', 'method', 'team', 'expect', 'assessment', 'home-contact'], 'Home section order changed');
+assert.deepEqual(homeSections, ['hero', 'services', 'method', 'team', 'expect', 'home-contact'], 'Home must place assessment inside Services rather than duplicate it below');
+const homeServices = home.html.match(/<section\b[^>]*\sid="services"[\s\S]*?<\/section>/u)?.[0] ?? '';
+assert.equal(new URL(assessmentBooking.href).searchParams.get('oiid'), 'sv:29617337', 'Assessment booking must use the client-provided service, not another treatment');
+assert.ok(homeServices.includes('data-section-frame="assessment"'), 'Home Services must feature the assessment panel');
+assert.ok(homeServices.indexOf('data-section-frame="assessment"') < homeServices.indexOf('<ul'), 'Assessment must precede the speciality categories');
+assert.equal((home.html.match(/data-section-frame="assessment"/gu) ?? []).length, 1, 'Home must include one assessment panel');
+for (const page of renderedPages.values()) {
+  const assessmentLink = page.html.match(/<a\b[^>]*\sdata-nav-assessment="[^"]*"[^>]*>/u)?.[0];
+  assert.ok(assessmentLink, `${page.filename}: missing first-appointment navigation entry`);
+  const assessmentHref = decodeAttribute(assessmentLink.match(/href="([^"]+)"/u)?.[1] ?? '');
+  assert.equal(assessmentHref, assessmentBooking.href, `${page.filename}: inconsistent first-appointment link`);
+  assert.ok(page.html.indexOf('data-nav-assessment') < page.html.indexOf('data-nav-speciality'), `${page.filename}: first-appointment entry must precede categories`);
+  if (['home', 'speciality', 'method'].includes(page.pageId)) {
+    const panelButton = page.html.match(/<a\b[^>]*href="([^"]+)"[^>]*><span>BOOK YOUR FIRST APPOINTMENT<\/span>/u);
+    assert.equal(decodeAttribute(panelButton?.[1] ?? ''), assessmentBooking.href, `${page.filename}: assessment button must use the shared booking link`);
+    assert.equal((page.html.match(/data-section-frame="assessment"/gu) ?? []).length, 1, `${page.filename}: missing or duplicated assessment panel`);
+    for (const copy of [assessmentBooking.question, ...assessmentBooking.paragraphs, assessmentBooking.duration, assessmentBooking.buttonLabel]) {
+      assert.ok(decodeAttribute(page.html).includes(copy), `${page.filename}: missing assessment copy: ${copy}`);
+    }
+    assert.ok(!page.html.includes('Ask about an assessment'), `${page.filename}: outdated assessment enquiry CTA`);
+  }
+}
 assert.ok(!/Live Better|A healthier you|Real results/iu.test(home.html), 'Home still contains generic legacy marketing copy');
 assert.ok(renderedPages.has('/pages/the-inbody-method.html'), 'Missing Method page');
 // This listing was replaced by Advanced Lymphatic Therapy; preserve its existing detail URL.

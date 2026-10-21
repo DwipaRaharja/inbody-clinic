@@ -90,12 +90,18 @@ About yang dipakai bersama hanya untuk menyesuaikan kartu Home.
 Urutan section Home pada renderer React:
 
 1. `hero`: tiga slide, headline klinis dan foto asli yang sudah ada.
-2. `services`: How Can We Help? dengan enam speciality.
+2. `services`: How Can We Help?, panel Start Here, lalu enam speciality.
 3. `method`: pengantar The InBody Method™ dan empat tahap.
 4. `team`: pengalaman dan filosofi kolektif tim.
 5. `expect`: empat langkah pengalaman kunjungan.
-6. `assessment`: Not sure what to book? Start here.
-7. `home-contact`: kontak, lokasi, jam klinik, dan peta.
+6. `home-contact`: kontak, lokasi, jam klinik, dan peta.
+
+Assessment Home berada di dalam Services sebelum kategori, memakai varian embedded
+dari `AssessmentCTA`. Jangan menduplikasinya sebagai section setelah What to Expect.
+Data copy, durasi 90 menit, label tombol, dan URL booking berasal dari
+`js/data/assessment-booking.js`, juga dipakai CTA speciality/Method dan navbar.
+Gunakan link Fresha yang diberikan client untuk assessment `sv:29617337`, lokasi
+`2731243`. Jangan menggantinya dengan ID layanan lain.
 
 Module Difference, testimonial, dan CTA harbour lama tetap ada tetapi tidak dipasang pada Home baru.
 Kutipan pasien tidak diubah. Jangan memasukkan kembali section lama tanpa meninjau urutan brief.
@@ -173,7 +179,8 @@ masih menunggu review dicatat pada `docs/REVISION_IMPLEMENTATION.md`.
 
 ## 7. Navigasi dan treatment lama
 
-Dropdown navbar memakai enam speciality dalam grid 1/2/3 kolom, pertanyaan singkat,
+Dropdown navbar dimulai dengan tautan ringkas Start Here untuk assessment 90 menit,
+lalu enam speciality dalam grid 1/2/3 kolom, pertanyaan singkat,
 dan tautan Method di bawah. Panel mempertahankan animasi, inert, keyboard Escape,
 fokus, serta perilaku mobile/hover dari controller sebelumnya.
 
@@ -195,31 +202,39 @@ serta tautan Method. Tagline memakai “Clinical expertise. Personalised care.�
 
 ## 8. About, Contact Us, dan Our Clinic
 
-About dimulai dengan H1 “Meet your clinicians” melalui `MeetClinicians`.
-Profil Saila dan Beatriz memakai satu komponen `ClinicianProfile`: foto, nama/profesi,
-pengalaman, ringkasan, Clinical focus, Her approach, serta tombol layanan dan kontak.
-Data berada pada `saila` dan `beatriz` di `js/data/team.js`, menggunakan foto asli.
-Grid menjadi dua kolom mulai 901px; di bawahnya profil bertumpuk. CSS subgrid
-menyejajarkan baris konten serta tombol kedua profil meski jumlah keahliannya berbeda.
-Foto memakai rasio 4:3 di layar kecil dan 9:5 di dua kolom, dengan crop yang konsisten.
+About mengikuti referensi `InBody-Clinic-About-Us-2-Therapists.jpg`: hero bertekstur
+grid ringan, H1 “One shared philosophy. Personalised care. The InBody Method™.”,
+dan panel pengalaman gabungan 42+ tahun dengan `team.summary`.
+Urutan section: hero, profil Saila, profil Beatriz, The team behind InBody Clinic,
+Our clinical approach — The InBody
+Method™, lalu footer. Section Method memakai `MethodPreview`
+yang sama dengan Home, termasuk copy, CTA, empat langkah, dan latar light sage.
+`TeamDetails` memakai foto bersama di kiri dan panel teks putih di kanan mulai
+901px, dengan kedua kartu sama lebar dan tinggi; bertumpuk pada layar kecil.
+Border sage tipis dan radius 22px mengikuti kartu profil. Foto mengisi tinggi
+kartu secara responsif. Copy tiga paragraf memakai `team.introduction`,
+`team.philosophy`, dan `team.sharedCare`; foto memakai `team.detailImage`.
+`ClinicianSection` menggunakan komponen kartu biografi, foto, fakta, dan keahlian
+yang sama. Foto Saila di kiri, Beatriz di kanan mulai 901px; pada layar kecil
+foto lebih dahulu lalu konten, dengan grid kartu satu kolom sebelum 641px.
+Foto asli memakai rasio 9:10 dan caption navy. Empat kartu fakta merangkum
+informasi masing-masing terapis. Panel utama putih, kartu keahlian cream, dan
+Her Approach Beatriz navy. Corner radius 16–22px dan divider sage tipis.
 Nama tiap anggota memakai H2 di bawah H1 bersama. Pengalaman Saila 20+ tahun dan
 Beatriz 22+ tahun; profesi Beatriz membedakan pendidikan Chile dan peran Australia.
-Banner “Two clinicians, one shared approach” belum digunakan sesuai arahan pengguna.
-Urutan section adalah Meet your clinicians, Experience & expertise, The team behind
-InBody Clinic, dan The InBody Method™. Strip credential terpisah dan profil Beatriz
-lama digantikan oleh profil sejajar; informasi clinical tutor Saila tetap berada
-di section expertise. `TherapistExpertise` mempertahankan grid expertise 2×2 dan
-`MethodPreview` tetap menjadi pengantar Method.
-`TeamDetails` memakai informasi kolektif pada
-`team.introduction`, `team.philosophy`, dan `team.sharedCare`, foto bersama lokal
-`assets/images/about/team.jpg` melalui `team.detailImage`, serta CTA Contact Us.
-Profil Saila dan Beatriz memakai data masing-masing; jangan menambahkan nama belakang,
-identitas, atau kualifikasi yang belum diberikan. Foto bersama mendukung pengantar kolektif.
+Copy tetap berasal dari `saila` dan `beatriz` di `js/data/team.js`. Saila memakai
+intro, tiga speciality, pendekatan, dan empat area clinical focus sebelumnya.
+Beatriz menampilkan tiga paragraf biografi, lima keahlian beserta deskripsi,
+tiga paragraf pendekatan. Section kalimat penutup filosofi bersama sudah dihapus.
+Jangan mengganti paragraf lengkap dengan summary atau menambahkan nama belakang,
+identitas, atau kualifikasi yang belum diberikan. Navbar/footer tidak disalin
+ke halaman About; gunakan shell dan tombol bersama yang sudah ada.
 Team overview Home menggunakan informasi kolektif client dan foto bersama yang sudah tersedia.
 
 Contact Us memakai data di `js/data/clinic-contact.js`, kartu kontak, Google Maps, dan form email.
 Name hanya menerima huruf Unicode/spasi. Form membuka draf email; tidak mengirim melalui server.
-CTA assessment menuju `#contact-form` tanpa prefill atau integrasi booking baru.
+CTA assessment menuju Fresha melalui data booking bersama; CTA appointment umum
+tetap menuju Contact Us. Form email tidak berubah menjadi form booking.
 
 Our Clinic tetap memakai 12 JPEG asli pada `gallery/`, filter kategori, grid 1/2/3 kolom,
 thumbnail 4:3, dan dialog `object-contain`. Dialog mendukung close/Escape, scroll lock,
