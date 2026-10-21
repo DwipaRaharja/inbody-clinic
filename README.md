@@ -194,6 +194,9 @@ Section Our clinical approach — The InBody Method™ memakai `MethodPreview` s
 section tim, termasuk empat
 langkah dan tautan Method. Footer langsung mengikuti section Method.
 Navbar, footer, dan komponen tombol tetap menggunakan komponen bersama.
+Animasi About memakai `js/features/about-reveal.js` dan controller GSAP bersama:
+foto fade-in, konten naik 16px selama 850ms, dan kartu memakai stagger 120ms.
+Efek muncul sekali per kunjungan, dengan cleanup route dan fallback reduced motion/CDN.
 
 ## Verifikasi
 

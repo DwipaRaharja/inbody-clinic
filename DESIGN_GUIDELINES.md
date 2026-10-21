@@ -82,8 +82,10 @@ SVG khusus berada di `js/components/icons.jsx` dan memakai `currentColor`.
 Kartu speciality menggunakan lingkaran Light Sage ukuran 80/88px dan ikon sekitar 40/42px.
 Surgery memakai first-aid-kit; lymphatic memakai leaf; Lipedema memakai SVG body-contour;
 pregnancy memakai SVG pregnancy; TMJ memakai heartbeat; skin/tissue memakai SVG skin-health.
-SVG kartu memakai stroke-width 0.85 pada viewBox 24px. Jangan mengubah ketebalan SVG
-About yang dipakai bersama hanya untuk menyesuaikan kartu Home.
+Ikon kartu Home memakai frame 42×42px; glyph Phosphor Regular tetap 40px dan
+SVG khusus memakai stroke-width 1.2 pada viewBox 24px agar ketebalan garisnya
+sebanding. Bentuk/path SVG dan pilihan simbol tetap sama. Penyesuaian stroke
+hanya di kartu Home; jangan mengubah default komponen `Icon` yang dipakai bersama.
 
 ## 5. Struktur Home
 
@@ -106,10 +108,10 @@ Gunakan link Fresha yang diberikan client untuk assessment `sv:29617337`, lokasi
 Module Difference, testimonial, dan CTA harbour lama tetap ada tetapi tidak dipasang pada Home baru.
 Kutipan pasien tidak diubah. Jangan memasukkan kembali section lama tanpa meninjau urutan brief.
 
-Animasi konten diterapkan pada Home, Our Clinic, Contact Us, seluruh service/speciality,
+Animasi konten diterapkan pada Home, About, Our Clinic, Contact Us, seluruh service/speciality,
 dan The InBody Method™ melalui
 `js/features/content-reveal.js`; Home memilih kelompok melalui `js/features/home-reveal.js`.
-Teks naik 16px sambil fade-in selama 850ms (`power2.out`); foto dan hero hanya fade-in.
+Teks naik 16px sambil fade-in selama 850ms (`power2.out`); foto dan slider hero Home hanya fade-in.
 Kartu serta daftar yang masuk layar bersama memakai stagger 120ms. Tiap target muncul
 sekali per kunjungan halaman, tanpa mengulang saat scroll kembali. Pergantian slide dan
 animasi header memakai controller masing-masing. Gunakan GSAP CDN yang sudah ada
@@ -127,6 +129,11 @@ Controller service dipasang sekali pada `createServicePage`, speciality pada
 per service atau menambahkan wrapper untuk animasi. Foto hanya fade-in; kartu expertise
 bergerak sebagai satu kelompok bersama judul dan daftarnya. Posisi sticky foto Method,
 grid, urutan section, dan dekorasi konektor MethodSteps harus tetap bekerja.
+About memilih elemen layout melalui `js/features/about-reveal.js`. Foto dan caption
+memudar bersama; kartu fakta, biografi, keahlian, dan pendekatan muncul sebagai
+satu unit per kartu. Section tim serta pengantar/empat langkah Method mengikuti
+controller yang sama. Jangan memilih isi kartu sebagai target animasi tambahan
+karena target induk dan anak akan membuat gerakan serta opacity bertumpuk.
 
 Hero mempertahankan autoplay 5000ms, transisi 700ms, arah masuk dari kanan/keluar ke kiri,
 inert/aria-hidden pada slide nonaktif, serta reduced motion. Fokus di dalam hero, visibilitas tab,
