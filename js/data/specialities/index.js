@@ -14,6 +14,12 @@ const details = {
     techniques: ['Specialised hands-on treatment', 'Lymphatic therapy where appropriate', 'Scar and tissue care', 'Therapeutic technology when appropriate', 'Personalised recovery and self-care advice'],
     timing: 'Care may be relevant while preparing for a procedure or at different stages after surgery. An individual assessment helps us understand the support that is appropriate for your stage of recovery.',
     imageService: 'post-surgical-recovery',
+    image: {
+      src: './assets/images/specialities/pre-post-surgical-recovery/hero.jpg',
+      alt: 'A clinician explaining supportive taping to a patient during a recovery treatment',
+      width: 1600,
+      height: 1066,
+    },
   },
   'clinical-lymphatic-care': {
     booking: {
@@ -66,9 +72,9 @@ const details = {
     imageService: 'pregnancy-massage-circulation-support',
     image: {
       src: './assets/images/specialities/pregnancy-postpartum-care/hero.jpeg',
-      alt: 'Hands applying pink kinesiology tape to the abdomen during a care session',
-      width: 1600,
-      height: 1066,
+      alt: 'A clinician providing hands-on abdominal care during a pregnancy and postpartum treatment',
+      width: 1024,
+      height: 1536,
     },
   },
   'tmj-pain-stress-care': {
