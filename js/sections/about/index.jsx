@@ -15,9 +15,9 @@ const sailaFocus = [
 const clinicianFacts = {
   saila: [
     { title: '20+', detail: 'Years of clinical experience' },
-    { title: 'Spain trained', detail: 'Physiotherapist' },
-    { title: 'Sydney', detail: 'InBody Clinic' },
-    { title: 'Clinical Tutor', detail: 'Mentoring healthcare students' },
+    { title: 'Women’s Health', detail: 'Physiotherapy specialist' },
+    { title: 'Founder & Clinical Director', detail: 'InBody Clinic, Sydney' },
+    { title: 'Clinical Placement Tutor', detail: 'Universidad Francisco de Vitoria' },
   ],
   beatriz: [
     { title: '22+', detail: 'Years of clinical experience' },
@@ -69,7 +69,6 @@ function BiographyCard({ clinician }) {
   return <div className={panelClasses} data-clinician-biography>
     <div className="flex flex-wrap items-center justify-between gap-3">
       <Eyebrow>Meet your therapist</Eyebrow>
-      {clinician.id === 'beatriz' && <p className="rounded-full bg-clinic-light-sage/40 px-3 py-1.5 text-[9px] leading-[1.5]">{clinician.experience}</p>}
     </div>
     <header className="mt-4" data-clinician-heading>
       <h2 id={`${clinician.id}-title`} className="font-display text-[36px] leading-[1.08] font-semibold tracking-[-0.018em] tablet:text-[44px] wide:text-[50px]">{clinician.name}</h2>
@@ -127,7 +126,7 @@ function ClinicianSection({ clinician, index }) {
       <div className="mb-7 flex min-w-0 flex-wrap items-center gap-x-5 gap-y-3 border-b border-clinic-sage/20 pb-4 tablet:mb-8">
         <span className="font-display text-[16px] font-semibold text-clinic-sage italic" aria-hidden="true">0{index + 1} / 02</span>
         <Eyebrow>Meet your therapist</Eyebrow>
-        <p className="ml-auto text-[9px] leading-[1.6] tracking-[0.1em] text-clinic-navy/65 uppercase tablet:text-[10px]">{index === 0 ? clinician.role : clinician.experience}</p>
+        <p className="ml-auto text-[9px] leading-[1.6] tracking-[0.1em] text-clinic-navy/65 uppercase tablet:text-[10px]">{clinician.role}</p>
       </div>
       <div className={`grid min-w-0 items-start gap-6 wide:gap-8 ${index === 0 ? 'nav:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]' : 'nav:grid-cols-[minmax(0,1.18fr)_minmax(0,0.82fr)]'}`}>
         <TherapistPortrait clinician={clinician} index={index} />

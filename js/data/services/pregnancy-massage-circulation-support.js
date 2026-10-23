@@ -28,7 +28,7 @@ export default {
     benefits: [
       { icon: 'ph-heart', label: 'Care shaped around you' },
       { icon: 'ph-sparkle', label: 'Clinically guided care' },
-      { icon: 'ph-circle', label: 'Gentle, considered approach' },
+      { icon: 'ph-baby', label: 'Gentle, considered approach' },
     ],
   },
   options: {
