@@ -22,7 +22,7 @@ export default {
   },
   hero: {
     eyebrow: 'Chronic Pain, Stress & Inflammation Therapy ',
-    lines: [{ text: 'Find Relief' }, { text: 'Feel More Restored', accent: true }],
+    lines: [{ text: 'Find relief' }, { text: 'feel more restored', accent: true }],
     subEyebrow: 'InBody Clinic · Women’s Pain Support',
     description: 'A gentle clinical treatment designed to ease persistent pain, calm the nervous system, and support the body through stress and inflammation.',
     benefits: [

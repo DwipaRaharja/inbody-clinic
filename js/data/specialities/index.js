@@ -96,7 +96,7 @@ const details = {
       care: 'skin & tissue care',
       description: 'Ask about personalised care for cellulite, skin texture, firmness and tissue mobility.',
     },
-    headline: ['Cellulite &', 'Tissue Remodelling'],
+    headline: ['Cellulite &', 'Tissue remodelling'],
     introduction: [
       'Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility.',
       'At InBody Clinic, we understand that changes in skin and connective tissue can be influenced by hormonal fluctuations, ageing, pregnancy, weight changes, surgery and medical treatments.',
@@ -139,7 +139,7 @@ const details = {
     },
     treatments: [{
       ...services['clinical-cellulite-remodelling'],
-      name: 'Cellulite & Tissue Remodelling',
+      name: 'Cellulite & Tissue remodelling',
       summary: 'Personalised dermatofunctional care to improve skin texture, tissue quality, firmness and mobility.',
     }],
   },

@@ -22,7 +22,7 @@ export default {
   },
   hero: {
     eyebrow: 'TMJ, Jaw & Headache Treatment ',
-    lines: [{ text: 'Ease The Tension' }, { text: 'Feel More At Ease', accent: true }],
+    lines: [{ text: 'Ease the tension' }, { text: 'feel more at ease', accent: true }],
     subEyebrow: 'InBody Clinic · TMJ & Jaw Care',
     description: 'Gentle, targeted care to help ease jaw tension, stress-related clenching and headaches, supporting greater comfort in everyday life.',
     benefits: [

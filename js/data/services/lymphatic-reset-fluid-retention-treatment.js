@@ -23,8 +23,8 @@ export default {
   hero: {
     eyebrow: 'Lymphatic Reset & Fluid Retention Treatment',
     lines: [
-      { text: 'Reduce Swelling, Heavy' },
-      { segments: [{ text: 'Legs & ' }, { text: 'Tissue Congestion', accent: true }] },
+      { text: 'Reduce swelling, heavy' },
+      { segments: [{ text: 'legs & ' }, { text: 'tissue congestion', accent: true }] },
     ],
     subEyebrow: 'InBody Clinic · Body Contouring',
     description: 'Many women experience persistent swelling, fluid retention, or a constant feeling of heaviness in the body. Stress, hormonal changes, sedentary lifestyle, or circulatory slowdown can overload the lymphatic system, reducing its ability to remove excess fluid and metabolic waste.',

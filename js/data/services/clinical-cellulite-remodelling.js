@@ -24,9 +24,9 @@ export default {
     eyebrow: 'Clinical Cellulite Remodelling',
     lines: [
       { text: 'Treatment for' },
-      { text: 'Cellulite, Fluid' },
-      { segments: [{ text: 'Retention & ' }, { text: 'Tissue', accent: true }] },
-      { text: 'Congestion', accent: true },
+      { text: 'cellulite, fluid' },
+      { segments: [{ text: 'retention & ' }, { text: 'tissue', accent: true }] },
+      { text: 'congestion', accent: true },
     ],
     subEyebrow: 'InBody Clinic · Body Contouring',
     description: 'Cellulite is rarely just fat. It is often associated with poor circulation, lymphatic stagnation, and connective tissue fibrosis. When fluids accumulate and connective tissue becomes rigid, the skin may develop visible dimpling and uneven texture.',

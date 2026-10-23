@@ -23,9 +23,9 @@ export default {
   hero: {
     eyebrow: 'Lipedema & Inflammatory Leg Care',
     lines: [
-      { text: 'Relief for Heavy,' },
-      { text: 'Painful and', segments: [{ text: 'Painful ' }, { text: 'and', accent: true }] },
-      { text: 'Swollen Legs', accent: true },
+      { text: 'Relief for heavy,' },
+      { text: 'painful and', segments: [{ text: 'painful ' }, { text: 'and', accent: true }] },
+      { text: 'swollen legs', accent: true },
     ],
     subEyebrow: 'InBody Clinic · Lymphatic Drainage',
     description: 'If your legs feel heavy, swollen, or tender, even with diet and exercise, it may be related to lipedema, a chronic inflammatory and lymphatic condition.',

@@ -22,7 +22,7 @@ export default {
   },
   hero: {
     eyebrow: 'Endometriosis & Pelvic Pain Support',
-    lines: [{ text: 'Feel Supported' }, { text: 'Find More Comfort', accent: true }],
+    lines: [{ text: 'Feel supported' }, { text: 'find more comfort', accent: true }],
     subEyebrow: 'InBody Clinic · Pelvic Pain Care',
     description: 'Gentle clinical care designed to ease pelvic discomfort, reduce inflammation, and improve tissue mobility, supporting long-term pelvic health and everyday comfort.',
     benefits: [

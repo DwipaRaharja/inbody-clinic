@@ -23,7 +23,7 @@ export default {
   },
   hero: {
     eyebrow: 'Postnatal Lymphatic Drainage',
-    lines: [{ text: 'Feel lighter' }, { text: 'Move freely', accent: true }],
+    lines: [{ text: 'Feel lighter' }, { text: 'move freely', accent: true }],
     description: 'A gentle, considered treatment to support circulation and help ease the feeling of heaviness after pregnancy and childbirth.',
     benefits: [
       { icon: 'ph-heart', label: 'Care shaped around you' },

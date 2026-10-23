@@ -22,7 +22,7 @@ export default {
   },
   hero: {
     eyebrow: 'Post - Surgical Recovery',
-    lines: [{ text: 'Healing Takes' }, { text: 'Thoughtful Support', accent: true }],
+    lines: [{ text: 'Healing takes' }, { text: 'thoughtful support', accent: true }],
     subEyebrow: 'InBody Clinic · Lymphatic Drainage',
     description: 'Gentle, personalised support after plastic or reconstructive surgery, shaped around your procedure and stage of healing.',
     benefits: [

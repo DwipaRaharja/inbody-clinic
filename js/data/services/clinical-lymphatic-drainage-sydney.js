@@ -22,7 +22,7 @@ export default {
   },
   hero: {
     eyebrow: 'Advanced Lymphatic Therapy',
-    lines: [{ text: 'Advanced Lymphatic' }, { text: 'Therapy', accent: true }],
+    lines: [{ text: 'Advanced lymphatic' }, { text: 'therapy', accent: true }],
     subEyebrow: 'InBody Clinic · Lymphatic Drainage',
     description: [
       'Specialised Lymphatic Drainage & Personalised Fluid Management in Double Bay, Sydney',

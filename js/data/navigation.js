@@ -2,7 +2,7 @@ import { specialityCatalog } from './specialities/catalog.js';
 
 export const specialityNavigationLinks = specialityCatalog.map(speciality => ({
   ...speciality,
-  name: speciality.id === 'skin-tissue-health' ? 'Cellulite & Tissue Remodelling' : speciality.name,
+  name: speciality.id === 'skin-tissue-health' ? 'Cellulite & Tissue remodelling' : speciality.name,
   href: speciality.bookingHref,
 }));
 

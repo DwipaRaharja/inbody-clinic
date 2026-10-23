@@ -13,7 +13,7 @@ const appointments = {
   massage: { offerItemId: '29742779', name: 'Remedial Massage | Integrated Clinical Bodywork – 60 min', durationMinutes: 60 },
   pelvic: { offerItemId: '26131923', name: 'Pelvic & Abdominal Therapy', durationMinutes: 60 },
   // Fresha currently displays a 70-minute duration for this listing.
-  cellulite: { offerItemId: '29617957', name: 'Cellulite & Tissue Remodelling', durationMinutes: 70 },
+  cellulite: { offerItemId: '29617957', name: 'Cellulite & Tissue remodelling', durationMinutes: 70 },
 };
 
 const serviceAppointments = {
