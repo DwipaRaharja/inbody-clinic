@@ -17,9 +17,9 @@ export const heroSlides = [
     description: 'Personalised clinical care combining specialised hands-on therapy, extensive clinical experience and advanced technology when appropriate.',
     image: {
       src: './assets/images/home/hero.jpg',
-      alt: 'InBody Clinic practitioner beside a treatment device in the clinic',
-      width: 1024,
-      height: 670,
+      alt: 'Saila Insua López standing beside an INDIBA treatment device in the clinic',
+      width: 1550,
+      height: 1014,
     },
     benefits,
   },
