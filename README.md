@@ -31,6 +31,114 @@ Foto galeri memudar bersama keterangannya; dialog galeri tetap langsung terbuka.
 Kolom form Contact muncul bersama labelnya dan langsung terlihat saat mendapat fokus.
 Latar pembuka Contact memakai Cream yang sama dengan pembuka halaman speciality Our Services.
 
+## Deskripsi project
+
+InBody Clinic adalah situs web untuk klinik terapi klinis di **Double Bay, Sydney**, yang berfokus pada
+*Women's Health & Advanced Lymphatic Therapy* — meliputi drainage limfatik lanjutan, pemulihan pascaoperasi,
+care kehamilan & postpartum, perawatan lipedema/limfoedema, remodeling selulit & jaringan, serta care TMJ,
+nyeri & stres. Situs ini bersifat informasional dengan pemesanan langsung melalui **Fresha**; pemilihan
+layanan, slot, dan pembayaran terjadi di Fresha, sehingga website tidak menyimpan data booking.
+
+Secara teknis, project ini adalah **generator situs statis** berbasis
+**React 19 + Vite 8 + React Router 7 + Tailwind CSS v4**: build menghasilkan **23 halaman HTML** yang sudah
+berisi konten penuh (SEO-friendly, tanpa JavaScript tetap terbaca), lalu React melakukan *hydration* untuk
+mengaktifkan interaksi (slider hero, dropdown, galeri, form, animasi GSAP). Navigasi internal berperilaku
+seperti SPA — navbar/footer tetap terpasang, URL/metadata/scroll/fokus diperbarui — namun setiap URL tetap
+memiliki file HTML sendiri sehingga link langsung dan refresh bekerja di static hosting mana pun.
+
+**Fitur utama:**
+
+- 23 halaman prerender: Home, About, Contact, Our Clinic, The InBody Method™, 6 halaman speciality, dan 12 halaman treatment (`404.html` ikut dibuat).
+- Konten klinik terpusat sebagai data modul ES (`js/data/`), terpisah dari tampilan.
+- Booking Fresha per kategori speciality dan per treatment (URL `sv:` spesifik), dikelola dalam satu sumber.
+- Hero slider (3 foto, autoplay 5 detik), galeri klinik 12 foto dengan filter + dialog, form kontak yang membuka draf email.
+- Animasi GSAP sekali-per-tampil (header entrance, content reveal, stagger 120 ms) dengan fallback reduced motion dan CDN gagal.
+- Aksesibilitas: skip link, `aria-current`, live region navigasi, pemulihan fokus & scroll pada navigasi, dialog galeri yang mengembalikan fokus.
+- Kualitas: validasi output build (`npm test`) dan tes browser Playwright (`test:navigation`, `test:header`, `test:home-reveal`).
+
+## Workflow antar file dan folder
+
+### 1. Alur build — static generation (SSG)
+
+```text
+index.html (shell + placeholder)
+        │
+scripts/build.mjs
+        ├── ① Vite build client   → dist/ (index.html + bundle JS/CSS)
+        ├── ② Vite build SSR      → .build/ssr/entry-server.js
+        ├── ③ src/entry-server.jsx  render(path) untuk setiap route
+        │       └── src/routes.js ── sumber tunggal 23 URL + title + description
+        │       └── src/pages.jsx   → js/pages/*.jsx → sections + init()
+        ├── ④ template dist/index.html diisi: <!--app-html-->,
+        │       <meta app-route>, <title>, <meta description>,
+        │       class <html>/<body> (src/theme.js), data-page/service/speciality
+        ├── ⑤ tulis dist/<path> untuk tiap route + /404.html
+        └── ⑥ salin assets/ dan gallery/ ke dist/, tulis .nojekyll
+```
+
+Definisi `pageId` pada `src/routes.js` menentukan factory yang dipakai: `home/about/contact/clinic`
+memakai definisi langsung di `js/pages/*.jsx`, sedangkan `service` dan `speciality` memakai factory
+`js/layouts/service-page.jsx` (dan padanan speciality) sehingga 12 treatment dan 6 speciality berbagi
+layout identik — hanya data yang berbeda.
+
+### 2. Alur runtime — hydration & navigasi SPA
+
+```text
+dist/<halaman>.html dibuka browser
+        │
+src/entry-client.jsx
+        ├── baca <meta app-route> + BASE_URL (js/utils/urls.js)
+        ├── HTML cocok dengan path? → hydrateRoot : createRoot
+        └── BrowserRouter (basePath) → src/App.jsx
+                ├── shell tetap: ContactBar → Navbar → <main> → Footer
+                ├── getRoute(path) → getPage(pageId) → sections dirender
+                │       └── js/sections/* → js/components/* + js/data/*
+                ├── page.init(main) dipasang via useLayoutEffect
+                │       └── js/features/*.js (slider, reveal, galeri, form)
+                │           mengembalikan fungsi cleanup → dipanggil saat pindah halaman
+                └── efek dokumen: title/description/body dataset,
+                    fokus ke <main>, scroll ke atas/anchor, pulihkan scroll Back/Forward
+```
+
+Klik pada link internal dicegat di level `document` oleh `App.jsx`; hanya URL yang dikenali
+`getRoute()` yang di-*prevent* dan direspons React Router. Link eksternal, `mailto:`, `tel:`,
+download, `target="_blank"`, dan link ber-atribut `data-full-reload` mengikuti perilaku browser normal.
+
+### 3. Alur data & booking
+
+```text
+js/data/
+├── services/          12 modul per treatment + index.js (gabung) + booking.js (URL Fresha)
+│       └── js/pages/service.jsx → js/layouts/service-page.jsx → js/sections/service/*
+├── specialities/      catalog.js (ringan: nama, ikon, serviceIds) + index.js
+│       (konten lengkap) + booking.js → js/pages/speciality.jsx + navbar
+├── navigation.js → js/components/navbar.jsx + footer.jsx
+├── team.js / method.js / hero-slides.js / clinic-gallery.js / clinic-contact.js
+│       └── js/sections/{about,method,home,clinic,contact}/*
+└── assessment-booking.js → panel Start Here + BookingButton (js/components/button.jsx)
+```
+
+Booking di-**join** saat runtime modul: `services/index.js` menempelkan `serviceBookings[id]`
+ke tiap objek service; `specialities/catalog.js` menempelkan `specialityBookingLinks`.
+URL Fresha bersama untuk tombol umum berada di `bookingHref` pada `js/components/button.jsx`.
+
+### 4. Ringkasan tanggung jawab folder
+
+| Folder        | Tanggung jawab |
+| ------------- | -------------- |
+| `src/`        | Kernel aplikasi: shell `App.jsx`, daftar route + metadata, peta pageId → page, entry server/client, token tema |
+| `js/pages/`   | Definisi halaman: daftar section (`id`, `className`, `labelledBy`, `render`) + `init()` dengan cleanup |
+| `js/layouts/` | Factory komposisi halaman agar semua service/speciality memakai layout bersama |
+| `js/sections/`| Komponen per bagian halaman (hero, services, method, team, CTA, dsb.) |
+| `js/components/` | Komponen lintas halaman: navbar, footer, heading, tombol/BookingButton, ikon, kartu care |
+| `js/data/`    | Seluruh konten klinik & URL booking; satu-satunya tempat mengubah copy konten |
+| `js/features/`| Controller imperatif (GSAP, slider, galeri, form) yang dipasang via `init()` dan dibersihkan saat navigasi |
+| `js/utils/`   | Helper URL sadar-base (`siteUrl`, `stripBase`) |
+| `css/`        | `input.css` — Tailwind v4 + design tokens (`clinic-*`) |
+| `scripts/`    | `build.mjs` (prerender), `check-pages.mjs`, `check-navigation.mjs`, tes header & reveal |
+| `assets/`, `gallery/` | Aset asli klinik yang disalin utuh ke `dist/` saat build |
+| `.github/`    | Workflow deploy GitHub Pages (`deploy.yml`) |
+
 ## Menjalankan project
 
 Gunakan Node.js yang memenuhi versi pada `package.json`, lalu:

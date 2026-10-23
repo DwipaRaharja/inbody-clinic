@@ -377,3 +377,116 @@ tidak termasuk lingkup. Pilihan foto hero tetap menunggu diskusi sesuai catatan 
 
 Copy baru adalah draft berdasarkan brief, belum dinyatakan sebagai persetujuan
 editorial/klinis final client. Lihat [docs/REVISION_IMPLEMENTATION.md](docs/REVISION_IMPLEMENTATION.md).
+
+---
+
+# Task konsistensi data konten (copy & struktur data)
+
+**Tanggal:** 23 Oktober 2026
+**Status:** Audit selesai; perbaikan belum diterapkan.
+**Lingkup:** 12 file `js/data/services/*.js`, `js/data/specialities/index.js`, dan terkait
+`js/data/hero-slides.js`. Hasil audit ini menggantikan pesan yang terpotong
+("pengecekan mendalam untuk di …") dengan daftar temuan lengkap di bawah.
+
+## T01 — Kapitalisasi judul (`hero.lines`, `recovery.steps`) — perlu keputusan
+
+Gaya kapital campur dalam satu property yang sama:
+
+- Sentence case: `Feel lighter / Move freely`, `Rebuild your / inner strength`
+  (Postnatal, Recovery Core, Pregnancy Massage).
+- Title Case tiap kata: `Ease The Tension / Feel More At Ease`, `Move More Freely`,
+  `Feel More Restored`, `Body’s Recovery` (TMJ, Therapeutic Massage, Chronic Pain,
+  Endometriosis, Post-Surgical, sebagian Cellulite).
+- Campur dalam satu file (Post-Surgical): `Healing Takes / Thoughtful Support`
+  berdampingan dengan `Gentle, Tailored Care / for Every Step`.
+- `recovery.steps` juga campur: `Circulation & Oxygen Support` (Title) vs
+  `Ease jaw tension` (Sentence).
+
+- [ ] **Keputusan:** pilih satu standar — Sentence case (usulan) atau Title Case — lalu
+      terapkan pada semua file service.
+- [ ] Terapkan standar yang dipilih.
+- [ ] ⚠️ Karena mengubah copy, konfirmasikan ke client apakah copy masih draft.
+
+## T02 — Eyebrow dan subEyebrow tidak konsisten
+
+- [ ] Hapus trailing space: `'TMJ, Jaw & Headache Treatment '`,
+      `'Chronic Pain, Stress & Inflammation Therapy '`.
+- [ ] `'Post - Surgical Recovery'` → `'Post-Surgical Recovery'`.
+- [ ] Samakan `subEyebrow`: Postnatal tidak punya `subEyebrow` (dua file lain punya
+      `InBody Clinic · <kategori>`); TMJ memakai `TMJ & Jaw Care`, Chronic
+      `Women’s Pain Support`, Endometriosis `Pelvic Pain Care` — tidak cocok
+      dengan nama kategorinya.
+
+## T03 — Tanda petik/apostrof
+
+- [ ] `hero-slides.js` line 13: `"Women's Health."` memakai apostrof lurus;
+      standardkan ke tipografis `’` seperti seluruh file data lain.
+
+## T04 — Tanda titik-dua (`:`) pada subtitle kolom
+
+Campur tiga gaya antar file:
+
+- `'Treatment May Include :'` (dengan spasi) vs `'Treatment May Include:'` (tanpa) vs
+  `'The treatment combines:'`.
+- `[ ] Samakan satu gaya (usulan: tanpa spasi sebelum `:`).`
+- [ ] Grammar: `Many Patient Notice` → `Many Patients Notice` (4 file).
+
+## T05 — 🚨 Bug copy-paste konten (prioritas)
+
+| # | File | Bug | Perbaikan usulan |
+| --- | --- | --- | --- |
+| 1 | `clinical-cellulite-remodelling.js` `recovery.steps` | Ketiga description salinan halaman post-surgical (`Never intended to be painful…surgical structures`) | Tulis description per jenis cellulite |
+| 2 | `lymphatic-reset-fluid-retention-treatment.js` `recovery.steps` | `Personalised clinical electrotherapy` muncul 2×; salah satu description berisi copy lama (collagen) | Ganti step kedua dengan therapy lain yang benar |
+| 3 | `lipedema-inflammatory-leg-care.js` `options.paragraphs` | Teks milik Postnatal (`After pregnancy and childbirth…C-section…`) | Tulis pengantar lipedema |
+| 4 | 4 file Pain & TMJ (`cta.description`) | `Ask about support for swelling, fluid retention and heavy legs` salah konteks untuk jaw/pelvic/pain | Samakan dengan `booking.description` per treatment |
+| 5 | `pregnancy-massage-circulation-support.js` `options.items` | `Rib restriction and breathing fatigue` dobel | Ganti item kedua |
+| 6 | `postnatal-lymphatic-drainage.js` `options.items` | Typo `Heavy ortired legs` | `Heavy or tired legs` |
+| 7 | `chronic-pain-stress-inflammation.js` `expertise.columns[1].items` | `Fatigue and poor sleep linked to stress` duplikat dgn item persisten | Gabungkan hapus duplikat |
+
+- [ ] Perbaiki #1–#7.
+- [ ] Konfirmasi: `postnatal.expertise.items` ≈ duplikat `options.items` (dengan
+      variasi koma) — apakah disengaja untuk panel beda, atau dirapikan?
+
+## T06 — Ejaan dan tanda baca lintas file
+
+- [ ] `lipedema` vs `lipoedema` campur dalam file Lipedema — pilih satu ejaan.
+- [ ] Oxford comma tidak konsisten (`heaviness in the legs, abdomen, and face` vs
+      `swelling, fluid retention and heavy legs`) — pilih satu.
+- [ ] Titik akhir kalimat: summary Clinical Lymphatic tanpa titik; `cta.description`
+      tanpa titik sementara `booking.description` speciality ber-titik — samakan.
+
+## T07 — `quote` generik dipakai 6 service
+
+- [ ] `The treatment is gentle, rhythmic, and highly specific…` dipakai
+      Postnatal, Recovery Core, Pregnancy Massage, Clinical Lymphatic, Lipedema,
+      dan Post-Surgical; sisanya punya quote spesifik. Tentukan: quote spesifik
+      per treatment (usulan) atau quote generik memang disengaja.
+
+## T08 — Speciality — kapitalisasi daftar
+
+- [ ] `clinical-lymphatic-care.needs` memakai Title Case
+      (`General Swelling & Fluid Retention`) sementara 5 speciality lain sentence
+      case — samakan.
+- [ ] `techniques` Pre-Post & Clinical Lymphatic Title Case vs lain sentence — samakan.
+
+## Keputusan yang menunggu (melanjutkan tabel bagian 7)
+
+| ID | Hal yang perlu ditentukan | Usulan | Keputusan |
+| --- | --- | --- | --- |
+| R01 | Standar kapital judul (T01) | Sentence case | — |
+| R02 | Bug copy-paste T05 boleh diperbaiki semua? | Ya, minimal #1–#5 | — |
+| R03 | Gaya `:` dan `Many patients notice:` (T04) | Tanpa spasi | — |
+| R04 | Ejaan lipedema/lipoedema & Oxford comma (T06) | `lipedema`; tanpa Oxford comma konsisten dgn mayoritas | — |
+| R05 | Lingkup perbaikan lain terpotong dari instruksi | Konfirmasi area tambahan yang diminta | — |
+
+## Verifikasi setelah implementasi
+
+```sh
+npm run build
+npm test
+```
+
+Tes `check-pages.mjs` memvalidasi 23 HTML prerender, metadata, dan aset; perubahan
+copy publik juga perlu review visual cepat pada halaman detail that berubah
+(cellulite, lymphatic reset, lipedema, pregnancy massage, postnatal, post-surgical,
+TMJ, chronic pain, therapeutic massage, endometriosis).

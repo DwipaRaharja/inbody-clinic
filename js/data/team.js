@@ -17,7 +17,7 @@ export const team = {
 export const saila = {
   id: 'saila',
   name: 'Saila Insua López',
-  role: 'Spain-trained physiotherapist',
+  role: 'European-Trained Physiotherapist | Women’s Health & Dermatofunctional Therapy Specialist',
   experience: '20+ years of clinical experience',
   image: {
     src: './assets/images/about/saila.jpg',
@@ -25,7 +25,15 @@ export const saila = {
     width: 1600,
     height: 1066,
   },
-  summary: 'With over 20 years of clinical experience, Saila specialises in women’s health, dermatofunctional therapy and advanced lymphatic care.',
+  biography: [
+    'Saila Insua López is a Spanish-trained physiotherapist with over 20 years of clinical experience, specialising in women’s health, pelvic floor rehabilitation, obstetrics, postpartum recovery and dermatofunctional physiotherapy.',
+    'Her clinical expertise encompasses pre- and post-operative rehabilitation following plastic and reconstructive surgery, advanced scar and tissue management, and specialised Manual Lymphatic Drainage using the Leduc and Vodder methods.',
+    'With additional qualifications in Nutrition and Epigenetics, alongside training in Therapeutic Pilates, Saila brings a multidisciplinary perspective to women’s health, integrating clinical knowledge, specialised hands-on techniques and advanced therapeutic technologies.',
+    'Throughout her career in Madrid, Saila founded and directed Fisiomoncloa, a physiotherapy clinic dedicated to women’s health. She also served as a clinical placement tutor at Universidad Francisco de Vitoria, contributing to the practical education and professional development of future physiotherapists.',
+    'Building on her extensive European clinical experience, Saila founded InBody Clinic in Sydney as its Founder and Clinical Director, bringing together her expertise in women’s health, clinical lymphatic therapy and post-surgical recovery.',
+    'Her approach is grounded in clinical reasoning, individualised care and a deep understanding of the female body throughout its different life stages.',
+    'At InBody Clinic, her vision is to deliver specialised, evidence-informed care that supports recovery, tissue health and long-term wellbeing.',
+  ],
   expertise: [
     { title: 'Women’s Health', href: './pages/services/pain-tmj-relief/endometriosis-pelvic-pain-support.html' },
     { title: 'Dermatofunctional Therapy', href: './pages/specialities/skin-tissue-health.html' },

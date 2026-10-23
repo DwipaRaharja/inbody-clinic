@@ -8,10 +8,11 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: './assets/images/services/Lymphatic Drainage/Lipedema & Inflammatory Leg Care/WhatsApp Image 2026-10-02 at 10.33.06 (1).jpeg',
-      alt: 'Saila providing hands-on treatment to a patient’s bent leg at InBody Clinic',
-      width: 1600,
-      height: 1066,
+      src: `${postnatalImageDirectory}postnatal.jpeg`,
+      alt: 'Electrotherapy pads on a patient’s abdomen during a postnatal treatment at InBody Clinic',
+      width: 1024,
+      height: 1536,
+      position: '50% 85%',
     },
     treatment: {
       src: `${postnatalImageDirectory}WhatsApp Image 2026-10-02 at 10.33.09.jpeg`,

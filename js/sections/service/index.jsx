@@ -11,7 +11,8 @@ function ServiceImage({ image = {}, hero = false }) {
   const height = Number(image.height ?? image.h);
   const hasDimensions = Number.isFinite(width) && width > 0 && Number.isFinite(height) && height > 0;
   const fitClass = image.fit === "contain" ? "object-contain" : "object-cover";
-  return <img className={`block w-full min-w-0 rounded-[10px] ${fitClass} ${hero ? "aspect-[3/2]" : "aspect-[9/10]"}`} src={assetUrl(image.src)} alt={image.alt} width={hasDimensions ? Math.round(width) : undefined} height={hasDimensions ? Math.round(height) : undefined} fetchPriority={hero ? "high" : undefined} loading={hero ? undefined : "lazy"} decoding="async" />;
+  const positionStyle = image.position ? { objectPosition: image.position } : undefined;
+  return <img className={`block w-full min-w-0 rounded-[10px] ${fitClass} ${hero ? "aspect-[3/2]" : "aspect-[9/10]"}`} src={assetUrl(image.src)} alt={image.alt} width={hasDimensions ? Math.round(width) : undefined} height={hasDimensions ? Math.round(height) : undefined} style={positionStyle} fetchPriority={hero ? "high" : undefined} loading={hero ? undefined : "lazy"} decoding="async" />;
 }
 function ServiceBenefit({ icon, label }) {
   const iconClass = /^ph-[a-z0-9-]+$/.test(icon) ? icon : "ph-heart";
