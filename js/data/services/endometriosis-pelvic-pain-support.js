@@ -8,13 +8,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.02 (3).jpeg`,
+      src: `${imageDirectory}endometriosis_pelvic_pain_support_hero.jpeg`,
       alt: 'Saila explaining pelvic anatomy with an anatomical model at InBody Clinic',
       width: 1600,
       height: 1068,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.04.jpeg`,
+      src: `${imageDirectory}endometriosis_pelvic_pain_support_treatment.jpeg`,
       alt: 'An InBody Clinic therapist treating a patient’s abdomen with a handheld device',
       width: 1600,
       height: 1066,

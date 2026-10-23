@@ -8,13 +8,13 @@ export default {
   category: 'Lymphatic Drainage',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp-Image-2025-10-12-at-19.38.17-1024x683.webp`,
+      src: `${imageDirectory}clinical_lymphatic_drainage_sydney_hero.webp`,
       alt: 'An InBody Clinic therapist providing hands-on treatment to a patient’s back',
       width: 1024,
       height: 683,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp-Image-2025-10-12-at-19.38.17-1-1024x683.webp`,
+      src: `${imageDirectory}clinical_lymphatic_drainage_sydney_treatment.webp`,
       alt: 'An InBody Clinic therapist providing gentle treatment to a patient’s upper arm',
       width: 1024,
       height: 683,

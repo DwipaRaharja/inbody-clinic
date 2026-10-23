@@ -247,7 +247,7 @@ diperbarui bersama konten. Back/Forward memulihkan halaman dan scroll; navigasi 
 memindahkan fokus ke `<main>` dan scroll ke atas atau anchor tujuan.
 
 Tulis URL konten relatif terhadap root project, misalnya `./pages/contact.html` atau
-`./assets/logo/logo.png`. Helper URL React menambahkan base build secara konsisten.
+`./assets/logo/site_logo.png`. Helper URL React menambahkan base build secara konsisten.
 Anchor `#...` tetap lokal. Link eksternal, email, telepon, download, modifier click,
 dan `target="_blank"` mengikuti perilaku browser. `data-full-reload` dapat dipakai
 pada link yang memang membutuhkan perpindahan dokumen penuh.

@@ -261,7 +261,7 @@ try {
   assert.equal(await page.locator('link[rel="stylesheet"][href$=".css"]').count() >= 1, true);
   await page.locator('#navbar [data-nav-page="about"]').click();
   await waitForPage(page, { page: 'about' });
-  assert.equal(await page.locator('#navbar img').evaluate(img => new URL(img.src).pathname), base + 'assets/logo/logo.png');
+  assert.equal(await page.locator('#navbar img').evaluate(img => new URL(img.src).pathname), base + 'assets/logo/site_logo.png');
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator('[data-nav-toggle]').click();

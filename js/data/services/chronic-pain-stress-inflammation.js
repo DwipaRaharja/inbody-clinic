@@ -8,13 +8,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.01 (1).jpeg`,
+      src: `${imageDirectory}chronic_pain_stress_inflammation_hero.jpeg`,
       alt: 'Saila providing hands-on abdominal treatment to a patient at InBody Clinic',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.00 (1).jpeg`,
+      src: `${imageDirectory}chronic_pain_stress_inflammation_treatment.jpeg`,
       alt: 'An InBody Clinic therapist using a handheld device to treat a patient’s back',
       width: 1600,
       height: 1066,

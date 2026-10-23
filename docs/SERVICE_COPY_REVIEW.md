@@ -63,7 +63,7 @@ sama dengan layanan tempat foto itu tampil.
 | --- | --- | --- |
 | Pregnancy Massage & Circulation Support | `assets/images/services/Pregnancy & Postpartum/Pregnancy Massage & Circulation Support/` | Memakai pasangan foto yang sesuai PNG terbaru, menggantikan pilihan Postnatal dari instruksi sebelum koleksi desain baru tersedia. |
 | Recovery & Core Restoration | `assets/images/services/Pregnancy & Postpartum/Recovery & Core Restoration/` | Dua foto yang sesuai PNG dipakai; foto alternatif tidak otomatis menjadi section tambahan. |
-| Postnatal Lymphatic Drainage | Foto treatment dalam folder `POSTNATAL LYMPHATIC DRAINAGE/`; hero `WhatsApp Image 2026-10-02 at 10.33.06 (1).jpeg` berada di folder Lipedema & Inflammatory Leg Care | Hero lintas folder disengaja karena isi foto tersebut cocok dengan PNG Postnatal. Aset asli tidak dipindah atau diganti namanya. |
+| Postnatal Lymphatic Drainage | Folder `assets/images/services/Pregnancy & Postpartum/POSTNATAL LYMPHATIC DRAINAGE/` | Hero `postnatal_lymphatic_drainage_hero.jpeg` dan treatment `postnatal_lymphatic_drainage_treatment.jpeg` memakai nama file yang mengikuti halaman dan section. |
 
 ## Review terbuka — 10 layanan lainnya sudah diterapkan
 

@@ -8,13 +8,13 @@ export default {
   category: 'Body Contouring',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.06 (2).jpeg`,
+      src: `${imageDirectory}lymphatic_reset_fluid_retention_treatment_hero.jpeg`,
       alt: 'A therapist providing manual abdominal treatment to a patient resting on a treatment bed',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.07 (1).jpeg`,
+      src: `${imageDirectory}lymphatic_reset_fluid_retention_treatment_treatment.jpeg`,
       alt: 'Close-up of a therapist using a handheld treatment applicator on a patient’s skin',
       width: 1600,
       height: 1066,

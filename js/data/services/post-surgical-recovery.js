@@ -8,13 +8,13 @@ export default {
   category: 'Lymphatic Drainage',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp-Image-2025-10-12-at-19.36.09-1-1536x1024.webp`,
+      src: `${imageDirectory}post_surgical_recovery_hero.webp`,
       alt: 'An InBody Clinic therapist applying black medical tape to a patient’s abdomen',
       width: 1536,
       height: 1024,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp-Image-2025-10-12-at-19.36.09-1536x1024.webp`,
+      src: `${imageDirectory}post_surgical_recovery_treatment.webp`,
       alt: 'A close view of a therapist applying supportive tape across a patient’s abdomen',
       width: 1536,
       height: 1024,

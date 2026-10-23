@@ -8,13 +8,13 @@ export default {
   category: 'Lymphatic Drainage',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.06 (1).jpeg`,
+      src: `${imageDirectory}lipedema_inflammatory_leg_care_hero.jpeg`,
       alt: 'An InBody Clinic therapist providing hands-on treatment to a patient’s bent leg',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp-Image-2025-09-25-at-09.14.44.webp`,
+      src: `${imageDirectory}lipedema_inflammatory_leg_care_treatment.webp`,
       alt: 'A group of women standing together with their arms around one another',
       width: 612,
       height: 408,

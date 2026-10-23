@@ -15,7 +15,7 @@ const details = {
     timing: 'Care may be relevant while preparing for a procedure or at different stages after surgery. An individual assessment helps us understand the support that is appropriate for your stage of recovery.',
     imageService: 'post-surgical-recovery',
     image: {
-      src: './assets/images/specialities/pre-post-surgical-recovery/hero.jpg',
+      src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero.jpg',
       alt: 'A clinician explaining supportive taping to a patient during a recovery treatment',
       width: 1600,
       height: 1066,
@@ -71,7 +71,7 @@ const details = {
     timing: 'Your needs can change during pregnancy and after childbirth. An assessment provides a starting point for care that reflects your current symptoms and stage of recovery.',
     imageService: 'pregnancy-massage-circulation-support',
     image: {
-      src: './assets/images/specialities/pregnancy-postpartum-care/hero.jpeg',
+      src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero.jpeg',
       alt: 'A clinician providing hands-on abdominal care during a pregnancy and postpartum treatment',
       width: 1024,
       height: 1536,
@@ -132,7 +132,7 @@ const details = {
       'For clients recovering from cancer treatment, care is adapted to their oncological history, current health status and any medical precautions, with medical clearance or multidisciplinary coordination when required.',
     ],
     image: {
-      src: './assets/images/specialities/skin-tissue-health/hero.jpg',
+      src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero.jpg',
       alt: 'An InBody Clinic therapist providing hands-on tissue care with a treatment device to a patient’s thigh',
       width: 1600,
       height: 1066,

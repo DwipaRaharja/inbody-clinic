@@ -147,9 +147,9 @@ Hero mempertahankan autoplay 5000ms, transisi 700ms, arah masuk dari kanan/kelua
 inert/aria-hidden pada slide nonaktif, serta reduced motion. Fokus di dalam hero, visibilitas tab,
 dan posisi hero diperhatikan oleh controller. Tiga tombol titik di tengah bawah hero memilih slide
 dan menandai slide aktif; navigasi slider tidak memakai panah atau ikon caret.
-Slide ketiga hero memakai foto tim terbaru yang diberikan pengguna pada `assets/images/home/hero-3.jpg`.
-Foto slide pertama tetap memakai aset yang sudah dipilih (1024×670).
-Slide kedua memakai foto asli 1600×1066 pada `assets/images/home/hero-2.jpg`, menggantikan
+Slide ketiga hero memakai foto tim terbaru yang diberikan pengguna pada `assets/images/home/home_slider_3.jpg`.
+Slide pertama memakai foto klinik yang dipilih pengguna pada `assets/images/home/home_slider_1.jpg` (1550×1014).
+Slide kedua memakai foto asli 1600×1066 pada `assets/images/home/home_slider_2.jpg`, menggantikan
 crop 530×588 yang diperbesar. Posisi crop 75% menjaga kedua wajah tetap terlihat.
 
 Kartu speciality memakai grid 1/2/3 kolom. Seluruh kartu adalah tautan ke speciality;
@@ -216,7 +216,7 @@ Tiga belas treatment tetap memakai template `js/sections/service/index.jsx`. Bre
 speciality induk ditambahkan. Endometriosis tetap ditautkan dari Women's Health pada About,
 tanpa menetapkan parent speciality baru. Catatan copy lama tetap terbuka pada `docs/SERVICE_COPY_REVIEW.md`.
 
-Clinical Cellulite Remodelling memakai `hero-treatment.jpg` untuk hero dan `tissue-treatment.jpg`
+Clinical Cellulite Remodelling memakai `clinical_cellulite_remodelling_hero.jpg` untuk hero dan `clinical_cellulite_remodelling_treatment.jpg`
 untuk Ideal If You Notice, keduanya dari foto client di folder aset treatment tersebut.
 Kedua kartu The Treatment & What to Expect memakai `ServiceExpertiseList` yang sama:
 daftar bernomor dengan latar abu-abu, tanpa varian khusus ikon pada kartu kanan.

@@ -8,13 +8,13 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.54 (1).jpeg`,
+      src: `${imageDirectory}recovery_core_restoration_hero.jpeg`,
       alt: 'A therapist explaining a treatment to a patient resting on a treatment bed',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.54.jpeg`,
+      src: `${imageDirectory}recovery_core_restoration_treatment.jpeg`,
       alt: 'A therapist applying pink supportive tape to a patient’s abdomen',
       width: 1600,
       height: 1066,

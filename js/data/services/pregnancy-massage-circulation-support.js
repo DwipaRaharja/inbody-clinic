@@ -8,13 +8,13 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.55 (1).jpeg`,
+      src: `${imageDirectory}pregnancy_massage_circulation_support_hero.jpeg`,
       alt: 'Saila providing hands-on care to a patient lying on a treatment bed at InBody Clinic',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.55.jpeg`,
+      src: `${imageDirectory}pregnancy_massage_circulation_support_treatment.jpeg`,
       alt: 'Saila standing beside a patient resting on a treatment bed in the clinic',
       width: 1600,
       height: 1066,

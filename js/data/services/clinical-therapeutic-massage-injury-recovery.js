@@ -8,13 +8,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp-Image-2025-09-04-at-13.43.19.webp`,
+      src: `${imageDirectory}clinical_therapeutic_massage_injury_recovery_hero.webp`,
       alt: 'A therapist providing hands-on massage to a patient’s back',
       width: 612,
       height: 408,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.08 (1).jpeg`,
+      src: `${imageDirectory}clinical_therapeutic_massage_injury_recovery_treatment.jpeg`,
       alt: 'An InBody Clinic therapist treating a patient’s leg with a handheld device',
       width: 1600,
       height: 1066,

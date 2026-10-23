@@ -8,13 +8,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.32.59.jpeg`,
+      src: `${imageDirectory}tmj_jaw_headache_treatment_hero.jpeg`,
       alt: 'Saila treating a patient’s jaw with a handheld device at InBody Clinic',
       width: 1600,
       height: 1068,
     },
     treatment: {
-      src: `${imageDirectory}WhatsApp Image 2026-10-02 at 10.33.01 (2).jpeg`,
+      src: `${imageDirectory}tmj_jaw_headache_treatment_treatment.jpeg`,
       alt: 'Saila providing gentle manual treatment around a patient’s jaw and neck',
       width: 1600,
       height: 1068,

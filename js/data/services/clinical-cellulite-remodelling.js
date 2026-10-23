@@ -8,13 +8,13 @@ export default {
   category: 'Body Contouring',
   images: {
     hero: {
-      src: `${imageDirectory}hero-treatment.jpg`,
+      src: `${imageDirectory}clinical_cellulite_remodelling_hero.jpg`,
       alt: 'Close-up of a therapist applying a treatment device to a patient’s abdomen',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}tissue-treatment.jpg`,
+      src: `${imageDirectory}clinical_cellulite_remodelling_treatment.jpg`,
       alt: 'A therapist providing hands-on tissue care with a treatment device to a patient’s thigh',
       width: 1600,
       height: 1066,
