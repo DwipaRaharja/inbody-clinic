@@ -11,7 +11,10 @@ export function MethodIntro() {
         <p className="mt-5 max-w-[34ch] font-display text-[26px] leading-[1.35] font-medium text-clinic-sage tablet:text-[30px]">Born from experience. Driven by passion. Created for women.</p>
         <p className="mt-5 text-[14px] leading-[1.85] text-clinic-navy/85 tablet:text-[15px]">The InBody Method™ is the result of over 20 years of clinical experience, continuous learning and a genuine passion for women’s health and wellbeing.</p>
       </div>
-      <img className="block aspect-[4/3] w-full min-w-0 rounded-xl object-cover wide:sticky wide:top-[108px] wide:col-start-2 wide:row-span-2 wide:row-start-1 wide:self-start" src={assetUrl("./gallery/clinic_reception.jpeg")} alt="The clinic reception with seating and illuminated product shelves" width="1536" height="1024" fetchPriority="high" />
+      <picture className="block aspect-[4/3] w-full min-w-0 overflow-hidden rounded-xl wide:sticky wide:top-[108px] wide:col-start-2 wide:row-span-2 wide:row-start-1 wide:self-start">
+        <source srcSet={assetUrl("./assets/gallery/clinic_reception.webp")} type="image/webp" />
+        <img className="block size-full object-cover" src={assetUrl("./assets/gallery/clinic_reception.jpeg")} alt="The clinic reception with seating and illuminated product shelves" width="1536" height="1024" fetchPriority="high" />
+      </picture>
     <div className="min-w-0 text-[14px] leading-[1.85] text-clinic-navy/85 tablet:text-[15px] wide:col-start-1 wide:row-start-2">
       <p>Our journey began in physiotherapy, including the founding of a specialised women’s health clinic in Madrid. Through years of advanced training and clinical practice across Europe and Chile, we have developed expertise in pelvic health, pregnancy and postpartum care, clinical lymphatic drainage, lipedema, dermatofunctional therapy and recovery following plastic and reconstructive surgery.</p>
       <p className="mt-5">We are women. We are mothers. And we understand that every stage of a woman’s life brings different needs.</p>

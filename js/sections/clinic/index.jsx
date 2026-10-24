@@ -17,7 +17,10 @@ function GalleryCard({ photo }) {
   const title = photo.title;
   return <li className="min-w-0" data-gallery-card data-gallery-id={photo.id} data-gallery-categories={photo.categories.join(" ")} data-content-reveal="fade" data-content-reveal-group="clinic-photos">
     <button className="group relative block aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl bg-clinic-light-grey text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clinic-sage" type="button" data-gallery-open={photo.id} aria-label={`View photo: ${title}`}>
-      <img className="block size-full object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none" src={assetUrl(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+      <picture className="block size-full">
+        <source srcSet={assetUrl(photo.src.replace(/\.jpeg$/u, ".webp"))} type="image/webp" />
+        <img className="block size-full object-cover transition-transform duration-500 group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none" src={assetUrl(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+      </picture>
       <span className="absolute right-3 bottom-3 inline-flex size-10 items-center justify-center rounded-full bg-clinic-white/95 text-clinic-navy shadow-sm transition-colors group-hover:bg-clinic-white motion-reduce:transition-none" aria-hidden="true"><i className="ph ph-arrows-out text-[20px]"></i></span>
     </button>
     <p className="mt-5 text-[9px] leading-[1.6] font-semibold tracking-[0.15em] text-clinic-sage uppercase tablet:text-[10px]">{photo.eyebrow}</p>

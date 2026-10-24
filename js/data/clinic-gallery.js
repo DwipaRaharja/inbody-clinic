@@ -5,8 +5,8 @@ export const clinicGalleryFilters = [
   { id: 'details', label: 'Details' },
 ];
 
-// Keep the supplied originals in gallery/; captions and categories belong to the page data.
-const photoSource = (section) => './gallery/clinic_' + section + '.jpeg';
+// Keep the supplied originals in assets/gallery/; captions and categories belong to the page data.
+const photoSource = (section) => './assets/gallery/clinic_' + section + '.jpeg';
 
 export const clinicGalleryPhotos = [
   {
