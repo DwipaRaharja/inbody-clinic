@@ -11,7 +11,7 @@ import { preview } from 'vite';
 
 const modulePath = process.env.PLAYWRIGHT_MODULE_PATH;
 const { chromium, request } = await import(modulePath ? pathToFileURL(modulePath).href : 'playwright');
-const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
+const html = await readFile(new URL('../../dist/index.html', import.meta.url), 'utf8');
 const cdnUrl = html.match(/<script id="gsap-cdn" async src="([^"]+)"/u)?.[1];
 assert.ok(cdnUrl, 'Build must include the GSAP CDN script');
 

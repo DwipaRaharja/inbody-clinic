@@ -10,13 +10,13 @@ import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { routes } from '../src/routes.js';
-import { serviceBookings } from '../js/data/services/booking.js';
+import { routes } from '../../src/routes.js';
+import { serviceBookings } from '../../js/data/services/booking.js';
 
 // Use a local Playwright installation, or the desktop app's bundled package.
 const playwrightModule = process.env.PLAYWRIGHT_MODULE_PATH;
 const { chromium } = await import(playwrightModule ? pathToFileURL(playwrightModule).href : 'playwright');
-const projectRoot = resolve(fileURLToPath(new URL('../', import.meta.url)));
+const projectRoot = resolve(fileURLToPath(new URL('../../', import.meta.url)));
 const outputRoot = join(projectRoot, 'dist');
 const homeHtml = await readFile(join(outputRoot, 'index.html'), 'utf8');
 const base = homeHtml.match(/<meta\s+name="app-base"\s+content="([^"]+)"/u)?.[1];

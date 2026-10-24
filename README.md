@@ -135,7 +135,7 @@ URL Fresha bersama untuk tombol umum berada di `bookingHref` pada `js/components
 | `js/features/`| Controller imperatif (GSAP, slider, galeri, form) yang dipasang via `init()` dan dibersihkan saat navigasi |
 | `js/utils/`   | Helper URL sadar-base (`siteUrl`, `stripBase`) |
 | `css/`        | `input.css` — Tailwind v4 + design tokens (`clinic-*`) |
-| `scripts/`    | `build.mjs` (prerender), `check-pages.mjs`, `check-navigation.mjs`, tes header & reveal |
+| `scripts/`    | `build.mjs` entry point, `build/` pipeline modules, `check/` output dan tes browser |
 | `assets/` | Aset asli klinik, termasuk foto `assets/gallery/`, yang disalin ke `dist/` saat build |
 | `.github/`    | Workflow deploy GitHub Pages (`deploy.yml`) |
 
@@ -179,9 +179,9 @@ js/
 assets/                             # Foto, logo, dan assets/gallery/ berisi 12 foto klinik
 css/input.css                       # Tailwind dan design tokens
 scripts/
-├── build.mjs                       # Vite build dan prerender semua route
-├── check-pages.mjs                 # Validasi output HTML/aset/tautan
-└── check-navigation.mjs            # Tes browser pada hasil build
+├── build.mjs                       # Entry point pipeline build
+├── build/                          # Config, Vite/SSR, SEO, HTML, prerender, output statis
+└── check/                          # Pemeriksaan HTML/SEO dan tes browser
 dist/                               # Output untuk GitHub Pages atau Hostinger
 ```
 

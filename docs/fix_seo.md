@@ -108,14 +108,14 @@ const jsonLd = {
 - Foto JPEG asli tetap ada untuk fallback dan konten non-galeri; hero slider `home_slider_*.jpg` ikut `fetchPriority="high"` jadi prioritas.
 - Foto hero/detail service (≤ 190 KB) boleh menyusul; bukan bloker LCP.
 
-### Prioritas 5 — Perkuat `scripts/check-pages.mjs` ✅
+### Prioritas 5 — Perkuat `scripts/check/check-pages.mjs` ✅
 
 `npm test` sekarang memeriksa keluaran SEO build agar perubahan pada P1–P4 tidak mudah terlewat:
 
-- Setiap halaman publik harus memiliki canonical HTTPS yang cocok dengan route, seluruh metadata Open Graph dan Twitter Card yang cocok dengan judul/deskripsinya, serta gambar sosial yang diharapkan (`scripts/check-pages.mjs`, mulai baris 102 untuk canonical dan baris 105 untuk pemeriksaan metadata).
-- Setiap halaman publik harus memiliki tepat satu JSON-LD yang valid dan berisi data klinik yang sama dengan `js/data/clinic-contact.js`; properti alamat, jam, peta, nomor telepon, email, dan spesialisasi ikut dibandingkan (`scripts/check-pages.mjs`, mulai baris 121).
-- `robots.txt` harus ada, mengizinkan crawling root, dan menunjuk sitemap pada domain dasar canonical (`scripts/check-pages.mjs`, mulai baris 48). `sitemap.xml` harus ada dengan tepat 23 URL yang sama dengan `src/routes.js`; URL ekstra seperti 404 akan membuat perbandingan gagal (mulai baris 55).
-- Link sweep memeriksa `srcset` selain `href` dan `src`, sehingga file WebP yang dirujuk `<source>` harus benar-benar ada di `dist/` (`scripts/check-pages.mjs`, mulai baris 183).
+- Setiap halaman publik harus memiliki canonical HTTPS yang cocok dengan route, seluruh metadata Open Graph dan Twitter Card yang cocok dengan judul/deskripsinya, serta gambar sosial yang diharapkan (`scripts/check/check-pages.mjs`, mulai baris 102 untuk canonical dan baris 105 untuk pemeriksaan metadata).
+- Setiap halaman publik harus memiliki tepat satu JSON-LD yang valid dan berisi data klinik yang sama dengan `js/data/clinic-contact.js`; properti alamat, jam, peta, nomor telepon, email, dan spesialisasi ikut dibandingkan (`scripts/check/check-pages.mjs`, mulai baris 121).
+- `robots.txt` harus ada, mengizinkan crawling root, dan menunjuk sitemap pada domain dasar canonical (`scripts/check/check-pages.mjs`, mulai baris 48). `sitemap.xml` harus ada dengan tepat 23 URL yang sama dengan `src/routes.js`; URL ekstra seperti 404 akan membuat perbandingan gagal (mulai baris 55).
+- Link sweep memeriksa `srcset` selain `href` dan `src`, sehingga file WebP yang dirujuk `<source>` harus benar-benar ada di `dist/` (`scripts/check/check-pages.mjs`, mulai baris 183).
 - `404.html` harus memiliki `noindex, follow` dan tidak boleh memiliki canonical ataupun JSON-LD (baris 208–212).
 - Verifikasi: `npm test` berhasil untuk 23 halaman prerender pada build yang tersedia.
 
@@ -179,7 +179,7 @@ Workflow GitHub Pages mengisi `SITE_URL` otomatis; untuk build Hostinger, isi UR
   - Galeri klinik: `<picture>` memilih WebP dari nama JPEG di `js/sections/clinic/index.jsx` baris 20–21; `<img src>` JPEG di baris 22 menjadi fallback. Lazy loading dan decoding async tetap dipakai.
   - The InBody Method: foto resepsionis memakai sumber WebP dan JPEG fallback di `js/sections/method/index.jsx` baris 14–16; prioritas pemuatan tinggi tetap pada gambar hero. `js/features/clinic-gallery.js` baris 59 memakai `currentSrc`, sehingga foto yang dibuka di dialog mengikuti format yang dipilih browser.
   - Hasil build: `scripts/build.mjs` menyalin folder `assets/` ke `dist/` pada baris 189. Build berhasil; 13 referensi WebP pada HTML hasil build semuanya memiliki berkas tujuan.
-- [x] P5 Pemeriksaan SEO dan aset pada `scripts/check-pages.mjs`
+- [x] P5 Pemeriksaan SEO dan aset pada `scripts/check/check-pages.mjs`
   - Canonical, Open Graph, dan Twitter Card setiap halaman dicocokkan dengan route; canonical harus HTTPS dan tepat pada URL halamannya.
   - JSON-LD harus bisa diparse, hanya satu per halaman publik, cocok dengan data klinik, dan tidak ada pada 404.
   - Keberadaan dan isi `robots.txt`/`sitemap.xml` diperiksa, termasuk pencocokan URL sitemap dengan 23 route dan pengecualian 404.

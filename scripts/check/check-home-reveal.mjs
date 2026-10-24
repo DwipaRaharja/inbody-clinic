@@ -4,8 +4,8 @@
 // decision directly assertable: initial hiding, group stagger, focus reveal,
 // scroll restoration, reduced motion, cleanup and delayed/failed CDN.
 import assert from 'node:assert/strict';
-import { initHomeReveal } from '../js/features/home-reveal.js';
-import { initContentReveal } from '../js/features/content-reveal.js';
+import { initHomeReveal } from '../../js/features/home-reveal.js';
+import { initContentReveal } from '../../js/features/content-reveal.js';
 
 // Exercise lifecycle and fallback behavior without a browser or CDN dependency.
 // Tiny add/remove/emit registry shared by fake root, elements, the script tag

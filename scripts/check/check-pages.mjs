@@ -12,18 +12,18 @@ import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
 import { join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { routes } from '../src/routes.js';
-import { services } from '../js/data/services/index.js';
-import { serviceNavigationGroups, specialityNavigationLinks } from '../js/data/navigation.js';
-import { specialityCatalog, getSpecialityForService } from '../js/data/specialities/catalog.js';
-import { specialities } from '../js/data/specialities/index.js';
-import { assessmentBooking } from '../js/data/assessment-booking.js';
-import { saila, beatriz } from '../js/data/team.js';
-import { clinicContact, clinicMapUrl } from '../js/data/clinic-contact.js';
+import { routes } from '../../src/routes.js';
+import { services } from '../../js/data/services/index.js';
+import { serviceNavigationGroups, specialityNavigationLinks } from '../../js/data/navigation.js';
+import { specialityCatalog, getSpecialityForService } from '../../js/data/specialities/catalog.js';
+import { specialities } from '../../js/data/specialities/index.js';
+import { assessmentBooking } from '../../js/data/assessment-booking.js';
+import { saila, beatriz } from '../../js/data/team.js';
+import { clinicContact, clinicMapUrl } from '../../js/data/clinic-contact.js';
 
 // outputRoot is the dist/ folder under test; siteOrigin is a fake origin used
 // only to resolve href/src attribute values through `new URL()`.
-const projectRoot = fileURLToPath(new URL('../', import.meta.url));
+const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
 const outputRoot = resolve(projectRoot, 'dist');
 const siteOrigin = 'https://inbody.test';
 // The bundled Phosphor Regular stylesheet is the reference for icon glyphs.

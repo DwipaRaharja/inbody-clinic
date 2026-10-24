@@ -12,10 +12,10 @@
     "build": "node scripts/build.mjs",
     "build:pages": "node scripts/build.mjs --base /inbody-clinic/",
     "preview": "vite preview",
-    "test": "node scripts/check-pages.mjs",
-    "test:navigation": "node scripts/check-navigation.mjs",
-    "test:header": "node scripts/check-header-animation.mjs",
-    "test:home-reveal": "node scripts/check-home-reveal.mjs",
+    "test": "node scripts/check/check-pages.mjs",
+    "test:navigation": "node scripts/check/check-navigation.mjs",
+    "test:header": "node scripts/check/check-header-animation.mjs",
+    "test:home-reveal": "node scripts/check/check-home-reveal.mjs",
     "serve": "vite"
   },
   "keywords": [],
@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@phosphor-icons/web": "^2.1.2",
+    "gsap": "^3.15.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-router-dom": "7.18.4"
