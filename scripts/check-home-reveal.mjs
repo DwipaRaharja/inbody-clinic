@@ -1,8 +1,15 @@
+// Deterministic unit test for the reveal controllers (npm run
+// test:home-reveal — no browser, no CDN, no Playwright). Fake window/document,
+// GSAP, IntersectionObserver, matchMedia and timers make every controller
+// decision directly assertable: initial hiding, group stagger, focus reveal,
+// scroll restoration, reduced motion, cleanup and delayed/failed CDN.
 import assert from 'node:assert/strict';
 import { initHomeReveal } from '../js/features/home-reveal.js';
 import { initContentReveal } from '../js/features/content-reveal.js';
 
 // Exercise lifecycle and fallback behavior without a browser or CDN dependency.
+// Tiny add/remove/emit registry shared by fake root, elements, the script tag
+// and matchMedia results.
 class Events {
   listeners = new Map();
   addEventListener(name, callback) {
@@ -13,6 +20,8 @@ class Events {
   emit(name, event = {}) { [...this.listeners.get(name) ?? []].forEach(callback => callback(event)); }
 }
 
+// Minimal element: rects, children, dataset and querySelector cover every DOM
+// read the controllers perform.
 class Element extends Events {
   dataset = {};
   properties = {};
@@ -30,6 +39,11 @@ class Element extends Events {
   contains(target) { return this === target || this.children.some(child => child.contains(target)); }
 }
 
+// Builds a Home-like tree: hero (the data-hero-slider query), a services
+// frame with a heading and a list of six cards at growing scroll offsets,
+// plus fake GSAP/timers/observers. `loaded` toggles window.gsap, `reduced`
+// toggles matchMedia; handles are returned so scenarios simulate events and
+// inspect element state.
 function fixture({ loaded = true, reduced = false } = {}) {
   const hero = new Element(100);
   const heading = new Element(900);
@@ -87,6 +101,9 @@ function fixture({ loaded = true, reduced = false } = {}) {
   return { root, hero, heading, cards, script, media, observers, timers, gsap, animations, contexts: () => contexts };
 }
 
+// Scenario 1, happy path: initial hide (hero fades, cards rise), group
+// stagger, no replay on re-entry, focus reveals instantly, and a switch to
+// reduced motion tears everything down with a full GSAP revert.
 const active = fixture();
 const destroyActive = initHomeReveal(active.root);
 const observer = active.observers[0];
@@ -114,6 +131,8 @@ observer.enter(active.cards);
 assert.equal(active.animations.length, animationCount, 'Callbacks after cleanup must not animate detached content');
 destroyActive();
 
+// Scenario 2, scroll restoration: Back left the hero above the fold, so
+// setup must still enrol it; the observer then reveals it in place.
 const restored = fixture();
 restored.hero.top = -1000;
 const destroyRestored = initHomeReveal(restored.root);
@@ -123,11 +142,15 @@ restored.observers[0].enter([restored.hero]);
 assert.equal(restored.hero.dataset.contentRevealState, 'visible', 'The observer reveals the opening content after route scroll restoration');
 destroyRestored();
 
+// Scenario 3, reduced motion at mount: no observers, no GSAP context.
 const reduced = fixture({ reduced: true });
 initHomeReveal(reduced.root)();
 assert.equal(reduced.contexts(), 0);
 assert.equal(reduced.observers.length, 0);
 
+// Scenario 4, CDN arrives late: content stays readable while it loads, and
+// once loaded only below-fold targets may be hidden — never what is
+// already on screen.
 const late = fixture({ loaded: false });
 const destroyLate = initHomeReveal(late.root);
 assert.deepEqual(late.hero.properties, {}, 'Content is readable while the CDN loads');
@@ -138,6 +161,8 @@ assert.equal(late.heading.properties.opacity, 0, 'Below-fold content can still r
 destroyLate();
 assert.deepEqual(late.heading.properties, {});
 
+// Scenario 5, failure paths — script error, one-second timeout, unmount: a
+// CDN load event after any of these must not animate or hide anything.
 for (const reason of ['error', 'timeout', 'unmount']) {
   const fallback = fixture({ loaded: false });
   const destroy = initHomeReveal(fallback.root);
@@ -151,6 +176,8 @@ for (const reason of ['error', 'timeout', 'unmount']) {
   destroy();
 }
 
+// Scenario 6, other pages: without the hero slider the Home group list is
+// empty and no controller is installed.
 const otherPage = fixture();
 otherPage.root.selectors.delete('[data-hero-slider]');
 initHomeReveal(otherPage.root)();
@@ -182,9 +209,12 @@ for (const page of ['clinic', 'contact']) {
   }
 }
 
+// Scenario 7, declarative opt-in without markers: a page that never marks
+// data-content-reveal stays inert even though the helper exists.
 const unmarked = fixture();
 initContentReveal(unmarked.root)();
 assert.equal(unmarked.contexts(), 0, 'Unmarked pages do not initialize the shared controller');
+// Restore the host globals touched by the fixture.
 delete globalThis.window;
 delete globalThis.document;
 console.log('Passed: Home, Clinic and Contact reveal groups, stagger, once per visit, focus, cleanup, reduced motion and delayed/failed CDN fallbacks.');

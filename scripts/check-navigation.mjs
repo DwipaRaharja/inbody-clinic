@@ -1,3 +1,10 @@
+// Playwright suite for the hydrated build (npm run test:navigation). It
+// serves dist/ over a strict static server — files only, no SPA rewrite —
+// then verifies hydration, SPA navigation, history/scroll/focus behavior,
+// the full route catalog inside one document, native link semantics, deep
+// links, refresh, the mobile menu, and prerendered readability with
+// JavaScript disabled. Third-party requests are fulfilled from local data,
+// so a run never depends on network availability.
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
@@ -18,6 +25,9 @@ if (process.env.TEST_BASE_PATH) assert.equal(base, process.env.TEST_BASE_PATH, '
 const mimeTypes = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff' };
 const missingResources = [];
 const errors = [];
+// Static server strictly rooted in dist/: paths outside the base or the
+// output directory throw and 404 (recorded; favicon excepted) — by design
+// there is no index.html fallback, unlike production hosts.
 const server = createServer(async (request, response) => {
   const url = new URL(request.url, 'http://localhost');
   let pathname;
@@ -36,12 +46,16 @@ const server = createServer(async (request, response) => {
     response.end('Not found');
   }
 });
+// A random free port keeps test runs independent; origin + base mirrors the
+// URLs the app builds for itself.
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const origin = `http://127.0.0.1:${server.address().port}`;
 const destinationUrl = path => origin + base + (path === '/' ? '' : path.slice(1));
 const pageData = route => ({ page: route.pageId, service: route.serviceId ?? null, speciality: route.specialityId ?? null });
 let browser;
 
+// Resolves once React rehydrated, the route markers (page/service/speciality)
+// equal the expected route, content is mounted, and nothing is aria-busy.
 async function waitForPage(page, expected) {
   try {
     await page.waitForFunction((data) => document.querySelector('#app[data-hydrated="true"]')
@@ -54,6 +68,8 @@ async function waitForPage(page, expected) {
   }
 }
 
+// Clicks a temporary real <a> so navigation flows through the app's global
+// click handler rather than a programmatic router call.
 async function clickRoute(page, href, expected) {
   await page.evaluate((destination) => {
     const link = document.createElement('a');
@@ -65,6 +81,8 @@ async function clickRoute(page, href, expected) {
   await waitForPage(page, expected);
 }
 
+// The layout nodes captured on the first page must still be connected and
+// singular: React keeps the shell and swaps only the content.
 async function assertShell(page) {
   assert.equal(await page.evaluate(() => window.testShell.every((node) => node.isConnected)
     && window.testShell[0] === document.querySelector('#navbar')
@@ -75,6 +93,8 @@ async function assertShell(page) {
     && !window.testEmptyMain), true, 'Navigation must preserve layout nodes and populated content');
 }
 
+// New standalone context per suite; the request handler inside configures the
+// third-party interception behaviour.
 async function configureContext(options = {}) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce', ...options });
   // Make font/icon/map requests independent of third-party network availability.
@@ -104,10 +124,12 @@ try {
   browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}) });
   const context = await configureContext();
   const page = await context.newPage();
+  // Counts top-level document loads; only the initial goto may add one.
   let documentRequests = 0;
   page.on('request', request => { if (request.isNavigationRequest() && request.frame() === page.mainFrame()) documentRequests += 1; });
   await page.goto(destinationUrl('/'));
   await waitForPage(page, { page: 'home' });
+  // Capture the shell nodes and watch the app container for emptiness.
   await page.evaluate(() => {
     window.testShell = ['navbar', 'footer', 'main-content'].map(id => document.getElementById(id));
     window.testEmptyMain = false;
@@ -117,6 +139,7 @@ try {
     window.testOldHero = document.querySelector('[data-hero-slider]');
   });
 
+  // Core SPA flow: same document, new metadata, focus moved to <main>.
   await page.locator('#navbar [data-nav-page="about"]').click();
   await waitForPage(page, { page: 'about' });
   await assertShell(page);
@@ -144,6 +167,8 @@ try {
   assert.equal(new URL(page.url()).pathname, base + 'pages/contact.html');
   await assertShell(page);
 
+  // Contact form input sanitisation, then stale-element behavior after a
+  // route change (detached leftovers must not break the next page).
   await page.locator('#contact-form [name="name"]').fill('Rama123');
   assert.equal(await page.locator('#contact-form [name="name"]').inputValue(), 'Rama');
   await page.evaluate(() => { window.testOldName = document.querySelector('#contact-form [name="name"]'); });
@@ -155,6 +180,8 @@ try {
     return window.testOldName.value;
   }), 'Test123', 'Old contact controller must be cleaned up');
 
+  // Clinic gallery: the filter hides cards, the dialog opens, and history
+  // Back must close it while restoring the conversation state.
   await page.locator('[data-gallery-filter]:not([data-gallery-filter="all"])').first().click();
   assert.ok(await page.locator('[data-gallery-card][hidden]').count() > 0);
   await page.locator('[data-gallery-card]:not([hidden]) [data-gallery-open]').first().click();
@@ -175,6 +202,7 @@ try {
   await waitForPage(page, { page: 'clinic' });
   await page.waitForFunction(() => Math.abs(window.scrollY - 600) < 2);
 
+  // Footer shortcut must land on the in-page #services anchor.
   await page.locator('#footer [data-nav-page="services"]').evaluate(link => link.click());
   await waitForPage(page, { page: 'home' });
   await page.waitForFunction(() => Math.abs(document.getElementById('services').getBoundingClientRect().top - 76) < 10);
@@ -263,6 +291,8 @@ try {
   await waitForPage(page, { page: 'about' });
   assert.equal(await page.locator('#navbar img').evaluate(img => new URL(img.src).pathname), base + 'assets/logo/site_logo.png');
 
+  // Mobile: open the menu, navigate (it collapses), reopen, then dispatch the
+  // category dropdown that opens Fresha; layout must stay overflow-free.
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator('[data-nav-toggle]').click();
   assert.equal(await page.locator('[data-nav-toggle]').getAttribute('aria-expanded'), 'true');
