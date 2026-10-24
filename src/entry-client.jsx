@@ -4,7 +4,11 @@ import { App } from './App.jsx';
 import { basePath, stripBase } from '../js/utils/urls.js';
 import { normalizePath } from './routes.js';
 import '@phosphor-icons/web/regular';
+import { gsap } from 'gsap';
 import '../css/input.css';
+
+// Keep the existing animation controllers on the same local GSAP instance.
+window.gsap = gsap;
 
 const root = document.getElementById('app');
 const app = <BrowserRouter basename={basePath}><App /></BrowserRouter>;

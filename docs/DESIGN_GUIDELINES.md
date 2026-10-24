@@ -122,10 +122,10 @@ dan The InBody Method™ melalui
 Teks naik 16px sambil fade-in selama 850ms (`power2.out`); foto dan slider hero Home hanya fade-in.
 Kartu serta daftar yang masuk layar bersama memakai stagger 120ms. Tiap target muncul
 sekali per kunjungan halaman, tanpa mengulang saat scroll kembali. Pergantian slide dan
-animasi header memakai controller masing-masing. Gunakan GSAP CDN yang sudah ada
-dan IntersectionObserver; jangan menambahkan ScrollTrigger atau dependency animasi baru.
-Reduced motion, fokus pengguna, cleanup route, dan CDN gagal/lambat harus menjaga
-konten tetap terlihat. Jangan menyembunyikan konten pada HTML prerender atau CSS awal.
+animasi header memakai controller masing-masing. Gunakan dependency GSAP lokal yang
+sudah dibundel Vite dan IntersectionObserver; jangan menambahkan ScrollTrigger.
+Reduced motion, fokus pengguna, dan cleanup route harus menjaga konten tetap terbaca.
+Jangan menyembunyikan konten pada HTML prerender atau CSS awal.
 Clinic dan Contact menandai kelompok dengan `data-content-reveal="rise|fade"` dan
 `data-content-reveal-group` untuk stagger. Foto galeri beserta caption hanya fade-in;
 dialog tetap terpisah dari target animasi. Form Contact menganimasikan seluruh kolom
@@ -285,9 +285,9 @@ aset, urutan Home, enam speciality, dan 12 treatment. Tes browser memeriksa hydr
 navigasi tanpa reload, shell, cleanup, history, mobile, dan konten tanpa JavaScript.
 Periksa visual serta interaksi setelah perubahan layout; hasil tes teknis bukan persetujuan copy client.
 
-Animasi masuk header memakai GSAP core dari CDN melalui `js/features/header-entrance.js`.
+Animasi masuk header memakai GSAP lokal dari bundle client melalui `js/features/header-entrance.js`.
 Latar bar kontak terbuka dari atas ke bawah terlebih dahulu, lalu lokasi, email, telepon,
 dan menu navbar memudar masuk. Logo dan container navbar tetap statis.
 Effect dipasang sekali pada layout App; perpindahan route tidak mengulang animasi.
 Reduced motion dan interaksi pengguna menghentikan animasi serta memulihkan style.
-Konten tetap terlihat jika CDN gagal atau terlambat. Jangan mengaktifkan animasi seluruh teks.
+Konten tetap terlihat pada HTML prerender dan ketika reduced motion aktif. Jangan mengaktifkan animasi seluruh teks.

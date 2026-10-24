@@ -1,15 +1,14 @@
 // Deterministic unit test for the reveal controllers (npm run
-// test:home-reveal — no browser, no CDN, no Playwright). Fake window/document,
-// GSAP, IntersectionObserver, matchMedia and timers make every controller
+// test:home-reveal — no browser, CDN or Playwright). Fake window,
+// fake GSAP, IntersectionObserver, matchMedia and timers make every controller
 // decision directly assertable: initial hiding, group stagger, focus reveal,
-// scroll restoration, reduced motion, cleanup and delayed/failed CDN.
+// scroll restoration, reduced motion and cleanup.
 import assert from 'node:assert/strict';
 import { initHomeReveal } from '../../js/features/home-reveal.js';
 import { initContentReveal } from '../../js/features/content-reveal.js';
 
-// Exercise lifecycle and fallback behavior without a browser or CDN dependency.
-// Tiny add/remove/emit registry shared by fake root, elements, the script tag
-// and matchMedia results.
+// Exercise lifecycle behavior without a browser or CDN dependency. Tiny
+// add/remove/emit registry shared by fake root, elements and matchMedia.
 class Events {
   listeners = new Map();
   addEventListener(name, callback) {
@@ -41,10 +40,9 @@ class Element extends Events {
 
 // Builds a Home-like tree: hero (the data-hero-slider query), a services
 // frame with a heading and a list of six cards at growing scroll offsets,
-// plus fake GSAP/timers/observers. `loaded` toggles window.gsap, `reduced`
-// toggles matchMedia; handles are returned so scenarios simulate events and
-// inspect element state.
-function fixture({ loaded = true, reduced = false } = {}) {
+// plus fake GSAP/timers/observers. GSAP is available synchronously in the app;
+// this fixture supplies a fake instance, and `reduced` toggles matchMedia.
+function fixture({ reduced = false } = {}) {
   const hero = new Element(100);
   const heading = new Element(900);
   const cards = Array.from({ length: 6 }, (_, index) => new Element(1100 + index * 220));
@@ -54,11 +52,9 @@ function fixture({ loaded = true, reduced = false } = {}) {
   const root = new Element(0, [hero, services]);
   root.selectors.set('[data-hero-slider]', hero);
   root.selectors.set('[data-section-frame="services"]', services);
-  const script = new Events();
   const media = new Events();
   media.matches = reduced;
   const observers = [];
-  const timers = new Set();
   const animations = [];
   const saved = new Map();
   let contexts = 0;
@@ -84,8 +80,6 @@ function fixture({ loaded = true, reduced = false } = {}) {
   globalThis.window = {
     innerHeight: 720,
     matchMedia: () => media,
-    setTimeout(callback) { timers.add(callback); return callback; },
-    clearTimeout(callback) { timers.delete(callback); },
     IntersectionObserver: class {
       observed = new Set();
       disconnected = false;
@@ -95,10 +89,9 @@ function fixture({ loaded = true, reduced = false } = {}) {
       disconnect() { this.disconnected = true; this.observed.clear(); }
       enter(elements) { this.callback(elements.map(target => ({ target, isIntersecting: true }))); }
     },
-    ...(loaded ? { gsap } : {}),
+    gsap,
   };
-  globalThis.document = { getElementById: () => script };
-  return { root, hero, heading, cards, script, media, observers, timers, gsap, animations, contexts: () => contexts };
+  return { root, hero, heading, cards, media, observers, gsap, animations, contexts: () => contexts };
 }
 
 // Scenario 1, happy path: initial hide (hero fades, cards rise), group
@@ -148,35 +141,7 @@ initHomeReveal(reduced.root)();
 assert.equal(reduced.contexts(), 0);
 assert.equal(reduced.observers.length, 0);
 
-// Scenario 4, CDN arrives late: content stays readable while it loads, and
-// once loaded only below-fold targets may be hidden — never what is
-// already on screen.
-const late = fixture({ loaded: false });
-const destroyLate = initHomeReveal(late.root);
-assert.deepEqual(late.hero.properties, {}, 'Content is readable while the CDN loads');
-window.gsap = late.gsap;
-late.script.emit('load');
-assert.deepEqual(late.hero.properties, {}, 'A delayed CDN must not hide already-visible content');
-assert.equal(late.heading.properties.opacity, 0, 'Below-fold content can still reveal after a short CDN delay');
-destroyLate();
-assert.deepEqual(late.heading.properties, {});
-
-// Scenario 5, failure paths — script error, one-second timeout, unmount: a
-// CDN load event after any of these must not animate or hide anything.
-for (const reason of ['error', 'timeout', 'unmount']) {
-  const fallback = fixture({ loaded: false });
-  const destroy = initHomeReveal(fallback.root);
-  if (reason === 'error') fallback.script.emit('error');
-  if (reason === 'timeout') [...fallback.timers].forEach(callback => callback());
-  if (reason === 'unmount') destroy();
-  window.gsap = fallback.gsap;
-  fallback.script.emit('load');
-  assert.equal(fallback.contexts(), 0, `${reason}: late loading must not start a reveal`);
-  for (const element of [fallback.hero, fallback.heading, ...fallback.cards]) assert.deepEqual(element.properties, {});
-  destroy();
-}
-
-// Scenario 6, other pages: without the hero slider the Home group list is
+// Scenario 4, other pages: without the hero slider the Home group list is
 // empty and no controller is installed.
 const otherPage = fixture();
 otherPage.root.selectors.delete('[data-hero-slider]');
@@ -209,12 +174,11 @@ for (const page of ['clinic', 'contact']) {
   }
 }
 
-// Scenario 7, declarative opt-in without markers: a page that never marks
+// Scenario 5, declarative opt-in without markers: a page that never marks
 // data-content-reveal stays inert even though the helper exists.
 const unmarked = fixture();
 initContentReveal(unmarked.root)();
 assert.equal(unmarked.contexts(), 0, 'Unmarked pages do not initialize the shared controller');
 // Restore the host globals touched by the fixture.
 delete globalThis.window;
-delete globalThis.document;
-console.log('Passed: Home, Clinic and Contact reveal groups, stagger, once per visit, focus, cleanup, reduced motion and delayed/failed CDN fallbacks.');
+console.log('Passed: Home, Clinic and Contact reveal groups, stagger, once per visit, focus, cleanup and reduced motion with local GSAP.');

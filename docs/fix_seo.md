@@ -18,14 +18,13 @@ Audit dilakukan tanggal **24 Oktober 2026** terhadap hasil build `dist/` terbaru
 | 4. robots.txt & sitemap.xml | ✅ Implemented; publish on next build/deploy | `scripts/build.mjs` now generates both files from `src/routes.js`; GitHub Pages provides its full public base URL through `SITE_URL` |
 | 5. Hosting SPA tidak 404 | ✅ Lewat | Semua URL = file fisik, tidak butuh rewrite; `404.html`, `.nojekyll`, `.github/workflows/deploy.yml` lengkap |
 | 6. Struktur heading, `<a href>`, alt | ✅ Lewat | 24/24 file HTML tepat satu `<h1>`; nav memakai `<a href>` nyata; alt deskriptif dari `js/data/` |
-| 7. Performa | ⚠️ Sebagian | `loading="lazy"` + `fetchPriority` ✅; GSAP CDN async dengan fallback ✅; 12 foto galeri disajikan sebagai WebP ≤ 114 KB dengan JPEG fallback; optimasi gambar hero/detail service masih tersisa |
+| 7. Performa | ⚠️ Sebagian | `loading="lazy"` + `fetchPriority` ✅; GSAP dibundel secara lokal ✅; 12 foto galeri disajikan sebagai WebP ≤ 114 KB dengan JPEG fallback; optimasi gambar hero/detail service masih tersisa |
 | 8. Search Console / Bing | ❌ Belum | Token verifikasi belum ada (menunggu domain live) |
 | 9. Structured Data JSON-LD | ✅ Implemented; publish on next build/deploy | `scripts/build.mjs` emits one shared `MedicalClinic` entity on every public route; clinic address and opening hours come from `js/data/clinic-contact.js` |
 | 10. Pantau & bersabar | — | Bekerja setelah situs online |
 
 **Kesimpulan:** fondasi jauh di atas minimum panduan (konten penuh tersedia di HTML awal,
-satu `<h1>` per halaman, animasi tidak menyembunyikan konten bila CDN gagal —
-`js/features/content-reveal.js:80` hanya men-set `opacity: 0` saat runtime dengan timeout 1 detik).
+satu `<h1>` per halaman, konten tetap tersedia pada HTML prerender dan animasi menghormati reduced motion.
 robots.txt, sitemap.xml, canonical, Open Graph, Twitter Card, dan structured data klinik sekarang dibuat saat build;
 gap SEO yang tersisa meliputi pengoptimalan media serta verifikasi setelah domain dipublikasikan.
 

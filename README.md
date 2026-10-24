@@ -7,20 +7,20 @@ internal; konten utama, URL, metadata, dan menu aktif mengikuti halaman tujuan.
 
 Website memuat enam speciality dan 12 treatment aktif, menggunakan desain, copy,
 dan foto asli yang telah disetujui.
-Animasi masuk header memakai GSAP core dari CDN: latar bar kontak terbuka dari atas
+Animasi masuk header memakai GSAP core dari dependency npm yang dibundel Vite: latar bar kontak terbuka dari atas
 ke bawah, lalu lokasi/email/telepon dan menu navbar memudar masuk. Logo tetap statis.
 Animasi hanya berjalan sekali setiap dokumen dibuka, menghormati reduced motion,
 dan dihentikan saat pengguna mulai berinteraksi. Navigasi React tidak mengulanginya.
-CDN tidak ditambahkan sebagai dependency npm. Konten tetap terlihat jika CDN gagal
-atau belum siap dalam satu detik.
+GSAP tersedia lokal tanpa permintaan CDN. Konten tetap terlihat pada HTML awal,
+dan reduced motion menonaktifkan animasi.
 
 Home, Our Clinic, Contact Us, seluruh service/speciality, dan The InBody Method™ memakai
 `js/features/content-reveal.js` untuk animasi sekali saat tiap
 kelompok konten masuk layar: teks naik 16px sambil fade-in, foto hanya fade-in,
 dan kartu/daftar memakai jeda 120ms. Durasi 850ms dengan easing `power2.out`.
 Hero memudar masuk sebagai satu kelompok; pergantian slide tetap memakai controller
-slider. Fitur memakai GSAP CDN yang sama dan IntersectionObserver, tanpa ScrollTrigger.
-Reduced motion menonaktifkannya; konten tetap terbaca jika CDN gagal atau terlambat.
+slider. Fitur memakai dependency GSAP lokal yang sama dan IntersectionObserver, tanpa ScrollTrigger.
+Reduced motion menonaktifkannya; konten tetap terbaca sebelum JavaScript berjalan.
 Home memilih kelompok melalui `js/features/home-reveal.js`; Clinic dan Contact memakai
 atribut `data-content-reveal` (`rise`/`fade`) dan `data-content-reveal-group` untuk stagger.
 `js/features/care-reveal.js` memilih elemen yang sudah ada pada layout service,
@@ -52,7 +52,7 @@ memiliki file HTML sendiri sehingga link langsung dan refresh bekerja di static 
 - Konten klinik terpusat sebagai data modul ES (`js/data/`), terpisah dari tampilan.
 - Booking Fresha per kategori speciality dan per treatment (URL `sv:` spesifik), dikelola dalam satu sumber.
 - Hero slider (3 foto, autoplay 5 detik), galeri klinik 12 foto dengan filter + dialog, form kontak yang membuka draf email.
-- Animasi GSAP sekali-per-tampil (header entrance, content reveal, stagger 120 ms) dengan fallback reduced motion dan CDN gagal.
+- Animasi GSAP lokal sekali-per-tampil (header entrance, content reveal, stagger 120 ms) dengan dukungan reduced motion.
 - Aksesibilitas: skip link, `aria-current`, live region navigasi, pemulihan fokus & scroll pada navigasi, dialog galeri yang mengembalikan fokus.
 - Kualitas: validasi output build (`npm test`) dan tes browser Playwright (`test:navigation`, `test:header`, `test:home-reveal`).
 
@@ -332,7 +332,7 @@ langkah dan tautan Method. Footer langsung mengikuti section Method.
 Navbar, footer, dan komponen tombol tetap menggunakan komponen bersama.
 Animasi About memakai `js/features/about-reveal.js` dan controller GSAP bersama:
 foto fade-in, konten naik 16px selama 850ms, dan kartu memakai stagger 120ms.
-Efek muncul sekali per kunjungan, dengan cleanup route dan fallback reduced motion/CDN.
+Efek muncul sekali per kunjungan, dengan cleanup route dan dukungan reduced motion.
 
 ## Verifikasi
 
@@ -343,13 +343,13 @@ npm run test:home-reveal
 npm run test:navigation
 ```
 
-`npm run test:header` memeriksa urutan latar dan fade teks menggunakan GSAP CDN asli,
+`npm run test:header` memeriksa urutan latar dan fade teks menggunakan GSAP lokal dari build,
 logo/judul yang tetap statis, satu animasi per dokumen, menu mobile, reduced motion,
-serta fallback CDN gagal/lambat. Tes ini memerlukan koneksi CDN dan Playwright;
-respons GSAP hanya disimpan di memori selama tes.
+serta tidak adanya script GSAP CDN di HTML build. Tes ini memerlukan Playwright,
+tetapi tidak memerlukan koneksi CDN untuk GSAP.
 
 `npm run test:home-reveal` memeriksa kelompok Home/Clinic/Contact, stagger, animasi sekali,
-fokus keyboard, cleanup, reduced motion, serta fallback CDN gagal/lambat tanpa jaringan.
+fokus keyboard, cleanup, dan reduced motion menggunakan mock GSAP tanpa browser.
 
 `npm test` memvalidasi **hasil build yang sudah ada di `dist/`**: 23 HTML prerender,
 metadata, satu H1/main, shell, ARIA, ID unik, seluruh route/anchor, parent speciality,

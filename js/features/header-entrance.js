@@ -1,28 +1,17 @@
-// GSAP core is supplied by the async CDN script in index.html.
-// Content starts visible, so a blocked/slow CDN never leaves the header hidden.
+// GSAP is imported into the client bundle by src/entry-client.jsx.
 export function initHeaderEntrance(root) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (!root || reducedMotion.matches) return () => {};
 
-  const script = document.getElementById('gsap-cdn');
   let context;
   let stopped = false;
-  let timeout;
-
-  function stopWaiting() {
-    window.clearTimeout(timeout);
-    script?.removeEventListener('load', start);
-    script?.removeEventListener('error', stopWaiting);
-  }
 
   function stop() {
     stopped = true;
-    stopWaiting();
     context?.revert();
   }
 
   function start() {
-    stopWaiting();
     const gsap = window.gsap;
     if (stopped || reducedMotion.matches || !gsap?.context) return;
     const background = root.querySelector('[data-contact-background]');
@@ -52,13 +41,7 @@ export function initHeaderEntrance(root) {
   const onMotionChange = () => { if (reducedMotion.matches) stop(); };
   reducedMotion.addEventListener('change', onMotionChange);
 
-  if (window.gsap) start();
-  else if (script) {
-    script.addEventListener('load', start, { once: true });
-    script.addEventListener('error', stopWaiting, { once: true });
-    // Skip a late entrance instead of making already-read text disappear.
-    timeout = window.setTimeout(stopWaiting, 1000);
-  }
+  start();
 
   return () => {
     stop();

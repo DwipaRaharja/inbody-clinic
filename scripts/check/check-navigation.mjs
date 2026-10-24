@@ -101,10 +101,7 @@ async function configureContext(options = {}) {
   await context.route('https://**/*', async (route) => {
     const url = new URL(route.request().url());
     const iconPath = '/npm/@phosphor-icons/web@2.1.2/';
-    if (url.hostname === 'cdn.jsdelivr.net' && url.pathname.endsWith('/gsap.min.js')) {
-      // Navigation also works when the optional animation CDN is unavailable.
-      await route.abort();
-    } else if (url.hostname === 'cdn.jsdelivr.net' && url.pathname.startsWith(iconPath)) {
+    if (url.hostname === 'cdn.jsdelivr.net' && url.pathname.startsWith(iconPath)) {
       const filename = join(projectRoot, 'node_modules/@phosphor-icons/web', url.pathname.slice(iconPath.length));
       await route.fulfill({ body: await readFile(filename), contentType: mimeTypes[extname(filename)] ?? 'application/octet-stream' });
     } else {
