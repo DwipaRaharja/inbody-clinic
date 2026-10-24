@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { readFileSync } from 'node:fs';
-import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig(({ isPreview }) => {
   let base = process.env.VITE_BASE_PATH || '/';
@@ -14,7 +13,7 @@ export default defineConfig(({ isPreview }) => {
   }
   return {
     base,
-    plugins: [react(), tailwindcss(), visualizer({ open: true, gzipSize: true, filename: 'stats.html' })],
+    plugins: [react(), tailwindcss()],
     publicDir: false,
     build: { outDir: 'dist' },
   };
