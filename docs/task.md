@@ -35,7 +35,7 @@ klinik. Komunikasi tetap hangat, mendengarkan pasien, dan mudah dipahami.
 | About | Baru memperkenalkan Saila Insua López | Tambahkan profil anggota tim kedua dan filosofi bersama |
 | Detail layanan | Ada 13 halaman di empat kelompok folder | Usulan: pertahankan sebagai detail pendukung, tambahkan enam halaman speciality |
 | Booking | Tombol Book an Appointment menuju Contact Us; form membuka draf email | Belum ada alur booking langsung atau data slot appointment yang terhubung |
-| Foto | Ada foto Home, Saila, treatment, dan 12 foto klinik dalam `gallery/` | Bisa digunakan kembali setelah pemilihan konteks; identitas/foto profil anggota kedua perlu dipastikan |
+| Foto | Ada foto Home, Saila, treatment, dan 12 foto klinik dalam `assets/gallery/` | Bisa digunakan kembali setelah pemilihan konteks; identitas/foto profil anggota kedua perlu dipastikan |
 | Struktur dan komponen | Entry HTML sudah rapi dalam `pages/`; shell, navbar, footer, heading, dan tombol sudah reusable | Gunakan struktur dan komponen yang ada |
 
 Saat ini ada **17 halaman**: Home, About, Our Clinic, Contact Us, dan 13 detail

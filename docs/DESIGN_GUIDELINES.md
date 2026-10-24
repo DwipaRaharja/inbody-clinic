@@ -260,7 +260,7 @@ Name hanya menerima huruf Unicode/spasi. Form membuka draf email; tidak mengirim
 CTA assessment menuju Fresha melalui data booking bersama; tombol Book an Appointment
 memakai link Fresha pada `bookingHref`. Form email tidak berubah menjadi form booking.
 
-Our Clinic tetap memakai 12 JPEG asli pada `gallery/`, filter kategori, grid 1/2/3 kolom,
+Our Clinic tetap memakai 12 JPEG asli pada `assets/gallery/`, filter kategori, grid 1/2/3 kolom,
 thumbnail 4:3, dan dialog `object-contain`. Dialog mendukung close/Escape, scroll lock,
 serta pengembalian fokus. MP4 belum dipakai.
 
