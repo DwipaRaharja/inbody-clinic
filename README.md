@@ -73,7 +73,7 @@ scripts/build.mjs
         │       <meta app-route>, <title>, <meta description>,
         │       class <html>/<body> (src/theme.js), data-page/service/speciality
         ├── ⑤ tulis dist/<path> untuk tiap route + /404.html
-        └── ⑥ salin assets/ dan gallery/ ke dist/, tulis .nojekyll
+        └── ⑥ salin assets/ ke dist/, tulis .nojekyll
 ```
 
 Definisi `pageId` pada `src/routes.js` menentukan factory yang dipakai: `home/about/contact/clinic`
@@ -136,7 +136,7 @@ URL Fresha bersama untuk tombol umum berada di `bookingHref` pada `js/components
 | `js/utils/`   | Helper URL sadar-base (`siteUrl`, `stripBase`) |
 | `css/`        | `input.css` — Tailwind v4 + design tokens (`clinic-*`) |
 | `scripts/`    | `build.mjs` (prerender), `check-pages.mjs`, `check-navigation.mjs`, tes header & reveal |
-| `assets/`, `gallery/` | Aset asli klinik yang disalin utuh ke `dist/` saat build |
+| `assets/` | Aset asli klinik, termasuk foto `assets/gallery/`, yang disalin ke `dist/` saat build |
 | `.github/`    | Workflow deploy GitHub Pages (`deploy.yml`) |
 
 ## Menjalankan project
@@ -152,13 +152,15 @@ Buka alamat yang ditampilkan Vite. Edit komponen `.jsx`, data, atau CSS untuk me
 perubahan melalui development server. Jangan menggunakan Live Server sebagai pengganti Vite
 atau membuka `index.html` dengan `file://`.
 
-```sh
+```powershell
+$env:SITE_URL = 'https://example.test' # ganti dengan URL publik yang sebenarnya
 npm run build
 npm run preview
 ```
 
 `build` membuat folder `dist/` untuk hosting pada root domain. `preview` menyajikan hasil
-build tersebut secara lokal. Folder `dist/` adalah keluaran build; jangan mengedit isinya
+build tersebut secara lokal. `SITE_URL` wajib diisi karena build juga menghasilkan sitemap
+dan robots dengan URL absolut. Folder `dist/` adalah keluaran build; jangan mengedit isinya
 secara manual. Jalankan build lagi setelah mengubah source.
 
 ## Struktur folder
@@ -174,8 +176,7 @@ js/
 ├── data/                           # Konten klinik, tim, kontak, galeri, layanan
 ├── features/                       # Controller slider, form email, dan galeri
 └── layouts/                        # Token container dan layout
-assets/                             # Foto dan logo asli
-gallery/                            # 12 JPEG klinik; MP4 belum dipakai
+assets/                             # Foto, logo, dan assets/gallery/ berisi 12 foto klinik
 css/input.css                       # Tailwind dan design tokens
 scripts/
 ├── build.mjs                       # Vite build dan prerender semua route
@@ -197,7 +198,8 @@ GitHub Pages menyajikan folder hasil build. Pada repository GitHub, pilih
 melalui Actions. Workflow memasang dependency, membaca base dari konfigurasi GitHub Pages
 (termasuk custom domain), membuat build dengan base tersebut,
 memvalidasi output, lalu mengunggah `dist/` sebagai artifact Pages. Menjalankan build
-lokal saja belum memublikasikan situs.
+lokal saja belum memublikasikan situs. Workflow juga memberikan URL publik Pages sebagai
+`SITE_URL` untuk sitemap dan robots.
 
 Untuk preview lokal dengan base project Pages:
 
@@ -225,19 +227,27 @@ GitHub Pages tanpa `HashRouter`, trik `404.html`, atau rewrite server ke halaman
 
 Untuk website pada root domain, buat build baru:
 
-```sh
+```powershell
+$env:SITE_URL = 'https://domain-publik-anda' # isi URL publik sebenarnya, termasuk subpath jika ada
 npm run build
 npm test
 ```
 
 Upload **isi** `dist/` ke folder document root website di File Manager hPanel, biasanya
 `public_html/`. `index.html`, `pages/`, bundle, foto, logo, dan galeri harus berada pada
-posisi relatif yang dihasilkan build. Untuk subfolder domain, buat build dengan
+posisi relatif yang dihasilkan build. Upload juga file `.htaccess` dari root repository
+secara terpisah ke `public_html/`; file itu mengalihkan HTTP ke HTTPS dan memakai
+`404.html` hasil build untuk URL yang tidak tersedia. Sertifikat SSL harus aktif lebih
+dulu di hPanel agar redirect HTTPS dapat digunakan. Aturan `ErrorDocument` mengasumsikan
+situs dipasang di document root domain; sesuaikan path jika situs dipasang di subfolder.
+
+Semua halaman sudah menjadi file HTML prerender, jadi jangan menambahkan rewrite SPA yang
+mengalihkan setiap URL ke Home. Untuk subfolder domain, buat build dengan
 `npm run build -- --base /nama-subfolder/` sebelum upload.
 
 Hosting hanya perlu menyajikan file statis. Node.js diperlukan saat development/build,
 dan tidak perlu berjalan sebagai server produksi. Routing langsung ditangani oleh file
-HTML hasil prerender; tidak diperlukan aturan `.htaccess` yang mengarahkan semua URL ke Home.
+HTML hasil prerender.
 
 ## Navigasi dan fitur
 
