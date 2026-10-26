@@ -259,21 +259,21 @@ Adaptasi snipet laporan (`rel="preload"` + `font-display: swap`): `font-display`
 
 ### T1 — Ruang reflow (urutan masalah 1)
 
-- [ ] `header-entrance.js`: jadwalkan `start()` lewat double `requestAnimationFrame` (§3.1 langkah 1) dan batalkan frame yang menggantung pada `stop()`.
-- [ ] `content-reveal.js`: tween reveal menjadi `gsap.fromTo` (§3.1 langkah 2).
-- [ ] Tambah `fromTo` ke mock GSAP di `scripts/check/check-home-reveal.mjs` agar skenario stagger/reveal tetap menguji jalur yang sama.
-- [ ] `npm run test:home-reveal`, `npm test` (output HTML tidak boleh berubah: asersi `data-content-reveal-state`, timing, dan cleanup harus tetap lulus).
+- [X] `header-entrance.js`: jadwalkan `start()` lewat double `requestAnimationFrame` (§3.1 langkah 1) dan batalkan frame yang menggantung pada `stop()`.
+- [X] `content-reveal.js`: tween reveal menjadi `gsap.fromTo` (§3.1 langkah 2).
+- [X] Tambah `fromTo` ke mock GSAP di `scripts/check/check-home-reveal.mjs` agar skenario stagger/reveal tetap menguji jalur yang sama (dengan iterasi elemen batch di sisi fixture).
+- [X] `npm run test:home-reveal`, `npm test` (output HTML tidak boleh berubah: asersi `data-content-reveal-state`, timing, dan cleanup harus tetap lulus).
 - [ ] (Opsional, hanya bila trace prod menunjuk paint) `motion-safe:will-change-transform` pada elemen hero.
-      **Selesai bila:** entrance tidak lagi memaksa reflow di tengah commit hidrasi; semua tes hijau.
+      **Selesai bila:** entrance tidak lagi memaksa reflow di tengah commit hidrasi; semua tes hijau. — Terpenuhi: tes hijau, diimplementasi di commit `c25c094`.
       **Estimasi dampak prod:** kecil–sedang; biayanya murah, dikerjakan lebih dulu karena menyentuh jalur first paint.
 
 ### T2 — Font self-host (urutan masalah 2)
 
-- [ ] Audit bobot terpakai (perintah §3.2 langkah 1) dan finalisasi daftar berkas.
-- [ ] `npm i @fontsource/cormorant-garamond @fontsource/montserrat`, impor CSS per-weight di `src/entry-client.jsx` (§3.2 langkah 2); lepas impor weight yang ternyata tidak dipakai.
-- [ ] Hapus `preconnect` + stylesheet Google `index.html:16–21`.
-- [ ] `npm run build`: verifikasi woff2 di-emit ke `dist/assets/` dan tereferensi dari stylesheet ter-bundle; `npm test` harus tetap hijau.
-      **Selesai bila:** Lighthouse prod tidak lagi menandai fonts.googleapis.com/gstatic; tampilan heading tetap sama (Cormorant/Montserrat).
+- [X] Audit bobot terpakai (perintah §3.2 langkah 1) dan finalisasi daftar berkas. — Hasil: `font-light`/`font-medium`/`font-semibold`/`font-bold` serta italic pada aksen Heading terpakai; bobot final **Cormorant 400/500/600/700 + italic 600/700, Montserrat 300/400/500/600/700**.
+- [X] `npm i @fontsource/cormorant-garamond @fontsource/montserrat`, impor CSS per-weight di `src/entry-client.jsx` (§3.2 langkah 2); lepas impor weight yang ternyata tidak dipakai. — Pakai berkas `latin-*` (subset latin saja; cyrillic/vietnam tidak diimpor) supaya dist tetap ramping.
+- [X] Hapus `preconnect` + stylesheet Google `index.html:16–21`. — Verifikasi: `dist/index.html` kini 0 referensi `fonts.googleapis`/`fonts.gstatic`.
+- [X] `npm run build`: verifikasi woff2 di-emit ke `dist/assets/` dan tereferensi dari stylesheet ter-bundle; `npm test` harus tetap hijau. — Montserrat woff2 ±18,7 kB per bobot, Cormorant woff2 ±22–24 kB per bobot; browser tetap hanya mengunduh berkas yang cocok `unicode-range`; `@font-face` ikut chunk `vendor-*.css` (cache-stable).
+      **Selesai bila:** Lighthouse prod tidak lagi menandai fonts.googleapis.com/gstatic; tampilan heading tetap sama (Cormorant/Montserrat). — Sisi kode/build telah terpenuhi (commit `cb13800`); konfirmasi akhir menunggu ukuran ulang T5.
       **Estimasi dampak:** menghapus satu origin pihak ketiga + stylesheet render-blocking remote; terasa di jaringan nyata (dev localhost hampir tidak menunjukkan selisihnya).
 
 ### T3 — Long task & chunk vendor (urutan masalah 3)
