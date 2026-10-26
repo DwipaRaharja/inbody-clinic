@@ -4,22 +4,12 @@ import { App } from './App.jsx';
 import { basePath, stripBase } from '../js/utils/urls.js';
 import { normalizePath } from './routes.js';
 import '@phosphor-icons/web/regular';
-// Self-hosted fonts (T2): latin subset per weight, same families as the
-// --font-display/--font-sans tokens. Replaces the render-blocking Google Fonts
-// stylesheet that used to live in index.html.
-import '@fontsource/cormorant-garamond/latin-400.css';
-import '@fontsource/cormorant-garamond/latin-500.css';
-import '@fontsource/cormorant-garamond/latin-600.css';
-import '@fontsource/cormorant-garamond/latin-700.css';
-import '@fontsource/cormorant-garamond/latin-600-italic.css';
-import '@fontsource/cormorant-garamond/latin-700-italic.css';
-import '@fontsource/montserrat/latin-300.css';
-import '@fontsource/montserrat/latin-400.css';
-import '@fontsource/montserrat/latin-500.css';
-import '@fontsource/montserrat/latin-600.css';
-import '@fontsource/montserrat/latin-700.css';
-import { gsap } from 'gsap';
+// Self-hosted variable fonts (T2): one latin woff2 per face replaces the
+// nine per-weight stylesheets and the old third-party Google Fonts request.
+// Family names must match css/input.css tokens (see css/fonts.css).
+import '../css/fonts.css';
 import '../css/input.css';
+import { gsap } from 'gsap';
 
 // Keep the existing animation controllers on the same local GSAP instance.
 window.gsap = gsap;
