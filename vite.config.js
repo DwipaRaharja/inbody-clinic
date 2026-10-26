@@ -17,6 +17,9 @@ export default defineConfig(({ isPreview }) => {
     publicDir: false,
     build: {
       outDir: 'dist',
+      // One stylesheet: app + font-face CSS merged, so first paint waits on a
+      // single same-origin file instead of two (per-T2/T3 follow-up).
+      cssCodeSplit: false,
       // Split stable third-party code (GSAP) out of the app entry so new
       // deploys keep the vendor cache warm; remaining node_modules join it.
       rolldownOptions: {
