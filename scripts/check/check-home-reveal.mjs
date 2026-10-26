@@ -75,6 +75,11 @@ function fixture({ reduced = false } = {}) {
       elements.forEach(clear);
       values.onComplete();
     },
+    fromTo(elements, fromValues, values) {
+      // Mirror the real method: apply the explicit start frame, then animate.
+      elements.forEach(element => this.set(element, fromValues));
+      this.to(elements, values);
+    },
     killTweensOf() {},
   };
   globalThis.window = {

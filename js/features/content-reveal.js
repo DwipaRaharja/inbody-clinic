@@ -40,17 +40,21 @@ export function initContentReveal(root, groups) {
     for (const group of groups) {
       const batch = group.targets.filter(element => entering.has(element));
       if (!batch.length) continue;
-      context.add(() => gsap.to(batch, {
-        opacity: 1,
-        ...(group.fade ? {} : { y: 0 }),
-        duration: 0.85,
-        ease: 'power2.out',
-        stagger: 0.12,
-        clearProps: group.fade ? 'opacity' : 'opacity,transform',
-        onComplete: () => {
-          if (!stopped) batch.forEach(element => { element.dataset.contentRevealState = 'visible'; });
-        },
-      }));
+      // fromTo restates the start frame explicitly (what start() already set),
+      // so GSAP does not read computed styles when the reveal tween begins.
+      context.add(() => gsap.fromTo(batch,
+        { opacity: 0, ...(group.fade ? {} : { y: 16 }) },
+        {
+          opacity: 1,
+          ...(group.fade ? {} : { y: 0 }),
+          duration: 0.85,
+          ease: 'power2.out',
+          stagger: 0.12,
+          clearProps: group.fade ? 'opacity' : 'opacity,transform',
+          onComplete: () => {
+            if (!stopped) batch.forEach(element => { element.dataset.contentRevealState = 'visible'; });
+          },
+        }));
     }
   }
 

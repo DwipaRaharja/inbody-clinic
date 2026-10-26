@@ -5,9 +5,14 @@ export function initHeaderEntrance(root) {
 
   let context;
   let stopped = false;
+  let frame;
 
   function stop() {
     stopped = true;
+    if (frame !== undefined) {
+      cancelAnimationFrame(frame);
+      frame = undefined;
+    }
     context?.revert();
   }
 
@@ -35,13 +40,21 @@ export function initHeaderEntrance(root) {
     }, root);
   }
 
+  function schedule() {
+    // Two frames out: begin after the first paint instead of stacking layout
+    // reads on React's hydration commit (same pattern as hero-slider.js).
+    frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(start);
+    });
+  }
+
   // Interaction takes priority over an entrance still playing or loading.
   root.addEventListener('pointerdown', stop, { once: true, capture: true });
   root.addEventListener('keydown', stop, { once: true, capture: true });
   const onMotionChange = () => { if (reducedMotion.matches) stop(); };
   reducedMotion.addEventListener('change', onMotionChange);
 
-  start();
+  schedule();
 
   return () => {
     stop();
