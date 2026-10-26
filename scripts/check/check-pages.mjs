@@ -319,7 +319,7 @@ for (const clinician of [saila, beatriz]) {
   assert.ok(profile.includes('Meet your therapist'), `${clinician.name}: missing therapist eyebrow`);
 }
 const homeSections = [...home.html.matchAll(/<section\b[^>]*\sid="([^"]+)"/gu)].map(match => match[1]);
-assert.deepEqual(homeSections, ['hero', 'services', 'method', 'team', 'expect', 'home-contact'], 'Home must place assessment inside Services rather than duplicate it below');
+assert.deepEqual(homeSections, ['hero', 'gift-voucher', 'services', 'method', 'team', 'expect', 'home-contact'], 'Home must place Gift Voucher between Hero and Services, and keep assessment inside Services');
 const homeServices = home.html.match(/<section\b[^>]*\sid="services"[\s\S]*?<\/section>/u)?.[0] ?? '';
 assert.equal(new URL(assessmentBooking.href).searchParams.get('oiid'), 'sv:29617337', 'Assessment booking must use the client-provided service, not another treatment');
 assert.ok(homeServices.includes('data-section-frame="assessment"'), 'Home Services must feature the assessment panel');
