@@ -171,10 +171,20 @@ Adaptasi snipet laporan (`rel="preload"` + `font-display: swap`): `font-display`
    // vite.config.js
    build: {
      outDir: 'dist',
-     rolldownOptions: { output: { codeSplitting: true } },
+     rolldownOptions: {
+       output: {
+         advancedChunks: {
+           groups: [
+             { name: 'gsap', priority: 10, test: /[\\/]node_modules[\\/]gsap[\\/]/ },
+             { name: 'vendor', priority: 5, test: /[\\/]node_modules[\\/]/ },
+           ],
+         },
+       },
+     },
    },
    ```
    Efek: chunk GSAP menjadi berkas stabil yang tidak perlu divalidasi ulang saat deploy konten baru.
+   **Catatan hasil eksekusi (T3):** `codeSplitting: true` saja _tidak_ membelah graf import statis dari satu entry (build tetap satu chunk 520 kB) — yang benar-benar bekerja pada stack ini adalah `advancedChunks`. Angka terverifikasi: `gsap-*` 69,6 kB (gzip 27,3), `vendor-*` 257,0 kB (gzip 81,5), entry `index-*` 192,4 kB (gzip 48,0), runtime 0,6 kB; warning chunk >500 kB hilang, total transfer tetap ~155 kB gzip.
 3. **Jangan pindah inisialisasi controller ke `setTimeout(0)`** seperti saran generik laporan. `page.init()` dipasang di `useLayoutEffect` (`App.jsx:74`) justru agar tidak flicker; setTimeout memperkenalkan race visual tanpa bukti kebutuhan di produksi. Satu-satunya penjadwalan ulang yang dianjurkan adalah §3.1 langkah 1 (double rAF pada entrance — supaya tidak menumpuk commit hidrasi).
 4. Listener scroll `rememberScroll` (`App.jsx:66`) sudah pasif dan murah (menyimpan pasangan angka ke `Map`); tidak perlu debounce.
 5. Yang harus dihindari: memecah halaman per-section dengan `React.lazy`. Hidrasi tetap membutuhkan semua section, sehingga split tambahan hanya menambah waterfall tanpa mengurangi pekerjaan first load. Chunking vendor (poin 2) sudah cukup.
@@ -268,12 +278,12 @@ Adaptasi snipet laporan (`rel="preload"` + `font-display: swap`): `font-display`
 
 ### T3 — Long task & chunk vendor (urutan masalah 3)
 
-- [ ] `vite.config.js`: tambah `rolldownOptions.output.codeSplitting: true` (§3.3 langkah 2).
+- [X] `vite.config.js`: vendor GSAP dipisah lewat `rolldownOptions.output.advancedChunks` — `codeSplitting: true` semata ternyata tidak membelah graf import statis satu entry (lihat catatan §3.3 langkah 2).
 - [ ] (Pra-pemecahan) Selidiki ~74 kB JS tak terpakai di dalam `index-*.js` (temuan run lokal: total 155,4 kB) supaya vendor chunk tidak mengangkut kode mati — gratis dilakukan sebelum T3.
-- [ ] `npm run build`: catat daftar berkas `dist/assets/` baru (chunk GSAP terpisah) di kolom sesudah tabel §5.
-- [ ] `npm test`, `npm run test:home-reveal`.
-- [ ] Larangan (lihat §3.3 langkah 5): tanpa `React.lazy` per-section, tanpa service worker.
-      **Selesai bila:** warning chunk >500 kB hilang (atau menyusut terukur; catat angka baru); perilaku hidrasi tidak berubah (tes hijau).
+- [X] `npm run build`: chunk tercatat — `gsap-*` 69,6 kB (gzip 27,3), `vendor-*` 257,0 kB (gzip 81,5), entry `index-*` 192,4 kB (gzip 48,0) (angka lengkap di §3.3 langkah 2).
+- [X] `npm test`, `npm run test:home-reveal`.
+- [X] Larangan (lihat §3.3 langkah 5): tanpa `React.lazy` per-section, tanpa service worker.
+      **Selesai bila:** warning chunk >500 kB hilang (atau menyusut terukur; catat angka baru); perilaku hidrasi tidak berubah (tes hijau). — Terpenuhi: chunk terbesar kini 257 kB, tes hijau.
       **Estimasi:** cache jangka panjang untuk vendor; skor naik kecil, TBT prod turun sedikit.
 
 ### T4 — Gambar (urutan masalah 4) — dampak terbesar di jaringan nyata

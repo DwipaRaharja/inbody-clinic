@@ -15,6 +15,20 @@ export default defineConfig(({ isPreview }) => {
     base,
     plugins: [react(), tailwindcss()],
     publicDir: false,
-    build: { outDir: 'dist' },
+    build: {
+      outDir: 'dist',
+      // Split stable third-party code (GSAP) out of the app entry so new
+      // deploys keep the vendor cache warm; remaining node_modules join it.
+      rolldownOptions: {
+        output: {
+          advancedChunks: {
+            groups: [
+              { name: 'gsap', priority: 10, test: /[\\/]node_modules[\\/]gsap[\\/]/ },
+              { name: 'vendor', priority: 5, test: /[\\/]node_modules[\\/]/ },
+            ],
+          },
+        },
+      },
+    },
   };
 });
