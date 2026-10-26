@@ -29,6 +29,7 @@ const paths = {
   </>,
   menu: <path d="M4 6h16M4 12h16M4 18h16" />,
   close: <path d="m6 6 12 12M6 18 18 6" />,
+  gift: <><rect x="3" y="8" width="18" height="13" rx="1.5" /><path d="M12 8v13M3 12h18" /><path d="M12 8H8a2.5 2.5 0 1 1 2.5-2.5C10.5 6.9 12 8 12 8Zm0 0h4a2.5 2.5 0 1 0-2.5-2.5C13.5 6.9 12 8 12 8Z" /></>,
 };
 
 export function Icon({ name, className = '' }) {

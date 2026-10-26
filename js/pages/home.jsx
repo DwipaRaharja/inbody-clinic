@@ -1,4 +1,5 @@
 import { Hero } from '../sections/home/hero.jsx';
+import { GiftVoucher } from '../sections/home/gift-voucher.jsx';
 import { Services } from '../sections/home/services.jsx';
 import { MethodPreview, TeamPreview, WhatToExpect } from '../components/care.jsx';
 import { HomeContact } from '../sections/home/contact.jsx';
@@ -10,6 +11,7 @@ export default {
   background: 'cream',
   sections: [
     { id: 'hero', className: 'relative w-full min-w-0 overflow-hidden bg-clinic-white', labelledBy: 'hero-title', render: Hero },
+    { id: 'gift-voucher', className: 'bg-clinic-white', labelledBy: 'gift-voucher-title', render: GiftVoucher },
     { id: 'services', className: 'bg-clinic-white', labelledBy: 'services-title', render: Services },
     { id: 'method', className: 'bg-clinic-light-sage/45', labelledBy: 'method-title', render: MethodPreview },
     { id: 'team', className: 'bg-clinic-white', labelledBy: 'team-title', render: TeamPreview },

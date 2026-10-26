@@ -13,6 +13,7 @@ export function initHomeReveal(root) {
 
   // Fade the carousel once, never its individual slides or their transforms.
   add([root.querySelector('[data-hero-slider]')], true);
+  add([frame('gift-voucher')?.firstElementChild]);
   add([frame('services')?.firstElementChild]);
   add(frame('services')?.querySelector('ul')?.children ?? []);
   add([frame('method')?.firstElementChild]);

@@ -25,10 +25,13 @@ const variants = {
   },
 };
 
-export function ActionButton({ label, href, variant = 'hero', type = 'button' }) {
+export function ActionButton({ label, href, variant = 'hero', type = 'button', target, rel, ariaLabel }) {
   const styles = variants[variant] ?? variants.hero;
   const Tag = href ? 'a' : 'button';
   const attributes = href ? { href: siteUrl(href) } : { type: ['button', 'submit', 'reset'].includes(type) ? type : 'button' };
+  if (href && target) attributes.target = target;
+  if (href && rel) attributes.rel = rel;
+  if (href && ariaLabel) attributes['aria-label'] = ariaLabel;
   if (variant === 'navbar') attributes['data-nav-intro'] = '';
   return <Tag className={`inline-flex max-w-full cursor-pointer items-center justify-center ${styles.shapeClasses ?? 'rounded-full'} ${styles.colorClasses ?? 'bg-clinic-sage'} font-sans font-medium leading-[1.25] ${styles.textClasses ?? 'tracking-[0.045em] uppercase'} text-clinic-white transition-[filter,transform] duration-[160ms] hover:-translate-y-px hover:brightness-95 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${styles.classes}`} {...attributes}><span>{label}</span><Icon name="arrow" className={`shrink-0 ${styles.iconClasses}`} /></Tag>;
 }

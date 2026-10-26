@@ -5,10 +5,13 @@ import { containerClasses, pagePaddingClasses } from '../layouts/container.js';
 import { getNavigationLinks, specialityNavigationLinks } from '../data/navigation.js';
 import { assetUrl, siteUrl } from '../utils/urls.js';
 import { assessmentBooking } from '../data/assessment-booking.js';
+import { giftVoucherHref } from '../data/gift-voucher.js';
 
 const contactClasses = 'inline-flex items-center gap-2 text-[9px] font-medium tablet:text-[10px] nav:text-[12px]';
 const contactIconClasses = 'size-[15px] shrink-0 nav:size-[18px]';
-const navLinkClasses = "relative w-fit py-[13px] whitespace-nowrap text-[14px] font-medium transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage after:pointer-events-none after:absolute after:bottom-2 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100 motion-reduce:transition-none motion-reduce:after:transition-none nav:py-0 nav:text-[12px] nav:after:-bottom-1.5 wide:text-[14px]";
+const navLinkBaseClasses = "relative w-fit py-[13px] whitespace-nowrap font-medium transition-colors duration-[160ms] hover:text-clinic-sage focus-visible:text-clinic-sage after:pointer-events-none after:absolute after:bottom-2 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out after:content-[''] hover:after:scale-x-100 focus-visible:after:scale-x-100 motion-reduce:transition-none motion-reduce:after:transition-none nav:py-0 nav:after:-bottom-1.5";
+const navLinkClasses = `${navLinkBaseClasses} text-[14px] nav:text-[12px] wide:text-[14px]`;
+const giftNavLinkClasses = `${navLinkBaseClasses} inline-flex items-center gap-1.5 text-[14px] nav:text-[10px] wide:text-[12px]`;
 
 function ServicesDropdown({ serviceId, specialityId, currentPage, open, servicesRef, servicesToggleRef, onToggle, onPointerEnter, onPointerLeave, onBlur }) {
   return <div ref={servicesRef} className="min-w-0 nav:flex nav:items-center nav:self-stretch" data-services-dropdown onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave} onBlur={onBlur}>
@@ -141,10 +144,11 @@ export function Navbar({ currentPage = 'home', serviceId, specialityId } = {}) {
   return <nav ref={navbarRef} className={`${containerClasses} relative z-10 flex min-h-[72px] items-center justify-between gap-8 bg-clinic-white py-[7px] tablet:min-h-[76px] nav:min-h-[72px] nav:gap-5 wide:min-h-[76px] wide:gap-8`} aria-label="Main navigation" onClick={closeOnNavigation}>
     <a className="block shrink-0" href={siteUrl('./')} aria-label="InBody Clinic home"><img className="h-auto w-[158px] tablet:w-[170px] wide:w-[184px]" src={assetUrl('./assets/logo/site_logo.png')} alt="InBody Clinic — Woman Health Clinics" width="184" height="58" /></a>
     <button ref={toggleRef} className="group inline-flex size-11 cursor-pointer items-center justify-center text-clinic-navy nav:hidden" data-nav-toggle data-nav-intro type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-controls="nav-links" aria-expanded={open} onClick={() => setOpen(!open)}><Icon name="menu" className="size-[25px] group-aria-expanded:hidden" /><Icon name="close" className="hidden size-[25px] group-aria-expanded:block" /></button>
-    <div className={`${pagePaddingClasses} absolute inset-x-0 top-full hidden max-h-[calc(100dvh-108px)] flex-col items-stretch gap-0 overflow-y-auto overscroll-contain bg-clinic-white pt-3 pb-6 shadow-[0_12px_20px_rgb(32_56_88/0.1)] data-[open=true]:flex tablet:max-h-[calc(100dvh-118px)] nav:static nav:flex nav:max-h-none nav:flex-row nav:items-center nav:self-stretch nav:gap-5 nav:overflow-visible nav:p-0 nav:shadow-none wide:gap-[clamp(18px,2.6vw,40px)]`} id="nav-links" data-open={String(open)}>
+    <div className={`${pagePaddingClasses} absolute inset-x-0 top-full hidden max-h-[calc(100dvh-108px)] flex-col items-stretch gap-0 overflow-y-auto overscroll-contain bg-clinic-white pt-3 pb-6 shadow-[0_12px_20px_rgb(32_56_88/0.1)] data-[open=true]:flex tablet:max-h-[calc(100dvh-118px)] nav:static nav:flex nav:max-h-none nav:flex-row nav:items-center nav:self-stretch nav:gap-3 nav:overflow-visible nav:p-0 nav:shadow-none wide:gap-[clamp(18px,2.6vw,40px)]`} id="nav-links" data-open={String(open)}>
       {getNavigationLinks(currentPage).map(({ id, label, href }) => id === 'services'
         ? <ServicesDropdown key={id} serviceId={serviceId} specialityId={specialityId} currentPage={currentPage} open={servicesOpen} servicesRef={servicesRef} servicesToggleRef={servicesToggleRef} onToggle={toggleServices} onPointerEnter={enterServices} onPointerLeave={leaveServices} onBlur={blurServices} />
         : <a key={id} className={navLinkClasses} data-nav-page={id} data-nav-intro href={siteUrl(href)} aria-current={id === currentPage ? 'page' : undefined}>{label}</a>)}
+      <a className={giftNavLinkClasses} data-nav-page="gift-vouchers" data-nav-intro href={giftVoucherHref} target="_blank" rel="noopener noreferrer" aria-label="Gift Vouchers (opens in a new tab)"><Icon name="gift" className="size-[18px] shrink-0 nav:size-[15px] wide:size-[17px]" /><span>Gift Vouchers</span></a>
       <BookingButton variant="navbar" />
     </div>
   </nav>;
