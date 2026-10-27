@@ -11,8 +11,10 @@ import '@fontsource/cormorant-garamond/latin-400.css';
 import '@fontsource/cormorant-garamond/latin-500.css';
 import '@fontsource/cormorant-garamond/latin-600.css';
 import '@fontsource/cormorant-garamond/latin-700.css';
-import '@fontsource/cormorant-garamond/latin-600-italic.css';
-import '@fontsource/cormorant-garamond/latin-700-italic.css';
+// No italic faces on purpose: the original site's Google Fonts URL declared no
+// italic axis, so every `italic` span sheared the upright glyphs (faux oblique).
+// Importing real Cormorant italic faces changed those glyphs once more, so we
+// keep the synthesized rendering to match the original byte-for-byte look.
 import '@fontsource/montserrat/latin-300.css';
 import '@fontsource/montserrat/latin-400.css';
 import '@fontsource/montserrat/latin-500.css';
