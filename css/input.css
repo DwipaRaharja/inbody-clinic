@@ -13,8 +13,8 @@
   --color-clinic-white: #ffffff;
   --color-clinic-light-grey: #e8e9e7;
 
-  --font-display: "Cormorant Garamond Variable", serif;
-  --font-sans: "Montserrat Variable", sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Montserrat", sans-serif;
 
   --breakpoint-tablet: 40.0625rem;
   --breakpoint-nav: 56.3125rem;
