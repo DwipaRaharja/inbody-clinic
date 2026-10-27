@@ -1,4 +1,5 @@
 import { assetUrl, siteUrl } from '../../utils/urls.js';
+import { HeroPicture } from '../../components/hero-picture.jsx';
 import { Heading } from '../../components/heading.jsx';
 import { ActionButton } from '../../components/button.jsx';
 import { containerClasses } from '../../layouts/container.js';
@@ -43,7 +44,7 @@ function ProfileActions({ clinician }) {
 function TherapistPortrait({ clinician, index }) {
   return <div className={`min-w-0 ${index === 1 ? 'nav:col-start-2 nav:row-start-1' : ''}`} data-clinician-media>
     <figure className="m-0 overflow-hidden rounded-[22px] bg-clinic-navy" data-clinician-photo>
-      <img className={`block aspect-[9/10] w-full object-cover ${clinician.id === 'beatriz' ? 'object-[56%_center]' : 'object-center'}`} src={assetUrl(clinician.image.src)} alt={clinician.image.alt} width={clinician.image.width} height={clinician.image.height} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} />
+      <HeroPicture image={clinician.image} className="block aspect-[9/10] w-full" imgClassName={`block ${clinician.image.webp?.length ? 'size-full' : 'aspect-[9/10] w-full'} object-cover ${clinician.id === 'beatriz' ? 'object-[56%_center]' : 'object-center'}`} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} />
       <figcaption className="flex min-w-0 items-center justify-between gap-4 px-5 py-5 text-clinic-white tablet:px-6">
         <div className="min-w-0">
           <Eyebrow className="text-clinic-light-sage">Meet your therapist</Eyebrow>

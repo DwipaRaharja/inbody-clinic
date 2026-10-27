@@ -21,6 +21,11 @@ export const saila = {
   experience: '20+ years of clinical experience',
   image: {
     src: './assets/images/about/about_saila_profile.jpg',
+    webp: [
+      { src: './assets/images/about/about_saila_profile-720.webp', width: 720 },
+      { src: './assets/images/about/about_saila_profile-1440.webp', width: 1440 },
+    ],
+    sizes: '(min-width: 56.3125rem) min(50vw, 640px), 100vw',
     alt: 'Saila Insua López at InBody Clinic holding a treatment device in front of the clinic shelves',
     width: 1600,
     height: 1066,

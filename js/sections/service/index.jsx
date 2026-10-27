@@ -3,16 +3,18 @@ import { Heading } from "../../components/heading.jsx";
 import { ActionButton, BookingButton } from "../../components/button.jsx";
 import { containerClasses } from "../../layouts/container.js";
 import { getSpecialityForService } from "../../data/specialities/catalog.js";
+import { HeroPicture } from "../../components/hero-picture.jsx";
 function paragraphs(value) {
   return Array.isArray(value) ? value : [value];
 }
 function ServiceImage({ image = {}, hero = false }) {
-  const width = Number(image.width ?? image.w);
-  const height = Number(image.height ?? image.h);
-  const hasDimensions = Number.isFinite(width) && width > 0 && Number.isFinite(height) && height > 0;
   const fitClass = image.fit === "contain" ? "object-contain" : "object-cover";
   const positionStyle = image.position ? { objectPosition: image.position } : undefined;
-  return <img className={`block w-full min-w-0 rounded-[10px] ${fitClass} ${hero ? "aspect-[3/2]" : "aspect-[9/10]"}`} src={assetUrl(image.src)} alt={image.alt} width={hasDimensions ? Math.round(width) : undefined} height={hasDimensions ? Math.round(height) : undefined} style={positionStyle} fetchPriority={hero ? "high" : undefined} loading={hero ? undefined : "lazy"} decoding="async" />;
+  const width = Number(image.width ?? image.w);
+  const height = Number(image.height ?? image.h);
+  const dimensions = Number.isFinite(width) && width > 0 && Number.isFinite(height) && height > 0 ? { width: Math.round(width), height: Math.round(height) } : {};
+  const hasWebp = Boolean(image.webp?.length);
+  return <HeroPicture image={image} className={hasWebp ? `block w-full min-w-0 overflow-hidden rounded-[10px] ${hero ? "aspect-[3/2]" : "aspect-[9/10]"}` : undefined} imgClassName={hasWebp ? `block size-full ${fitClass}` : `block w-full min-w-0 rounded-[10px] ${fitClass}`} imgStyle={positionStyle} fetchPriority={hero ? "high" : undefined} loading={hero ? undefined : "lazy"} decoding="async" {...dimensions} />;
 }
 function ServiceBenefit({ icon, label }) {
   const iconClass = /^ph-[a-z0-9-]+$/.test(icon) ? icon : "ph-heart";

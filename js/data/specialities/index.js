@@ -16,6 +16,11 @@ const details = {
     imageService: 'post-surgical-recovery',
     image: {
       src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero.jpg',
+      webp: [
+        { src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero-720.webp', width: 720 },
+        { src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero-1440.webp', width: 1440 },
+      ],
+      sizes: '(min-width: 68.8125rem) min(55vw, 704px), 100vw',
       alt: 'A clinician explaining supportive taping to a patient during a recovery treatment',
       width: 1600,
       height: 1066,
@@ -72,6 +77,11 @@ const details = {
     imageService: 'pregnancy-massage-circulation-support',
     image: {
       src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero.jpeg',
+      webp: [
+        { src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero-720.webp', width: 720 },
+        { src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero-1024.webp', width: 1024 },
+      ],
+      sizes: '(min-width: 68.8125rem) min(55vw, 704px), 100vw',
       alt: 'A clinician providing hands-on abdominal care during a pregnancy and postpartum treatment',
       width: 1024,
       height: 1536,
@@ -133,6 +143,11 @@ const details = {
     ],
     image: {
       src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero.jpg',
+      webp: [
+        { src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero-720.webp', width: 720 },
+        { src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero-1440.webp', width: 1440 },
+      ],
+      sizes: '(min-width: 68.8125rem) min(55vw, 704px), 100vw',
       alt: 'An InBody Clinic therapist providing hands-on tissue care with a treatment device to a patient’s thigh',
       width: 1600,
       height: 1066,

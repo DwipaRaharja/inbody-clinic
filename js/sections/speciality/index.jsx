@@ -1,4 +1,5 @@
 import { assetUrl, siteUrl } from "../../utils/urls.js";
+import { HeroPicture } from "../../components/hero-picture.jsx";
 import { Heading } from "../../components/heading.jsx";
 import { ActionButton } from "../../components/button.jsx";
 import { containerClasses } from "../../layouts/container.js";
@@ -16,7 +17,7 @@ export function SpecialityHero(speciality) {
       {paragraphs(speciality.introduction).map((paragraph) => <p key={paragraph} className="mt-6 max-w-[56ch] text-[14px] leading-[1.85] tablet:text-[15px]">{paragraph}</p>)}
       <div className="mt-7"><ActionButton label="Book an appointment" href={speciality.bookingHref} /></div>
     </div>
-    <img className="block aspect-[4/3] w-full min-w-0 rounded-xl object-cover wide:aspect-[5/4]" src={assetUrl(speciality.image.src)} alt={speciality.image.alt} width={speciality.image.width} height={speciality.image.height} fetchPriority="high" />
+    <HeroPicture image={speciality.image} className="block aspect-[4/3] w-full min-w-0 overflow-hidden rounded-xl wide:aspect-[5/4]" imgClassName={`block ${speciality.image.webp?.length ? 'size-full' : 'aspect-[4/3] w-full min-w-0'} object-cover`} fetchPriority="high" />
   </div>;
 }
 export function SpecialityNeeds(speciality) {
