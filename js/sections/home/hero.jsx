@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import { assetUrl } from "../../utils/urls.js";
 import { Heading } from "../../components/heading.jsx";
+import { HeroPicture } from "../../components/hero-picture.jsx";
 import { BookingButton } from "../../components/button.jsx";
 import { containerClasses, fullBleedGridClasses, pagePaddingClasses } from "../../layouts/container.js";
 import { heroSlides } from "../../data/hero-slides.js";
@@ -17,7 +17,7 @@ function HeroBenefits({ benefits, vertical = false }) {
   </ul>;
 }
 function HeroImage({ slide, primary, className }) {
-  return <img className={`absolute inset-0 block size-full object-cover ${className}`} src={assetUrl(slide.image.src)} alt={slide.image.alt} width={slide.image.width} height={slide.image.height} fetchPriority={primary ? "high" : undefined} decoding={primary ? undefined : "async"} />;
+  return <HeroPicture image={slide.image} className="absolute inset-0 block size-full" imgClassName={`size-full object-cover ${className}`} fetchPriority={primary ? "high" : undefined} loading={primary ? undefined : "lazy"} decoding={primary ? undefined : "async"} />;
 }
 export function HeroSlide({ slide, index = 0 }) {
   const primary = index === 0;

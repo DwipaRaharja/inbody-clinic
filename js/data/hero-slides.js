@@ -17,6 +17,11 @@ export const heroSlides = [
     description: 'Personalised clinical care combining specialised hands-on therapy, extensive clinical experience and advanced technology when appropriate.',
     image: {
       src: './assets/images/home/home_slider_1.jpg',
+      webp: [
+        { src: './assets/images/home/home_slider_1-720.webp', width: 720 },
+        { src: './assets/images/home/home_slider_1-1440.webp', width: 1440 },
+      ],
+      sizes: '(min-width: 68.8125rem) min(50vw, 720px), 100vw',
       alt: 'Saila Insua López standing beside an INDIBA treatment device in the clinic',
       width: 1550,
       height: 1014,
@@ -34,6 +39,11 @@ export const heroSlides = [
     description: 'Specialised hands-on care for swelling, lymphatic symptoms and post-surgical recovery, guided by individual assessment and ongoing review.',
     image: {
       src: './assets/images/home/home_slider_2.jpg',
+      webp: [
+        { src: './assets/images/home/home_slider_2-720.webp', width: 720 },
+        { src: './assets/images/home/home_slider_2-1440.webp', width: 1440 },
+      ],
+      sizes: '(min-width: 68.8125rem) min(50vw, 720px), 100vw',
       alt: 'Two InBody Clinic practitioners reviewing a personalised care plan together on a tablet',
       width: 1600,
       height: 1066,
@@ -51,6 +61,11 @@ export const heroSlides = [
     description: 'Women’s health, post-surgical recovery and tissue health: a personalised approach combining clinical experience, specialised manual therapy and technology when appropriate.',
     image: {
       src: './assets/images/home/home_slider_3.jpg',
+      webp: [
+        { src: './assets/images/home/home_slider_3-720.webp', width: 720 },
+        { src: './assets/images/home/home_slider_3-1440.webp', width: 1440 },
+      ],
+      sizes: '100vw',
       alt: 'The InBody Clinic team standing together beside an INDIBA treatment device',
       width: 1536,
       height: 1024,
