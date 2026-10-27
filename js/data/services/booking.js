@@ -1,6 +1,6 @@
 // Verified against the public Fresha booking flow on 22 October 2026.
 // Keep service-specific selection separate from the broader speciality links.
-const bookingPage = 'https://www.fresha.com/id/a/inbody-clinic-womens-health-clinical-lymphatic-care-double-bay-sydney-double-bay-level-1-336-new-south-head-rd-new-south-head-road-spgbnjt8/booking';
+const bookingPage = 'https://www.fresha.com/a/inbody-clinic-womens-health-clinical-lymphatic-care-double-bay-sydney-double-bay-level-1-336-new-south-head-rd-new-south-head-road-spgbnjt8/booking';
 
 const appointments = {
   pregnancy: { offerItemId: '26998157', name: 'Pregnancy Care', durationMinutes: 60 },
