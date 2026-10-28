@@ -206,10 +206,8 @@ for (const { path, filename, html } of renderedPages.values()) {
 }
 
 // Unknown URLs intentionally receive no canonical/social/schema metadata.
-// Beasties re-serialises the document as plain HTML5, so void tags lose the
-// self-closing `/>`; accept both spellings here.
 const notFoundHtml = await readFile(join(outputRoot, '404.html'), 'utf8');
-assert.ok(/<meta\s+name="robots"\s+content="noindex, follow"\s*\/?>/u.test(notFoundHtml), '404.html: missing noindex, follow');
+assert.ok(/<meta\s+name="robots"\s+content="noindex, follow"\s*\/>/u.test(notFoundHtml), '404.html: missing noindex, follow');
 assert.equal((notFoundHtml.match(/<link\s+rel="canonical"/gu) ?? []).length, 0, '404.html: must not have a canonical');
 assert.equal((notFoundHtml.match(/<script\b[^>]*type="application\/ld\+json"/giu) ?? []).length, 0, '404.html: must not have clinic JSON-LD');
 
