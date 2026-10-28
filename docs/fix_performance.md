@@ -283,6 +283,7 @@ Adaptasi snipet laporan (`rel="preload"` + `font-display: swap`): `font-display`
 ### T3 — Long task & chunk vendor (urutan masalah 3)
 
 - [X] `vite.config.js`: vendor GSAP dipisah lewat `rolldownOptions.output.advancedChunks` — `codeSplitting: true` semata ternyata tidak membelah graf import statis satu entry (lihat catatan §3.3 langkah 2).
+- [X] 28 Okt — **trial inline critical CSS (beasties) dibatalkan** (`1560a09` dicoba tuntas lalu di-revert `660a324`): eksekusi dan verifikasinya sukses (critical CSS inline per halaman + link swap-lazy + semua `@font-face` ter-pin di head, 24/24 berkas, gates hijau), tetapi laporan skor di tangan pengguna pada state **sebelum** beasties sudah **konsisten 86–92** — dinilai cukup, sehingga biaya tambahannya tidak dibayar: HTML tiap halaman membesar (critical inline), CSS sisa tetap harus diunduh pasca-paint, dan re-serialization DOM-nya menuntut penyesuaian test. Keputusan final render-blocking = **Opsi C**: satu stylesheet render-blocking ukuran wajar (gzip ±22,6 kB) + 3 preload font, tanpa inline critical. Trial tersimpan di riwayat git (`1560a09`) bila suatu saat mau dihidupkan ulang.
 - [ ] (Pra-pemecahan) Selidiki ~74 kB JS tak terpakai di dalam `index-*.js` (temuan run lokal: total 155,4 kB) supaya vendor chunk tidak mengangkut kode mati — gratis dilakukan sebelum T3.
 - [X] `npm run build`: chunk tercatat — `gsap-*` 69,6 kB (gzip 27,3), `vendor-*` 257,0 kB (gzip 81,5), entry `index-*` 192,4 kB (gzip 48,0) (angka lengkap di §3.3 langkah 2).
 - [X] `npm test`, `npm run test:home-reveal`.
