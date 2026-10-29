@@ -4,6 +4,12 @@ import { Icon } from "../../components/icons.jsx";
 import { specialityCatalog } from "../../data/specialities/catalog.js";
 import { containerClasses } from "../../layouts/container.js";
 import { AssessmentCTA } from "../../components/care.jsx";
+import celluliteRemodellingIcon from "../../../assets/icons/home_our_services_cellulite_tissue_remodelling.svg";
+
+const specialityIconAssets = {
+  "cellulite-remodelling": celluliteRemodellingIcon,
+};
+
 export function Services() {
   return <div className={`${containerClasses} py-14 tablet:py-20`} data-section-frame="services">
     <div className="mx-auto max-w-[900px] text-center [&_p.uppercase]:mx-auto">
@@ -16,7 +22,7 @@ export function Services() {
         <a className="group mx-auto flex h-full w-full max-w-[350px] flex-col items-center text-center" href={siteUrl(speciality.href)} aria-label={`${speciality.question} Explore ${speciality.homeName ?? speciality.name}`}>
           <span className="inline-flex size-20 shrink-0 items-center justify-center rounded-full bg-clinic-light-sage transition-colors group-hover:bg-clinic-light-sage/70 motion-reduce:transition-none wide:size-[88px]">
             <span className="inline-flex size-[42px] shrink-0 items-center justify-center text-clinic-navy" aria-hidden="true">
-              {speciality.svg ? <Icon name={speciality.icon} className="size-full [stroke-width:1.2]" /> : <i className={`ph ${speciality.icon} block text-[40px] leading-none`}></i>}
+              {speciality.iconAsset ? <img src={specialityIconAssets[speciality.iconAsset]} alt="" className="size-full object-contain" /> : speciality.svg ? <Icon name={speciality.icon} className="size-full [stroke-width:1.2]" /> : <i className={`ph ${speciality.icon} block text-[40px] leading-none`}></i>}
             </span>
           </span>
           <h3 className="mt-5 font-sans! text-[16px] leading-[1.45] font-semibold wide:text-[17px]">{speciality.question}</h3>
