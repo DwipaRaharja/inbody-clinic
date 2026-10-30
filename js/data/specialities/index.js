@@ -1,3 +1,4 @@
+import { imageAsset } from '../../utils/image-assets.js';
 import { specialityCatalog } from './catalog.js';
 import { services } from '../services/index.js';
 
@@ -15,10 +16,10 @@ const details = {
     timing: 'Care may be relevant while preparing for a procedure or at different stages after surgery. An individual assessment helps us understand the support that is appropriate for your stage of recovery.',
     imageService: 'post-surgical-recovery',
     image: {
-      src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero.jpg',
+      src: imageAsset('specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero.jpg'),
       webp: [
-        { src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero-720.webp', width: 720 },
-        { src: './assets/images/specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero-1440.webp', width: 1440 },
+        { src: imageAsset('specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero-720.webp'), width: 720 },
+        { src: imageAsset('specialities/pre-post-surgical-recovery/pre_post_surgical_recovery_hero-1440.webp'), width: 1440 },
       ],
       sizes: '(min-width: 68.8125rem) min(55vw, 704px), 100vw',
       alt: 'A clinician explaining supportive taping to a patient during a recovery treatment',
@@ -76,10 +77,10 @@ const details = {
     timing: 'Your needs can change during pregnancy and after childbirth. An assessment provides a starting point for care that reflects your current symptoms and stage of recovery.',
     imageService: 'pregnancy-massage-circulation-support',
     image: {
-      src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero.jpeg',
+      src: imageAsset('specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero.jpeg'),
       webp: [
-        { src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero-720.webp', width: 720 },
-        { src: './assets/images/specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero-1024.webp', width: 1024 },
+        { src: imageAsset('specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero-720.webp'), width: 720 },
+        { src: imageAsset('specialities/pregnancy-postpartum-care/pregnancy_postpartum_care_hero-1024.webp'), width: 1024 },
       ],
       sizes: '(min-width: 68.8125rem) min(55vw, 704px), 100vw',
       alt: 'A clinician providing hands-on abdominal care during a pregnancy and postpartum treatment',
@@ -142,10 +143,10 @@ const details = {
       'For clients recovering from cancer treatment, care is adapted to their oncological history, current health status and any medical precautions, with medical clearance or multidisciplinary coordination when required.',
     ],
     image: {
-      src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero.jpg',
+      src: imageAsset('specialities/skin-tissue-health/skin_tissue_health_hero.jpg'),
       webp: [
-        { src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero-720.webp', width: 720 },
-        { src: './assets/images/specialities/skin-tissue-health/skin_tissue_health_hero-1440.webp', width: 1440 },
+        { src: imageAsset('specialities/skin-tissue-health/skin_tissue_health_hero-720.webp'), width: 720 },
+        { src: imageAsset('specialities/skin-tissue-health/skin_tissue_health_hero-1440.webp'), width: 1440 },
       ],
       sizes: '(min-width: 68.8125rem) min(55vw, 704px), 100vw',
       alt: 'An InBody Clinic therapist providing hands-on tissue care with a treatment device to a patient’s thigh',

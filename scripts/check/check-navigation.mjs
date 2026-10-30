@@ -22,7 +22,7 @@ const homeHtml = await readFile(join(outputRoot, 'index.html'), 'utf8');
 const base = homeHtml.match(/<meta\s+name="app-base"\s+content="([^"]+)"/u)?.[1];
 assert.ok(base?.startsWith('/') && base.endsWith('/'), 'Run npm run build before browser tests');
 if (process.env.TEST_BASE_PATH) assert.equal(base, process.env.TEST_BASE_PATH, 'Build base differs from TEST_BASE_PATH');
-const mimeTypes = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff' };
+const mimeTypes = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff' };
 const missingResources = [];
 const errors = [];
 // Static server strictly rooted in dist/: paths outside the base or the
@@ -286,7 +286,7 @@ try {
   assert.equal(await page.locator('link[rel="stylesheet"][href$=".css"]').count() >= 1, true);
   await page.locator('#navbar [data-nav-page="about"]').click();
   await waitForPage(page, { page: 'about' });
-  assert.equal(await page.locator('#navbar img').evaluate(img => new URL(img.src).pathname), base + 'assets/logo/site_logo.png');
+  assert.equal(await page.locator('#navbar img').evaluate(img => new URL(img.src).pathname), base + 'assets/images/png/logo/site_logo.png');
 
   // Mobile: open the menu, navigate (it collapses), reopen, then dispatch the
   // category dropdown that opens Fresha; layout must stay overflow-free.

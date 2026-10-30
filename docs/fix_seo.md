@@ -59,7 +59,7 @@ Tag dihasilkan di `writePage()` memakai marker `<!--app-route-->`. URL absolut m
 
 ```js
 const canonical = `${siteBaseUrl}${path}`;
-const configuredOgImage = route.ogImage ?? '/assets/logo/site_logo.png';
+const configuredOgImage = route.ogImage ?? '/assets/images/png/logo/site_logo.png';
 const ogImage = `${siteBaseUrl}/${configuredOgImage.replace(/^\/+/, '')}`;
 // Canonical, og:*, and twitter:* are added to each public route's static HTML.
 // 404.html receives no canonical and is marked noindex.
@@ -81,7 +81,7 @@ const jsonLd = {
   '@type': 'MedicalClinic',
   name: 'InBody Clinic',
   url: `${siteBaseUrl}/`,
-  logo: `${siteBaseUrl}/assets/logo/site_logo.png`,
+  logo: `${siteBaseUrl}/assets/images/png/logo/site_logo.png`,
   telephone: '+61424912490',
   email: 'Sailainsua@gmail.com',
   address: {
@@ -102,7 +102,7 @@ const jsonLd = {
 
 ### Prioritas 4 — Kompresi & WebP galeri ✅
 
-- Semua 12 foto `assets/gallery/` punya varian WebP hingga lebar 1600px; tiap varian di bawah 200 KB.
+- Semua 12 foto JPEG `assets/images/jpeg/gallery/` punya varian WebP di `assets/images/webp/gallery/` hingga lebar 1600px; tiap varian di bawah 200 KB.
 - Galeri klinik dan foto resepsionis di halaman The InBody Method memakai `<picture>` dengan WebP + fallback JPEG.
 - Foto JPEG asli tetap ada untuk fallback dan konten non-galeri; hero slider `home_slider_*.jpg` ikut `fetchPriority="high"` jadi prioritas.
 - Foto hero/detail service (≤ 190 KB) boleh menyusul; bukan bloker LCP.
@@ -172,7 +172,7 @@ Workflow GitHub Pages mengisi `SITE_URL` otomatis; untuk build Hostinger, isi UR
   - `Physiotherapy` dipakai sebagai nilai `medicalSpecialty` pada `scripts/build.mjs` baris 126, bukan sebagai `@type`. URL Fresha booking tidak ditambahkan ke `sameAs`, karena tautan yang tersedia adalah alur booking dan bukan profil publik klinik yang terkonfirmasi.
   - 404 tidak mendapat JSON-LD. Pemeriksaan hasil build menemukan tepat satu blok yang dapat diparse pada masing-masing dari 23 halaman publik dan tidak ada blok pada `404.html`.
 - [x] P4 WebP galeri (12 foto) + `<picture>`
-  - Aset: dibuat 12 varian `.webp` di `assets/gallery/` dengan nama dasar yang sama seperti JPEG. Sisi terpanjang dibatasi hingga 1600 px; setiap WebP berukuran kurang dari 200 KB. JPEG asli tetap disimpan sebagai fallback.
+  - Aset: dibuat 12 varian `.webp` di `assets/images/webp/gallery/` dengan nama dasar yang sama seperti JPEG di `assets/images/jpeg/gallery/`. Sisi terpanjang dibatasi hingga 1600 px; setiap WebP berukuran kurang dari 200 KB. JPEG asli tetap disimpan sebagai fallback.
   - Nama varian: `clinic_calm_setting.webp`, `clinic_considered_setting.webp`, `clinic_inside_studio.webp`, `clinic_prepared_visit.webp`, `clinic_private_care.webp`, `clinic_quiet_space.webp`, `clinic_reception.webp`, `clinic_tools.webp`, `clinic_treatment_equipment.webp`, `clinic_treatment_room.webp`, `clinic_treatment_space.webp`, dan `clinic_waiting_lounge.webp`.
   - Hasil kompresi: total JPEG galeri 2.477.469 byte; total WebP 840.294 byte, sekitar 66,1% lebih kecil. WebP terbesar berukuran 113.764 byte (`clinic_prepared_visit.webp`).
   - Galeri klinik: `<picture>` memilih WebP dari nama JPEG di `js/sections/clinic/index.jsx` baris 20–21; `<img src>` JPEG di baris 22 menjadi fallback. Lazy loading dan decoding async tetap dipakai.

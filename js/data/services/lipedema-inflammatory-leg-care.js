@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Lymphatic Drainage/Lipedema & Inflammatory Leg Care/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Lymphatic Drainage/Lipedema & Inflammatory Leg Care/';
 
 export default {
   id: 'lipedema-inflammatory-leg-care',
@@ -8,13 +9,13 @@ export default {
   category: 'Lymphatic Drainage',
   images: {
     hero: {
-      src: `${imageDirectory}lipedema_inflammatory_leg_care_hero.jpeg`,
+      src: imageAsset(`${imageDirectory}lipedema_inflammatory_leg_care_hero.jpeg`),
       alt: 'An InBody Clinic therapist providing hands-on treatment to a patient’s bent leg',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}lipedema_inflammatory_leg_care_treatment.webp`,
+      src: imageAsset(`${imageDirectory}lipedema_inflammatory_leg_care_treatment.webp`),
       alt: 'A group of women standing together with their arms around one another',
       width: 612,
       height: 408,

@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Lymphatic Drainage/Post-Surgical Recovery/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Lymphatic Drainage/Post-Surgical Recovery/';
 
 export default {
   id: 'post-surgical-recovery',
@@ -8,13 +9,13 @@ export default {
   category: 'Lymphatic Drainage',
   images: {
     hero: {
-      src: `${imageDirectory}post_surgical_recovery_hero.webp`,
+      src: imageAsset(`${imageDirectory}post_surgical_recovery_hero.webp`),
       alt: 'An InBody Clinic therapist applying black medical tape to a patient’s abdomen',
       width: 1536,
       height: 1024,
     },
     treatment: {
-      src: `${imageDirectory}post_surgical_recovery_treatment.webp`,
+      src: imageAsset(`${imageDirectory}post_surgical_recovery_treatment.webp`),
       alt: 'A close view of a therapist applying supportive tape across a patient’s abdomen',
       width: 1536,
       height: 1024,

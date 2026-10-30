@@ -133,10 +133,10 @@ URL Fresha bersama untuk tombol umum berada di `bookingHref` pada `js/components
 | `js/components/` | Komponen lintas halaman: navbar, footer, heading, tombol/BookingButton, ikon, kartu care |
 | `js/data/`    | Seluruh konten klinik & URL booking; satu-satunya tempat mengubah copy konten |
 | `js/features/`| Controller imperatif (GSAP, slider, galeri, form) yang dipasang via `init()` dan dibersihkan saat navigasi |
-| `js/utils/`   | Helper URL sadar-base (`siteUrl`, `stripBase`) |
+| `js/utils/`   | Helper URL sadar-base (`siteUrl`, `stripBase`) dan path gambar berbasis format (`imageAsset`, `imageVariant`) |
 | `css/`        | `input.css` — Tailwind v4 + design tokens (`clinic-*`) |
 | `scripts/`    | `build.mjs` entry point, `build/` pipeline modules, `check/` output dan tes browser |
-| `assets/` | Aset asli klinik, termasuk foto `assets/gallery/`, yang disalin ke `dist/` saat build |
+| `assets/` | Aset klinik yang disalin ke `dist/` saat build; gambar raster dikelompokkan di `assets/images/` berdasarkan format |
 | `.github/`    | Workflow deploy GitHub Pages (`deploy.yml`) |
 
 ## Menjalankan project
@@ -176,7 +176,13 @@ js/
 ├── data/                           # Konten klinik, tim, kontak, galeri, layanan
 ├── features/                       # Controller slider, form email, dan galeri
 └── layouts/                        # Token container dan layout
-assets/                             # Foto, logo, dan assets/gallery/ berisi 12 foto klinik
+assets/
+├── images/
+│   ├── jpeg/                       # Foto JPEG (.jpg dan .jpeg), termasuk galeri
+│   ├── webp/                       # Foto WebP dan varian responsif
+│   ├── avif/                       # Foto AVIF
+│   └── png/logo/                   # Logo PNG
+└── icons/                          # Ikon SVG
 css/input.css                       # Tailwind dan design tokens
 scripts/
 ├── build.mjs                       # Entry point pipeline build
@@ -256,8 +262,10 @@ tanpa memuat ulang dokumen. URL, judul, deskripsi, dataset halaman, dan `aria-cu
 diperbarui bersama konten. Back/Forward memulihkan halaman dan scroll; navigasi baru
 memindahkan fokus ke `<main>` dan scroll ke atas atau anchor tujuan.
 
-Tulis URL konten relatif terhadap root project, misalnya `./pages/contact.html` atau
-`./assets/logo/site_logo.png`. Helper URL React menambahkan base build secara konsisten.
+Tulis URL konten relatif terhadap root project, misalnya `./pages/contact.html`.
+Untuk foto, gunakan `imageAsset('home/home_slider_1.jpg')` agar folder format dipilih
+berdasarkan ekstensi; `imageVariant(path, 'webp')` membuat path varian WebP. Helper URL
+React menambahkan base build secara konsisten. Logo berada di `images/png/logo/`.
 Anchor `#...` tetap lokal. Link eksternal, email, telepon, download, modifier click,
 dan `target="_blank"` mengikuti perilaku browser. `data-full-reload` dapat dipakai
 pada link yang memang membutuhkan perpindahan dokumen penuh.
@@ -317,7 +325,7 @@ About mengikuti referensi dua terapis: hero “One shared philosophy” dengan p
 pengalaman gabungan 42+ tahun, kemudian profil Saila dan Beatriz secara bergantian.
 Foto berada di kiri untuk Saila dan kanan untuk Beatriz mulai 901px;
 pada layar kecil foto dan kartu konten bertumpuk.
-Beatriz memakai copy serta foto yang diberikan pengguna (`assets/images/about/beatriz.jpg`),
+Beatriz memakai copy serta foto yang diberikan pengguna (`assets/images/jpeg/about/about_beatriz_profile.jpg`),
 dengan latar Chilean-trained physiotherapist dan peran Australian Remedial Massage Therapist.
 Data profil berada di `js/data/team.js`; jangan menyalin credential antaranggota tim.
 Copy lama Saila serta biografi, lima rincian keahlian, dan tiga paragraf pendekatan

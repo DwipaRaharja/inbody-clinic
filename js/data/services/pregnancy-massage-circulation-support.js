@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Pregnancy Massage & Circulation Support/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Pregnancy & Postpartum/Pregnancy Massage & Circulation Support/';
 
 export default {
   id: 'pregnancy-massage-circulation-support',
@@ -8,13 +9,13 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: `${imageDirectory}pregnancy_massage_circulation_support_hero.jpeg`,
+      src: imageAsset(`${imageDirectory}pregnancy_massage_circulation_support_hero.jpeg`),
       alt: 'Saila providing hands-on care to a patient lying on a treatment bed at InBody Clinic',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}pregnancy_massage_circulation_support_treatment.jpeg`,
+      src: imageAsset(`${imageDirectory}pregnancy_massage_circulation_support_treatment.jpeg`),
       alt: 'Saila standing beside a patient resting on a treatment bed in the clinic',
       width: 1600,
       height: 1066,

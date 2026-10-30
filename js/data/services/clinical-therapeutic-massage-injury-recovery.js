@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Pain & TMJ Relief/Clinical Therapeutic Massage & Injury Recovery/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Pain & TMJ Relief/Clinical Therapeutic Massage & Injury Recovery/';
 
 export default {
   id: 'clinical-therapeutic-massage-injury-recovery',
@@ -8,13 +9,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}clinical_therapeutic_massage_injury_recovery_hero.webp`,
+      src: imageAsset(`${imageDirectory}clinical_therapeutic_massage_injury_recovery_hero.webp`),
       alt: 'A therapist providing hands-on massage to a patient’s back',
       width: 612,
       height: 408,
     },
     treatment: {
-      src: `${imageDirectory}clinical_therapeutic_massage_injury_recovery_treatment.jpeg`,
+      src: imageAsset(`${imageDirectory}clinical_therapeutic_massage_injury_recovery_treatment.jpeg`),
       alt: 'An InBody Clinic therapist treating a patient’s leg with a handheld device',
       width: 1600,
       height: 1066,

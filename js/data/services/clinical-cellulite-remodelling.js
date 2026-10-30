@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Body Contouring/Clinical Cellulite Remodelling/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Body Contouring/Clinical Cellulite Remodelling/';
 
 export default {
   id: 'clinical-cellulite-remodelling',
@@ -8,13 +9,13 @@ export default {
   category: 'Body Contouring',
   images: {
     hero: {
-      src: `${imageDirectory}clinical_cellulite_remodelling_hero.jpg`,
+      src: imageAsset(`${imageDirectory}clinical_cellulite_remodelling_hero.jpg`),
       alt: 'Close-up of a therapist applying a treatment device to a patient’s abdomen',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}clinical_cellulite_remodelling_treatment.jpg`,
+      src: imageAsset(`${imageDirectory}clinical_cellulite_remodelling_treatment.jpg`),
       alt: 'A therapist providing hands-on tissue care with a treatment device to a patient’s thigh',
       width: 1600,
       height: 1066,

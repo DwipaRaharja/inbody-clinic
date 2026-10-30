@@ -106,7 +106,7 @@ for (const route of routes) {
   assert.equal(metaContent('property', 'og:title'), route.title, `${filename}: missing or incorrect og:title`);
   assert.equal(metaContent('property', 'og:description'), route.description, `${filename}: missing or incorrect og:description`);
   assert.equal(metaContent('property', 'og:url'), expectedCanonical, `${filename}: missing or incorrect og:url`);
-  const configuredOgImage = route.ogImage ?? '/assets/logo/site_logo.png';
+  const configuredOgImage = route.ogImage ?? '/assets/images/png/logo/site_logo.png';
   const expectedOgImage = /^https?:\/\//iu.test(configuredOgImage)
     ? configuredOgImage
     : `${canonicalSiteBase}/${configuredOgImage.replace(/^\/+/, '')}`;
@@ -125,7 +125,7 @@ for (const route of routes) {
   assert.equal(clinicSchema['@type'], 'MedicalClinic', `${filename}: incorrect clinic schema type`);
   assert.equal(clinicSchema['@id'], `${canonicalSiteBase}/#clinic`, `${filename}: incorrect clinic schema ID`);
   assert.equal(clinicSchema.url, `${canonicalSiteBase}/`, `${filename}: incorrect clinic schema URL`);
-  assert.equal(clinicSchema.logo, `${canonicalSiteBase}/assets/logo/site_logo.png`, `${filename}: incorrect clinic schema logo`);
+  assert.equal(clinicSchema.logo, `${canonicalSiteBase}/assets/images/png/logo/site_logo.png`, `${filename}: incorrect clinic schema logo`);
   assert.equal(clinicSchema.telephone, clinicContact.phoneHref.replace(/^tel:/u, ''), `${filename}: JSON-LD phone differs from clinic data`);
   assert.equal(clinicSchema.email, clinicContact.email, `${filename}: JSON-LD email differs from clinic data`);
   assert.deepEqual(clinicSchema.address, { '@type': 'PostalAddress', ...clinicContact.structuredAddress }, `${filename}: JSON-LD address differs from clinic data`);

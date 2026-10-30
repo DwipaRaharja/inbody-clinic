@@ -1,3 +1,5 @@
+import { imageAsset } from '../utils/image-assets.js';
+
 export const clinicGalleryFilters = [
   { id: 'all', label: 'All Spaces' },
   { id: 'treatment-rooms', label: 'Treatment Rooms' },
@@ -5,8 +7,8 @@ export const clinicGalleryFilters = [
   { id: 'details', label: 'Details' },
 ];
 
-// Keep the supplied originals in assets/gallery/; captions and categories belong to the page data.
-const photoSource = (section) => './assets/gallery/clinic_' + section + '.jpeg';
+// Keep originals grouped by file format under assets/images/.
+const photoSource = (section) => imageAsset(`gallery/clinic_${section}.jpeg`);
 
 export const clinicGalleryPhotos = [
   {

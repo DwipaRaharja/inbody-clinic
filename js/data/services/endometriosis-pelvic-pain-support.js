@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Pain & TMJ Relief/Endometriosis & Pelvic Pain Support/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Pain & TMJ Relief/Endometriosis & Pelvic Pain Support/';
 
 export default {
   id: 'endometriosis-pelvic-pain-support',
@@ -8,13 +9,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}endometriosis_pelvic_pain_support_hero.jpeg`,
+      src: imageAsset(`${imageDirectory}endometriosis_pelvic_pain_support_hero.jpeg`),
       alt: 'Saila explaining pelvic anatomy with an anatomical model at InBody Clinic',
       width: 1600,
       height: 1068,
     },
     treatment: {
-      src: `${imageDirectory}endometriosis_pelvic_pain_support_treatment.jpeg`,
+      src: imageAsset(`${imageDirectory}endometriosis_pelvic_pain_support_treatment.jpeg`),
       alt: 'An InBody Clinic therapist treating a patient’s abdomen with a handheld device',
       width: 1600,
       height: 1066,

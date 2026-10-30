@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Lymphatic Drainage/Clinical Lymphatic Drainage Sydney/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Lymphatic Drainage/Clinical Lymphatic Drainage Sydney/';
 
 export default {
   id: 'clinical-lymphatic-drainage-sydney',
@@ -8,13 +9,13 @@ export default {
   category: 'Lymphatic Drainage',
   images: {
     hero: {
-      src: `${imageDirectory}clinical_lymphatic_drainage_sydney_hero.webp`,
+      src: imageAsset(`${imageDirectory}clinical_lymphatic_drainage_sydney_hero.webp`),
       alt: 'An InBody Clinic therapist providing hands-on treatment to a patient’s back',
       width: 1024,
       height: 683,
     },
     treatment: {
-      src: `${imageDirectory}clinical_lymphatic_drainage_sydney_treatment.webp`,
+      src: imageAsset(`${imageDirectory}clinical_lymphatic_drainage_sydney_treatment.webp`),
       alt: 'An InBody Clinic therapist providing gentle treatment to a patient’s upper arm',
       width: 1024,
       height: 683,

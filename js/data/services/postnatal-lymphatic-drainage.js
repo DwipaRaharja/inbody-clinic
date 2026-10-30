@@ -1,4 +1,5 @@
-const postnatalImageDirectory = './assets/images/services/Pregnancy & Postpartum/POSTNATAL LYMPHATIC DRAINAGE/';
+import { imageAsset } from '../../utils/image-assets.js';
+const postnatalImageDirectory = 'services/Pregnancy & Postpartum/POSTNATAL LYMPHATIC DRAINAGE/';
 
 export default {
   id: 'postnatal-lymphatic-drainage',
@@ -8,14 +9,14 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: `${postnatalImageDirectory}postnatal_lymphatic_drainage_hero.jpeg`,
+      src: imageAsset(`${postnatalImageDirectory}postnatal_lymphatic_drainage_hero.jpeg`),
       alt: 'Electrotherapy pads on a patient’s abdomen during a postnatal treatment at InBody Clinic',
       width: 1024,
       height: 1536,
       position: '50% 85%',
     },
     treatment: {
-      src: `${postnatalImageDirectory}postnatal_lymphatic_drainage_treatment.jpeg`,
+      src: imageAsset(`${postnatalImageDirectory}postnatal_lymphatic_drainage_treatment.jpeg`),
       alt: 'An InBody Clinic therapist treating a patient’s abdomen with a handheld device',
       width: 1600,
       height: 1066,

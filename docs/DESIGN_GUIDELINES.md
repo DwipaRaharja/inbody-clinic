@@ -147,9 +147,9 @@ Hero mempertahankan autoplay 5000ms, transisi 700ms, arah masuk dari kanan/kelua
 inert/aria-hidden pada slide nonaktif, serta reduced motion. Fokus di dalam hero, visibilitas tab,
 dan posisi hero diperhatikan oleh controller. Tiga tombol titik di tengah bawah hero memilih slide
 dan menandai slide aktif; navigasi slider tidak memakai panah atau ikon caret.
-Slide ketiga hero memakai foto tim terbaru yang diberikan pengguna pada `assets/images/home/home_slider_3.jpg`.
-Slide pertama memakai foto klinik yang dipilih pengguna pada `assets/images/home/home_slider_1.jpg` (1550×1014).
-Slide kedua memakai foto asli 1600×1066 pada `assets/images/home/home_slider_2.jpg`, menggantikan
+Slide ketiga hero memakai foto tim terbaru yang diberikan pengguna pada `assets/images/jpeg/home/home_slider_3.jpg`.
+Slide pertama memakai foto klinik yang dipilih pengguna pada `assets/images/jpeg/home/home_slider_1.jpg` (1550×1014).
+Slide kedua memakai foto asli 1600×1066 pada `assets/images/jpeg/home/home_slider_2.jpg`, menggantikan
 crop 530×588 yang diperbesar. Posisi crop 75% menjaga kedua wajah tetap terlihat.
 
 Kartu speciality memakai grid 1/2/3 kolom. Seluruh kartu adalah tautan ke speciality;
@@ -176,7 +176,7 @@ sekali di `js/data/specialities/booking.js` dan tersedia sebagai `bookingHref` p
 Pertahankan `href` katalog untuk tautan internal kartu Our Specialities di Home.
 
 Halaman Skin & Tissue Health memakai copy Cellulite & Tissue Remodelling dan foto
-yang diberikan client pada `assets/images/specialities/skin-tissue-health/hero.jpg`.
+yang diberikan client pada `assets/images/jpeg/specialities/skin-tissue-health/skin_tissue_health_hero.jpg`.
 Template speciality tetap sama, dengan tujuh kebutuhan, enam teknik, dan satu kartu:
 Cellulite & Tissue Remodelling. Treatment skin firmness/hormonal body changes telah
 dihapus dari kartu terkait, data layanan, katalog, navigasi, dan route halaman detail.
@@ -260,7 +260,7 @@ Name hanya menerima huruf Unicode/spasi. Form membuka draf email; tidak mengirim
 CTA assessment menuju Fresha melalui data booking bersama; tombol Book an Appointment
 memakai link Fresha pada `bookingHref`. Form email tidak berubah menjadi form booking.
 
-Our Clinic tetap memakai 12 JPEG asli pada `assets/gallery/`, filter kategori, grid 1/2/3 kolom,
+Our Clinic tetap memakai 12 JPEG pada `assets/images/jpeg/gallery/` dan WebP pada `assets/images/webp/gallery/`, filter kategori, grid 1/2/3 kolom,
 thumbnail 4:3, dan dialog `object-contain`. Dialog mendukung close/Escape, scroll lock,
 serta pengembalian fokus. MP4 belum dipakai.
 

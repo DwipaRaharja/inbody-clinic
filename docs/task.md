@@ -35,7 +35,7 @@ klinik. Komunikasi tetap hangat, mendengarkan pasien, dan mudah dipahami.
 | About | Baru memperkenalkan Saila Insua López | Tambahkan profil anggota tim kedua dan filosofi bersama |
 | Detail layanan | Ada 13 halaman di empat kelompok folder | Usulan: pertahankan sebagai detail pendukung, tambahkan enam halaman speciality |
 | Booking | Tombol Book an Appointment menuju Contact Us; form membuka draf email | Belum ada alur booking langsung atau data slot appointment yang terhubung |
-| Foto | Ada foto Home, Saila, treatment, dan 12 foto klinik dalam `assets/gallery/` | Bisa digunakan kembali setelah pemilihan konteks; identitas/foto profil anggota kedua perlu dipastikan |
+| Foto | Ada foto Home, Saila, treatment, dan 12 foto klinik di `assets/images/jpeg/gallery/` dengan varian WebP di `assets/images/webp/gallery/` | Bisa digunakan kembali setelah pemilihan konteks; identitas/foto profil anggota kedua perlu dipastikan |
 | Struktur dan komponen | Entry HTML sudah rapi dalam `pages/`; shell, navbar, footer, heading, dan tombol sudah reusable | Gunakan struktur dan komponen yang ada |
 
 Saat ini ada **17 halaman**: Home, About, Our Clinic, Contact Us, dan 13 detail
@@ -191,7 +191,7 @@ sesuai, tanpa menggandakan halaman.
   Label pembuka menjadi “Meet our team”.
 - [x] Tambahkan satu section detail tim setelah expertise dan sebelum Method sesuai
   izin pengguna, tanpa mengubah layout section lama. Gunakan informasi kolektif dari
-  brief, foto bersama `assets/images/about/team.jpg`, serta CTA Contact Us.
+  brief, foto bersama `assets/images/jpeg/about/about_team_profile.jpg`, serta CTA Contact Us.
 - [ ] Tambahkan section Meet Our Team pada Home, memperkenalkan dua anggota tim
   secara seimbang, bukan hanya satu figur utama.
 - [x] Perbarui halaman About yang sudah ada untuk menampilkan dua profil lengkap:
@@ -210,7 +210,7 @@ Pengguna kini memberikan nama Beatriz, foto asli, latar pendidikan Chile, peran
 Australian Remedial Massage Therapist, pengalaman 22+ tahun, lima area expertise,
 dan pendekatan perawatannya. Profil individu ditambahkan setelah expertise Saila
 dan sebelum detail tim kolektif, dengan data di `js/data/team.js` dan foto
-`assets/images/about/beatriz.jpg`. Nama belakang atau credential tambahan tidak dibuat.
+`assets/images/jpeg/about/about_beatriz_profile.jpg`. Nama belakang atau credential tambahan tidak dibuat.
 Pengantar kolektif Meet Our Team pada Home tetap memakai data tim bersama.
 
 ### R06 — What to Expect

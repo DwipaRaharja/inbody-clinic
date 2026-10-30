@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Pain & TMJ Relief/Chronic Pain, Stress & Inflammation Therapy/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Pain & TMJ Relief/Chronic Pain, Stress & Inflammation Therapy/';
 
 export default {
   id: 'chronic-pain-stress-inflammation',
@@ -8,13 +9,13 @@ export default {
   category: 'Pain & TMJ Relief',
   images: {
     hero: {
-      src: `${imageDirectory}chronic_pain_stress_inflammation_hero.jpeg`,
+      src: imageAsset(`${imageDirectory}chronic_pain_stress_inflammation_hero.jpeg`),
       alt: 'Saila providing hands-on abdominal treatment to a patient at InBody Clinic',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}chronic_pain_stress_inflammation_treatment.jpeg`,
+      src: imageAsset(`${imageDirectory}chronic_pain_stress_inflammation_treatment.jpeg`),
       alt: 'An InBody Clinic therapist using a handheld device to treat a patient’s back',
       width: 1600,
       height: 1066,

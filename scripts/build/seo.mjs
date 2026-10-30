@@ -8,7 +8,7 @@ function createClinicJsonLd(siteBaseUrl) {
     '@id': `${siteBaseUrl}/#clinic`,
     name: 'InBody Clinic',
     url: `${siteBaseUrl}/`,
-    logo: `${siteBaseUrl}/assets/logo/site_logo.png`,
+    logo: `${siteBaseUrl}/assets/images/png/logo/site_logo.png`,
     telephone: clinicContact.phoneHref.replace(/^tel:/u, ''),
     email: clinicContact.email,
     address: { '@type': 'PostalAddress', ...clinicContact.structuredAddress },
@@ -29,7 +29,7 @@ export function createSeoTags({ route, path, siteBaseUrl, pageTitle, pageDescrip
   if (!route) return ['<meta name="robots" content="noindex, follow" />'];
 
   const canonical = `${siteBaseUrl}${path}`;
-  const configuredOgImage = route.ogImage ?? '/assets/logo/site_logo.png';
+  const configuredOgImage = route.ogImage ?? '/assets/images/png/logo/site_logo.png';
   const ogImage = /^https?:\/\//iu.test(configuredOgImage)
     ? configuredOgImage
     : `${siteBaseUrl}/${configuredOgImage.replace(/^\/+/, '')}`;

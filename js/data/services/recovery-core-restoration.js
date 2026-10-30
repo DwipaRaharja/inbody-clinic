@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Pregnancy & Postpartum/Recovery & Core Restoration/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Pregnancy & Postpartum/Recovery & Core Restoration/';
 
 export default {
   id: 'recovery-core-restoration',
@@ -8,13 +9,13 @@ export default {
   category: 'Pregnancy & Postpartum',
   images: {
     hero: {
-      src: `${imageDirectory}recovery_core_restoration_hero.jpeg`,
+      src: imageAsset(`${imageDirectory}recovery_core_restoration_hero.jpeg`),
       alt: 'A therapist explaining a treatment to a patient resting on a treatment bed',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}recovery_core_restoration_treatment.jpeg`,
+      src: imageAsset(`${imageDirectory}recovery_core_restoration_treatment.jpeg`),
       alt: 'A therapist applying pink supportive tape to a patient’s abdomen',
       width: 1600,
       height: 1066,

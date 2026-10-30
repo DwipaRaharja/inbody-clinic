@@ -1,5 +1,6 @@
+import { imageAsset } from '../utils/image-assets.js';
 const teamPortrait = {
-  src: './assets/images/about/about_team_profile.jpg',
+  src: imageAsset('about/about_team_profile.jpg'),
   alt: 'The two InBody Clinic practitioners standing together in the clinic',
   width: 1535,
   height: 1024,
@@ -20,10 +21,10 @@ export const saila = {
   role: 'European-Trained Physiotherapist | Women’s Health & Dermatofunctional Therapy Specialist',
   experience: '20+ years of clinical experience',
   image: {
-    src: './assets/images/about/about_saila_profile.jpg',
+    src: imageAsset('about/about_saila_profile.jpg'),
     webp: [
-      { src: './assets/images/about/about_saila_profile-720.webp', width: 720 },
-      { src: './assets/images/about/about_saila_profile-1440.webp', width: 1440 },
+      { src: imageAsset('about/about_saila_profile-720.webp'), width: 720 },
+      { src: imageAsset('about/about_saila_profile-1440.webp'), width: 1440 },
     ],
     sizes: '(min-width: 56.3125rem) min(50vw, 640px), 100vw',
     alt: 'Saila Insua López at InBody Clinic holding a treatment device in front of the clinic shelves',
@@ -59,7 +60,7 @@ export const beatriz = {
   contactLabel: 'Contact our team',
   contactHref: './pages/contact.html',
   image: {
-    src: './assets/images/about/about_beatriz_profile.jpg',
+    src: imageAsset('about/about_beatriz_profile.jpg'),
     alt: 'Beatriz at InBody Clinic standing beside an INDIBA treatment device',
     width: 1536,
     height: 1024,

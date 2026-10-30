@@ -1,4 +1,5 @@
-const imageDirectory = './assets/images/services/Body Contouring/Lymphatic Reset & Fluid Retention Treatment/';
+import { imageAsset } from '../../utils/image-assets.js';
+const imageDirectory = 'services/Body Contouring/Lymphatic Reset & Fluid Retention Treatment/';
 
 export default {
   id: 'lymphatic-reset-fluid-retention-treatment',
@@ -8,13 +9,13 @@ export default {
   category: 'Body Contouring',
   images: {
     hero: {
-      src: `${imageDirectory}lymphatic_reset_fluid_retention_treatment_hero.jpeg`,
+      src: imageAsset(`${imageDirectory}lymphatic_reset_fluid_retention_treatment_hero.jpeg`),
       alt: 'A therapist providing manual abdominal treatment to a patient resting on a treatment bed',
       width: 1600,
       height: 1066,
     },
     treatment: {
-      src: `${imageDirectory}lymphatic_reset_fluid_retention_treatment_treatment.jpeg`,
+      src: imageAsset(`${imageDirectory}lymphatic_reset_fluid_retention_treatment_treatment.jpeg`),
       alt: 'Close-up of a therapist using a handheld treatment applicator on a patient’s skin',
       width: 1600,
       height: 1066,

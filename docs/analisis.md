@@ -47,7 +47,7 @@ The following changes are identified as potential optimizations for the source c
 
 <!-- Potential Fix: Optimize Hero Image using modern formats and priority loading -->
 <img
-  src="assets/images/home/home_slider_1.webp"
+  src="assets/images/webp/home/home_slider_1-1440.webp"
   fetchpriority="high"
   loading="eager"
   width="611"
@@ -112,9 +112,9 @@ The following changes are identified as potential optimizations for the source c
 
 <!-- Potential Fix: Use modern formats and responsive sizing for hero images -->
 <picture>
-  <source srcset="assets/images/home/home_slider_1.webp" type="image/webp" />
+  <source srcset="assets/images/webp/home/home_slider_1-1440.webp" type="image/webp" />
   <img
-    src="assets/images/home/home_slider_1.jpg"
+    src="assets/images/jpeg/home/home_slider_1.jpg"
     width="611"
     height="400"
     alt="INDIBA treatment"
