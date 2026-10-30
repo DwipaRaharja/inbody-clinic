@@ -14,7 +14,7 @@ function ServiceImage({ image = {}, hero = false }) {
   const height = Number(image.height ?? image.h);
   const dimensions = Number.isFinite(width) && width > 0 && Number.isFinite(height) && height > 0 ? { width: Math.round(width), height: Math.round(height) } : {};
   const hasWebp = Boolean(image.webp?.length);
-  return <HeroPicture image={image} className={hasWebp ? `block w-full min-w-0 overflow-hidden rounded-[10px] ${hero ? "aspect-[3/2]" : "aspect-[9/10]"}` : undefined} imgClassName={hasWebp ? `block size-full ${fitClass}` : `block w-full min-w-0 rounded-[10px] ${fitClass}`} imgStyle={positionStyle} fetchPriority={hero ? "high" : undefined} loading={hero ? undefined : "lazy"} decoding="async" {...dimensions} />;
+  return <HeroPicture image={image} className={hasWebp ? `block w-full min-w-0 overflow-hidden rounded-[10px] ${hero ? "aspect-[3/2]" : "aspect-[9/10]"}` : undefined} imgClassName={hasWebp ? `block size-full ${fitClass}` : `block w-full min-w-0 ${hero ? "aspect-[3/2]" : ""} rounded-[10px] ${fitClass}`} imgStyle={positionStyle} fetchPriority={hero ? "high" : undefined} loading={hero ? undefined : "lazy"} decoding="async" {...dimensions} />;
 }
 function ServiceBenefit({ icon, label }) {
   const iconClass = /^ph-[a-z0-9-]+$/.test(icon) ? icon : "ph-heart";
