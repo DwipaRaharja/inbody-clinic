@@ -17,7 +17,7 @@ export function SpecialityHero(speciality) {
       {paragraphs(speciality.introduction).map((paragraph) => <p key={paragraph} className="mt-6 max-w-[56ch] text-[14px] leading-[1.85] tablet:text-[15px]">{paragraph}</p>)}
       <div className="mt-7"><ActionButton label="Book an appointment" href={speciality.bookingHref} /></div>
     </div>
-    <HeroPicture image={speciality.image} className="block aspect-[4/3] w-full min-w-0 overflow-hidden rounded-xl wide:aspect-[5/4]" imgClassName={`block ${speciality.image.webp?.length ? 'size-full' : 'aspect-[4/3] w-full min-w-0'} object-cover`} fetchPriority="high" />
+    <HeroPicture image={speciality.image} className="block aspect-[4/3] w-full min-w-0 overflow-hidden rounded-xl wide:aspect-[5/4]" imgClassName={`block ${speciality.image.webp?.length ? 'size-full' : 'aspect-[4/3] w-full min-w-0'} rounded-xl object-cover`} fetchPriority="high" />
   </div>;
 }
 export function SpecialityNeeds(speciality) {
